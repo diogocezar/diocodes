@@ -6,8 +6,6 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>diocodes</title>
-        <meta name="description" content="Just my contacts hub" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Under Construction</h1>
     </div>
