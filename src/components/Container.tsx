@@ -18,4 +18,6 @@ const Container = React.forwardRef<
   );
 });
 
+Container.displayName = "Container";
+
 export { Container };

@@ -15,6 +15,8 @@ const Title = React.forwardRef<
   );
 });
 
+Title.displayName = "Title";
+
 const SubTitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -29,6 +31,8 @@ const SubTitle = React.forwardRef<
   );
 });
 
+SubTitle.displayName = "SubTitle";
+
 const SubSubTitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -42,5 +46,7 @@ const SubSubTitle = React.forwardRef<
     </h3>
   );
 });
+
+SubSubTitle.displayName = "SubSubTitle";
 
 export { Title, SubTitle, SubSubTitle };

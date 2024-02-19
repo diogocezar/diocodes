@@ -12,4 +12,6 @@ const Paragraph = React.forwardRef<
   );
 });
 
+Paragraph.displayName = "Paragraph";
+
 export { Paragraph };

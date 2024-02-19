@@ -12,4 +12,6 @@ const Hightlight = React.forwardRef<
   );
 });
 
+Hightlight.displayName = "Hightlight";
+
 export { Hightlight };
