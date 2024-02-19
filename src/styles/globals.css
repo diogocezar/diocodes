@@ -30,10 +30,12 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
     background: var(--background-dark);
+    border-radius: 0.25rem;
 }
 
 body::-webkit-scrollbar-thumb {
     background: var(--green);
+    border-radius: 0.25rem;
 }
 
 body::-webkit-scrollbar {
