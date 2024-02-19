@@ -8,7 +8,7 @@ const fira = Fira_Code({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Mentorias com o Diogão",
   icons: {
-    icon: "/favicon.png", // /public path
+    icon: "/diocodes.png",
   },
   description:
     "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",

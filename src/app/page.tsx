@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
   return (
     <Container>
-      <HeaderImage src="/perfil.jpeg" alt="Diogão Profile Picture" />
+      <HeaderImage src="/diocodes.png" alt="Diogão Profile Picture" />
       <Title>
         Mentorias com o <span className="text-green">&lt;/Diogão&gt;</span>
       </Title>
