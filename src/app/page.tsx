@@ -69,8 +69,8 @@ export default function Home() {
       </Paragraph>
       <Paragraph>
         Estou disponibilizando parte do meu tempo para ajudar pessoas{" "}
-        <Hightlight>(que realmente precisam)</Hightlight> a se aprimorar na área
-        de tecnologia.
+        <Hightlight>(que realmente precisam)</Hightlight> a se aprimorarem na
+        área de tecnologia.
       </Paragraph>
       <SubTitle>Para quem é a mentoria?</SubTitle>
       <Paragraph>
@@ -94,11 +94,16 @@ export default function Home() {
       <Paragraph>Marque um papo comigo clicando no botão a seguir.</Paragraph>
       <Paragraph>
         Não se esqueça de preencher o campo{" "}
-        <Hightlight>Como posso te ajudar?</Hightlight>
+        <Hightlight>como posso te ajudar?</Hightlight>
       </Paragraph>
       <Paragraph>
         Me conte de forma resumida, quais são as suas dificuldades, o que
         gostaria de aprender, ou qualquer outra coisa que achar relevante!
+      </Paragraph>
+      <Paragraph>
+        É importante que você aguarde a <Hightlight>CONFIRMAÇÃO</Hightlight> do
+        agendamento! Caso eu não consiga confirmar, tente agendar em um outro
+        horário!
       </Paragraph>
       <Button
         data-cal-namespace=""
