@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 
 const fira = Fira_Code({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Diogão - Mentoria para desenvolvedores",
+  title: "Mentorias com o Diogão",
   description:
-    "Estou disponibilizando parte do meu tempo para ajudar pessoas que desejam se aprimorar na área de tecnologia.",
+    "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",
 };
 
 export default function RootLayout({

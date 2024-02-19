@@ -1,45 +1,58 @@
 "use client";
-import Cal, { getCalApi } from "@calcom/embed-react";
+import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import Image from "next/image";
+import { getXpYear } from "@/lib/utils";
+import { SubSubTitle, SubTitle, Title } from "@/components/Titles";
+import { Paragraph } from "@/components/Paragraphs";
+import { Container } from "@/components/Container";
+import { Hightlight } from "@/components/Hightlight";
+import { Button } from "@/components/Button";
 
 export default function Home() {
+  const xpYears = getXpYear();
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();
       cal("ui", {
-        styles: { branding: { brandColor: "#50FA7B" } },
+        styles: {
+          branding: { brandColor: "#50FA7B" },
+        },
         hideEventTypeDetails: false,
         layout: "month_view",
       });
     })();
   }, []);
   return (
-    <main className="bg-background min-h-screen flex-col items-center justify-between p-5 md:p-24 lg:p-36">
+    <Container>
       <div className="mb-12 h-[250px] w-[250px] overflow-hidden rounded-full">
         <Image
           src="/perfil.jpeg"
           width={500}
           height={500}
-          alt="Picture of the author"
+          alt="Diogão Profile Picture"
         />
       </div>
-      <h1 className="text-pink mb-12 text-6xl font-bold">Mentoria Diogão</h1>
-      <h2 className="text-green mb-4 text-4xl font-bold">
-        Chegou a hora de devolver!
-      </h2>
-      <h3 className="text-foreground mb-12 mt-2 text-xl">
-        Olá, sou o Diogo Cezar, mas o pessoal me chama de{" "}
-        <span className="text-purple">Diogão</span>.
-      </h3>
-      <p className="text-foreground mb-4">
-        Tenho <span className="text-purple">38 anos</span>, e estou na área de
-        desenvolvimento a mais de <span className="text-purple">17 anos</span>.
-      </p>
-      <p className="text-foreground mb-4">
-        Durante esse tempo, tive a oportunidade de trabalhar em diversas
-        empresas, e com isso, adquiri alguma experiência. Caso queira saber mais
-        sobre mim, acesse o meu site pessoal:{" "}
+      <Title>
+        Mentorias com o <span className="text-green">&lt;/Diogão&gt;</span>
+      </Title>
+      <SubSubTitle>
+        Olá, sou o <span className="underline">Diogo Cezar</span>, mas pode me
+        chamar de <Hightlight>Diogão</Hightlight>.
+      </SubSubTitle>
+      <Paragraph>
+        Estou na área de tecnologia a mais de{" "}
+        <Hightlight>{xpYears} anos</Hightlight>.
+      </Paragraph>
+      <Paragraph>
+        Eu já fui de tudo um pouco: <span className="underline">professor</span>
+        , <span className="underline">palestrante</span>,{" "}
+        <span className="underline">desenvolvedor</span>,{" "}
+        <span className="underline">líder de tecnologia.</span>
+      </Paragraph>
+      <Paragraph>
+        Caso queira conhecer um pouco mais sobre a minha história, por favorm
+        acesse o meu site:{" "}
         <a
           href="https://diogocezar.dev"
           target="_blank"
@@ -48,34 +61,52 @@ export default function Home() {
         >
           https://diogocezar.dev
         </a>
-      </p>
-      <p className="text-foreground mb-4">
-        E agora, chegou a hora de <span className="text-purple">devolver</span>{" "}
+      </Paragraph>
+      <SubTitle>Por que estou fazendo isso?</SubTitle>
+      <Paragraph>
+        Já a algum tempo, sinto que posso <Hightlight>compartilhar</Hightlight>{" "}
         um pouco do que aprendi.
-      </p>
-      <p className="text-foreground mb-4">
-        Estou disponibilizando parte do meu tempo para ajudar pessoas que
-        desejam se aprimorar na área de tecnologia.
-      </p>
-      <h2 className="text-green mb-4 mt-12 text-4xl font-bold">
-        Como funciona?
-      </h2>
-      <p className="text-foreground mb-4">
-        Marque um papo comigo usando o calendário abaixo!
-      </p>
-      <p className="text-foreground mb-4">
+      </Paragraph>
+      <Paragraph>
+        Estou disponibilizando parte do meu tempo para ajudar pessoas{" "}
+        <Hightlight>(que realmente precisam)</Hightlight> a se aprimorar na área
+        de tecnologia.
+      </Paragraph>
+      <SubTitle>Para quem é a mentoria?</SubTitle>
+      <Paragraph>
+        Não importa qual é o seu nível de conhecimento. Se você está começando,
+        ou se já tem alguma experiência, eu posso te ajudar!
+      </Paragraph>
+      <SubTitle>Qual é a pegadinha?</SubTitle>
+      <SubSubTitle>
+        É agora o momento que eu vendo um curso de como ser dev em 3 semanas?
+      </SubSubTitle>
+      <Paragraph>
+        <Hightlight>NÃO!</Hightlight> Não tem pegadinha! Não tem venda de curso!
+        Não preciso dos seus dados, não tem ebook!
+      </Paragraph>
+      <Paragraph>
+        Estou disponibilizando 1 hora por semana (2 papos de 30 minutos), para
+        realizar essas mentorias de forma totalmente{" "}
+        <Hightlight>GRATUITA!</Hightlight>
+      </Paragraph>
+      <SubTitle>Tá! Curti! Como eu faço?</SubTitle>
+      <Paragraph>Marque um papo comigo clicando no botão a seguir.</Paragraph>
+      <Paragraph>
         Não se esqueça de preencher o campo{" "}
-        <span className="text-purple">Como posso te ajudar?</span>
-      </p>
-      <p className="text-foreground mb-12">
+        <Hightlight>Como posso te ajudar?</Hightlight>
+      </Paragraph>
+      <Paragraph>
         Me conte de forma resumida, quais são as suas dificuldades, o que
         gostaria de aprender, ou qualquer outra coisa que achar relevante!
-      </p>
-      <Cal
-        calLink="diogocezar/mentoria-diocodes"
-        style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        config={{ layout: "month_view" }}
-      />
-    </main>
+      </Paragraph>
+      <Button
+        data-cal-namespace=""
+        data-cal-link="diogocezar/mentoria-diogao"
+        data-cal-config='{"layout":"month_view"}'
+      >
+        Agendar Mentoria
+      </Button>
+    </Container>
   );
 }
