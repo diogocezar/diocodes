@@ -44,7 +44,7 @@ export default function Home() {
         <span className="underline">líder de tecnologia.</span>
       </Paragraph>
       <Paragraph>
-        Caso queira conhecer um pouco mais sobre a minha história, por favorm
+        Caso queira conhecer um pouco mais sobre a minha história, por favor
         acesse o meu site:{" "}
         <a
           href="https://diogocezar.dev"
