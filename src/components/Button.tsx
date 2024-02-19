@@ -6,16 +6,18 @@ const Button = React.forwardRef<
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   return (
-    <button
-      ref={ref}
-      className={cn(
-        "bg-pink text-background hover:bg-green mb-10 mt-10 animate-bounce cursor-crosshair rounded-full px-8 py-4 font-semibold transition-all",
-        className,
-      )}
-      {...props}
-    >
-      {props.children}
-    </button>
+    <div className="flex flex-row justify-center">
+      <button
+        ref={ref}
+        className={cn(
+          "bg-pink text-background hover:bg-green mb-10 mt-10 animate-bounce cursor-crosshair rounded-full px-8 py-4 font-semibold transition-all",
+          className,
+        )}
+        {...props}
+      >
+        {props.children}
+      </button>
+    </div>
   );
 });
 
@@ -41,4 +43,17 @@ const ButtonFooter = React.forwardRef<
 
 ButtonFooter.displayName = "Button";
 
-export { Button, ButtonFooter };
+const ButtonLink = React.forwardRef<
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <button ref={ref} className={cn("", className)} {...props}>
+      {props.children}
+    </button>
+  );
+});
+
+ButtonLink.displayName = "Button";
+
+export { Button, ButtonFooter, ButtonLink };

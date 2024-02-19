@@ -1,24 +1,9 @@
 import React from "react";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 
-type HeaderImageProps = {
-  className?: string;
-  src: string;
-  alt: string;
-};
-
-const HeaderImage = ({ className, src, alt, ...props }: HeaderImageProps) => {
+const HeaderImage = ({ ...props }) => {
   return (
-    <div className="mb-12 h-[250px] w-[250px] items-center overflow-hidden rounded-full">
-      <Image
-        className={cn("", className)}
-        src={src}
-        width={500}
-        height={500}
-        alt={alt}
-        {...props}
-      />
+    <div className="mb-12 h-[150px] w-[150px] items-center overflow-hidden md:h-[250px] md:w-[250px]">
+      {props.children}
     </div>
   );
 };

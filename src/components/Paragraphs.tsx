@@ -8,10 +8,7 @@ const Paragraph = React.forwardRef<
   return (
     <h1
       ref={ref}
-      className={cn(
-        "text-foreground text-md mb-6 text-center md:text-left",
-        className,
-      )}
+      className={cn("text-foreground text-md mb-6 md:text-left", className)}
     >
       {props.children}
     </h1>

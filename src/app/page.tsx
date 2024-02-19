@@ -6,10 +6,12 @@ import { SubSubTitle, SubTitle, Title } from "@/components/Titles";
 import { Paragraph } from "@/components/Paragraphs";
 import { Container } from "@/components/Container";
 import { Hightlight } from "@/components/Hightlight";
-import { Button, ButtonFooter } from "@/components/Button";
+import { Button, ButtonFooter, ButtonLink } from "@/components/Button";
 import { HeaderImage } from "@/components/Image";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
+import Diocodes from "@/assets/diocodes";
+import { Heart, Calendar, FileCode } from "@phosphor-icons/react";
 
 export default function Home() {
   const xpYears = getXpYear();
@@ -29,7 +31,9 @@ export default function Home() {
     <>
       <main>
         <Container>
-          <HeaderImage src="/diocodes.png" alt="Diogão Profile Picture" />
+          <HeaderImage>
+            <Diocodes />
+          </HeaderImage>
           <Title>
             Mentorias com o <span className="text-green">&lt;/Diogão&gt;</span>
           </Title>
@@ -60,6 +64,15 @@ export default function Home() {
               https://diogocezar.dev
             </a>
           </Paragraph>
+          <Button
+            data-cal-namespace=""
+            data-cal-link="diogocezar/mentoria-diogao"
+            data-cal-config='{"layout":"month_view"}'
+            className="mt-10 flex flex-row items-center justify-start gap-2 md:mt-14 md:justify-center"
+          >
+            <Calendar size={20} />
+            Agendar Mentoria
+          </Button>
           <SubSubTitle>Por que estou fazendo isso?</SubSubTitle>
           <Paragraph>
             Já a algum tempo, sinto que posso{" "}
@@ -81,17 +94,23 @@ export default function Home() {
             semanas?
           </SubTitle>
           <Paragraph>
-            <Hightlight>NÃO!</Hightlight> Não tem pegadinha! Não tem venda de
-            curso! Não preciso dos seus dados, não tem ebook!
+            <Hightlight>Não!</Hightlight> Não tem pegadinha! Não tem venda de
+            curso! Não preciso dos seus dados, não tem e-book!
           </Paragraph>
           <Paragraph>
             Estou disponibilizando 1 hora por semana (2 papos de 30 minutos),
             para realizar essas mentorias de forma totalmente{" "}
-            <Hightlight>GRATUITA!</Hightlight>
+            <Hightlight>gratuita!</Hightlight>
           </Paragraph>
           <SubSubTitle>Tá! Curti! Como eu faço?</SubSubTitle>
           <Paragraph>
-            Marque um papo comigo clicando no botão a seguir.
+            Marque um papo comigo clicando no{" "}
+            <ButtonLink
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <Hightlight className="underline">Agendar Mentoria</Hightlight>
+            </ButtonLink>
+            .
           </Paragraph>
           <Paragraph>
             Não se esqueça de preencher o campo{" "}
@@ -102,33 +121,35 @@ export default function Home() {
             gostaria de aprender, ou qualquer outra coisa que achar relevante!
           </Paragraph>
           <Paragraph>
-            É importante que você aguarde a <Hightlight>CONFIRMAÇÃO</Hightlight>{" "}
+            É importante que você aguarde a <Hightlight>confirmação</Hightlight>{" "}
             do agendamento! Caso eu não consiga confirmar, tente agendar em um
             outro horário!
           </Paragraph>
-          <Button
-            data-cal-namespace=""
-            data-cal-link="diogocezar/mentoria-diogao"
-            data-cal-config='{"layout":"month_view"}'
-          >
-            Agendar Mentoria
-          </Button>
         </Container>
       </main>
       <Footer>
         <div>
           <Link href="https://github.com/diogocezar/diocodes" target="_blank">
-            <ButtonFooter>Acessar código fonte!</ButtonFooter>
+            <ButtonFooter className="flex flex-row justify-center gap-2">
+              <FileCode size={20} />
+              Acessar código fonte!
+            </ButtonFooter>
           </Link>
         </div>
         <div>
-          <p className="text-background m-0 font-bold">
-            Feito com ❤️ por{" "}
+          <p className="text-background m-0 flex flex-row items-center justify-center gap-2 font-semibold">
+            Feito com{" "}
+            <Heart
+              weight="fill"
+              className="text-pink animate-pulse"
+              size={20}
+            />
+            ️por
             <a
               href="https://diogocezar.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-pink underline"
+              className="underline"
             >
               Diogo Cezar
             </a>

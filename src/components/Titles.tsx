@@ -9,7 +9,7 @@ const Title = React.forwardRef<
     <h1
       ref={ref}
       className={cn(
-        "text-pink mb-6 text-center text-2xl font-bold md:mb-12 md:text-left md:text-6xl",
+        "text-pink mb-6 text-2xl font-bold md:mb-12 md:text-6xl",
         className,
       )}
     >
@@ -28,7 +28,7 @@ const SubTitle = React.forwardRef<
     <h3
       ref={ref}
       className={cn(
-        "text-foreground mb-4 mt-2 text-center text-lg md:mb-12 md:text-left md:text-xl",
+        "text-foreground mb-4 mt-2 text-lg md:mb-12 md:text-xl",
         className,
       )}
     >
@@ -47,7 +47,7 @@ const SubSubTitle = React.forwardRef<
     <h2
       ref={ref}
       className={cn(
-        "text-green mb-8 mt-1 text-center text-xl font-bold md:mt-14 md:text-left md:text-4xl",
+        "text-green mb-8 mt-1 text-xl font-bold md:mt-14 md:text-4xl",
         className,
       )}
     >

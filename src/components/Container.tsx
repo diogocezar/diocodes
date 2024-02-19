@@ -9,7 +9,7 @@ const Container = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex flex-col items-center p-5 md:mb-0 md:items-start md:p-24 md:pb-6 md:pt-12",
+        "flex flex-col p-5 md:mb-0 md:items-start md:p-24 md:pb-6 md:pt-12",
         className,
       )}
     >
