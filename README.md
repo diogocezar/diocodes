@@ -20,8 +20,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Colocar cal.com embedado
 - [x] Organizar a implementação com componentes
 - [x] Melhorias de responsividade
-- [ ] Incluir favicon
-- [ ] Incluir rodapé
+- [x] Incluir favicon
+- [x] Incluir rodapé
 
 ## 📦 Instalação
 

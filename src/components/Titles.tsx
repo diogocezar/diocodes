@@ -28,7 +28,7 @@ const SubTitle = React.forwardRef<
     <h3
       ref={ref}
       className={cn(
-        "text-foreground mb-4 mt-2 text-lg md:mb-12 md:text-xl",
+        "text-foreground mb-4 mt-2 text-center text-lg md:mb-12 md:text-left md:text-xl",
         className,
       )}
     >
@@ -37,7 +37,7 @@ const SubTitle = React.forwardRef<
   );
 });
 
-SubTitle.displayName = "SubSubTitle";
+SubTitle.displayName = "SubTitle";
 
 const SubSubTitle = React.forwardRef<
   HTMLHeadingElement,
@@ -47,7 +47,7 @@ const SubSubTitle = React.forwardRef<
     <h2
       ref={ref}
       className={cn(
-        "text-green mb-8 mt-1 text-xl font-bold md:mt-14 md:text-4xl",
+        "text-green mb-8 mt-1 text-center text-xl font-bold md:mt-14 md:text-left md:text-4xl",
         className,
       )}
     >
@@ -56,6 +56,6 @@ const SubSubTitle = React.forwardRef<
   );
 });
 
-SubSubTitle.displayName = "SubTitle";
+SubSubTitle.displayName = "SubSubTitle";
 
 export { Title, SubTitle, SubSubTitle };
