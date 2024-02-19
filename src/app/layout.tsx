@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/diocodes.png",
   },
+  manifest: "/manifest.json",
   description:
     "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",
 };
