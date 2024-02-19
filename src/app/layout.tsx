@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
 import "@/styles/globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const fira = Fira_Code({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={fira.className}>{children}</body>
+      <GoogleAnalytics gaId="G-XRK77CENDK" />
     </html>
   );
 }
