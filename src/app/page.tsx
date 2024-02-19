@@ -1,13 +1,13 @@
 "use client";
 import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
-import Image from "next/image";
 import { getXpYear } from "@/lib/utils";
 import { SubSubTitle, SubTitle, Title } from "@/components/Titles";
 import { Paragraph } from "@/components/Paragraphs";
 import { Container } from "@/components/Container";
 import { Hightlight } from "@/components/Hightlight";
 import { Button } from "@/components/Button";
+import { HeaderImage } from "@/components/Image";
 
 export default function Home() {
   const xpYears = getXpYear();
@@ -25,21 +25,14 @@ export default function Home() {
   }, []);
   return (
     <Container>
-      <div className="mb-12 h-[250px] w-[250px] overflow-hidden rounded-full">
-        <Image
-          src="/perfil.jpeg"
-          width={500}
-          height={500}
-          alt="Diogão Profile Picture"
-        />
-      </div>
+      <HeaderImage src="/perfil.jpeg" alt="Diogão Profile Picture" />
       <Title>
         Mentorias com o <span className="text-green">&lt;/Diogão&gt;</span>
       </Title>
-      <SubSubTitle>
+      <SubTitle>
         Olá, sou o <span className="underline">Diogo Cezar</span>, mas pode me
         chamar de <Hightlight>Diogão</Hightlight>.
-      </SubSubTitle>
+      </SubTitle>
       <Paragraph>
         Estou na área de tecnologia a mais de{" "}
         <Hightlight>{xpYears} anos</Hightlight>.
@@ -62,7 +55,7 @@ export default function Home() {
           https://diogocezar.dev
         </a>
       </Paragraph>
-      <SubTitle>Por que estou fazendo isso?</SubTitle>
+      <SubSubTitle>Por que estou fazendo isso?</SubSubTitle>
       <Paragraph>
         Já a algum tempo, sinto que posso <Hightlight>compartilhar</Hightlight>{" "}
         um pouco do que aprendi.
@@ -72,15 +65,15 @@ export default function Home() {
         <Hightlight>(que realmente precisam)</Hightlight> a se aprimorarem na
         área de tecnologia.
       </Paragraph>
-      <SubTitle>Para quem é a mentoria?</SubTitle>
+      <SubSubTitle>Para quem é a mentoria?</SubSubTitle>
       <Paragraph>
         Não importa qual é o seu nível de conhecimento. Se você está começando,
         ou se já tem alguma experiência, eu posso te ajudar!
       </Paragraph>
-      <SubTitle>Qual é a pegadinha?</SubTitle>
-      <SubSubTitle>
+      <SubSubTitle>Qual é a pegadinha?</SubSubTitle>
+      <SubTitle>
         É agora o momento que eu vendo um curso de como ser dev em 3 semanas?
-      </SubSubTitle>
+      </SubTitle>
       <Paragraph>
         <Hightlight>NÃO!</Hightlight> Não tem pegadinha! Não tem venda de curso!
         Não preciso dos seus dados, não tem ebook!
@@ -90,7 +83,7 @@ export default function Home() {
         realizar essas mentorias de forma totalmente{" "}
         <Hightlight>GRATUITA!</Hightlight>
       </Paragraph>
-      <SubTitle>Tá! Curti! Como eu faço?</SubTitle>
+      <SubSubTitle>Tá! Curti! Como eu faço?</SubSubTitle>
       <Paragraph>Marque um papo comigo clicando no botão a seguir.</Paragraph>
       <Paragraph>
         Não se esqueça de preencher o campo{" "}

@@ -8,7 +8,10 @@ const Title = React.forwardRef<
   return (
     <h1
       ref={ref}
-      className={cn("text-pink mb-12 text-6xl font-bold", className)}
+      className={cn(
+        "text-pink mb-6 text-center text-2xl font-bold md:mb-12 md:text-left md:text-6xl",
+        className,
+      )}
     >
       {props.children}
     </h1>
@@ -22,31 +25,37 @@ const SubTitle = React.forwardRef<
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => {
   return (
-    <h2
-      ref={ref}
-      className={cn("text-green mb-8 mt-14 text-4xl font-bold", className)}
-    >
-      {props.children}
-    </h2>
-  );
-});
-
-SubTitle.displayName = "SubTitle";
-
-const SubSubTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => {
-  return (
     <h3
       ref={ref}
-      className={cn("text-foreground mb-12 mt-2 text-xl", className)}
+      className={cn(
+        "text-foreground mb-4 mt-2 text-lg md:mb-12 md:text-xl",
+        className,
+      )}
     >
       {props.children}
     </h3>
   );
 });
 
-SubSubTitle.displayName = "SubSubTitle";
+SubTitle.displayName = "SubSubTitle";
+
+const SubSubTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <h2
+      ref={ref}
+      className={cn(
+        "text-green mb-8 mt-1 text-xl font-bold md:mt-14 md:text-4xl",
+        className,
+      )}
+    >
+      {props.children}
+    </h2>
+  );
+});
+
+SubSubTitle.displayName = "SubTitle";
 
 export { Title, SubTitle, SubSubTitle };

@@ -9,7 +9,7 @@ const Container = React.forwardRef<
     <main
       ref={ref}
       className={cn(
-        "min-h-screen flex-col items-center justify-between p-5 md:p-24 lg:p-36",
+        "flex min-h-screen flex-col items-center p-5 md:items-start md:p-24 md:pt-12 lg:p-36 lg:pt-14",
         className,
       )}
     >
