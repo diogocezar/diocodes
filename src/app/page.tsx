@@ -1,6 +1,6 @@
 "use client";
 import { getCalApi } from "@calcom/embed-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getXpYear } from "@/lib/utils";
 import { SubSubTitle, SubTitle, Title } from "@/components/Titles";
 import { Paragraph } from "@/components/Paragraphs";
@@ -11,10 +11,27 @@ import { HeaderImage } from "@/components/Image";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import Diocodes from "@/assets/diocodes";
-import { Heart, Calendar, FileCode } from "@phosphor-icons/react";
+import { Heart, Calendar, FileCode, Spinner } from "@phosphor-icons/react";
+
+type TypeBooking = {
+  attendees: string;
+  startTime: Date;
+  endTime: Date;
+};
 
 export default function Home() {
   const xpYears = getXpYear();
+  const [bookings, setBookints] = useState(Array<TypeBooking>);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    (async function () {
+      setIsLoading(true);
+      const request = await fetch("/api/bookings");
+      const bookings = await request.json();
+      setBookints(bookings);
+      setIsLoading(false);
+    })();
+  }, []);
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();
@@ -73,6 +90,26 @@ export default function Home() {
             <Calendar size={20} />
             Agendar Mentoria
           </Button>
+          <SubSubTitle>Quem já agendou?</SubSubTitle>
+          {isLoading ? (
+            <Paragraph className="flex flex-row gap-2">
+              <Spinner size={20} className="animate-spin" />
+              Carregando...
+            </Paragraph>
+          ) : (
+            <ul>
+              {bookings.map((booking: TypeBooking, index) => (
+                <li key={index}>
+                  <Paragraph>
+                    <Hightlight>{booking.attendees.toUpperCase()}</Hightlight>{" "}
+                    <span className="text-xs">
+                      {new Date(booking.startTime).toLocaleString("pt-BR")}
+                    </span>
+                  </Paragraph>
+                </li>
+              ))}
+            </ul>
+          )}
           <SubSubTitle>Por que estou fazendo isso?</SubSubTitle>
           <Paragraph>
             Já a algum tempo, sinto que posso{" "}
