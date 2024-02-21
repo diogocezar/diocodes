@@ -11,10 +11,12 @@ export const GET = async () => {
     (item: any) => item.eventTypeId === eventId,
   );
   const responseDate = filteredData.map((item: any) => {
+    const isActive = new Date(item.endTime) > new Date();
     return {
       attendees: item.attendees[0].name,
       startTime: item.startTime,
       endTime: item.endTime,
+      isActive,
     };
   });
   return new Response(JSON.stringify(responseDate));

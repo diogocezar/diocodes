@@ -17,6 +17,7 @@ type TypeBooking = {
   attendees: string;
   startTime: Date;
   endTime: Date;
+  isActive: boolean;
 };
 
 export default function Home() {
@@ -97,15 +98,21 @@ export default function Home() {
               Carregando...
             </Paragraph>
           ) : (
-            <ul>
+            <ul className="flex w-full flex-row flex-wrap">
               {bookings.map((booking: TypeBooking, index) => (
-                <li key={index}>
-                  <Paragraph>
-                    <Hightlight>{booking.attendees.toUpperCase()}</Hightlight>{" "}
-                    <span className="text-xs">
+                <li
+                  key={index}
+                  className={`w-full md:w-[50%] ${booking.isActive ? "opacity-100" : "opacity-20"}`}
+                >
+                  <div className="bg-comment m-2 gap-2 rounded-3xl p-6">
+                    <div className="text-background mb-2 text-sm font-bold">
+                      <Calendar size={32} className="mb-3" />{" "}
+                      {booking.attendees.toUpperCase()}
+                    </div>
+                    <div className="text-xs">
                       {new Date(booking.startTime).toLocaleString("pt-BR")}
-                    </span>
-                  </Paragraph>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
