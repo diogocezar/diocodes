@@ -93,16 +93,16 @@ export default function Home() {
           </Button>
           <SubSubTitle>Quem já agendou?</SubSubTitle>
           {isLoading ? (
-            <Paragraph className="flex flex-row gap-2">
+            <Paragraph className="mb-8 flex flex-row gap-2">
               <Spinner size={20} className="animate-spin" />
               Carregando...
             </Paragraph>
           ) : (
-            <ul className="flex w-full flex-row flex-wrap">
+            <ul className="mb-8 flex w-full flex-row flex-wrap">
               {bookings.map((booking: TypeBooking, index) => (
                 <li
                   key={index}
-                  className={`w-full md:w-[50%] ${booking.isActive ? "opacity-100" : "opacity-20"}`}
+                  className={`w-full md:w-[50%] lg:w-[33.3%] xl:w-[25%] ${booking.isActive ? "opacity-100" : "opacity-20"}`}
                 >
                   <div className="bg-comment m-2 gap-2 rounded-3xl p-6">
                     <div className="text-background mb-2 text-sm font-bold">
