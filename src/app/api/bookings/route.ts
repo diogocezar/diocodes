@@ -18,12 +18,12 @@ export const GET = async () => {
   const URL = "https://api.cal.com/v1/bookings";
   const eventId = 634170; // Event ID for Diocodes
   const result = await fetch(`${URL}?apiKey=${API_KEY_CALL}`, {
-    next: { revalidate: 1 },
+    next: { revalidate: 120 },
   });
   const data = await result.json();
   const { bookings } = data;
   const filteredData = bookings.filter(
-    (item: any) => item.eventTypeId === eventId,
+    (item: any) => item.eventTypeId === eventId && item.status !== "CANCELLED",
   );
   const resData = filteredData.map((item: any): BookingsResponse => {
     const isActive = new Date(item.endTime) > new Date();
