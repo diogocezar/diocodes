@@ -2,72 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --background-dark: #0e0f12;
-    --background: #282a36;
-    --current-line: #44475a;
-    --foreground: #f8f8f2;
-    --comment: #6272a4;
-    --cyan: #8be9fd;
-    --green: #50fa7b;
-    --orange: #ffb86c;
-    --pink: #ff79c6;
-    --purple: #bd93f9;
-    --red: #ff5555;
-    --yellow: #f1fa8c;
-}
+@layer base {
+    :root {
+        --background-dark: #0e0f12;
+        --background: #282a36;
+        --current-line: #44475a;
+        --foreground: #f8f8f2;
+        --comment: #6272a4;
+        --cyan: #8be9fd;
+        --green: #50fa7b;
+        --orange: #ffb86c;
+        --pink: #ff79c6;
+        --purple: #bd93f9;
+        --red: #ff5555;
+        --yellow: #f1fa8c;
 
-* {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
-}
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
 
-body::-webkit-scrollbar {
-    width: 0.25rem;
-}
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
 
-body::-webkit-scrollbar-track {
-    background: var(--background-dark);
-    border-radius: 0.25rem;
-}
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
 
-body::-webkit-scrollbar-thumb {
-    background: var(--green);
-    border-radius: 0.25rem;
-}
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
 
-body::-webkit-scrollbar {
-    width: 0.7rem;
-}
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
 
-body::-webkit-scrollbar-track {
-    background: var(--background-dark);
-}
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
 
-body::-webkit-scrollbar-thumb {
-    background: var(--green);
-}
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
 
-::selection {
-    background-color: var(--green) !important;
-    color: var(--background) !important;
-}
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 10% 3.9%;
 
-body {
-    background-color: #282a36;
-    opacity: 1;
-    background-image: radial-gradient(
-            rgba(255, 121, 198, 0.2) 1.4000000000000001px,
-            transparent 1.2px
-        ),
-        radial-gradient(
-            rgba(255, 121, 198, 0.5) 1.4000000000000001px,
-            #282a36 1.2px
-        );
-    background-size: 112px 112px;
-    background-position:
-        0 0,
-        56px 56px;
+        --radius: 0.5rem;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: var(--background-dark);
+        border-radius: 0.25rem;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: var(--green);
+        border-radius: 0.25rem;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0.7rem;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: var(--background-dark);
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: var(--green);
+    }
+
+    ::selection {
+        background-color: var(--green) !important;
+        color: var(--background) !important;
+    }
+
+    body {
+        background-color: #282a36;
+        opacity: 1;
+        background-image: radial-gradient(
+                rgba(255, 121, 198, 0.2) 1.4000000000000001px,
+                transparent 1.2px
+            ),
+            radial-gradient(
+                rgba(255, 121, 198, 0.5) 1.4000000000000001px,
+                #282a36 1.2px
+            );
+        background-size: 112px 112px;
+        background-position:
+            0 0,
+            56px 56px;
+    }
 }

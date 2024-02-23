@@ -27,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      const request = await fetch("/api/bookings");
+      const request = await fetch("/api/booking");
       const bookings = await request.json();
       setBookints(bookings);
       setIsLoading(false);
