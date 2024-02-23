@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Mentorias com o Diogão",
-  "short_name": "Diocodes",
-  "description": "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",
+  "name": "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+  "short_name": "Mentorias Diogão",
+  "description": "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",

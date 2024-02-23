@@ -39,5 +39,15 @@ export const GET = async () => {
       return new Date(a.startTime).getTime() - new Date(b.startTime).getTime();
     },
   );
-  return new Response(JSON.stringify(resDataOrdered));
+  const resDataOrderedFiltered = resDataOrdered.filter(
+    (item: BookingsResponse, index: number, self: BookingsResponse[]) =>
+      index ===
+      self.findIndex(
+        (t) =>
+          t.attendees === item.attendees &&
+          t.startTime === item.startTime &&
+          t.endTime === item.endTime,
+      ),
+  );
+  return new Response(JSON.stringify(resDataOrderedFiltered));
 };

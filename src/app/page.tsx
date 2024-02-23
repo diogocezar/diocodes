@@ -52,13 +52,11 @@ export default function Home() {
           <HeaderImage>
             <Diocodes />
           </HeaderImage>
-          <Title>
-            Mentorias com o <span className="text-green">&lt;/Diogão&gt;</span>
+          <Title className="md:max-w-[80%] lg:max-w-[50%]">
+            Mentoria Gratuita em Tecnologia com{" "}
+            <span className="text-green text-4xl md:text-7xl">Diogão</span>
           </Title>
-          <SubTitle>
-            Olá, sou o <span className="underline">Diogo Cezar</span>, mas pode
-            me chamar de <Hightlight>Diogão</Hightlight>.
-          </SubTitle>
+          <SubTitle>Explorando as Oportunidades na Área de Tecnologia</SubTitle>
           <Paragraph>
             Estou na área de tecnologia a mais de{" "}
             <Hightlight>{xpYears} anos</Hightlight>.
@@ -102,15 +100,17 @@ export default function Home() {
               {bookings.map((booking: TypeBooking, index) => (
                 <li
                   key={index}
-                  className={`w-full md:w-[50%] lg:w-[33.3%] xl:w-[25%] ${booking.isActive ? "opacity-100" : "opacity-20"}`}
+                  className={`w-full cursor-crosshair md:w-[50%] lg:w-[33.3%] xl:w-[25%] ${booking.isActive ? "opacity-100" : "opacity-20"}`}
                 >
-                  <div className="bg-comment m-2 gap-2 rounded-3xl p-6">
-                    <div className="text-background mb-2 text-sm font-bold">
-                      <Calendar size={32} className="mb-3" />{" "}
-                      {booking.attendees.toUpperCase()}
-                    </div>
-                    <div className="text-xs">
-                      {new Date(booking.startTime).toLocaleString("pt-BR")}
+                  <div className="group">
+                    <div className="bg-comment group-hover:bg-purple m-2 gap-2 rounded-3xl p-6 transition duration-300 ease-in-out">
+                      <div className="text-foreground mb-2 text-sm font-bold">
+                        <Calendar size={32} className="text-background mb-3" />{" "}
+                        {booking.attendees.toUpperCase()}
+                      </div>
+                      <div className="text-pink group-hover:text-foreground text-xs transition duration-300 ease-in-out">
+                        {new Date(booking.startTime).toLocaleString("pt-BR")}
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -142,9 +142,12 @@ export default function Home() {
             curso! Não preciso dos seus dados, não tem e-book!
           </Paragraph>
           <Paragraph>
-            Estou disponibilizando 1 hora por semana (2 papos de 30 minutos),
-            para realizar essas mentorias de forma totalmente{" "}
-            <Hightlight>gratuita!</Hightlight>
+            Enquanto eu conseguir, vou disponibilizar meu tempo de forma
+            gratúita para ajudar.
+          </Paragraph>
+          <Paragraph>
+            As mentorias podem ser agendadas 2 vezes por semana (com papos de 30
+            minutos).
           </Paragraph>
           <SubSubTitle>Tá! Curti! Como eu faço?</SubSubTitle>
           <Paragraph>

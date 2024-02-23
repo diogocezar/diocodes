@@ -15,16 +15,23 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Mentorias com o Diogão",
+  title:
+    "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
   description:
-    "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",
+    "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
   keywords: [
-    "mentoria",
-    "techlead",
-    "dicas",
-    "tecnologia",
-    "programação",
-    "desenvolvimento",
+    "mentorias gratuitas em tecnologia",
+    "mentoria para profissionais de TI",
+    "orientação tecnológica gratuita",
+    "mentoria em programação gratuita",
+    "mentor de desenvolvimento de software",
+    "guia para programadores iniciantes",
+    "mentor de design de interface",
+    "mentor de carreira em tecnologia",
+    "desenvolvimento profissional em TI",
+    "estratégias de crescimento na carreira de TI",
+    "comunidade de mentoria em tecnologia",
+    "networking para profissionais de TI",
   ],
   authors: [
     {
