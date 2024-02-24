@@ -9,7 +9,11 @@ export async function POST() {
       from: "Diogo Cezar <diogo@diogocezar.com>",
       to: ["diogo@diogocezar.com"],
       subject: "Hello world",
-      react: EmailAvaliation({ firstName: "John" }) as React.ReactElement,
+      react: EmailAvaliation({
+        firstName: "diogo",
+        date: "31/02/2002",
+        time: "12:00",
+      }) as React.ReactElement,
     });
 
     return Response.json(data);
