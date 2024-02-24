@@ -1,4 +1,4 @@
-type BookingsResponse = {
+type BookingResponse = {
   attendees: string;
   startTime: string;
   endTime: string;
@@ -25,7 +25,7 @@ export const GET = async () => {
   const filteredData = bookings.filter(
     (item: any) => item.eventTypeId === eventId && item.status !== "CANCELLED",
   );
-  const resData = filteredData.map((item: any): BookingsResponse => {
+  const resData = filteredData.map((item: any): BookingResponse => {
     const isActive = new Date(item.endTime) > new Date();
     return {
       attendees: reduceName(item.attendees[0].name),
@@ -35,12 +35,12 @@ export const GET = async () => {
     };
   });
   const resDataOrdered = resData.sort(
-    (a: BookingsResponse, b: BookingsResponse) => {
+    (a: BookingResponse, b: BookingResponse) => {
       return new Date(a.startTime).getTime() - new Date(b.startTime).getTime();
     },
   );
   const resDataOrderedFiltered = resDataOrdered.filter(
-    (item: BookingsResponse, index: number, self: BookingsResponse[]) =>
+    (item: BookingResponse, index: number, self: BookingResponse[]) =>
       index ===
       self.findIndex(
         (t) =>

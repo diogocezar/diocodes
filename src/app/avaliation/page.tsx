@@ -7,7 +7,7 @@ import { HeaderImage } from "@/components/Image";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import Diocodes from "@/assets/diocodes";
-import { Heart, FileCode } from "@phosphor-icons/react";
+import { Heart, FileCode, Spinner } from "@phosphor-icons/react";
 import {
   Select,
   SelectContent,
@@ -29,8 +29,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Paragraph } from "@phosphor-icons/react/dist/ssr";
 
 type TypeAvaliation = {
+  id: number;
   attendees: string;
   startTime: Date;
   endTime: Date;
@@ -38,7 +40,8 @@ type TypeAvaliation = {
 };
 
 const FormSchema = z.object({
-  attendees: z.string(),
+  name: z.string(),
+  startDate: z.string(),
   email: z.string().email(),
 });
 
@@ -49,15 +52,14 @@ export default function Home() {
     resolver: zodResolver(FormSchema),
   });
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("passou");
     console.log(data);
   }
   useEffect(() => {
-    (async function () {
+    (async function() {
       setIsLoading(true);
       const request = await fetch("/api/avaliation");
-      const bookings = await request.json();
-      setAvaliations(bookings);
+      const avaliations = await request.json();
+      setAvaliations(avaliations);
       setIsLoading(false);
     })();
   }, []);
@@ -72,55 +74,60 @@ export default function Home() {
             Enviar avaliação da{" "}
             <span className="text-green text-4xl md:text-7xl">Mentoria</span>
           </Title>
+
           <SubTitle>
-            Selecione qual a mentoria deseja enviar a avaliação:
+            Envie uma avaliação por e-mail!
           </SubTitle>
 
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="w-2/3 space-y-6"
-            >
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a verified email to display" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {isLoading && (
-                          <SelectItem value="null">Loading...</SelectItem>
-                        )}
-                        {avaliations.map((avaliation) => (
-                          <SelectItem
-                            key={avaliation.email}
-                            value={avaliation.email}
-                          >
-                            {avaliation.email}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormDescription>
-                      You can manage email addresses in your{" "}
-                      <Link href="/examples/forms">email settings</Link>.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Submit</Button>
-            </form>
-          </Form>
+          {isLoading ? (
+            <Paragraph className="mb-8 flex flex-row gap-2">
+              <Spinner size={20} className="animate-spin" />
+              Carregando...
+            </Paragraph>
+          ) : (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-2/3 space-y-6"
+              >
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Qual papo?" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {avaliations.map((avaliation) => (
+                            <SelectItem
+                              key={avaliation.id}
+                              value={avaliation.id.toString()}
+                            >
+                              {avaliation.attendees.toUpperCase()} - {new Date(avaliation.startTime).toLocaleString("pt-BR")}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription>
+                        You can manage email addresses in your{" "}
+                        <Link href="/examples/forms">email settings</Link>.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit">Submit</Button>
+              </form>
+            </Form>
+          )
         </Container>
       </main>
       <Footer>

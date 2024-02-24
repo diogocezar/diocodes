@@ -22,6 +22,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Melhorias de responsividade
 - [x] Incluir favicon
 - [x] Incluir rodapé
+- [x] Instalação do Shadcn
+- [ ] Organização dos componentes
 
 ## 📦 Instalação
 
