@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
 
@@ -84,6 +85,7 @@ export default function RootLayout({
         {children}
       </body>
       <GoogleAnalytics gaId="G-XRK77CENDK" />
+      <SpeedInsights />
     </html>
   );
 }
