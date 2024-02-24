@@ -10,7 +10,7 @@ const Footer = React.forwardRef<
 >(() => {
   return (
     <>
-      <footer className={"bg-green mt-10 w-full"}>
+      <footer className="bg-background-dark mt-10 w-full shadow-2xl">
         <div className="flex flex-col items-center justify-between gap-6 p-5 pt-10 md:flex-row md:gap-0 md:p-24 md:pt-12 lg:p-12 lg:pt-14">
           <div>
             <Link href="https://github.com/diogocezar/diocodes" target="_blank">
@@ -24,7 +24,7 @@ const Footer = React.forwardRef<
             </Link>
           </div>
           <div>
-            <p className="text-background m-0 flex flex-row items-center justify-center gap-2 font-semibold">
+            <p className="text-foreground m-0 flex flex-row items-center justify-center gap-2 font-semibold">
               Feito com{" "}
               <Heart
                 weight="fill"

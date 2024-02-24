@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { Footer } from "@/components/containers/footer";
 import { Spinner } from "@phosphor-icons/react";
 import { Container } from "@/components/app/container";
 import {
@@ -26,34 +25,40 @@ import { Paragraph } from "@/components/app/paragraph";
 import { Header } from "@/components/containers/header";
 import { TypeAvaliation } from "@/types/type-avaliation";
 import { SchemaAvaliation } from "@/schemas/schema-avaliation";
+import { toast } from "sonner";
 
-export default function Home() {
+export default function AdminAvaliation() {
   const [avaliations, setAvaliations] = useState(Array<TypeAvaliation>);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSelect, setIsLoadingSelect] = useState(false);
+  const [isLoadingForm, setIsLoadingForm] = useState(false);
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
   });
   async function onSubmit(data: z.infer<typeof SchemaAvaliation>) {
-    const avaliation = avaliations.find(
-      (avaliation) => avaliation.id === parseInt(data.attendee),
-    );
-    const request = await fetch("/api/send-avaliation", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(avaliation),
-    });
-    const response = await request.json();
-    console.log(response);
+    setIsLoadingForm(true);
+    try {
+      const avaliation = avaliations.find(
+        (avaliation) => avaliation.id === parseInt(data.attendee),
+      );
+      await fetch("/api/send-avaliation", {
+        method: "POST",
+        body: JSON.stringify(avaliation),
+      });
+      toast("O e-mail foi enviado com sucesso!");
+    } catch (error) {
+      console.error(error);
+      toast("Houve um erro ao enviar o email. Tente novamente!");
+    } finally {
+      setIsLoadingForm(false);
+    }
   }
   useEffect(() => {
     (async function () {
-      setIsLoading(true);
+      setIsLoadingSelect(true);
       const request = await fetch("/api/avaliation");
       const avaliations = await request.json();
       setAvaliations(avaliations);
-      setIsLoading(false);
+      setIsLoadingSelect(false);
     })();
   }, []);
   return (
@@ -61,19 +66,17 @@ export default function Home() {
       <Container>
         <Header />
         <Paragraph className="mb-8">
-          É possível enviar um e-mail para as pessoas que já conversaram!
+          Utilize o formulário abaixo para enviar a avaliação para os
+          participantes que já realizaram a mentoria.
         </Paragraph>
-        {isLoading ? (
+        {isLoadingSelect ? (
           <Paragraph className="mb-8 flex flex-row gap-2">
             <Spinner size={20} className="animate-spin" />
             Carregando...
           </Paragraph>
         ) : (
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="w-1/2 space-y-6"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2">
               <FormField
                 control={form.control}
                 name="attendee"
@@ -85,7 +88,7 @@ export default function Home() {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger disabled={isLoadingForm}>
                           <SelectValue placeholder="Selecione..." />
                         </SelectTrigger>
                       </FormControl>
@@ -95,7 +98,7 @@ export default function Home() {
                             key={avaliation.id}
                             value={avaliation.id.toString()}
                           >
-                            {avaliation.attendees.toUpperCase()} -{" "}
+                            {avaliation?.attendee.toUpperCase()} -{" "}
                             {new Date(avaliation.startTime).toLocaleString(
                               "pt-BR",
                             )}
@@ -107,8 +110,14 @@ export default function Home() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="mt-16">
-                Enviar
+              <Button type="submit" className="mt-20" disabled={isLoadingForm}>
+                {isLoadingForm ? (
+                  <div className="flex flex-row gap-2">
+                    <Spinner size={20} className="animate-spin" /> Aguarde...
+                  </div>
+                ) : (
+                  "Enviar"
+                )}
               </Button>
             </form>
           </Form>

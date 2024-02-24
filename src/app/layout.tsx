@@ -6,6 +6,7 @@ import type { Viewport } from "next";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/containers/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
 
@@ -83,6 +84,7 @@ export default function RootLayout({
       <body className={cn("bg-background antialiased", fira.className)}>
         {children}
         <Footer />
+        <Toaster />
         <SpeedInsights />
       </body>
       <GoogleAnalytics gaId="G-XRK77CENDK" />

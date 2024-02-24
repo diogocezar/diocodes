@@ -21,15 +21,17 @@ const Book = React.forwardRef<
   }, []);
   return (
     <>
-      <Button
-        data-cal-namespace=""
-        data-cal-link="diogocezar/mentoria-diogao"
-        data-cal-config='{"layout":"month_view"}'
-        className="mt-10 flex flex-row items-center justify-start gap-2 md:mt-14 md:justify-center"
-      >
-        <Calendar size={20} />
-        Agendar Mentoria
-      </Button>
+      <div className="flex flex-row justify-center">
+        <Button
+          data-cal-namespace=""
+          data-cal-link="diogocezar/mentoria-diogao"
+          data-cal-config='{"layout":"month_view"}'
+          className="mt-10 flex flex-row items-center justify-start gap-2 md:mt-14 md:justify-center"
+        >
+          <Calendar size={20} />
+          Agendar Mentoria
+        </Button>
+      </div>
     </>
   );
 });

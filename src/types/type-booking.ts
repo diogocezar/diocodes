@@ -1,5 +1,5 @@
 export type TypeBooking = {
-  attendees: string;
+  attendee: string;
   startTime: Date;
   endTime: Date;
   isActive: boolean;

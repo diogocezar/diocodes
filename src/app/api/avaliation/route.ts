@@ -18,7 +18,7 @@ const formatResponse = (validBookings: any) =>
   validBookings.map((item: any): AvaliationResponse => {
     return {
       id: item.id,
-      attendees: compactName(item.attendees[0].name),
+      attendee: compactName(item.attendees[0].name),
       startTime: item.startTime,
       endTime: item.endTime,
       email: item.attendees[0].email,
@@ -36,7 +36,7 @@ const removeDuplicates = (ordered: any) =>
       index ===
       self.findIndex(
         (t) =>
-          t.attendees === item.attendees &&
+          t.attendee === item.attendee &&
           t.startTime === item.startTime &&
           t.endTime === item.endTime,
       ),

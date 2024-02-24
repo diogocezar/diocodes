@@ -1,6 +1,6 @@
 export type TypeAvaliation = {
   id: number;
-  attendees: string;
+  attendee: string;
   startTime: Date;
   endTime: Date;
   email: string;

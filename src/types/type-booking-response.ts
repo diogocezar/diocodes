@@ -1,6 +1,6 @@
 export type BookingResponse = {
   id: string;
-  attendees: string;
+  attendee: string;
   startTime: string;
   endTime: string;
   isActive: boolean;

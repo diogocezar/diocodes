@@ -17,15 +17,15 @@ import * as React from "react";
 import { Tailwind } from "@react-email/tailwind";
 
 interface EmailAvaliationProps {
-  date: string;
-  time: string;
-  firstName: string;
+  attendee: string;
+  startTime: Date;
+  link: string;
 }
 
 export const EmailAvaliation = ({
-  firstName,
-  date,
-  time,
+  attendee,
+  startTime,
+  link,
 }: EmailAvaliationProps) => (
   <Html>
     <Head>
@@ -40,7 +40,7 @@ export const EmailAvaliation = ({
         fontStyle="normal"
       />
     </Head>
-    <Preview>Avalie a sua mentoria!</Preview>
+    <Preview>Olá, tudo certo? Você poderia avaliar a nossa mentoria?</Preview>
     <Tailwind>
       <Body className="mt-12">
         <Container>
@@ -57,17 +57,18 @@ export const EmailAvaliation = ({
 
           <Section className="mt-8">
             <Text className="text-base leading-8 text-[#020817]">
-              Olá <span className="text-[#ff79c6]">{firstName}</span>, tudo
+              Olá <span className="text-[#ff79c6]">{attendee}</span>, tudo
               certo? Espero que sim! 😊
             </Text>
             <Text className="text-base leading-8 text-[#020817]">
               Este e-mail é para pedir uma avaliação sobre a mentoria que
               tivemos no dia{" "}
-              <span className="font-bold text-[#ff79c6]">{date}</span> às{" "}
-              <span className="font-bold text-[#ff79c6]">{time}</span>.
+              <span className="font-bold text-[#ff79c6]">
+                {new Date(startTime).toLocaleString("pt-BR")}
+              </span>
             </Text>
             <Button
-              href="https://diocodes.dev"
+              href={link}
               className="mb-6 mt-4 rounded-full bg-[#50fa7b] px-6 py-4 text-[#282a36]"
             >
               Avaliar a Mentoria
@@ -94,9 +95,9 @@ export const EmailAvaliation = ({
 );
 
 EmailAvaliation.PreviewProps = {
-  firstName: "diogo",
-  date: "31/02/2002",
-  time: "12:00",
+  attendee: "Diogo Cezar",
+  startTime: new Date("2024-02-21T20:30:00.000Z"),
+  link: "https://www.diocodes.dev/",
 } as EmailAvaliationProps;
 
 export default EmailAvaliation;
