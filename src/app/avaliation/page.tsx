@@ -58,60 +58,62 @@ export default function Home() {
   }, []);
   return (
     <>
-      <main>
-        <Container>
-          <Header />
-          {isLoading ? (
-            <Paragraph className="mb-8 flex flex-row gap-2">
-              <Spinner size={20} className="animate-spin" />
-              Carregando...
-            </Paragraph>
-          ) : (
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-2/3 space-y-6"
-              >
-                <FormField
-                  control={form.control}
-                  name="attendee"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Escolha uma pessoa</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecione..." />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {avaliations.map((avaliation) => (
-                            <SelectItem
-                              key={avaliation.id}
-                              value={avaliation.id.toString()}
-                            >
-                              {avaliation.attendees.toUpperCase()} -{" "}
-                              {new Date(avaliation.startTime).toLocaleString(
-                                "pt-BR",
-                              )}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit">Enviar</Button>
-              </form>
-            </Form>
-          )}
-        </Container>
-      </main>
-      <Footer />
+      <Container>
+        <Header />
+        <Paragraph className="mb-8">
+          É possível enviar um e-mail para as pessoas que já conversaram!
+        </Paragraph>
+        {isLoading ? (
+          <Paragraph className="mb-8 flex flex-row gap-2">
+            <Spinner size={20} className="animate-spin" />
+            Carregando...
+          </Paragraph>
+        ) : (
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-1/2 space-y-6"
+            >
+              <FormField
+                control={form.control}
+                name="attendee"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Escolha uma pessoa</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {avaliations.map((avaliation) => (
+                          <SelectItem
+                            key={avaliation.id}
+                            value={avaliation.id.toString()}
+                          >
+                            {avaliation.attendees.toUpperCase()} -{" "}
+                            {new Date(avaliation.startTime).toLocaleString(
+                              "pt-BR",
+                            )}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="mt-16">
+                Enviar
+              </Button>
+            </form>
+          </Form>
+        )}
+      </Container>
     </>
   );
 }

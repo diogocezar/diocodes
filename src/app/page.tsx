@@ -1,6 +1,5 @@
 "use client";
 import { Container } from "@/components/app/container";
-import { Footer } from "@/components/containers/footer";
 import { Header } from "@/components/containers/header";
 import { Book } from "@/components/containers/book";
 import { Presentation } from "@/components/containers/presentation";
@@ -13,19 +12,16 @@ import { Liked } from "@/components/containers/liked";
 export default function Home() {
   return (
     <>
-      <main>
-        <Container>
-          <Header />
-          <Presentation />
-          <Book />
-          <WhoBooked />
-          <Why />
-          <Who />
-          <IsTrap />
-          <Liked />
-        </Container>
-      </main>
-      <Footer />
+      <Container>
+        <Header />
+        <Presentation />
+        <Book />
+        <WhoBooked />
+        <Why />
+        <Who />
+        <IsTrap />
+        <Liked />
+      </Container>
     </>
   );
 }

@@ -6,7 +6,7 @@ const Container = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   return (
-    <div
+    <main
       ref={ref}
       className={cn(
         "flex flex-col p-5 md:mb-0 md:items-start md:p-24 md:pb-6 md:pt-12",
@@ -14,7 +14,7 @@ const Container = React.forwardRef<
       )}
     >
       {props.children}
-    </div>
+    </main>
   );
 });
 
