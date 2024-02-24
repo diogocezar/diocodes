@@ -23,7 +23,10 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Incluir favicon
 - [x] Incluir rodapé
 - [x] Instalação do Shadcn
-- [ ] Organização dos componentes
+- [x] Organização dos componentes
+- [X] Refatorar as apis separando em funções
+- [ ] Criar e-mail que solicita a avaliação
+- [ ] Criar uma lista com a opção de enviar a avaliação
 
 ## 📦 Instalação
 

@@ -10,3 +10,11 @@ export function getXpYear() {
   const currentYear = new Date().getFullYear();
   return currentYear - startYear;
 }
+
+export function compactName(name: string): string {
+  if (name.length > 20) {
+    const nameArray = name.split(" ");
+    return `${nameArray[0]} ${nameArray[nameArray.length - 1]}`;
+  }
+  return name;
+}

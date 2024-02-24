@@ -1,6 +1,6 @@
 import React from "react";
-import { SubSubTitle } from "@/components/app/Titles";
-import { Paragraph } from "@/components/app/Paragraphs";
+import { SubSubTitle } from "@/components/app/titles";
+import { Paragraph } from "@/components/app/paragraph";
 
 const Who = React.forwardRef<
   HTMLDivElement,

@@ -1,4 +1,4 @@
-import { EmailAvaliation } from "@/components/emails/EmailAvaliation";
+import { EmailAvaliation } from "@/components/emails/email-avaliation";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.API_RESEND);

@@ -1,7 +1,7 @@
 import React from "react";
-import { SubSubTitle } from "@/components/app/Titles";
-import { Hightlight } from "@/components/app/Hightlight";
-import { Paragraph } from "@/components/app/Paragraphs";
+import { SubSubTitle } from "@/components/app/titles";
+import { Hightlight } from "@/components/app/hightlight";
+import { Paragraph } from "@/components/app/paragraph";
 
 const Why = React.forwardRef<
   HTMLDivElement,

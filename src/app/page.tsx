@@ -1,14 +1,14 @@
 "use client";
-import { Container } from "@/components/app/Container";
-import { Footer } from "@/components/containers/Footer";
-import { Header } from "@/components/containers/Header";
-import { Book } from "@/components/containers/Book";
-import { Presentation } from "@/components/containers/Presentation";
-import { WhoBooked } from "@/components/containers/WhoBooked";
-import { Why } from "@/components/containers/Why";
-import { Who } from "@/components/containers/Who";
-import { IsTrap } from "@/components/containers/IsTrap";
-import { Liked } from "@/components/containers/Liked";
+import { Container } from "@/components/app/container";
+import { Footer } from "@/components/containers/footer";
+import { Header } from "@/components/containers/header";
+import { Book } from "@/components/containers/book";
+import { Presentation } from "@/components/containers/presentation";
+import { WhoBooked } from "@/components/containers/who-booked";
+import { Why } from "@/components/containers/why";
+import { Who } from "@/components/containers/who";
+import { IsTrap } from "@/components/containers/is-trap";
+import { Liked } from "@/components/containers/liked";
 
 export default function Home() {
   return (

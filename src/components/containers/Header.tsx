@@ -1,7 +1,7 @@
 import React from "react";
-import { HeaderImage } from "@/components/app/Image";
+import { HeaderImage } from "@/components/app/image";
 import Diocodes from "@/assets/diocodes";
-import { SubTitle, Title } from "@/components/app/Titles";
+import { SubTitle, Title } from "@/components/app/titles";
 
 const Header = React.forwardRef<
   HTMLDivElement,

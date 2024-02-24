@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { Footer } from "@/components/containers/Footer";
+import { Footer } from "@/components/containers/footer";
 import { Spinner } from "@phosphor-icons/react";
-import { Container } from "@/components/app/Container";
+import { Container } from "@/components/app/container";
 import {
   Select,
   SelectContent,
@@ -22,10 +22,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Paragraph } from "@/components/app/Paragraphs";
-import { Header } from "@/components/containers/Header";
-import { TypeAvaliation } from "@/types/TypeAvaliation";
-import { SchemaAvaliation } from "@/schemas/SchemaAvaliation";
+import { Paragraph } from "@/components/app/paragraph";
+import { Header } from "@/components/containers/header";
+import { TypeAvaliation } from "@/types/type-avaliation";
+import { SchemaAvaliation } from "@/schemas/schema-avaliation";
 
 export default function Home() {
   const [avaliations, setAvaliations] = useState(Array<TypeAvaliation>);

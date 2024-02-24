@@ -1,6 +1,6 @@
 import React from "react";
-import { Paragraph } from "@/components/app/Paragraphs";
-import { Hightlight } from "@/components/app/Hightlight";
+import { Paragraph } from "@/components/app/paragraph";
+import { Hightlight } from "@/components/app/hightlight";
 import { getXpYear } from "@/lib/utils";
 
 const Presentation = React.forwardRef<

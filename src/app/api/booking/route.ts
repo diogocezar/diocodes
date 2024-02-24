@@ -1,45 +1,34 @@
-type BookingResponse = {
-  attendees: string;
-  startTime: string;
-  endTime: string;
-  isActive: boolean;
-};
+import { compactName } from "@/lib/utils";
+import { BookingResponse } from "@/types/type-booking-response";
 
-const reduceName = (name: string): string => {
-  if (name.length > 20) {
-    const nameArray = name.split(" ");
-    return `${nameArray[0]} ${nameArray[nameArray.length - 1]}`;
-  }
-  return name;
-};
+const API_CAL = process.env.API_CAL;
+const URL = "https://api.cal.com/v1/bookings";
+const EVENT_ID = 634170;
+const REVALIDATE = 120;
 
-export const GET = async () => {
-  const API_KEY_CALL = process.env.API_CAL;
-  const URL = "https://api.cal.com/v1/bookings";
-  const eventId = 634170; // Event ID for Diocodes
-  const result = await fetch(`${URL}?apiKey=${API_KEY_CALL}`, {
-    next: { revalidate: 120 },
-  });
-  const data = await result.json();
-  const { bookings } = data;
-  const filteredData = bookings.filter(
-    (item: any) => item.eventTypeId === eventId && item.status !== "CANCELLED",
+const filterValidBooking = (booking: any) =>
+  booking.filter(
+    (item: any) => item.eventTypeId === EVENT_ID && item.status !== "CANCELLED",
   );
-  const resData = filteredData.map((item: any): BookingResponse => {
-    const isActive = new Date(item.endTime) > new Date();
+
+const formatResponse = (validBookings: any) =>
+  validBookings.map((item: any): BookingResponse => {
     return {
-      attendees: reduceName(item.attendees[0].name),
+      id: item.id,
+      attendees: compactName(item.attendees[0].name),
       startTime: item.startTime,
       endTime: item.endTime,
-      isActive,
+      isActive: new Date(item.startTime).getTime() > new Date().getTime(),
     };
   });
-  const resDataOrdered = resData.sort(
-    (a: BookingResponse, b: BookingResponse) => {
-      return new Date(a.startTime).getTime() - new Date(b.startTime).getTime();
-    },
-  );
-  const resDataOrderedFiltered = resDataOrdered.filter(
+
+const sortByDate = (formatedResponse: any) =>
+  formatedResponse.sort((a: BookingResponse, b: BookingResponse) => {
+    return new Date(a.startTime).getTime() - new Date(b.startTime).getTime();
+  });
+
+const removeDuplicates = (ordered: any) =>
+  ordered.filter(
     (item: BookingResponse, index: number, self: BookingResponse[]) =>
       index ===
       self.findIndex(
@@ -49,5 +38,20 @@ export const GET = async () => {
           t.endTime === item.endTime,
       ),
   );
-  return new Response(JSON.stringify(resDataOrderedFiltered));
+
+export const GET = async () => {
+  try {
+    const result = await fetch(`${URL}?apiKey=${API_CAL}`, {
+      next: { revalidate: REVALIDATE },
+    });
+    const data = await result.json();
+    const { bookings } = data;
+    const validBookings = filterValidBooking(bookings);
+    const response = formatResponse(validBookings);
+    const ordered = sortByDate(response);
+    const withoutDuplicates = removeDuplicates(ordered);
+    return new Response(JSON.stringify(withoutDuplicates));
+  } catch (error) {
+    return new Response(JSON.stringify({ error }));
+  }
 };
