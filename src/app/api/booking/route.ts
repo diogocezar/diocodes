@@ -15,7 +15,7 @@ const formatResponse = (validBookings: any) =>
   validBookings.map((item: any): BookingResponse => {
     return {
       id: item.id,
-      attendee: compactName(item.attendee[0].name),
+      attendee: compactName(item.attendees[0].name),
       startTime: item.startTime,
       endTime: item.endTime,
       isActive: new Date(item.startTime).getTime() > new Date().getTime(),
@@ -52,6 +52,7 @@ export const GET = async () => {
     const withoutDuplicates = removeDuplicates(ordered);
     return new Response(JSON.stringify(withoutDuplicates));
   } catch (error) {
+    console.log(error);
     return new Response(JSON.stringify({ error }));
   }
 };

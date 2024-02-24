@@ -14,10 +14,15 @@ const WhoBooked = React.forwardRef<
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      const request = await fetch("/api/booking");
-      const bookings = await request.json();
-      setBookints(bookings);
-      setIsLoading(false);
+      try {
+        const request = await fetch("/api/booking");
+        const bookings = await request.json();
+        setBookints(bookings);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, []);
   return (

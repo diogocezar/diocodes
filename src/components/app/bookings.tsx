@@ -10,7 +10,7 @@ const Bookings = ({ booking }: any) => {
         <div className="bg-comment group-hover:bg-purple m-2 gap-2 p-6 transition duration-300 ease-in-out">
           <div className="text-foreground mb-2 text-sm font-bold">
             <Calendar size={32} className="text-background mb-3" />{" "}
-            {booking.attendees.toUpperCase()}
+            {booking.attendee.toUpperCase()}
           </div>
           <div className="text-pink group-hover:text-foreground text-xs transition duration-300 ease-in-out">
             {new Date(booking.startTime).toLocaleString("pt-BR")}
