@@ -1,10 +1,10 @@
 import * as React from "react";
 
-interface AvaliationProps {
+interface EmailAvaliationProps {
   firstName: string;
 }
 
-export const Avaliation: React.FC<Readonly<AvaliationProps>> = ({
+export const EmailAvaliation: React.FC<Readonly<EmailAvaliationProps>> = ({
   firstName,
 }) => (
   <div>

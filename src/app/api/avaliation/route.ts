@@ -15,7 +15,7 @@ const reduceName = (name: string): string => {
 };
 
 export const GET = async () => {
-  const API_KEY_CALL = process.env.API_KEY_CALL;
+  const API_KEY_CALL = process.env.API_CAL;
   const URL = "https://api.cal.com/v1/bookings";
   const eventId = 634170; // Event ID for Diocodes
   const result = await fetch(`${URL}?apiKey=${API_KEY_CALL}`, {

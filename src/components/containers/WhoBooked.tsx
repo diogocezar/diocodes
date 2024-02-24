@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SubSubTitle } from "@/components/app/Titles";
-import { TypeBooking } from "@/types/Booking";
+import { TypeBooking } from "@/types/TypeBooking";
 import { Paragraph } from "@/components/app/Paragraphs";
 import { Spinner } from "@phosphor-icons/react";
 import { Bookings } from "@/components/app/Bookings";

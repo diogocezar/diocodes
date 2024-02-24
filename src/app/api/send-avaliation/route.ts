@@ -1,4 +1,4 @@
-import { Avaliation } from "@/components/emails/Avaliation";
+import { EmailAvaliation } from "@/components/emails/EmailAvaliation";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.API_RESEND);
@@ -6,10 +6,10 @@ const resend = new Resend(process.env.API_RESEND);
 export async function POST() {
   try {
     const data = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
+      from: "Diogo Cezar <diogo@diogocezar.com>",
       to: ["diogo@diogocezar.com"],
-      subject: "Avaliation",
-      react: Avaliation({}),
+      subject: "Hello world",
+      react: EmailAvaliation({ firstName: "John" }) as React.ReactElement,
     });
 
     return Response.json(data);
