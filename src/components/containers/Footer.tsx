@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Heart, FileCode } from "@phosphor-icons/react";
+import { Heart, GithubLogo } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 const Footer = React.forwardRef<
@@ -17,8 +17,8 @@ const Footer = React.forwardRef<
                 variant={"destructive"}
                 className="flex flex-row justify-center gap-2"
               >
-                <FileCode size={20} />
-                Acessar código fonte!
+                <GithubLogo size={20} />
+                GitHub
               </Button>
             </Link>
           </div>
