@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Footer } from "@/components/containers/footer";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -86,8 +87,9 @@ export default function RootLayout({
         <Footer />
         <Toaster />
         <SpeedInsights />
+        <Analytics />
+        <GoogleAnalytics gaId="G-XRK77CENDK" />
       </body>
-      <GoogleAnalytics gaId="G-XRK77CENDK" />
     </html>
   );
 }
