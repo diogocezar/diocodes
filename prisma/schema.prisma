@@ -1,0 +1,73 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("URI_MONGODB")
+}
+
+enum Role {
+    ADMIN
+    USER
+}
+
+model Person {
+    id              String    @id @default(uuid()) @map("_id")
+    name            String
+    email           String    @unique
+    user            User?
+    bookingHost     Booking?  @relation(name: "booking_host")
+    bookingAttendee Booking?  @relation(name: "booking_atendee")
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime? @updatedAt
+    removedAt       DateTime?
+}
+
+model User {
+    id        String    @id @default(uuid()) @map("_id")
+    person    Person    @relation(fields: [personId], references: [id])
+    personId  String    @unique
+    role      Role      @default(USER)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
+    removedAt DateTime?
+}
+
+model Tag {
+    id           String      @id @default(uuid()) @map("_id")
+    name         String
+    avaliation   Avaliation? @relation(fields: [avaliationId], references: [id])
+    avaliationId String?
+    createdAt    DateTime    @default(now())
+    updatedAt    DateTime?   @updatedAt
+    removedAt    DateTime?
+}
+
+model Avaliation {
+    id        String    @id @default(uuid()) @map("_id")
+    booking   Booking   @relation(fields: [bookingId], references: [id])
+    bookingId String    @unique
+    rating    Int
+    tags      Tag[]
+    comment   String?
+    wasSent   Boolean   @default(false)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
+    removedAt DateTime?
+}
+
+model Booking {
+    id         String      @id @default(uuid()) @map("_id")
+    host       Person      @relation(name: "booking_host", fields: [hostId], references: [id])
+    hostId     String      @unique
+    attendee   Person      @relation(name: "booking_atendee", fields: [attendeeId], references: [id])
+    attendeeId String      @unique
+    startTime  DateTime
+    endTime    DateTime
+    itHappened Boolean     @default(false)
+    avaliation Avaliation?
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime?   @updatedAt
+    removedAt  DateTime?
+}

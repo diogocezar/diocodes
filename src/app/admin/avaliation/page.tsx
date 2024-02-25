@@ -38,12 +38,12 @@ export default function AdminAvaliation() {
     setIsLoadingForm(true);
     try {
       const avaliation = avaliations.find(
-        (avaliation) => avaliation.id === parseInt(data.attendee),
+        (avaliation) => avaliation.id === parseInt(data.attendee)
       );
-      await fetch("/api/avaliation/send", {
-        method: "POST",
-        body: JSON.stringify(avaliation),
-      });
+      // await fetch("/api/avaliation/send", {
+      //   method: "POST",
+      //   body: JSON.stringify(avaliation),
+      // });
       await fetch("/api/avaliation/save", {
         method: "POST",
         body: JSON.stringify(avaliation),
@@ -104,7 +104,7 @@ export default function AdminAvaliation() {
                           >
                             {avaliation?.attendee.toUpperCase()} -{" "}
                             {new Date(avaliation.startTime).toLocaleString(
-                              "pt-BR",
+                              "pt-BR"
                             )}
                           </SelectItem>
                         ))}

@@ -1,17 +1,9 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { PrismaClient } from "@prisma/client";
 
-const URI = process.env.URI_MONGODB || "";
-const DATABASE = "diocodes";
-
-const client = new MongoClient(URI, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-
-export async function connect() {
-  await client.connect();
-  return client.db(DATABASE);
+declare global {
+  var prisma: PrismaClient | undefined;
 }
+
+export const db = globalThis.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
