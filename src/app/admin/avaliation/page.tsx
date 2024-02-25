@@ -40,14 +40,18 @@ export default function AdminAvaliation() {
       const avaliation = avaliations.find(
         (avaliation) => avaliation.id === parseInt(data.attendee),
       );
-      await fetch("/api/send-avaliation", {
+      await fetch("/api/avaliation/send", {
         method: "POST",
         body: JSON.stringify(avaliation),
       });
-      toast("O e-mail foi enviado com sucesso!");
+      await fetch("/api/avaliation/save", {
+        method: "POST",
+        body: JSON.stringify(avaliation),
+      });
+      toast("O e-mail foi enviado e a avaliação salva com sucesso!");
     } catch (error) {
       console.error(error);
-      toast("Houve um erro ao enviar o email. Tente novamente!");
+      toast("Houve um erro ao enviar o email ou salvar a avaliação.");
     } finally {
       setIsLoadingForm(false);
     }
@@ -55,7 +59,7 @@ export default function AdminAvaliation() {
   useEffect(() => {
     (async function () {
       setIsLoadingSelect(true);
-      const request = await fetch("/api/avaliation");
+      const request = await fetch("/api/avaliation/get");
       const avaliations = await request.json();
       setAvaliations(avaliations);
       setIsLoadingSelect(false);
