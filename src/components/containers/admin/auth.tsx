@@ -9,19 +9,19 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <div className="flex w-full flex-col gap-2">
+    <div className={cn("grid justify-center gap-6", className)} {...props}>
+      <div className="flex w-[300px] flex-col gap-2">
         <Button
-          variant="outline"
-          type="button"
+          variant={"destructive"}
+          className="flex flex-row justify-center gap-2"
           onClick={() =>
             signIn("github", {
               callbackUrl: `/admin/dashboard`,
             })
           }
         >
-          <GithubLogo size={16} className="mr-2 h-4 w-4" />
-          Github
+          <GithubLogo size={20} />
+          GitHub
         </Button>
       </div>
     </div>

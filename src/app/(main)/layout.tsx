@@ -6,7 +6,7 @@ import type { Viewport } from "next";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { Footer } from "@/components/containers/footer";
+import { Footer } from "@/components/containers/main/footer";
 import { Toaster } from "@/components/ui/sonner";
 import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import { getServerSession } from "next-auth";
