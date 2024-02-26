@@ -8,6 +8,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Footer } from "@/components/containers/footer";
 import { Toaster } from "@/components/ui/sonner";
+import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
+import { getServerSession } from "next-auth";
+import CustomSessionProvider from "@/context/session-provider";
 
 const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
 
@@ -50,10 +53,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://diocodes.dev",
-    siteName: "Mentorias com o Diogão",
-    title: "Mentorias com o Diogão",
+    siteName:
+      "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+    title:
+      "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
     description:
-      "Mentorias com o Diogão é um projeto de mentoria para desenvolvedores que desejam evoluir suas habilidades e carreira.",
+      "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
     images: [
       {
         url: "https://diocodes.dev/diocodes.png",
@@ -75,20 +80,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
       <body className={cn("bg-background antialiased", fira.className)}>
-        {children}
-        <Footer />
-        <Toaster />
-        <SpeedInsights />
-        <Analytics />
-        <GoogleAnalytics gaId="G-XRK77CENDK" />
+        <CustomSessionProvider session={session}>
+          {children}
+          <Footer />
+          <Toaster />
+          <SpeedInsights />
+          <Analytics />
+          <GoogleAnalytics gaId="G-XRK77CENDK" />
+        </CustomSessionProvider>
       </body>
     </html>
   );

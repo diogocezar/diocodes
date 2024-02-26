@@ -12,21 +12,21 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 
 ## ✅ Tarefas
 
-- [x] Criar o README.md
-- [x] Organizção inicial do projeto
-- [x] Configurar a paleta de cores do projeto
-- [x] Configurar robots.txt
-- [x] Incluir estrutura inicial
-- [x] Colocar cal.com embedado
-- [x] Organizar a implementação com componentes
-- [x] Melhorias de responsividade
-- [x] Incluir favicon
-- [x] Incluir rodapé
-- [x] Instalação do Shadcn
-- [x] Organização dos componentes
-- [X] Refatorar as apis separando em funções
-- [ ] Criar e-mail que solicita a avaliação
-- [ ] Criar uma lista com a opção de enviar a avaliação
+- [x] Criar sistema de autenticação;
+- [x] Permitir apenas login de usuários específicos;
+- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
+- [ ] Criar layout da página de login;
+- [ ] Criar layout do Dashboard;
+- [ ] Criar layout da página de avaliações;
+- [ ] Criar services;
+- [ ] Criar proteção das rotas em `/admin`;
+- [ ] Criar layout base para sistema de administração;
+- [ ] Criar Listagem de Avaliações;
+- [ ] Criar Listagem de Reservas;
+- [ ] Alimentar as reservas automaticamente quando novos dados forem obtidos da API Cal.com
+- [ ] Criar envio de avaliação (escolhendo uma reserva ou manualmente);
+- [ ] Melhorar componentes utilizando sombras;
+- [ ] Criar página de erros;
 
 ## 📦 Instalação
 
