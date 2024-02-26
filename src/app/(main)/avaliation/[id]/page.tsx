@@ -12,7 +12,7 @@ import Rating from "@/components/app/rating";
 import { useState } from "react";
 import { Paragraph } from "@/components/app/paragraph";
 
-export default function Avaliation({ params }: { params: { id: string } }) {
+export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [rating, setRating] = useState<number>(1);
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
