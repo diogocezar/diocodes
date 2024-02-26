@@ -22,7 +22,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Paragraph } from "@/components/app/paragraph";
-import { Header } from "@/components/containers/header";
 import { TypeAvaliation } from "@/types/type-avaliation";
 import { SchemaAvaliation } from "@/schemas/schema-avaliation";
 import { toast } from "sonner";
@@ -38,7 +37,7 @@ export default function AdminAvaliation() {
     setIsLoadingForm(true);
     try {
       const avaliation = avaliations.find(
-        (avaliation) => avaliation.id === parseInt(data.attendee)
+        (avaliation) => avaliation.id === parseInt(data.attendee),
       );
       // await fetch("/api/avaliation/send", {
       //   method: "POST",
@@ -68,7 +67,6 @@ export default function AdminAvaliation() {
   return (
     <>
       <Container>
-        <Header />
         <Paragraph className="mb-8">
           Utilize o formulário abaixo para enviar a avaliação para os
           participantes que já realizaram a mentoria.
@@ -104,7 +102,7 @@ export default function AdminAvaliation() {
                           >
                             {avaliation?.attendee.toUpperCase()} -{" "}
                             {new Date(avaliation.startTime).toLocaleString(
-                              "pt-BR"
+                              "pt-BR",
                             )}
                           </SelectItem>
                         ))}

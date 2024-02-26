@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { Header } from "@/components/containers/header";
 import { SchemaAvaliation } from "@/schemas/schema-avaliation";
 import { SubTitle } from "@/components/app/titles";
 import Rating from "@/components/app/rating";
@@ -25,7 +24,6 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   return (
     <>
       <Container>
-        <Header />
         <SubTitle className="mb-8">
           De 1 a 5, qual a sua nota para a mentoria?
         </SubTitle>
