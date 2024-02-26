@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fira_Code } from "next/font/google";
+import { Fira_Code, Poppins } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";
@@ -13,6 +14,12 @@ import { getServerSession } from "next-auth";
 import CustomSessionProvider from "@/context/session-provider";
 
 const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -88,7 +95,15 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <body className={cn("bg-background antialiased", fira.className)}>
+      <body
+        className={cn(
+          "bg-background antialiased",
+          fira.className,
+          fira.variable,
+          poppins.variable,
+          GeistSans.variable,
+        )}
+      >
         <CustomSessionProvider session={session}>
           {children}
           <Footer />

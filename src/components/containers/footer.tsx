@@ -24,7 +24,7 @@ const Footer = React.forwardRef<
             </Link>
           </div>
           <div>
-            <p className="text-foreground m-0 flex flex-row items-center justify-center gap-2 font-semibold">
+            <p className="text-foreground font-poppins m-0 flex flex-row items-center justify-center gap-2 font-semibold">
               Feito com{" "}
               <Heart
                 weight="fill"

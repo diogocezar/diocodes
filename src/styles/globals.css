@@ -24,6 +24,18 @@
         --radius: 0.5rem;
     }
 
+    .font-poppins {
+        font-family: var(--font-poppins);
+    }
+
+    .font-fira {
+        font-family: var(--font-fira);
+    }
+
+    .font-geist {
+        font-family: var(--font-geist-sans);
+    }
+
     * {
         margin: 0;
         padding: 0;

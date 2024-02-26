@@ -28,7 +28,7 @@ const SubTitle = React.forwardRef<
     <h3
       ref={ref}
       className={cn(
-        "text-foreground mb-4 mt-2 text-lg md:mb-12 md:text-xl",
+        "text-foreground font-poppins mb-4 mt-2 text-lg font-medium md:mb-12 md:text-xl",
         className,
       )}
     >

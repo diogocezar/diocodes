@@ -5,20 +5,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "rounded-md text-md disabled:pointer-events-none disabled:opacity-50",
+  "rounded-md text-md disabled:pointer-events-none disabled:opacity-50 shadow",
   {
     variants: {
       variant: {
         default:
-          "bg-pink text-background hover:bg-green mb-10 mt-10 cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
+          "bg-pink font-poppins text-background hover:bg-green mb-10 mt-10 cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
         destructive:
-          "bg-background text-foreground hover:bg-pink cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
+          "bg-background font-poppins text-foreground hover:bg-pink cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border font-poppins border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-secondary font-poppins text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent font-poppins hover:text-accent-foreground",
+        link: "text-primary font-poppins underline-offset-4 hover:underline",
       },
     },
     defaultVariants: {
