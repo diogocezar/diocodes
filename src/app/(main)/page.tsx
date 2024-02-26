@@ -9,7 +9,7 @@ import { Who } from "@/components/containers/main/who";
 import { IsTrap } from "@/components/containers/main/is-trap";
 import { Liked } from "@/components/containers/main/liked";
 
-export default function HomePage() {
+export default function MainPage() {
   return (
     <>
       <Container>

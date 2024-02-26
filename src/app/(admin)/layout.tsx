@@ -87,7 +87,7 @@ export default async function RootLayout({
     <html lang="pt-BR">
       <body
         className={cn(
-          "bg-background antialiased",
+          "bg-background-dark antialiased",
           GeistSans.className,
           GeistSans.variable,
         )}

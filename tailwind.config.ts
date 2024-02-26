@@ -19,9 +19,9 @@ const config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
         background: "var(--background)",
         "current-line": "var(--current-line)",
         "background-dark": "var(--background-dark)",
@@ -35,32 +35,32 @@ const config = {
         red: "var(--red)",
         yellow: "var(--yellow)",
         primary: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
         destructive: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
         },
         muted: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
         accent: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
         },
         popover: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
         },
         card: {
-          DEFAULT: "var(--foreground)",
-          foreground: "var(--foreground)",
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
         },
       },
       borderRadius: {

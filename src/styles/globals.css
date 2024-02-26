@@ -17,11 +17,32 @@
         --red: #ff5555;
         --yellow: #f1fa8c;
 
-        --border: 240 5.9% 90%;
-        --input: 240 5.9% 90%;
-        --ring: 240 10% 3.9%;
+        --border: #f1fa8c;
+        --input: #f1fa8c;
+        --ring: #f1fa8c;
 
         --radius: 0.5rem;
+
+        --card: #282a36;
+        --card-foreground: #f8f8f2;
+
+        --popover: #0e0f12;
+        --popover-foreground: #f8f8f2;
+
+        --primary: #f8f8f2;
+        --primary-foreground: #f8f8f2;
+
+        --secondary: #50fa7b;
+        --secondary-foreground: #50fa7b;
+
+        --muted: #f8f8f2;
+        --muted-foreground: #7b7b7b;
+
+        --accent: #50fa7b;
+        --accent-foreground: #282a36;
+
+        --destructive: red;
+        --destructive-foreground: red;
     }
 
     .font-poppins {
@@ -74,7 +95,7 @@
         color: var(--background) !important;
     }
 
-    body {
+    .bg-dots {
         background-color: #282a36;
         opacity: 1;
         background-image: radial-gradient(

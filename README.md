@@ -19,6 +19,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Layout do login responsivo;
 - [ ] Criar layout do Dashboard;
 - [ ] Criar layout da página de avaliações;
+- [ ] Criar aplicação para PRD do GitHub;
 - [ ] Criar services;
 - [ ] Criar proteção das rotas em `/admin`;
 - [ ] Criar layout base para sistema de administração;

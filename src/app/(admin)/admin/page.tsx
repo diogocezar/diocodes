@@ -13,7 +13,7 @@ export default async function AuthenticationPage() {
 
   return (
     <>
-      <div className="container relative m-0 flex h-screen w-[100%] flex-col items-center justify-center p-0 md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="bg-dots container relative m-0 flex h-screen w-[100%] flex-col items-center justify-center p-0 md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-transparent p-10 text-white lg:flex dark:border-r">
           <div className="absolute inset-0 bg-transparent" />
           <div className="relative z-20 flex items-center text-lg font-medium">

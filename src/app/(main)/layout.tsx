@@ -96,7 +96,7 @@ export default async function RootLayout({
     <html lang="pt-BR">
       <body
         className={cn(
-          "bg-background antialiased",
+          "bg-dots antialiased",
           fira.className,
           fira.variable,
           poppins.variable,
