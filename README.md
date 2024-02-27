@@ -14,10 +14,11 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 
 - [x] Criar sistema de autenticação;
 - [x] Permitir apenas login de usuários específicos;
-- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [x] Criar layout da página de login;
 - [x] Layout do login responsivo;
-- [ ] Criar layout do Dashboard;
+- [x] Criar layout do Dashboard;
+- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
+- [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar aplicação para PRD do GitHub;
 - [ ] Criar services;

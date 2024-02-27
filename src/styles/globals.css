@@ -17,13 +17,13 @@
         --red: #ff5555;
         --yellow: #f1fa8c;
 
-        --border: #f1fa8c;
-        --input: #f1fa8c;
-        --ring: #f1fa8c;
+        --border: #282a36;
+        --input: #282a36;
+        --ring: #282a36;
 
         --radius: 0.5rem;
 
-        --card: #282a36;
+        --card: rgb(0 0 0 / 30%);
         --card-foreground: #f8f8f2;
 
         --popover: #0e0f12;

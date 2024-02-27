@@ -19,8 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title:
-    "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+  title: "Administração Diocodes",
   description:
     "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
   keywords: [
