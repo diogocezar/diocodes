@@ -25,6 +25,8 @@ import { Paragraph } from "@/components/app/paragraph";
 import { TypeAvaliation } from "@/types/type-avaliation";
 import { SchemaAvaliation } from "@/schemas/schema-avaliation";
 import { toast } from "sonner";
+import { AdminTitle } from "@/components/app/titles";
+import { Calendar } from "@phosphor-icons/react";
 
 export default function AdminAvaliation() {
   const [avaliations, setAvaliations] = useState(Array<TypeAvaliation>);
@@ -66,7 +68,14 @@ export default function AdminAvaliation() {
   }, []);
   return (
     <>
-      <Container>
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <div className="flex items-center justify-between space-y-2">
+          <AdminTitle>
+            <Calendar className="h-9 w-9" /> Reservas
+          </AdminTitle>
+        </div>
+      </div>
+      {/* <Container>
         <Paragraph className="mb-8">
           Utilize o formulário abaixo para enviar a avaliação para os
           participantes que já realizaram a mentoria.
@@ -124,7 +133,7 @@ export default function AdminAvaliation() {
             </form>
           </Form>
         )}
-      </Container>
+      </Container> */}
     </>
   );
 }

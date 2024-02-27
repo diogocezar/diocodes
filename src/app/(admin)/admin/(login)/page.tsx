@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { UserAuthForm } from "@/components/containers/admin/auth";
+import { UserAuthForm } from "@/components/containers/admin/login/auth";
 import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import Diocodes from "@/assets/diocodes";
 
