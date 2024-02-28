@@ -28,7 +28,7 @@ import { toast } from "sonner";
 import { AdminTitle } from "@/components/app/titles";
 import { Star } from "@phosphor-icons/react";
 
-export default function AdminAvaliation() {
+export default function AdminListAvaliation() {
   const [avaliations, setAvaliations] = useState(Array<TypeAvaliation>);
   const [isLoadingSelect, setIsLoadingSelect] = useState(false);
   const [isLoadingForm, setIsLoadingForm] = useState(false);

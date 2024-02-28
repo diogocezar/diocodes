@@ -10,12 +10,16 @@ import {
   Calendar,
   SignOut,
   Browsers,
+  CheckFat,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 export default function Nav() {
   const { data: session } = useSession();
   const { image, name } = session?.user || {};
+  const pathname = usePathname().replace("/admin/", "");
   return (
     <div className="bg-background-dark flex w-[240px] min-w-[240px] flex-col gap-4 overflow-y-auto px-4 py-6">
       <div className="flex h-full flex-col justify-between">
@@ -43,7 +47,14 @@ export default function Nav() {
             <li>
               <Link
                 href="/admin/dashboard"
-                className="text-background bg-pink hover:bg-background hover:text-foreground flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "dashboard"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "dashboard" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
               >
                 <ChartBar size={18} />
                 Dashboard
@@ -51,8 +62,15 @@ export default function Nav() {
             </li>
             <li>
               <Link
-                href="/admin/avaliation"
-                className="text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold"
+                href="/admin/avaliation/list"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "avaliation/list"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "avaliation/list" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
               >
                 <Star size={18} />
                 Avaliações
@@ -60,8 +78,31 @@ export default function Nav() {
             </li>
             <li>
               <Link
+                href="/admin/avaliation/request"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "avaliation/request"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "avaliation/request" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <CheckFat size={18} />
+                Solicitar Avaliação
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/admin/booking"
-                className="text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "booking"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "booking" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
               >
                 <Calendar size={18} />
                 Reservas
@@ -70,7 +111,9 @@ export default function Nav() {
             <li>
               <Link
                 href={"/"}
-                className="text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold"
+                className={clsx(
+                  "text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                )}
               >
                 <Browsers size={18} />
                 Acessar o site
