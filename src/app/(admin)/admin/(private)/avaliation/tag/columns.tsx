@@ -3,16 +3,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { TypeTag } from "@/types/type-tag";
 
-export type Tag = {
-  id: string;
-  name: string;
-  createdAt: Date;
-  removedAt?: Date;
-  updatedAt?: Date;
-};
-
-export const columns: ColumnDef<Tag>[] = [
+export const columns: ColumnDef<TypeTag>[] = [
   {
     id: "select",
     header: ({ table }) => (

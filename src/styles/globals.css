@@ -41,8 +41,8 @@
         --accent: #50fa7b;
         --accent-foreground: #282a36;
 
-        --destructive: red;
-        --destructive-foreground: red;
+        --destructive: #ff79c6;
+        --destructive-foreground: #ff79c6;
     }
 
     .font-poppins {

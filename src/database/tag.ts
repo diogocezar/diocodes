@@ -3,9 +3,12 @@ import { Tag } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
 export const createTag = async (tag: Tag) => {
+  console.log(tag);
   try {
-    await db.tag.create({ data: tag });
-    logger.info(`Tag created: ${tag.id}`);
+    const created = await db.tag.create({
+      data: { ...tag, createdAt: new Date() },
+    });
+    logger.info(`Tag created: ${created}`);
   } catch (error) {
     logger.error(error);
   }
@@ -13,11 +16,11 @@ export const createTag = async (tag: Tag) => {
 
 export const updateTag = async (id: string, tag: Tag) => {
   try {
-    await db.tag.update({
+    const updated = await db.tag.update({
       where: { id },
       data: { ...tag, updatedAt: new Date() },
     });
-    logger.info(`Tag updated: ${id}`);
+    logger.info(`Tag updated: ${updated}`);
   } catch (error) {
     logger.error(error);
   }
@@ -25,11 +28,11 @@ export const updateTag = async (id: string, tag: Tag) => {
 
 export const removeTag = async (id: string) => {
   try {
-    await db.tag.update({
+    const removed = await db.tag.update({
       where: { id },
       data: { removedAt: new Date() },
     });
-    logger.info(`Tag removed: ${id}`);
+    logger.info(`Tag removed: ${removed}`);
   } catch (error) {
     logger.error(error);
   }
@@ -37,8 +40,9 @@ export const removeTag = async (id: string) => {
 
 export const getAllTags = async (): Promise<Tag[]> => {
   try {
-    logger.info("Getting all tags");
-    return db.tag.findMany({ where: { removedAt: null } });
+    const result = await db.tag.findMany();
+    logger.info(`Getting all tags: ${result}`);
+    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -47,8 +51,9 @@ export const getAllTags = async (): Promise<Tag[]> => {
 
 export const getTag = async (id: string): Promise<Tag | null> => {
   try {
-    logger.info(`Getting tag: ${id}`);
-    return db.tag.findUnique({ where: { id, removedAt: null } });
+    const result = await db.tag.findUnique({ where: { id, removedAt: null } });
+    logger.info(`Getting tag: ${result}`);
+    return result;
   } catch (error) {
     logger.error(error);
   }

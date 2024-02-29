@@ -20,7 +20,10 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Separar Menu do Dashboard;
 - [x] Menu selecionado de acordo com a rota;
 - [x] Criar layout básico de uma data table;
-- [ ] Criar gerenciamento completo das Tags;
+- [x] Criação de Tags;
+- [ ] Loading da tabela;
+- [ ] Exclusão de Tags;
+- [ ] Ajustar updatedAt e removedAt;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;
