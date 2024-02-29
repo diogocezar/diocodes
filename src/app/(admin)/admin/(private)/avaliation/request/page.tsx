@@ -1,6 +1,12 @@
 "use client";
 import { AdminTitle } from "@/components/app/titles";
-import { CheckFat } from "@phosphor-icons/react";
+import {
+  Funnel,
+  MagnifyingGlass,
+  ArrowRight,
+  ArrowLeft,
+  TelegramLogo,
+} from "@phosphor-icons/react";
 import { columns } from "./columns";
 import { Payment } from "./columns";
 import * as React from "react";
@@ -33,8 +39,106 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const data: Payment[] = [
+  {
+    id: "m5gr84i9",
+    amount: 316,
+    status: "success",
+    email: "ken99@yahoo.com",
+  },
+  {
+    id: "3u1reuv4",
+    amount: 242,
+    status: "success",
+    email: "Abe45@gmail.com",
+  },
+  {
+    id: "derv1ws0",
+    amount: 837,
+    status: "processing",
+    email: "Monserrat44@gmail.com",
+  },
+  {
+    id: "5kma53ae",
+    amount: 874,
+    status: "success",
+    email: "Silas22@gmail.com",
+  },
+  {
+    id: "bhqecj4p",
+    amount: 721,
+    status: "failed",
+    email: "carmella@hotmail.com",
+  },
+  {
+    id: "m5gr84i9",
+    amount: 316,
+    status: "success",
+    email: "ken99@yahoo.com",
+  },
+  {
+    id: "3u1reuv4",
+    amount: 242,
+    status: "success",
+    email: "Abe45@gmail.com",
+  },
+  {
+    id: "derv1ws0",
+    amount: 837,
+    status: "processing",
+    email: "Monserrat44@gmail.com",
+  },
+  {
+    id: "5kma53ae",
+    amount: 874,
+    status: "success",
+    email: "Silas22@gmail.com",
+  },
+  {
+    id: "bhqecj4p",
+    amount: 721,
+    status: "failed",
+    email: "carmella@hotmail.com",
+  },
+  {
+    id: "m5gr84i9",
+    amount: 316,
+    status: "success",
+    email: "ken99@yahoo.com",
+  },
+  {
+    id: "3u1reuv4",
+    amount: 242,
+    status: "success",
+    email: "Abe45@gmail.com",
+  },
+  {
+    id: "derv1ws0",
+    amount: 837,
+    status: "processing",
+    email: "Monserrat44@gmail.com",
+  },
+  {
+    id: "5kma53ae",
+    amount: 874,
+    status: "success",
+    email: "Silas22@gmail.com",
+  },
+  {
+    id: "bhqecj4p",
+    amount: 721,
+    status: "failed",
+    email: "carmella@hotmail.com",
+  },
   {
     id: "m5gr84i9",
     amount: 316,
@@ -77,6 +181,7 @@ export default function AdminRequestAvaliation() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
+    initialState: { pagination: { pageSize: 15 } },
     data,
     columns,
     onSortingChange: setSorting,
@@ -96,36 +201,55 @@ export default function AdminRequestAvaliation() {
   });
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="flex items-center justify-between space-y-2">
-          <AdminTitle>
-            <CheckFat className="h-9 w-9" /> Solicitar Avaliação
+      <div className="flex-1 p-8 pt-6">
+        <div className="flex items-center justify-between">
+          <AdminTitle className="mb-0 mt-0">
+            <TelegramLogo className="h-9 w-9" /> Solicitar Avaliação
           </AdminTitle>
         </div>
-        <div className="w-full">
-          <div className="flex items-center justify-between py-4">
-            <Input
-              placeholder="Filtrar os dados"
-              value={
-                (table.getColumn("email")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("email")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
+        <div className="mt-0 w-full pt-8">
+          <div className="mb-4 flex h-[60px] items-center justify-between">
+            <div className="min-w-sm w-1/4">
+              <MagnifyingGlass className="text-muted-foreground absolute ml-[13px] mt-[13px] h-5 w-5" />
+              <Input
+                placeholder="Procurar..."
+                value={
+                  (table.getColumn("email")?.getFilterValue() as string) ?? ""
+                }
+                onChange={(event) =>
+                  table.getColumn("email")?.setFilterValue(event.target.value)
+                }
+                className="rouded-lg pl-10"
+              />
+            </div>
             <div className="flex flex-row items-center gap-4">
-              <Button>Solicitar Avaliação</Button>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button className="flex flex-row gap-2 rounded-lg">
+                    <TelegramLogo className="h-5 w-5" /> Solicitar Avaliação
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Are you absolutely sure?</SheetTitle>
+                    <SheetDescription>
+                      This action cannot be undone. This will permanently delete
+                      your account and remove your data from our servers.
+                    </SheetDescription>
+                  </SheetHeader>
+                </SheetContent>
+              </Sheet>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="ml-auto flex h-10 flex-row items-center"
-                  >
-                    Filtrar Colunas <ChevronDown className="ml-2 h-4 w-4" />
+                  <Button variant="outline" className="flex flex-row gap-2">
+                    <Funnel className="h-5 w-5" /> Filtrar Colunas{" "}
+                    <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent
+                  align="center"
+                  className="bg-card w-full border-0"
+                >
                   {table
                     .getAllColumns()
                     .filter((column) => column.getCanHide())
@@ -147,7 +271,7 @@ export default function AdminRequestAvaliation() {
               </DropdownMenu>
             </div>
           </div>
-          <div className="bg-card rounded-md shadow-lg">
+          <div className="bg-card shadow-lg">
             <Table>
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -156,7 +280,7 @@ export default function AdminRequestAvaliation() {
                       return (
                         <TableHead
                           key={header.id}
-                          className="text-foreground text-base font-bold"
+                          className="text-foreground bg-background-dark text-base font-bold"
                         >
                           {header.isPlaceholder
                             ? null
@@ -201,25 +325,25 @@ export default function AdminRequestAvaliation() {
               </TableBody>
             </Table>
           </div>
-          <div className="flex items-center justify-end space-x-2 py-4">
+          <div className="flex items-center justify-end py-4 pb-0">
             <div className="text-muted-foreground flex-1 text-sm">
               {table.getFilteredSelectedRowModel().rows.length} de{" "}
               {table.getFilteredRowModel().rows.length} linhas selecionada(s).
             </div>
-            <div className="space-x-2">
+            <div className="flex flex-row gap-2">
               <Button
                 variant="outline"
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
               >
-                Próxima Página
+                <ArrowLeft />
               </Button>
               <Button
                 variant="outline"
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
               >
-                Página Anterior
+                <ArrowRight />
               </Button>
             </div>
           </div>

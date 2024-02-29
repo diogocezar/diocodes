@@ -10,7 +10,7 @@ import {
   Calendar,
   SignOut,
   Browsers,
-  CheckFat,
+  TelegramLogo,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -30,7 +30,7 @@ export default function Nav() {
                 src={image || ""}
                 className="h-12 w-12 rounded-full"
               />
-              <AvatarFallback className="h-8 w-8 rounded-sm">
+              <AvatarFallback className="h-12 w-12 rounded-full">
                 {name &&
                   name
                     .split(" ")
@@ -88,7 +88,7 @@ export default function Nav() {
                     "bg-pink hover:bg-background hover:text-foreground",
                 )}
               >
-                <CheckFat size={18} />
+                <TelegramLogo size={18} />
                 Solicitar Avaliação
               </Link>
             </li>

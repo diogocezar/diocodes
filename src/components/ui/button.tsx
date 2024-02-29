@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-pink font-poppins text-background hover:bg-green mb-10 mt-10 cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
+          "bg-pink font-poppins text-background hover:bg-green mb-8 mt-8 cursor-crosshair rounded-full px-6 py-3 font-semibold transition duration-300 ease-in-out",
         destructive:
           "bg-background font-poppins text-foreground hover:bg-pink cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
         outline:
-          "border font-poppins border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "bg-card text-foreground hover:bg-background-dark flex flex-row items-center rounded-lg px-6 py-3",
         secondary:
           "bg-secondary font-poppins text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent font-poppins hover:text-accent-foreground",
