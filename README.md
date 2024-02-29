@@ -18,8 +18,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Layout do login responsivo;
 - [x] Criar layout do Dashboard;
 - [x] Separar Menu do Dashboard;
-- [X] Menu selecionado de acordo com a rota;
-- [ ] Criar layout da página de solicitação de avaliações;
+- [x] Menu selecionado de acordo com a rota;
+- [x] Criar layout básico de uma data table;
+- [ ] Criar gerenciamento completo das Tags;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;

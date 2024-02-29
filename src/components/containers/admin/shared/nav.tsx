@@ -11,6 +11,7 @@ import {
   SignOut,
   Browsers,
   TelegramLogo,
+  Tag,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -90,6 +91,22 @@ export default function Nav() {
               >
                 <TelegramLogo size={18} />
                 Solicitar Avaliação
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/avaliation/tag"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "avaliation/tag"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "avaliation/tag" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <Tag size={18} />
+                Tags
               </Link>
             </li>
             <li>
