@@ -7,7 +7,6 @@ export default function CustomQueryProvider({
   children,
 }: {
   children: React.ReactNode;
-  session: any;
 }): React.ReactNode {
   const [client] = useState(new QueryClient());
   return (
