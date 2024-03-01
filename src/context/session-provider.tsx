@@ -8,5 +8,9 @@ export default function CustomSessionProvider({
   children: React.ReactNode;
   session: any;
 }): React.ReactNode {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <>
+      <SessionProvider session={session}>{children}</SessionProvider>;
+    </>
+  );
 }

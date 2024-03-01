@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/sonner";
 import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import { getServerSession } from "next-auth";
 import CustomSessionProvider from "@/context/session-provider";
+import CustomQueryProvider from "@/context/query-provider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -91,13 +92,15 @@ export default async function RootLayout({
           GeistSans.variable,
         )}
       >
-        <CustomSessionProvider session={session}>
-          {children}
-          <Toaster />
-          <SpeedInsights />
-          <Analytics />
-          <GoogleAnalytics gaId="G-XRK77CENDK" />
-        </CustomSessionProvider>
+        <CustomQueryProvider>
+          <CustomSessionProvider session={session}>
+            {children}
+            <Toaster />
+            <SpeedInsights />
+            <Analytics />
+            <GoogleAnalytics gaId="G-XRK77CENDK" />
+          </CustomSessionProvider>
+        </CustomQueryProvider>
       </body>
     </html>
   );

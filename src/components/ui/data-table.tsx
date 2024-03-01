@@ -11,6 +11,7 @@ import {
   MagnifyingGlass,
   ArrowRight,
   ArrowLeft,
+  Trash,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import React, { ReactElement } from "react";
@@ -39,6 +40,7 @@ type DataTableProps = {
   data: any[];
   columns: any[];
   searchField: string;
+  handleDelete: Function;
 };
 
 export default function DataTable({
@@ -46,6 +48,7 @@ export default function DataTable({
   data,
   columns,
   searchField,
+  handleDelete,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -92,6 +95,15 @@ export default function DataTable({
         </div>
         <div className="flex flex-row items-center gap-4">
           {form}
+          <Button
+            className="flex flex-row gap-2 rounded-lg"
+            disabled={!table.getFilteredSelectedRowModel().rows.length}
+            onClick={() => {
+              handleDelete(table.getFilteredSelectedRowModel().rows);
+            }}
+          >
+            <Trash className="h-5 w-5" /> Remover
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex flex-row gap-2">

@@ -26,11 +26,10 @@ export const updateTag = async (id: string, tag: Tag) => {
   }
 };
 
-export const removeTag = async (id: string) => {
+export const removeTag = async (data: any) => {
   try {
-    const removed = await db.tag.update({
-      where: { id },
-      data: { removedAt: new Date() },
+    const removed = await db.tag.deleteMany({
+      where: { id: { in: data.idsToDelete } },
     });
     logger.info(`Tag removed: ${removed}`);
   } catch (error) {

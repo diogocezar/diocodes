@@ -2,44 +2,45 @@
 import { AdminTitle } from "@/components/app/titles";
 import { Tag as TagIcon } from "@phosphor-icons/react";
 import { columns } from "./columns";
-import { TypeTag } from "@/types/type-tag";
 import * as React from "react";
-
 import DataTable from "@/components/ui/data-table";
 import TagForm from "./form";
-import { useEffect, useState } from "react";
 import { api } from "@/services/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function AdminRequestAvaliation() {
-  const [data, setData] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    (async function () {
-      setIsLoading(true);
-      try {
-        const result = await api.get("/admin/avaliation/tag");
-        setData(result.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const { data } = await api.get("/admin/avaliation/tag");
+      return data;
+    },
+  });
+  const handleDelete = async (items: any) => {
+    const idsToDelete = items.map((item: any) => item.original.id);
+    await api.delete("/admin/avaliation/tag", {
+      data: { idsToDelete: idsToDelete },
+    });
+    queryClient.invalidateQueries({ queryKey: ["tags"] });
+  };
   return (
     <>
       <div className="flex-1 p-8 pt-6">
         <div className="flex items-center justify-between">
           <AdminTitle className="mb-0 mt-0">
-            <TagIcon className="h-9 w-9" /> Tags {isLoading && "Carregando..."}
+            <TagIcon className="h-9 w-9" /> Tags
           </AdminTitle>
         </div>
-        <DataTable
-          form={<TagForm defaultValues={{ name: "Uma nova Tag" }} />}
-          data={data}
-          columns={columns}
-          searchField="name"
-        />
+        {!isLoading && (
+          <DataTable
+            form={<TagForm defaultValues={{ name: "Uma nova Tag" }} />}
+            data={data}
+            columns={columns}
+            searchField="name"
+            handleDelete={handleDelete}
+          />
+        )}
       </div>
     </>
   );

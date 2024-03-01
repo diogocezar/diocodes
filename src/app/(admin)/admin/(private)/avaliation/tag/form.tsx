@@ -23,6 +23,7 @@ import {
 import { Spinner } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import { api } from "@/services/api";
+import { useQueryClient } from "@tanstack/react-query";
 
 type TagFormProps = {
   defaultValues?: z.infer<typeof SchemaTag>;
@@ -31,7 +32,7 @@ type TagFormProps = {
 export default function TagForm({ defaultValues }: TagFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof SchemaTag>>({
     resolver: zodResolver(SchemaTag),
     defaultValues: defaultValues || {
@@ -43,6 +44,7 @@ export default function TagForm({ defaultValues }: TagFormProps) {
     try {
       setIsLoading(true);
       await api.post("/admin/avaliation/tag", data);
+      queryClient.invalidateQueries({ queryKey: ["tags"] });
     } catch (error) {
       console.error(error);
     } finally {
