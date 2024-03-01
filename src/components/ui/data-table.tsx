@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ArrowLeft,
   Trash,
+  Spinner,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import React, { ReactElement } from "react";
@@ -41,6 +42,7 @@ type DataTableProps = {
   columns: any[];
   searchField: string;
   handleDelete: Function;
+  isLoading: boolean;
 };
 
 export default function DataTable({
@@ -49,6 +51,7 @@ export default function DataTable({
   columns,
   searchField,
   handleDelete,
+  isLoading,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -77,6 +80,10 @@ export default function DataTable({
       rowSelection,
     },
   });
+  const disableComponent = isLoading;
+  const disableComponentSelect = !(
+    !isLoading && table.getFilteredSelectedRowModel().rows.length
+  );
   return (
     <div className="mt-0 w-full pt-8">
       <div className="mb-4 flex h-[60px] items-center justify-between">
@@ -97,7 +104,7 @@ export default function DataTable({
           {form}
           <Button
             className="flex flex-row gap-2 rounded-lg"
-            disabled={!table.getFilteredSelectedRowModel().rows.length}
+            disabled={disableComponentSelect}
             onClick={() => {
               handleDelete(table.getFilteredSelectedRowModel().rows);
             }}
@@ -106,7 +113,11 @@ export default function DataTable({
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="flex flex-row gap-2">
+              <Button
+                variant="outline"
+                className="flex flex-row gap-2"
+                disabled={disableComponent}
+              >
                 <Funnel className="h-5 w-5" /> Filtrar Colunas{" "}
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
@@ -160,7 +171,7 @@ export default function DataTable({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {!isLoading && table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -183,7 +194,14 @@ export default function DataTable({
                   colSpan={columns.length}
                   className="text-foreground h-24 text-center"
                 >
-                  Não encontrei nada 😔
+                  {!isLoading ? (
+                    "Não encontrei nada 😔"
+                  ) : (
+                    <div className="flex w-full flex-row items-center justify-center gap-2">
+                      <Spinner size={20} className="animate-spin" />
+                      Carregando...
+                    </div>
+                  )}
                 </TableCell>
               </TableRow>
             )}
@@ -192,21 +210,22 @@ export default function DataTable({
       </div>
       <div className="flex items-center justify-end py-4 pb-0">
         <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} de{" "}
-          {table.getFilteredRowModel().rows.length} linhas selecionada(s).
+          {!isLoading ? table.getFilteredSelectedRowModel().rows.length : 0} de{" "}
+          {!isLoading ? table.getFilteredRowModel().rows.length : 0} linhas
+          selecionada(s).
         </div>
         <div className="flex flex-row gap-2">
           <Button
             variant="outline"
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            disabled={!isLoading && !table.getCanPreviousPage()}
           >
             <ArrowLeft />
           </Button>
           <Button
             variant="outline"
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            disabled={!isLoading && !table.getCanNextPage()}
           >
             <ArrowRight />
           </Button>

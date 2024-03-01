@@ -21,13 +21,15 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Menu selecionado de acordo com a rota;
 - [x] Criar layout básico de uma data table;
 - [x] Criação de Tags;
-- [ ] Loading da tabela;
-- [ ] Exclusão de Tags;
+- [x] Loading da tabela;
+- [x] Desabilitar componentes enquanto carrega tabela;
+- [x] Exclusão de Tags;
+- [ ] Confirmação ao excluir;
+- [ ] Edição de Tags;
 - [ ] Ajustar updatedAt e removedAt;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;
-
 - [ ] Criar aplicação para PRD do GitHub;
 - [ ] Criar services;
 - [ ] Criar proteção das rotas em `/admin`;

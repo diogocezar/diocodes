@@ -8,7 +8,7 @@ import TagForm from "./form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export default function AdminRequestAvaliation() {
+export default function AdminAvaliationTag() {
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["tags"],
@@ -24,6 +24,7 @@ export default function AdminRequestAvaliation() {
     });
     queryClient.invalidateQueries({ queryKey: ["tags"] });
   };
+  const dataTableColumns = columns(isLoading);
   return (
     <>
       <div className="flex-1 p-8 pt-6">
@@ -32,15 +33,14 @@ export default function AdminRequestAvaliation() {
             <TagIcon className="h-9 w-9" /> Tags
           </AdminTitle>
         </div>
-        {!isLoading && (
-          <DataTable
-            form={<TagForm defaultValues={{ name: "Uma nova Tag" }} />}
-            data={data}
-            columns={columns}
-            searchField="name"
-            handleDelete={handleDelete}
-          />
-        )}
+        <DataTable
+          form={<TagForm />}
+          data={data}
+          columns={dataTableColumns}
+          searchField="name"
+          handleDelete={handleDelete}
+          isLoading={isLoading}
+        />
       </div>
     </>
   );

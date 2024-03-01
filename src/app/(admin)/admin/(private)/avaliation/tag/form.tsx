@@ -27,6 +27,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type TagFormProps = {
   defaultValues?: z.infer<typeof SchemaTag>;
+  selectedRow?: any;
 };
 
 export default function TagForm({ defaultValues }: TagFormProps) {
