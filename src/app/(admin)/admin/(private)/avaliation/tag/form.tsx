@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SchemaTag } from "@/schemas/schema-tag";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -24,22 +24,25 @@ import { Spinner } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTagState } from "@/hooks/use-tag-state";
 
-type TagFormProps = {
-  defaultValues?: z.infer<typeof SchemaTag>;
-  selectedRow?: any;
-};
-
-export default function TagForm({ defaultValues }: TagFormProps) {
+export default function TagForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useTagState((state) => state.isOpen);
+  const setIsOpen = useTagState((state) => state.setIsOpen);
+  const selectedItem: any = useTagState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof SchemaTag>>({
     resolver: zodResolver(SchemaTag),
-    defaultValues: defaultValues || {
-      name: "",
-    },
   });
+  const setValue = form.setValue;
+  useEffect(() => {
+    if (selectedItem) {
+      setValue("name", selectedItem.name);
+    } else {
+      setValue("name", "");
+    }
+  }, [selectedItem, setValue]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaTag>) => {
     try {
@@ -56,11 +59,6 @@ export default function TagForm({ defaultValues }: TagFormProps) {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        <Button className="flex flex-row gap-2 rounded-lg">
-          <Tag className="h-5 w-5" /> Criar Tag
-        </Button>
-      </SheetTrigger>
       <SheetContent className="flex flex-col justify-center">
         <SheetHeader>
           <SheetTitle className="flex flex-row gap-2 rounded-lg">

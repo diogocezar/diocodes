@@ -7,9 +7,12 @@ import DataTable from "@/components/ui/data-table";
 import TagForm from "./form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTagState } from "@/hooks/use-tag-state";
 
 export default function AdminAvaliationTag() {
   const queryClient = useQueryClient();
+  const setIsOpen = useTagState((state) => state.setIsOpen);
+  const setSelectedItem = useTagState((state) => state.setSelectedItem);
   const { data, isLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
@@ -23,6 +26,14 @@ export default function AdminAvaliationTag() {
       data: { idsToDelete: idsToDelete },
     });
     queryClient.invalidateQueries({ queryKey: ["tags"] });
+  };
+  const handleEdit = async (item: any) => {
+    setSelectedItem(item[0].original);
+    setIsOpen(true);
+  };
+  const handleCreate = () => {
+    setSelectedItem({});
+    setIsOpen(true);
   };
   const dataTableColumns = columns(isLoading);
   return (
@@ -39,6 +50,8 @@ export default function AdminAvaliationTag() {
           columns={dataTableColumns}
           searchField="name"
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleCreate={handleCreate}
           isLoading={isLoading}
         />
       </div>

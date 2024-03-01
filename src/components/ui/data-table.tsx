@@ -11,8 +11,10 @@ import {
   MagnifyingGlass,
   ArrowRight,
   ArrowLeft,
+  PaintBrush,
   Trash,
   Spinner,
+  Tag,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import React, { ReactElement } from "react";
@@ -42,6 +44,8 @@ type DataTableProps = {
   columns: any[];
   searchField: string;
   handleDelete: Function;
+  handleEdit: Function;
+  handleCreate: Function;
   isLoading: boolean;
 };
 
@@ -51,6 +55,8 @@ export default function DataTable({
   columns,
   searchField,
   handleDelete,
+  handleEdit,
+  handleCreate,
   isLoading,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -80,9 +86,12 @@ export default function DataTable({
       rowSelection,
     },
   });
-  const disableComponent = isLoading;
-  const disableComponentSelect = !(
+  const disabledFilter = isLoading;
+  const disabledDelete = !(
     !isLoading && table.getFilteredSelectedRowModel().rows.length
+  );
+  const disabledEdit = !(
+    !isLoading && table.getFilteredSelectedRowModel().rows.length === 1
   );
   return (
     <div className="mt-0 w-full pt-8">
@@ -103,20 +112,37 @@ export default function DataTable({
         <div className="flex flex-row items-center gap-4">
           {form}
           <Button
+            onClick={() => {
+              handleCreate(table.getFilteredSelectedRowModel().rows);
+            }}
             className="flex flex-row gap-2 rounded-lg"
-            disabled={disableComponentSelect}
+          >
+            <Tag className="h-5 w-5" /> Criar Tag
+          </Button>
+          <Button
+            className="flex flex-row gap-2 rounded-lg"
+            disabled={disabledDelete}
             onClick={() => {
               handleDelete(table.getFilteredSelectedRowModel().rows);
             }}
           >
             <Trash className="h-5 w-5" /> Remover
           </Button>
+          <Button
+            className="flex flex-row gap-2 rounded-lg"
+            disabled={disabledEdit}
+            onClick={() => {
+              handleEdit(table.getFilteredSelectedRowModel().rows);
+            }}
+          >
+            <PaintBrush className="h-5 w-5" /> Editar
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
                 className="flex flex-row gap-2"
-                disabled={disableComponent}
+                disabled={disabledFilter}
               >
                 <Funnel className="h-5 w-5" /> Filtrar Colunas{" "}
                 <ChevronDown className="ml-2 h-4 w-4" />
