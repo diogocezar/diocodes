@@ -32,27 +32,34 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Ajustar updatedAt e removedAt;
 - [x] Criar curd de pessoas;
 - [x] Criar crud de usuários;
-- [ ] Permitir login apenas de usuários cadastrados;
-- [ ] Ajustar layout do select (opções);
-- [ ] Procurar por pessoa no cadastro de usuário;
-- [ ] Criar crud de mentorias;
-- [ ] Criar crud de solicitação de avaliação;
+- [x] Permitir login apenas de usuários cadastrados;
+- [x] Estilo para o loading do select;
+- [x] Ajustar layout do select (opções);
+- [x] Procurar por pessoa no cadastro de usuário;
+- [x] Criar crud de mentorias;
+- [x] Criar layout base para sistema de administração;
+- [ ] Ajustar bug do check encima do select;
+- [ ] Ajustar layout do datepicker;
+- [ ] Criar componente de tempo;
+- [ ] Salvar a data e hora no banco de dados;
+- [ ] Criar possibilidade de botão adicional no data-table;
+- [ ] Criar sistema de sincronização com Cal.com;
+- [ ] Criar crud de avaliações;
 - [ ] Criar layout da página de avaliação (para preenchimento);
 - [ ] Criar funcionalidade de enviar avaliação por e-mail;
+- [ ] Criar back-end para popular dados do Dashboard;
 - [ ] Separar componentes do Dashboard;
+- [ ] Obter as informações do Dashboard do Backend;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar aplicação para PRD do GitHub;
-- [ ] Rever logs;
 - [ ] Criar service para Cal.com;
 - [ ] Criar proteção das rotas em `/admin`;
-- [ ] Criar layout base para sistema de administração;
-- [ ] Criar Listagem de Avaliações;
-- [ ] Criar Listagem de Reservas;
-- [ ] Alimentar as reservas automaticamente quando novos dados forem obtidos da API Cal.com
-- [ ] Criar envio de avaliação (escolhendo uma reserva ou manualmente);
-- [ ] Melhorar componentes utilizando sombras;
 - [ ] Criar página de erros;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
+
+## 🖥️ Tecnologias
+
+https://shadcnui-expansions.typeart.cc/docs/datetime-picker
 
 ## 📦 Instalação
 

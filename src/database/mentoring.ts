@@ -41,7 +41,10 @@ export const removeMentoring = async (data: any) => {
 
 export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
-    const result = await db.mentoring.findMany({ where: { removedAt: null } });
+    const result = await db.mentoring.findMany({
+      where: { removedAt: null },
+      include: { host: true, attendee: true },
+    });
     return result;
   } catch (error) {
     logger.error(error);

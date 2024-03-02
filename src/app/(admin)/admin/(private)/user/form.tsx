@@ -99,7 +99,10 @@ export function UserForm() {
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <div className="flex flex-col gap-4">
             {isLoadingPerson ? (
-              "Carregando..."
+              <div className="text-foreground flex w-full flex-row items-center gap-2">
+                <Spinner size={20} className="animate-spin" />
+                Carregando...
+              </div>
             ) : (
               <FormField
                 control={form.control}
@@ -134,7 +137,7 @@ export function UserForm() {
               name="role"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Pessoa</FormLabel>
+                  <FormLabel>Papel</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}

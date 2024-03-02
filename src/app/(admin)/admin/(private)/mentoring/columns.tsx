@@ -3,16 +3,18 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import { TypeUser } from "@/types/type-user";
+import { TypeMentoring } from "@/types/type-mentoring";
 
 export const columnsNames = [
   { id: "select", name: "select" },
-  { id: "name", name: "Nome (Pessoa)" },
-  { id: "email", name: "E-mail (Pessoa)" },
+  { id: "host", name: "Host" },
+  { id: "startTime", name: "Início" },
+  { id: "endTime", name: "Fim" },
+  { id: "attendee", name: "Participante" },
   { id: "createdAt", name: "Criado em" },
 ];
 
-export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
+export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
   return [
     {
       accessorKey: "select",
@@ -37,8 +39,8 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
       enableHiding: false,
     },
     {
-      accessorKey: "name",
-      accessorFn: (row) => row?.person?.name,
+      accessorKey: "host",
+      accessorFn: (row) => row?.host?.name,
       header: ({ column }) => {
         return (
           <Button
@@ -46,16 +48,16 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Nome (Pessoa)
+            Host
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.person?.name}</div>,
+      cell: ({ row }) => <div>{row.original?.host?.name}</div>,
     },
     {
-      accessorKey: "email",
-      accessorFn: (row) => row?.person?.email,
+      accessorKey: "attendee",
+      accessorFn: (row) => row?.attendee?.name,
       header: ({ column }) => {
         return (
           <Button
@@ -63,15 +65,15 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Email (Pessoa)
+            Participante
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.person?.email}</div>,
+      cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
     },
     {
-      accessorKey: "role",
+      accessorKey: "startTime",
       header: ({ column }) => {
         return (
           <Button
@@ -79,12 +81,36 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Permissão
+            Início
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.getValue("role")}</div>,
+      cell: ({ row }) => (
+        <div>
+          {new Date(row.getValue("startTime")).toLocaleDateString("pt-BR")}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "endTime",
+      header: ({ column }) => {
+        return (
+          <Button
+            className="flex flex-row items-center gap-2"
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Fim
+            <ArrowUpDown className="h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div>
+          {new Date(row.getValue("endTime")).toLocaleDateString("pt-BR")}
+        </div>
+      ),
     },
     {
       accessorKey: "createdAt",
