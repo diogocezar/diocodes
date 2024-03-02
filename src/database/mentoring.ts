@@ -1,12 +1,12 @@
 import { db } from "@/database/connection";
-import { Booking } from "@prisma/client";
+import { Mentoring } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
-export const createBooking = async (booking: Booking) => {
+export const createMentoring = async (mentoring: Mentoring) => {
   try {
-    await db.booking.create({
+    await db.mentoring.create({
       data: {
-        ...booking,
+        ...mentoring,
         createdAt: new Date(),
         updatedAt: null,
         removedAt: null,
@@ -17,20 +17,20 @@ export const createBooking = async (booking: Booking) => {
   }
 };
 
-export const updateBooking = async (id: string, booking: Booking) => {
+export const updateMentoring = async (id: string, mentoring: Mentoring) => {
   try {
-    await db.booking.update({
+    await db.mentoring.update({
       where: { id },
-      data: { ...booking, updatedAt: new Date() },
+      data: { ...mentoring, updatedAt: new Date() },
     });
   } catch (error) {
     logger.error(error);
   }
 };
 
-export const removeBooking = async (data: any) => {
+export const removeMentoring = async (data: any) => {
   try {
-    await db.booking.updateMany({
+    await db.mentoring.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -39,9 +39,9 @@ export const removeBooking = async (data: any) => {
   }
 };
 
-export const getAllBookings = async (): Promise<Booking[]> => {
+export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
-    const result = await db.booking.findMany({ where: { removedAt: null } });
+    const result = await db.mentoring.findMany({ where: { removedAt: null } });
     return result;
   } catch (error) {
     logger.error(error);
@@ -49,9 +49,9 @@ export const getAllBookings = async (): Promise<Booking[]> => {
   return [];
 };
 
-export const getBooking = async (id: string): Promise<Booking | null> => {
+export const getMentoring = async (id: string): Promise<Mentoring | null> => {
   try {
-    const result = await db.booking.findUnique({
+    const result = await db.mentoring.findUnique({
       where: { id, removedAt: null },
     });
     return result;

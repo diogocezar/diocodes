@@ -3,15 +3,16 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import { TypePerson } from "@/types/type-person";
+import { TypeUser } from "@/types/type-user";
 
 export const columnsNames = [
   { id: "select", name: "select" },
-  { id: "name", name: "Nome" },
+  { id: "name", name: "Nome (Pessoa)" },
+  { id: "email", name: "E-mail (Pessoa)" },
   { id: "createdAt", name: "Criado em" },
 ];
 
-export const columns = (isLoading: boolean): ColumnDef<TypePerson>[] => {
+export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
   return [
     {
       accessorKey: "select",
@@ -44,12 +45,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypePerson>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Nome
+            Nome (Pessoa)
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.getValue("name")}</div>,
+      cell: ({ row }) => <div>{row.original?.person?.name}</div>,
     },
     {
       accessorKey: "email",
@@ -60,12 +61,28 @@ export const columns = (isLoading: boolean): ColumnDef<TypePerson>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Email
+            Email (Pessoa)
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.getValue("email")}</div>,
+      cell: ({ row }) => <div>{row.original?.person?.email}</div>,
+    },
+    {
+      accessorKey: "role",
+      header: ({ column }) => {
+        return (
+          <Button
+            className="flex flex-row items-center gap-2"
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Permissão
+            <ArrowUpDown className="h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("role")}</div>,
     },
     {
       accessorKey: "createdAt",

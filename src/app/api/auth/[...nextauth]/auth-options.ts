@@ -1,5 +1,6 @@
 import GithubProvider from "next-auth/providers/github";
 import { AuthOptions } from "next-auth";
+import { api } from "@/services/api";
 
 const authOptions: AuthOptions = {
   providers: [
@@ -11,7 +12,8 @@ const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET!,
   callbacks: {
     signIn: async ({ user }) => {
-      const allowedEmails = ["diogo@diogocezar.com"];
+      const result = await api.get("/admin/users/emails");
+      const allowedEmails = result.data;
       if (allowedEmails.includes(user.email!)) {
         return true;
       }

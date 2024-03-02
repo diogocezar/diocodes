@@ -39,7 +39,7 @@ export function PersonForm() {
       setValue("email", selectedItem.email);
     } else {
       setValue("name", "");
-      setValue("name", "");
+      setValue("email", "");
     }
   }, [selectedItem, setValue]);
 

@@ -7,12 +7,12 @@ import Link from "next/link";
 import {
   ChartBar,
   Star,
-  Calendar,
   SignOut,
   Browsers,
-  TelegramLogo,
   Tag,
   User,
+  Plant,
+  Users,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -64,6 +64,22 @@ export default function Nav() {
             </li>
             <li>
               <Link
+                href="/admin/mentoring"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "mentoring"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "mentoring" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <Plant size={18} />
+                Mentorias
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/admin/avaliation/list"
                 className={clsx(
                   "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
@@ -76,38 +92,6 @@ export default function Nav() {
               >
                 <Star size={18} />
                 Avaliações
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/avaliation/request"
-                className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
-                  pathname === "avaliation/request"
-                    ? "text-background"
-                    : "text-foreground",
-                  pathname === "avaliation/request" &&
-                    "bg-pink hover:bg-background hover:text-foreground",
-                )}
-              >
-                <TelegramLogo size={18} />
-                Solicitar Avaliação
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/booking"
-                className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
-                  pathname === "booking"
-                    ? "text-background"
-                    : "text-foreground",
-                  pathname === "booking" &&
-                    "bg-pink hover:bg-background hover:text-foreground",
-                )}
-              >
-                <Calendar size={18} />
-                Reservas
               </Link>
             </li>
             <li>
@@ -136,13 +120,28 @@ export default function Nav() {
                     "bg-pink hover:bg-background hover:text-foreground",
                 )}
               >
-                <User size={18} />
+                <Users size={18} />
                 Pessoas
               </Link>
             </li>
             <li>
               <Link
+                href="/admin/user"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "user" ? "text-background" : "text-foreground",
+                  pathname === "user" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <User size={18} />
+                Usuários
+              </Link>
+            </li>
+            <li>
+              <Link
                 href={"/"}
+                target="_blank"
                 className={clsx(
                   "text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
                 )}

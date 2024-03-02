@@ -31,8 +31,10 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar services;
 - [x] Ajustar updatedAt e removedAt;
 - [x] Criar curd de pessoas;
-- [ ] Criar crud de usuários;
+- [x] Criar crud de usuários;
 - [ ] Permitir login apenas de usuários cadastrados;
+- [ ] Ajustar layout do select (opções);
+- [ ] Procurar por pessoa no cadastro de usuário;
 - [ ] Criar crud de mentorias;
 - [ ] Criar crud de solicitação de avaliação;
 - [ ] Criar layout da página de avaliação (para preenchimento);

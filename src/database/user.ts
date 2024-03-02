@@ -4,14 +4,24 @@ import { logger } from "@/lib/logger";
 
 export const createUser = async (user: User) => {
   try {
-    await db.user.create({
-      data: {
-        ...user,
-        createdAt: new Date(),
-        updatedAt: null,
-        removedAt: null,
-      },
+    const exists = await db.user.findFirst({
+      where: { personId: user.personId },
     });
+    if (exists) {
+      await db.user.update({
+        where: { id: exists.id },
+        data: { removedAt: null, updatedAt: new Date() },
+      });
+    } else {
+      await db.user.create({
+        data: {
+          ...user,
+          createdAt: new Date(),
+          updatedAt: null,
+          removedAt: null,
+        },
+      });
+    }
   } catch (error) {
     logger.error(error);
   }
@@ -39,9 +49,18 @@ export const removeUser = async (data: any) => {
   }
 };
 
-export const getAllUsers = async (): Promise<User[]> => {
+export const getAllUsers = async (role?: string): Promise<any[]> => {
   try {
-    const result = await db.user.findMany({ where: { removedAt: null } });
+    let where = {};
+    if (role) {
+      where = { removedAt: null, role };
+    } else {
+      where = { removedAt: null };
+    }
+    const result = await db.user.findMany({
+      where,
+      include: { person: true },
+    });
     return result;
   } catch (error) {
     logger.error(error);

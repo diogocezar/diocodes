@@ -21,7 +21,6 @@ import {
   MagnifyingGlass,
   PaintBrush,
   Spinner,
-  Tag,
   Trash,
 } from "@phosphor-icons/react";
 import {

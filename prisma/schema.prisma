@@ -13,15 +13,15 @@ enum Role {
 }
 
 model Person {
-    id              String    @id @default(uuid()) @map("_id")
-    name            String
-    email           String    @unique
-    user            User?
-    bookingHost     Booking?  @relation(name: "booking_host")
-    bookingAttendee Booking?  @relation(name: "booking_atendee")
-    createdAt       DateTime  @default(now())
-    updatedAt       DateTime?
-    removedAt       DateTime?
+    id                String     @id @default(uuid()) @map("_id")
+    name              String
+    email             String     @unique
+    user              User?
+    mentoringHost     Mentoring? @relation(name: "mentoring_host")
+    mentoringAttendee Mentoring? @relation(name: "mentoring_atendee")
+    createdAt         DateTime   @default(now())
+    updatedAt         DateTime?
+    removedAt         DateTime?
 }
 
 model User {
@@ -56,8 +56,8 @@ model AvaliationTags {
 
 model Avaliation {
     id             String           @id @default(uuid()) @map("_id")
-    booking        Booking          @relation(fields: [bookingId], references: [id])
-    bookingId      String           @unique
+    mentoring      Mentoring        @relation(fields: [mentoringId], references: [id])
+    mentoringId    String           @unique
     rating         Int
     AvaliationTags AvaliationTags[]
     comment        String?
@@ -67,15 +67,14 @@ model Avaliation {
     removedAt      DateTime?
 }
 
-model Booking {
+model Mentoring {
     id         String      @id @default(uuid()) @map("_id")
-    host       Person      @relation(name: "booking_host", fields: [hostId], references: [id])
+    host       Person      @relation(name: "mentoring_host", fields: [hostId], references: [id])
     hostId     String      @unique
-    attendee   Person      @relation(name: "booking_atendee", fields: [attendeeId], references: [id])
+    attendee   Person      @relation(name: "mentoring_atendee", fields: [attendeeId], references: [id])
     attendeeId String      @unique
     startTime  DateTime
     endTime    DateTime
-    itHappened Boolean     @default(false)
     avaliation Avaliation?
     createdAt  DateTime    @default(now())
     updatedAt  DateTime?
