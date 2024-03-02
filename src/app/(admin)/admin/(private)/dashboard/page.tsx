@@ -102,7 +102,7 @@ export default function AdminDashboardPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="col-span-4">
             <CardHeader>
-              <CardTitle>Mentorias por mês (2024)</CardTitle>
+              <CardTitle>Avaliações por mês (2024)</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
               <Graph />

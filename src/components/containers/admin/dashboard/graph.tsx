@@ -5,51 +5,51 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 const data = [
   {
     name: "Jan",
-    total: Math.floor(Math.random() * 10),
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Feb",
-    total: Math.floor(Math.random() * 10),
+    name: "Fev",
+    total: Math.floor(Math.random() * 4),
   },
   {
     name: "Mar",
-    total: Math.floor(Math.random() * 10),
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Apr",
-    total: Math.floor(Math.random() * 10),
+    name: "Abr",
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "May",
-    total: Math.floor(Math.random() * 10),
+    name: "Mai",
+    total: Math.floor(Math.random() * 4),
   },
   {
     name: "Jun",
-    total: Math.floor(Math.random() * 10),
+    total: Math.floor(Math.random() * 4),
   },
   {
     name: "Jul",
-    total: Math.floor(Math.random() * 10),
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Aug",
-    total: Math.floor(Math.random() * 10),
+    name: "Ago",
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Sep",
-    total: Math.floor(Math.random() * 10),
+    name: "Set",
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Oct",
-    total: Math.floor(Math.random() * 10),
+    name: "Out",
+    total: Math.floor(Math.random() * 4),
   },
   {
     name: "Nov",
-    total: Math.floor(Math.random() * 10),
+    total: Math.floor(Math.random() * 4),
   },
   {
-    name: "Dec",
-    total: Math.floor(Math.random() * 10),
+    name: "Dez",
+    total: Math.floor(Math.random() * 4),
   },
 ];
 
