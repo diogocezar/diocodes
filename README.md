@@ -24,10 +24,13 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Loading da tabela;
 - [x] Desabilitar componentes enquanto carrega tabela;
 - [x] Exclusão de Tags;
+- [x] Edição de Tags;
+- [x] Layout do modal de confirmação;
+- [ ] Organização dos Componentes no CRUD;
+- [ ] Criar layout da página de avaliação (para preenchimento);
+- [ ] Criar funcionalidade de enviar avaliação por e-mail;
 - [ ] Confirmação ao excluir;
-- [ ] Edição de Tags;
 - [ ] Ajustar updatedAt e removedAt;
-- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar aplicação para PRD do GitHub;
@@ -40,6 +43,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [ ] Criar envio de avaliação (escolhendo uma reserva ou manualmente);
 - [ ] Melhorar componentes utilizando sombras;
 - [ ] Criar página de erros;
+- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 
 ## 📦 Instalação
 

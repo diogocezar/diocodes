@@ -10,17 +10,13 @@ import {
 import { Graph } from "@/components/containers/admin/dashboard/graph";
 import { RecentBookings } from "@/components/containers/admin/dashboard/recent-bookings";
 import { ChartBar, Star } from "@phosphor-icons/react";
-import { AdminTitle } from "@/components/app/titles";
+import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 
-export default function DashboardPage() {
+export default function AdminDashboardPage() {
   return (
     <>
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="flex items-center justify-between space-y-2">
-          <AdminTitle>
-            <ChartBar className="h-9 w-9" /> Dashboard
-          </AdminTitle>
-        </div>
+        <AdminTitle title="Dashboard" Icon={<ChartBar />} />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

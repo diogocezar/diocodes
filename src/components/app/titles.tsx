@@ -58,23 +58,4 @@ const SubSubTitle = React.forwardRef<
 
 SubSubTitle.displayName = "SubSubTitle";
 
-const AdminTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => {
-  return (
-    <h2
-      ref={ref}
-      className={cn(
-        "text-foreground mb-3 mt-2 flex flex-row gap-2 text-4xl font-bold tracking-tight",
-        className,
-      )}
-    >
-      {props.children}
-    </h2>
-  );
-});
-
-AdminTitle.displayName = "SubSubTitle";
-
-export { Title, SubTitle, SubSubTitle, AdminTitle };
+export { Title, SubTitle, SubSubTitle };

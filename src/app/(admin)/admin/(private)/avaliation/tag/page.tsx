@@ -1,5 +1,5 @@
 "use client";
-import { AdminTitle } from "@/components/app/titles";
+import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { Tag as TagIcon } from "@phosphor-icons/react";
 import { columns } from "./columns";
 import * as React from "react";
@@ -8,11 +8,17 @@ import TagForm from "./form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
+import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 
-export default function AdminAvaliationTag() {
+export default function AdminAvaliationTagPage() {
   const queryClient = useQueryClient();
-  const setIsOpen = useTagState((state) => state.setIsOpen);
+  const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
+  const isOpenConfirmDelete = useTagState((state) => state.isOpenConfirmDelete);
+  const setIsOpenConfirmDelete = useTagState(
+    (state) => state.setIsOpenConfirmDelete,
+  );
   const setSelectedItem = useTagState((state) => state.setSelectedItem);
+  const selectedItem = useTagState((state) => state.selectedItem);
   const { data, isLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
@@ -20,7 +26,12 @@ export default function AdminAvaliationTag() {
       return data;
     },
   });
-  const handleDelete = async (items: any) => {
+  const handleConfirmDelete = (item: any) => {
+    setSelectedItem(item);
+    setIsOpenConfirmDelete(true);
+  };
+  const handleDelete = async () => {
+    const items = selectedItem;
     const idsToDelete = items.map((item: any) => item.original.id);
     await api.delete("/admin/avaliation/tag", {
       data: { idsToDelete: idsToDelete },
@@ -29,27 +40,28 @@ export default function AdminAvaliationTag() {
   };
   const handleEdit = async (item: any) => {
     setSelectedItem(item[0].original);
-    setIsOpen(true);
+    setIsOpenForm(true);
   };
   const handleCreate = () => {
     setSelectedItem({});
-    setIsOpen(true);
+    setIsOpenForm(true);
   };
   const dataTableColumns = columns(isLoading);
   return (
     <>
       <div className="flex-1 p-8 pt-6">
-        <div className="flex items-center justify-between">
-          <AdminTitle className="mb-0 mt-0">
-            <TagIcon className="h-9 w-9" /> Tags
-          </AdminTitle>
-        </div>
+        <AdminTitle title="Tags" Icon={<TagIcon />} />
+        <ConfirmDelete
+          isOpenConfirmDelete={isOpenConfirmDelete}
+          setIsOpenConfirmDelete={setIsOpenConfirmDelete}
+          handleDelete={handleDelete}
+        />
         <DataTable
           form={<TagForm />}
           data={data}
           columns={dataTableColumns}
           searchField="name"
-          handleDelete={handleDelete}
+          handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}
           isLoading={isLoading}

@@ -3,7 +3,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@phosphor-icons/react";
@@ -26,10 +25,10 @@ import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
 
-export default function TagForm() {
+export default function AdminAvaliationTagForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const isOpen = useTagState((state) => state.isOpen);
-  const setIsOpen = useTagState((state) => state.setIsOpen);
+  const isOpenForm = useTagState((state) => state.isOpenForm);
+  const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
   const selectedItem: any = useTagState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof SchemaTag>>({
@@ -47,18 +46,25 @@ export default function TagForm() {
   const handleSubmit = async (data: z.infer<typeof SchemaTag>) => {
     try {
       setIsLoading(true);
-      await api.post("/admin/avaliation/tag", data);
+      if (selectedItem.id) {
+        await api.patch("/admin/avaliation/tag", {
+          id: selectedItem.id,
+          ...data,
+        });
+      } else {
+        await api.post("/admin/avaliation/tag", data);
+      }
       queryClient.invalidateQueries({ queryKey: ["tags"] });
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-      setIsOpen(false);
+      setIsOpenForm(false);
     }
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpenForm} onOpenChange={setIsOpenForm}>
       <SheetContent className="flex flex-col justify-center">
         <SheetHeader>
           <SheetTitle className="flex flex-row gap-2 rounded-lg">

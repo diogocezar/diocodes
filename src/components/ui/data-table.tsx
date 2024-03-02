@@ -1,3 +1,11 @@
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -7,36 +15,28 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  ArrowLeft,
+  ArrowRight,
   Funnel,
   MagnifyingGlass,
-  ArrowRight,
-  ArrowLeft,
   PaintBrush,
-  Trash,
   Spinner,
   Tag,
+  Trash,
 } from "@phosphor-icons/react";
-import { Input } from "@/components/ui/input";
-import React, { ReactElement } from "react";
-import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   ColumnFiltersState,
   SortingState,
   VisibilityState,
+  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  flexRender,
 } from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
+import React, { ReactElement } from "react";
 
 type DataTableProps = {
   form: ReactElement;
@@ -126,7 +126,7 @@ export default function DataTable({
               handleDelete(table.getFilteredSelectedRowModel().rows);
             }}
           >
-            <Trash className="h-5 w-5" /> Remover
+            <Trash className="h-5 w-5" /> Excluir
           </Button>
           <Button
             className="flex flex-row gap-2 rounded-lg"
