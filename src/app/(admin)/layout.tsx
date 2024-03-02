@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "@/styles/globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";
 import { cn } from "@/lib/utils";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import { getServerSession } from "next-auth";
@@ -96,9 +93,6 @@ export default async function RootLayout({
           <CustomSessionProvider session={session}>
             {children}
             <Toaster />
-            <SpeedInsights />
-            <Analytics />
-            <GoogleAnalytics gaId="G-XRK77CENDK" />
           </CustomSessionProvider>
         </CustomQueryProvider>
       </body>

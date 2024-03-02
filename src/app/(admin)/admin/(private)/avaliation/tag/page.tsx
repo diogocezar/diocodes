@@ -1,7 +1,7 @@
 "use client";
 import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { Tag as TagIcon } from "@phosphor-icons/react";
-import { columns } from "./columns";
+import { columns, columnsNames } from "./columns";
 import * as React from "react";
 import DataTable from "@/components/ui/data-table";
 import TagForm from "./form";
@@ -60,6 +60,7 @@ export default function AdminAvaliationTagPage() {
           form={<TagForm />}
           data={data}
           columns={dataTableColumns}
+          columnsNames={columnsNames}
           searchField="name"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}

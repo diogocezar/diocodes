@@ -19,7 +19,6 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
   });
-  console.log(params.id);
   async function onSubmit() {}
   return (
     <>

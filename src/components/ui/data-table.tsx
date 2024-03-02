@@ -42,6 +42,7 @@ type DataTableProps = {
   form: ReactElement;
   data: any[];
   columns: any[];
+  columnsNames: Array<Object>;
   searchField: string;
   handleDelete: Function;
   handleEdit: Function;
@@ -53,6 +54,7 @@ export default function DataTable({
   form,
   data,
   columns,
+  columnsNames,
   searchField,
   handleDelete,
   handleEdit,
@@ -165,7 +167,7 @@ export default function DataTable({
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {column.id}
+                      {columnsNames.find((item) => item.id === column.id).name}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
@@ -221,7 +223,7 @@ export default function DataTable({
                   className="text-foreground h-24 text-center"
                 >
                   {!isLoading ? (
-                    "Não encontrei nada 😔"
+                    "Não forram encontrados resultados."
                   ) : (
                     <div className="flex w-full flex-row items-center justify-center gap-2">
                       <Spinner size={20} className="animate-spin" />

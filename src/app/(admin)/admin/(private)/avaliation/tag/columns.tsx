@@ -5,10 +5,16 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { TypeTag } from "@/types/type-tag";
 
+export const columnsNames = [
+  { id: "select", name: "select" },
+  { id: "name", name: "Nome" },
+  { id: "createdAt", name: "Criado em" },
+];
+
 export const columns = (isLoading: boolean): ColumnDef<TypeTag>[] => {
   return [
     {
-      id: "select",
+      accessorKey: "select",
       header: ({ table }) => (
         <Checkbox
           checked={
@@ -43,9 +49,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeTag>[] => {
           </Button>
         );
       },
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("name")}</div>
-      ),
+      cell: ({ row }) => <div>{row.getValue("name")}</div>,
     },
     {
       accessorKey: "createdAt",
@@ -62,7 +66,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeTag>[] => {
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">
+        <div>
           {new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR")}
         </div>
       ),

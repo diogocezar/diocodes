@@ -10,7 +10,7 @@ export default function CustomSessionProvider({
 }): React.ReactNode {
   return (
     <>
-      <SessionProvider session={session}>{children}</SessionProvider>;
+      <SessionProvider session={session}>{children}</SessionProvider>
     </>
   );
 }

@@ -29,7 +29,7 @@ export default function ConfirmDelete({
       <AlertDialogContent className="bg-background-dark border-background">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-foreground flex flex-row items-center gap-2 text-xl">
-            <Trash className="h-5 w-5" /> Deseja excluir o registro?
+            <Trash className="h-5 w-5" /> Deseja excluir?
           </AlertDialogTitle>
           <AlertDialogDescription>
             Essa ação não poderá ser revertida!

@@ -1,9 +1,3 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
@@ -24,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
+import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 
 export default function AdminAvaliationTagForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +28,7 @@ export default function AdminAvaliationTagForm() {
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof SchemaTag>>({
     resolver: zodResolver(SchemaTag),
+    defaultValues: { name: "" },
   });
   const setValue = form.setValue;
   useEffect(() => {
@@ -64,48 +60,42 @@ export default function AdminAvaliationTagForm() {
   };
 
   return (
-    <Sheet open={isOpenForm} onOpenChange={setIsOpenForm}>
-      <SheetContent className="flex flex-col justify-center">
-        <SheetHeader>
-          <SheetTitle className="flex flex-row gap-2 rounded-lg">
-            <Tag className="h-5 w-5" /> Criar nova tag
-          </SheetTitle>
-        </SheetHeader>
-        <div className="flex w-full flex-col gap-4">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nome</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Nome da tag" {...field} />
-                    </FormControl>
-                    <FormMessage>
-                      {form.formState.errors.name?.message}
-                    </FormMessage>
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="bg-green hover:bg-pink flex h-10 flex-row gap-2 rounded-lg px-4 py-2"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div className="flex flex-row gap-2">
-                    <Spinner size={20} className="animate-spin" /> Aguarde...
-                  </div>
-                ) : (
-                  "Enviar"
-                )}
-              </Button>
-            </form>
-          </Form>
-        </div>
-      </SheetContent>
-    </Sheet>
+    <SheetForm
+      Icon={<Tag />}
+      isOpenForm={isOpenForm}
+      setIsOpenForm={setIsOpenForm}
+      title={selectedItem.id ? "Editar tag" : "Criar tag"}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nome</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nome da tag" {...field} />
+                </FormControl>
+                <FormMessage>{form.formState.errors.name?.message}</FormMessage>
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            className="bg-green hover:bg-pink flex h-10 flex-row gap-2 rounded-lg px-4 py-2"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <div className="flex flex-row gap-2">
+                <Spinner size={20} className="animate-spin" /> Aguarde...
+              </div>
+            ) : (
+              "Enviar"
+            )}
+          </Button>
+        </form>
+      </Form>
+    </SheetForm>
   );
 }

@@ -52,7 +52,6 @@ export const GET = async () => {
     const withoutDuplicates = removeDuplicates(ordered);
     return new Response(JSON.stringify(withoutDuplicates));
   } catch (error) {
-    console.log(error);
     return new Response(JSON.stringify({ error }));
   }
 };
