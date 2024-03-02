@@ -63,7 +63,7 @@ export default function DataTable({
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -157,7 +157,11 @@ export default function DataTable({
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
-                .map((column) => {
+                .map((column: any) => {
+                  const foundItem: any = columnsNames?.find(
+                    (item: any) => item.id === column.id
+                  );
+                  const columnName = foundItem ? foundItem.name : column.id;
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
@@ -167,7 +171,7 @@ export default function DataTable({
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {columnsNames.find((item) => item.id === column.id).name}
+                      {columnName}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
@@ -190,7 +194,7 @@ export default function DataTable({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -210,7 +214,7 @@ export default function DataTable({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
