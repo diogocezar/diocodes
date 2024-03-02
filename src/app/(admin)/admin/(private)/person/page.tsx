@@ -1,31 +1,33 @@
 "use client";
 import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
-import { Tag as TagIcon } from "@phosphor-icons/react";
+import { User } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
-} from "@/app/(admin)/admin/(private)/avaliation/tag/columns";
+} from "@/app/(admin)/admin/(private)/person/columns";
 import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
-import { TagForm } from "@/app/(admin)/admin/(private)/avaliation/tag/form";
+import { PersonForm } from "@/app/(admin)/admin/(private)/person/form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTagState } from "@/hooks/use-tag-state";
+import { usePersonState } from "@/hooks/use-person-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 
-export default function AdminAvaliationTagPage() {
+export default function AdminPersonPage() {
   const queryClient = useQueryClient();
-  const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
-  const isOpenConfirmDelete = useTagState((state) => state.isOpenConfirmDelete);
-  const setIsOpenConfirmDelete = useTagState(
+  const setIsOpenForm = usePersonState((state) => state.setIsOpenForm);
+  const isOpenConfirmDelete = usePersonState(
+    (state) => state.isOpenConfirmDelete,
+  );
+  const setIsOpenConfirmDelete = usePersonState(
     (state) => state.setIsOpenConfirmDelete,
   );
-  const setSelectedItem = useTagState((state) => state.setSelectedItem);
-  const selectedItem = useTagState((state) => state.selectedItem);
-  const url = "/admin/avaliation/tag";
+  const setSelectedItem = usePersonState((state) => state.setSelectedItem);
+  const selectedItem = usePersonState((state) => state.selectedItem);
+  const url = "/admin/person";
   const { data, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.ADMIN_AVALIATION_TAG],
+    queryKey: [QUERY_KEY.ADMIN_PERSON],
     queryFn: async () => {
       const { data } = await api.get(url);
       return data;
@@ -45,7 +47,7 @@ export default function AdminAvaliationTagPage() {
       data: { idsToDelete: idsToDelete },
     });
     queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_AVALIATION_TAG],
+      queryKey: [QUERY_KEY.ADMIN_PERSON],
     });
   };
 
@@ -58,18 +60,17 @@ export default function AdminAvaliationTagPage() {
     setSelectedItem({});
     setIsOpenForm(true);
   };
-
   return (
     <>
       <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Tags" Icon={<TagIcon />} />
+        <AdminTitle title="Pessoas" Icon={<User />} />
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
           handleDelete={handleDelete}
         />
         <DataTable
-          form={<TagForm />}
+          form={<PersonForm />}
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
@@ -78,8 +79,8 @@ export default function AdminAvaliationTagPage() {
           handleEdit={handleEdit}
           handleCreate={handleCreate}
           isLoading={isLoading}
-          createButtonLabel="Criar tag"
-          iconCreateButton={<TagIcon className="h-5 w-5" />}
+          createButtonLabel="Criar pessoa"
+          iconCreateButton={<User className="h-5 w-5" />}
         />
       </div>
     </>

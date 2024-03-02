@@ -4,8 +4,14 @@ import { logger } from "@/lib/logger";
 
 export const createAvaliation = async (avaliation: Avaliation) => {
   try {
-    await db.avaliation.create({ data: avaliation });
-    logger.info(`Avaliation created: ${avaliation.id}`);
+    await db.avaliation.create({
+      data: {
+        ...avaliation,
+        createdAt: new Date(),
+        updatedAt: null,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -17,19 +23,17 @@ export const updateAvaliation = async (id: string, avaliation: Avaliation) => {
       where: { id },
       data: { ...avaliation, updatedAt: new Date() },
     });
-    logger.info(`Avaliation updated: ${id}`);
   } catch (error) {
     logger.error(error);
   }
 };
 
-export const removeAvaliation = async (id: string) => {
+export const removeAvaliation = async (data: any) => {
   try {
-    await db.avaliation.update({
-      where: { id },
+    await db.avaliation.updateMany({
+      where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
-    logger.info(`Avaliation removed: ${id}`);
   } catch (error) {
     logger.error(error);
   }
@@ -37,18 +41,20 @@ export const removeAvaliation = async (id: string) => {
 
 export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   try {
-    logger.info("Getting all Tagss");
-    return db.avaliation.findMany({ where: { removedAt: null } });
+    const result = await db.avaliation.findMany({ where: { removedAt: null } });
+    return result;
   } catch (error) {
     logger.error(error);
   }
   return [];
 };
 
-export const getTag = async (id: string): Promise<Avaliation | null> => {
+export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
-    logger.info(`Getting Tags: ${id}`);
-    return db.avaliation.findUnique({ where: { id, removedAt: null } });
+    const result = await db.avaliation.findUnique({
+      where: { id, removedAt: null },
+    });
+    return result;
   } catch (error) {
     logger.error(error);
   }

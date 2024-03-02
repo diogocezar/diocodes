@@ -20,7 +20,7 @@ model Person {
     bookingHost     Booking?  @relation(name: "booking_host")
     bookingAttendee Booking?  @relation(name: "booking_atendee")
     createdAt       DateTime  @default(now())
-    updatedAt       DateTime? @updatedAt
+    updatedAt       DateTime?
     removedAt       DateTime?
 }
 
@@ -30,7 +30,7 @@ model User {
     personId  String    @unique
     role      Role      @default(USER)
     createdAt DateTime  @default(now())
-    updatedAt DateTime? @updatedAt
+    updatedAt DateTime?
     removedAt DateTime?
 }
 
@@ -38,7 +38,7 @@ model Tag {
     id             String           @id @default(uuid()) @map("_id")
     name           String
     createdAt      DateTime         @default(now())
-    updatedAt      DateTime?        @updatedAt
+    updatedAt      DateTime?
     removedAt      DateTime?
     AvaliationTags AvaliationTags[]
 }
@@ -50,7 +50,7 @@ model AvaliationTags {
     tag          Tag?        @relation(fields: [tagId], references: [id])
     tagId        String?
     createdAt    DateTime    @default(now())
-    updatedAt    DateTime?   @updatedAt
+    updatedAt    DateTime?
     removedAt    DateTime?
 }
 
@@ -63,7 +63,7 @@ model Avaliation {
     comment        String?
     wasSent        Boolean          @default(false)
     createdAt      DateTime         @default(now())
-    updatedAt      DateTime?        @updatedAt
+    updatedAt      DateTime?
     removedAt      DateTime?
 }
 
@@ -78,6 +78,6 @@ model Booking {
     itHappened Boolean     @default(false)
     avaliation Avaliation?
     createdAt  DateTime    @default(now())
-    updatedAt  DateTime?   @updatedAt
+    updatedAt  DateTime?
     removedAt  DateTime?
 }

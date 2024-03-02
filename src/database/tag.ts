@@ -5,7 +5,7 @@ import { logger } from "@/lib/logger";
 export const createTag = async (tag: Tag) => {
   try {
     await db.tag.create({
-      data: { ...tag, createdAt: new Date() },
+      data: { ...tag, createdAt: new Date(), updatedAt: null, removedAt: null },
     });
   } catch (error) {
     logger.error(error);
@@ -25,8 +25,9 @@ export const updateTag = async (id: string, tag: Tag) => {
 
 export const removeTag = async (data: any) => {
   try {
-    await db.tag.deleteMany({
+    await db.tag.updateMany({
       where: { id: { in: data.idsToDelete } },
+      data: { removedAt: new Date() },
     });
   } catch (error) {
     logger.error(error);
@@ -35,7 +36,7 @@ export const removeTag = async (data: any) => {
 
 export const getAllTags = async (): Promise<Tag[]> => {
   try {
-    const result = await db.tag.findMany();
+    const result = await db.tag.findMany({ where: { removedAt: null } });
     return result;
   } catch (error) {
     logger.error(error);

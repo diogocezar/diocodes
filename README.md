@@ -29,10 +29,14 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Organização dos Componentes no CRUD;
 - [x] Confirmação ao excluir;
 - [x] Criar services;
+- [x] Ajustar updatedAt e removedAt;
+- [x] Criar curd de pessoas;
+- [ ] Criar crud de usuários;
+- [ ] Permitir login apenas de usuários cadastrados;
+- [ ] Criar crud de mentorias;
 - [ ] Criar crud de solicitação de avaliação;
 - [ ] Criar layout da página de avaliação (para preenchimento);
 - [ ] Criar funcionalidade de enviar avaliação por e-mail;
-- [ ] Ajustar updatedAt e removedAt;
 - [ ] Separar componentes do Dashboard;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar aplicação para PRD do GitHub;

@@ -8,6 +8,8 @@ async function main() {
     create: {
       name: "Diogo Cezar",
       email: "diogo@diogocezar.com",
+      removedAt: null,
+      updatedAt: null,
     },
   });
   const user = await prisma.user.upsert({
@@ -16,6 +18,8 @@ async function main() {
     create: {
       role: "ADMIN",
       personId: person.id,
+      removedAt: null,
+      updatedAt: null,
     },
     include: { person: true },
   });

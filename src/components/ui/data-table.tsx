@@ -48,9 +48,11 @@ type DataTableProps = {
   handleEdit: Function;
   handleCreate: Function;
   isLoading: boolean;
+  createButtonLabel: string;
+  iconCreateButton: JSX.Element;
 };
 
-export default function DataTable({
+export function DataTable({
   form,
   data,
   columns,
@@ -60,10 +62,12 @@ export default function DataTable({
   handleEdit,
   handleCreate,
   isLoading,
+  createButtonLabel = "Criar",
+  iconCreateButton,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -119,7 +123,8 @@ export default function DataTable({
             }}
             className="flex flex-row gap-2 rounded-lg"
           >
-            <Tag className="h-5 w-5" /> Criar Tag
+            {iconCreateButton}
+            {createButtonLabel}
           </Button>
           <Button
             className="flex flex-row gap-2 rounded-lg"
@@ -159,7 +164,7 @@ export default function DataTable({
                 .filter((column) => column.getCanHide())
                 .map((column: any) => {
                   const foundItem: any = columnsNames?.find(
-                    (item: any) => item.id === column.id
+                    (item: any) => item.id === column.id,
                   );
                   const columnName = foundItem ? foundItem.name : column.id;
                   return (
@@ -194,7 +199,7 @@ export default function DataTable({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -214,7 +219,7 @@ export default function DataTable({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

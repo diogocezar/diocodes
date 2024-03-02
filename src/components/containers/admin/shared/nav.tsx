@@ -12,6 +12,7 @@ import {
   Browsers,
   TelegramLogo,
   Tag,
+  User,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -95,6 +96,22 @@ export default function Nav() {
             </li>
             <li>
               <Link
+                href="/admin/booking"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "booking"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "booking" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <Calendar size={18} />
+                Reservas
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/admin/avaliation/tag"
                 className={clsx(
                   "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
@@ -111,18 +128,16 @@ export default function Nav() {
             </li>
             <li>
               <Link
-                href="/admin/booking"
+                href="/admin/person"
                 className={clsx(
                   "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
-                  pathname === "booking"
-                    ? "text-background"
-                    : "text-foreground",
-                  pathname === "booking" &&
+                  pathname === "person" ? "text-background" : "text-foreground",
+                  pathname === "person" &&
                     "bg-pink hover:bg-background hover:text-foreground",
                 )}
               >
-                <Calendar size={18} />
-                Reservas
+                <User size={18} />
+                Pessoas
               </Link>
             </li>
             <li>
