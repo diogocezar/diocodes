@@ -80,13 +80,13 @@ export default function Nav() {
             </li>
             <li>
               <Link
-                href="/admin/avaliation/list"
+                href="/admin/avaliation"
                 className={clsx(
                   "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
-                  pathname === "avaliation/list"
+                  pathname === "avaliation"
                     ? "text-background"
                     : "text-foreground",
-                  pathname === "avaliation/list" &&
+                  pathname === "avaliation" &&
                     "bg-pink hover:bg-background hover:text-foreground",
                 )}
               >
@@ -96,13 +96,11 @@ export default function Nav() {
             </li>
             <li>
               <Link
-                href="/admin/avaliation/tag"
+                href="/admin/tag"
                 className={clsx(
                   "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
-                  pathname === "avaliation/tag"
-                    ? "text-background"
-                    : "text-foreground",
-                  pathname === "avaliation/tag" &&
+                  pathname === "tag" ? "text-background" : "text-foreground",
+                  pathname === "tag" &&
                     "bg-pink hover:bg-background hover:text-foreground",
                 )}
               >

@@ -1,7 +1,15 @@
+import { TypeAvaliationTags } from "./type-avaliation-tags";
+import { TypeMentoring } from "./type-mentoring";
+
 export type TypeAvaliation = {
-  id: number;
-  attendee: string;
-  startTime: Date;
-  endTime: Date;
-  email: string;
+  id: string;
+  mentoring: TypeMentoring;
+  mentoringId: string;
+  avaliationTags: TypeAvaliationTags[];
+  rating: number;
+  comment: string;
+  wasSent: boolean;
+  createdAt: Date;
+  removedAt?: Date;
+  updatedAt?: Date;
 };

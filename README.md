@@ -46,7 +46,6 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Erro ao editar data e hora;
 - [x] Data de término não pode ser menor que a data de início;
 - [ ] Criar crud de avaliações;
-- [ ] Criar possibilidade de botão adicional no data-table;
 - [ ] Criar sistema de sincronização com Cal.com;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
 - [ ] Criar layout da página de avaliação (para preenchimento);
@@ -64,6 +63,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 ## 🖥️ Tecnologias
 
 https://time.openstatus.dev/
+https://craft.mxkaske.dev/post/fancy-multi-select
 
 ## 📦 Instalação
 

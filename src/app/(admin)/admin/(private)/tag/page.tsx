@@ -4,10 +4,10 @@ import { Tag as TagIcon } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
-} from "@/app/(admin)/admin/(private)/avaliation/tag/columns";
+} from "@/app/(admin)/admin/(private)/tag/columns";
 import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
-import { TagForm } from "@/app/(admin)/admin/(private)/avaliation/tag/form";
+import { TagForm } from "@/app/(admin)/admin/(private)/tag/form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
@@ -23,9 +23,9 @@ export default function AdminAvaliationTagPage() {
   );
   const setSelectedItem = useTagState((state) => state.setSelectedItem);
   const selectedItem = useTagState((state) => state.selectedItem);
-  const url = "/admin/avaliation/tag";
+  const url = "/admin/tag";
   const { data, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.ADMIN_AVALIATION_TAG],
+    queryKey: [QUERY_KEY.ADMIN_TAG],
     queryFn: async () => {
       const { data } = await api.get(url);
       return data;
@@ -45,7 +45,7 @@ export default function AdminAvaliationTagPage() {
       data: { idsToDelete: idsToDelete },
     });
     queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_AVALIATION_TAG],
+      queryKey: [QUERY_KEY.ADMIN_TAG],
     });
   };
 

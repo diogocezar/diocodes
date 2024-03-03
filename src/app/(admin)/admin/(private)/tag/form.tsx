@@ -27,7 +27,7 @@ export function TagForm() {
   const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
   const selectedItem: any = useTagState((state) => state.selectedItem);
   const queryClient = useQueryClient();
-  const url = "/admin/avaliation/tag";
+  const url = "/admin/tag";
   const form = useForm<z.infer<typeof SchemaTag>>({
     resolver: zodResolver(SchemaTag),
     defaultValues: { name: "" },
@@ -53,7 +53,7 @@ export function TagForm() {
         await api.post(url, data);
       }
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.ADMIN_AVALIATION_TAG],
+        queryKey: [QUERY_KEY.ADMIN_TAG],
       });
     } catch (error) {
       console.error(error);
