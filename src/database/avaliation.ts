@@ -2,15 +2,28 @@ import { db } from "@/database/connection";
 import { Avaliation } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
-export const createAvaliation = async (avaliation: Avaliation) => {
+export const createAvaliation = async (
+  avaliation: Avaliation & { avaliationTags: [] }
+) => {
   try {
-    await db.avaliation.create({
-      data: {
-        ...avaliation,
-        createdAt: new Date(),
-        updatedAt: null,
-        removedAt: null,
+    const { mentoringId, comment, rating, wasSent, avaliationTags } =
+      avaliation;
+    const data = {
+      mentoringId,
+      comment,
+      rating,
+      wasSent,
+      avaliationTags: {
+        create: avaliationTags.map((tag) => ({
+          tagId: (tag as { id: string })?.id,
+        })),
       },
+      createdAt: new Date(),
+      updatedAt: null,
+      removedAt: null,
+    };
+    await db.avaliation.create({
+      data,
     });
   } catch (error) {
     logger.error(error);

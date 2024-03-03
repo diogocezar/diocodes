@@ -49,12 +49,6 @@ export function MentoringForm() {
 
   const form = useForm<z.infer<typeof SchemaMentoring>>({
     resolver: zodResolver(SchemaMentoring),
-    defaultValues: {
-      hostId: "",
-      attendeeId: "",
-      startTime: undefined,
-      endTime: undefined,
-    },
   });
   const setValue = form.setValue;
   useEffect(() => {

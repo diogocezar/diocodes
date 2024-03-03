@@ -29,6 +29,8 @@ import { QUERY_KEY } from "@/contants/query-key";
 import { TypeMentoring } from "@/types/type-mentoring";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { TypeTag } from "@/types/type-tag";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 
 export function AvaliationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,9 +47,6 @@ export function AvaliationForm() {
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
     defaultValues: {
-      mentoringId: "",
-      avaliationTags: [],
-      comment: "",
       wasSent: false,
     },
   });
@@ -57,11 +56,13 @@ export function AvaliationForm() {
       setValue("mentoringId", selectedItem?.mentoring?.id);
       setValue("avaliationTags", selectedItem?.avaliationTags);
       setValue("comment", selectedItem?.comment);
+      setValue("rating", selectedItem?.rating);
       setValue("wasSent", selectedItem?.wasSent);
     } else {
       setValue("mentoringId", "");
       setValue("avaliationTags", []);
       setValue("comment", "");
+      setValue("rating", "");
       setValue("wasSent", false);
     }
   }, [selectedItem, setValue]);
@@ -107,13 +108,25 @@ export function AvaliationForm() {
   const handleSubmit = async (data: z.infer<typeof SchemaAvaliation>) => {
     try {
       setIsLoading(true);
+      const avaliationTags = data?.avaliationTags?.map((item: any) => {
+        return {
+          id: item.value,
+        };
+      });
+      const formData = {
+        mentoringId: data.mentoringId,
+        avaliationTags,
+        comment: data.comment,
+        rating: Number(data.rating),
+        wasSent: data.wasSent,
+      };
       if (selectedItem.id) {
         await api.patch(url, {
           id: selectedItem.id,
-          ...data,
+          ...formData,
         });
       } else {
-        await api.post(url, data);
+        await api.post(url, formData);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_AVALIATION] });
     } catch (error) {
@@ -177,35 +190,69 @@ export function AvaliationForm() {
               <FormField
                 control={form.control}
                 name="avaliationTags"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Tags</FormLabel>
                     <MultiSelect
+                      fieldName="avaliationTags"
                       items={tag}
-                      placeholder="Selecione as tags..."
+                      setValue={setValue}
+                      placeholder="Selecione as tags"
                     />
-                    {/* <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione a mentoria" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {mentoring.map((item, index) => (
-                        <SelectItem key={index} value={item?.id}>
-                          {`${item?.attendee?.name} & ${item?.host?.name} - ${new Date(item?.startTime).toLocaleDateString("pt-BR")}`}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select> */}
                     <FormMessage />
                   </FormItem>
                 )}
               />
             )}
+            <FormField
+              control={form.control}
+              name="rating"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nota</FormLabel>
+                  <FormControl>
+                    <Input placeholder="5" {...field} />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.rating?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="comment"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Comentrário</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Foi muito boa a mentoria." {...field} />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.comment?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="wasSent"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">
+                      Já foi enviado por e-mail?
+                    </FormLabel>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
           </div>
           <Button
             type="submit"

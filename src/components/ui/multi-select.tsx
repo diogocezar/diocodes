@@ -6,15 +6,21 @@ import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import { Command as CommandPrimitive } from "cmdk";
-
 type Items = Record<"value" | "label", string>;
 
 type MultiSelectProps = {
   items: Items[];
+  setValue: any;
   placeholder?: string;
+  fieldName: string;
 };
 
-export function MultiSelect({ items, placeholder }: MultiSelectProps) {
+export function MultiSelect({
+  items,
+  placeholder,
+  setValue,
+  fieldName,
+}: MultiSelectProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<Items[]>([]);
@@ -108,6 +114,7 @@ export function MultiSelect({ items, placeholder }: MultiSelectProps) {
                     onSelect={(value) => {
                       setInputValue("");
                       setSelected((prev) => [...prev, item]);
+                      setValue(fieldName, [...selected, item]);
                     }}
                     className={"cursor-crosshair"}
                   >

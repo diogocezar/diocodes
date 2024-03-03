@@ -4,19 +4,21 @@ export const SchemaAvaliation = z.object({
   mentoringId: z.string({
     required_error: "É necessário informar uma mentoria.",
   }),
-  avaliationTags: z.array(
-    z.object({
-      name: z
-        .string({ required_error: "É necessário informar um nome para a tag." })
-        .min(3, { message: "A tag precisa ter no mínimo 3 caracteres." })
-        .max(255, { message: "A tag precisa ter no máximo 255 caracteres." }),
-    }),
-  ),
-  rating: z.number({
-    required_error: "É necessário informar uma classificação.",
+  avaliationTags: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string(),
+      }),
+    )
+    .optional(),
+  rating: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
+    message: "Você precisa informar um número.",
   }),
-  comment: z.string({
-    required_error: "É necessário informar um comentário.",
-  }),
-  wasSent: z.boolean(),
+  comment: z
+    .string({
+      required_error: "É necessário informar um comentário.",
+    })
+    .optional(),
+  wasSent: z.boolean().optional(),
 });
