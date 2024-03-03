@@ -88,7 +88,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       },
       cell: ({ row }) => (
         <div>
-          {new Date(row.getValue("startTime")).toLocaleDateString("pt-BR")}
+          {`${new Date(row.getValue("startTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("startTime")).toLocaleTimeString("pt-BR")}`}
         </div>
       ),
     },
@@ -108,7 +108,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       },
       cell: ({ row }) => (
         <div>
-          {new Date(row.getValue("endTime")).toLocaleDateString("pt-BR")}
+          {`${new Date(row.getValue("endTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("endTime")).toLocaleTimeString("pt-BR")}`}
         </div>
       ),
     },

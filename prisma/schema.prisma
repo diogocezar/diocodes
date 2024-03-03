@@ -13,15 +13,16 @@ enum Role {
 }
 
 model Person {
-    id                String     @id @default(uuid()) @map("_id")
+    id                String      @id @default(uuid()) @map("_id")
     name              String
-    email             String     @unique
+    email             String      @unique
     user              User?
-    mentoringHost     Mentoring? @relation(name: "mentoring_host")
-    mentoringAttendee Mentoring? @relation(name: "mentoring_atendee")
-    createdAt         DateTime   @default(now())
+    hostMentoring     Mentoring[] @relation("host")
+    attendeeMentoring Mentoring[] @relation("atendee")
+    createdAt         DateTime    @default(now())
     updatedAt         DateTime?
     removedAt         DateTime?
+    mentoringId       String?
 }
 
 model User {
@@ -69,10 +70,10 @@ model Avaliation {
 
 model Mentoring {
     id         String      @id @default(uuid()) @map("_id")
-    host       Person      @relation(name: "mentoring_host", fields: [hostId], references: [id])
-    hostId     String      @unique
-    attendee   Person      @relation(name: "mentoring_atendee", fields: [attendeeId], references: [id])
-    attendeeId String      @unique
+    host       Person      @relation("host", fields: [hostId], references: [id])
+    hostId     String
+    attendee   Person      @relation("atendee", fields: [attendeeId], references: [id])
+    attendeeId String
     startTime  DateTime
     endTime    DateTime
     avaliation Avaliation?

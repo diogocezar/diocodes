@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { TimePicker } from "@/components/ui/time-picker";
 import {
   Form,
   FormControl,
@@ -89,7 +89,6 @@ export function MentoringForm() {
 
   const handleSubmit = async (data: z.infer<typeof SchemaMentoring>) => {
     try {
-      console.log(data);
       setIsLoading(true);
       if (selectedItem.id) {
         await api.patch(url, {
@@ -107,6 +106,12 @@ export function MentoringForm() {
       setIsOpenForm(false);
     }
   };
+
+  const disabledStartDate = useCallback((date: Date) => date < new Date(), []);
+  const disabledEndDate = useCallback(
+    (date: Date) => date < form.getValues("startTime"),
+    [form],
+  );
 
   return (
     <SheetForm
@@ -186,36 +191,36 @@ export function MentoringForm() {
               name="startTime"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Início</FormLabel>
+                  <FormLabel>Começa em</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground",
-                          )}
-                        >
+                      <Button
+                        variant={"outline"}
+                        className="border-background text-foreground m-0 w-full gap-2 border px-4 text-left font-normal"
+                      >
+                        <div className="flex flex-row gap-2">
+                          <CalendarIcon className="h-5 w-5" />
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "dd/MM/yyyy HH:mm:ss")
                           ) : (
-                            <span>Pick a date</span>
+                            <div className="h-5">Selecione a data e hora</div>
                           )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
+                        </div>
+                      </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent className="w-auto p-0">
                       <Calendar
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
+                        disabled={disabledStartDate}
                       />
+                      <div className="border-border border-t p-3">
+                        <TimePicker
+                          setDate={field.onChange}
+                          date={field.value}
+                        />
+                      </div>
                     </PopoverContent>
                   </Popover>
                   <FormMessage />
@@ -227,36 +232,36 @@ export function MentoringForm() {
               name="endTime"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Fim</FormLabel>
+                  <FormLabel>Termina em</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground",
-                          )}
-                        >
+                      <Button
+                        variant={"outline"}
+                        className="border-background text-foreground m-0 w-full gap-2 border px-4 text-left font-normal"
+                      >
+                        <div className="flex flex-row gap-2">
+                          <CalendarIcon className="h-5 w-5" />
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "dd/MM/yyyy HH:mm:ss")
                           ) : (
-                            <span>Pick a date</span>
+                            <div className="h-5">Selecione a data e hora</div>
                           )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
+                        </div>
+                      </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent className="w-auto p-0">
                       <Calendar
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
+                        disabled={disabledEndDate}
                       />
+                      <div className="border-border border-t p-3">
+                        <TimePicker
+                          setDate={field.onChange}
+                          date={field.value}
+                        />
+                      </div>
                     </PopoverContent>
                   </Popover>
                   <FormMessage />

@@ -75,7 +75,7 @@ export default function AdminMentoringPage() {
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
-          searchField="name"
+          searchField="attendee"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}

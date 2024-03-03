@@ -38,13 +38,17 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Procurar por pessoa no cadastro de usuário;
 - [x] Criar crud de mentorias;
 - [x] Criar layout base para sistema de administração;
-- [ ] Ajustar bug do check encima do select;
-- [ ] Ajustar layout do datepicker;
-- [ ] Criar componente de tempo;
-- [ ] Salvar a data e hora no banco de dados;
+- [x] Ajustar bug do check encima do select;
+- [x] Ajustar layout do datepicker;
+- [x] Criar componente de tempo;
+- [x] Salvar a data e hora no banco de dados;
+- [x] Mostrar data e hora na tablela de mentorias;
+- [x] Erro ao editar data e hora;
+- [x] Data de término não pode ser menor que a data de início;
+- [ ] Criar crud de avaliações;
 - [ ] Criar possibilidade de botão adicional no data-table;
 - [ ] Criar sistema de sincronização com Cal.com;
-- [ ] Criar crud de avaliações;
+- [ ] Sonner de erros na tentativa de cadastrar os formulários;
 - [ ] Criar layout da página de avaliação (para preenchimento);
 - [ ] Criar funcionalidade de enviar avaliação por e-mail;
 - [ ] Criar back-end para popular dados do Dashboard;
@@ -59,7 +63,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 
 ## 🖥️ Tecnologias
 
-https://shadcnui-expansions.typeart.cc/docs/datetime-picker
+https://time.openstatus.dev/
 
 ## 📦 Instalação
 
