@@ -61,15 +61,21 @@ export const EmailAvaliation = ({
               certo? Espero que sim! 😊
             </Text>
             <Text className="text-base leading-8 text-[#020817]">
-              Este e-mail é para pedir uma avaliação sobre a mentoria que
-              tivemos no dia{" "}
+              Escrevo este e-mail te pedir uma ajudinha. É possível preencher
+              uma avaliação sobre a mentoria que tivemos no dia{" "}
               <span className="font-bold text-[#ff79c6]">
                 {new Date(startTime).toLocaleString("pt-BR")}
               </span>
             </Text>
+            <Text className="text-base leading-8 text-[#020817]">
+              Essa avaliação irá me ajudar a melhorar como mentor.{" "}
+              <span className="font-bold text-[#ff79c6]">
+                Prometo que não vai demorar mais que 5 minutos! 👍
+              </span>
+            </Text>
             <Button
               href={link}
-              className="mb-6 mt-4 rounded-full bg-[#50fa7b] px-6 py-4 text-[#282a36]"
+              className="mb-6 mt-4 rounded-full bg-[#ff79c6] px-6 py-4 text-[#f8f8f2]"
             >
               Avaliar a Mentoria
             </Button>

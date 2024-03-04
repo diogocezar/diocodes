@@ -5,10 +5,56 @@ import {
   updateInvite,
 } from "@/database/invite";
 
+import { EmailAvaliation } from "#/emails/emails/email-avaliation";
+import { Resend } from "resend";
+import { EMAIL } from "@/contants/email";
+import { randomUUID } from "crypto";
+import { getMentoring } from "@/database/mentoring";
+import { getPerson } from "@/database/person";
+
+const resend = new Resend(process.env.API_RESEND);
+
+const generateToken = () => {
+  return randomUUID();
+};
+
+const sendInvite = async (
+  mentoring: { startTime: Date },
+  attendee: { email: string; name: string },
+  token: string,
+) => {
+  const link = `${EMAIL.LINK}/${token}`;
+  const { startTime } = mentoring;
+  const { email, name } = attendee;
+  try {
+    await resend.emails.send({
+      from: EMAIL.FROM,
+      //to: [EMAIL.COPY_EMAIL, email],
+      to: [EMAIL.COPY_EMAIL],
+      subject: EMAIL.SUBJECT,
+      react: EmailAvaliation({
+        attendee: name,
+        startTime,
+        link,
+      }) as React.ReactElement,
+    });
+    return token;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const POST = async (req: Request) => {
   const data = await req.json();
   try {
-    const result = await createInvite(data);
+    const { mentoringId, attendeeId } = data;
+    const mentoring = await getMentoring(mentoringId);
+    const attendee = await getPerson(attendeeId);
+    const token = generateToken();
+
+    if (mentoring && attendee) await sendInvite(mentoring, attendee, token);
+
+    const result = await createInvite({ ...data, token });
     return new Response(JSON.stringify(result), { status: 201 });
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });
