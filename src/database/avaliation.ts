@@ -3,7 +3,7 @@ import { Avaliation } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
 export const createAvaliation = async (
-  avaliation: Avaliation & { avaliationTags: [] }
+  avaliation: Avaliation & { avaliationTags: [] },
 ) => {
   try {
     const { mentoringId, comment, rating, wasSent, avaliationTags } =
@@ -30,11 +30,32 @@ export const createAvaliation = async (
   }
 };
 
-export const updateAvaliation = async (id: string, avaliation: Avaliation) => {
+export const updateAvaliation = async (
+  id: string,
+  avaliation: Avaliation & { avaliationTags: [] },
+) => {
   try {
+    const { mentoringId, comment, rating, wasSent, avaliationTags } =
+      avaliation;
+    await db.avaliationTags.deleteMany({
+      where: { avaliationId: id },
+    });
+    const data = {
+      mentoringId,
+      comment,
+      rating,
+      wasSent,
+      avaliationTags: {
+        create: avaliationTags.map((tag) => ({
+          tagId: (tag as { id: string })?.id,
+        })),
+      },
+      updatedAt: new Date(),
+      removedAt: null,
+    };
     await db.avaliation.update({
       where: { id },
-      data: { ...avaliation, updatedAt: new Date() },
+      data,
     });
   } catch (error) {
     logger.error(error);
@@ -54,7 +75,13 @@ export const removeAvaliation = async (data: any) => {
 
 export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   try {
-    const result = await db.avaliation.findMany({ where: { removedAt: null } });
+    const result = await db.avaliation.findMany({
+      where: { removedAt: null },
+      include: {
+        avaliationTags: { include: { tag: true } },
+        mentoring: { include: { attendee: true, host: true } },
+      },
+    });
     return result;
   } catch (error) {
     logger.error(error);

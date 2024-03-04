@@ -3,18 +3,77 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import { TypeMentoring } from "@/types/type-mentoring";
+import { TypeAvaliation } from "@/types/type-avaliation";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "@phosphor-icons/react";
 
 export const columnsNames = [
   { id: "select", name: "select" },
-  { id: "host", name: "Host" },
-  { id: "startTime", name: "Início" },
-  { id: "endTime", name: "Fim" },
-  { id: "attendee", name: "Participante" },
+  { id: "mentoring", name: "Mentoria" },
+  { id: "date", name: "Data" },
+  { id: "tags", name: "Tags" },
+  { id: "rating", name: "Nota" },
   { id: "createdAt", name: "Criado em" },
 ];
 
-export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
+const formatMentoring = (row: any) => {
+  const { original } = row;
+  const { mentoring } = original;
+  const { host, attendee } = mentoring;
+  return `${attendee.name} & ${host.name}`;
+};
+
+const formatDate = (row: any) => {
+  const { original } = row;
+  const { mentoring } = original;
+  return `${new Date(mentoring.startTime).toLocaleDateString("pt-BR")}`;
+};
+
+const formatTags = (row: any) => {
+  const { original } = row;
+  const { avaliationTags } = original;
+  return (
+    <div className="flex flex-row gap-2">
+      {avaliationTags.map((avaliationTag: any) => {
+        return (
+          <Badge
+            key={avaliationTag.tag.name}
+            className="bg-background text-foreground rounded-md px-4 py-1 text-sm font-normal"
+            variant="secondary"
+          >
+            {avaliationTag.tag.name}
+          </Badge>
+        );
+      })}
+    </div>
+  );
+};
+
+const formatRating = (row: any) => {
+  const { original } = row;
+  const { rating } = original;
+  const normalizedValue = Math.min(Math.max(rating, 1), 5);
+  const filledStars = Array.from(
+    { length: normalizedValue },
+    (_, index) => index + 1,
+  );
+  const emptyStars = Array.from(
+    { length: 5 - normalizedValue },
+    (_, index) => index + 1 + normalizedValue,
+  );
+  return (
+    <div className="flex flex-row">
+      {filledStars.map((_, index) => (
+        <Star key={index} weight="fill" className="text-foreground" size={20} />
+      ))}
+      {emptyStars.map((_, index) => (
+        <Star key={index} className="text-foreground" size={20} />
+      ))}
+    </div>
+  );
+};
+
+export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
   return [
     {
       accessorKey: "select",
@@ -39,8 +98,8 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       enableHiding: false,
     },
     {
-      accessorKey: "host",
-      accessorFn: (row) => row?.host?.name,
+      accessorKey: "mentoring",
+      accessorFn: (row) => row?.mentoring?.attendee?.name,
       header: ({ column }) => {
         return (
           <Button
@@ -48,16 +107,15 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Host
+            Mentoria
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.host?.name}</div>,
+      cell: ({ row }) => <div>{formatMentoring(row)}</div>,
     },
     {
-      accessorKey: "attendee",
-      accessorFn: (row) => row?.attendee?.name,
+      accessorKey: "date",
       header: ({ column }) => {
         return (
           <Button
@@ -65,15 +123,15 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Participante
+            Data
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
+      cell: ({ row }) => <div>{formatDate(row)}</div>,
     },
     {
-      accessorKey: "startTime",
+      accessorKey: "tags",
       header: ({ column }) => {
         return (
           <Button
@@ -81,19 +139,15 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Início
+            Tags
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => (
-        <div>
-          {`${new Date(row.getValue("startTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("startTime")).toLocaleTimeString("pt-BR")}`}
-        </div>
-      ),
+      cell: ({ row }) => <div>{formatTags(row)}</div>,
     },
     {
-      accessorKey: "endTime",
+      accessorKey: "rating",
       header: ({ column }) => {
         return (
           <Button
@@ -101,16 +155,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Fim
+            Nota
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => (
-        <div>
-          {`${new Date(row.getValue("endTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("endTime")).toLocaleTimeString("pt-BR")}`}
-        </div>
-      ),
+      cell: ({ row }) => <div>{formatRating(row)}</div>,
     },
     {
       accessorKey: "createdAt",

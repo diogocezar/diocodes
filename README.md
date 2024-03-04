@@ -46,6 +46,11 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Erro ao editar data e hora;
 - [x] Data de término não pode ser menor que a data de início;
 - [ ] Criar crud de avaliações;
+  - [ ] Ajustar layout do enviado por email;
+  - [ ] Alterar a nota para um slider;
+  - [x] Editar deve puxar as tags cadastradas;
+  - [ ] Comentários como textarea;
+  - [x] Lista com os campos das avaliações;
 - [ ] Definir tags e deixá-las no seed;
 - [ ] Criar sistema de sincronização com Cal.com;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;

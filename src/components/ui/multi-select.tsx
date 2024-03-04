@@ -13,22 +13,29 @@ type MultiSelectProps = {
   setValue: any;
   placeholder?: string;
   fieldName: string;
+  initialValue?: Items[];
 };
 
 export function MultiSelect({
   items,
   placeholder,
   setValue,
+  initialValue = [],
   fieldName,
 }: MultiSelectProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<Items[]>([]);
+  const [selected, setSelected] = React.useState<Items[]>(initialValue);
   const [inputValue, setInputValue] = React.useState("");
 
-  const handleUnselect = React.useCallback((framework: Items) => {
-    setSelected((prev) => prev.filter((s) => s.value !== framework.value));
-  }, []);
+  const handleUnselect = React.useCallback(
+    (item: Items) => {
+      setSelected((prev) => prev.filter((s) => s.value !== item.value));
+      const newSelected = selected.filter((s) => s.value !== item.value);
+      setValue(fieldName, newSelected);
+    },
+    [selected, setValue, fieldName],
+  );
 
   const handleKeyDown = React.useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -39,17 +46,17 @@ export function MultiSelect({
             setSelected((prev) => {
               const newSelected = [...prev];
               newSelected.pop();
+              setValue(fieldName, newSelected);
               return newSelected;
             });
           }
         }
-        // This is not a default behaviour of the <input /> field
         if (e.key === "Escape") {
           input.blur();
         }
       }
     },
-    [],
+    [fieldName, setValue],
   );
 
   const selectables = items.filter((item) => !selected.includes(item));
@@ -87,7 +94,6 @@ export function MultiSelect({
               </Badge>
             );
           })}
-          {/* Avoid having the "Search" Icon */}
           <CommandPrimitive.Input
             ref={inputRef}
             value={inputValue}

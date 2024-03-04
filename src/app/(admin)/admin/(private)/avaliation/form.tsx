@@ -44,19 +44,33 @@ export function AvaliationForm() {
   const queryClient = useQueryClient();
   const url = "/admin/avaliation";
 
+  const formatTags = (tags: any) => {
+    if (!tags) return [];
+    return tags.map((item: any) => {
+      if (item.tag) {
+        return {
+          label: item.tag.name,
+          value: item.tag.id,
+        };
+      } else {
+        return {
+          label: item.label,
+          value: item.value,
+        };
+      }
+    });
+  };
+
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
-    defaultValues: {
-      wasSent: false,
-    },
   });
   const setValue = form.setValue;
   useEffect(() => {
     if (selectedItem) {
       setValue("mentoringId", selectedItem?.mentoring?.id);
-      setValue("avaliationTags", selectedItem?.avaliationTags);
+      setValue("avaliationTags", formatTags(selectedItem?.avaliationTags));
       setValue("comment", selectedItem?.comment);
-      setValue("rating", selectedItem?.rating);
+      setValue("rating", selectedItem?.rating?.toString());
       setValue("wasSent", selectedItem?.wasSent);
     } else {
       setValue("mentoringId", "");
@@ -197,6 +211,7 @@ export function AvaliationForm() {
                       fieldName="avaliationTags"
                       items={tag}
                       setValue={setValue}
+                      initialValue={form.getValues("avaliationTags")}
                       placeholder="Selecione as tags"
                     />
                     <FormMessage />

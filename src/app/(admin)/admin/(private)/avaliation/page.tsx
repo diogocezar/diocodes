@@ -4,7 +4,7 @@ import { Star } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
-} from "@/app/(admin)/admin/(private)/mentoring/columns";
+} from "@/app/(admin)/admin/(private)/avaliation/columns";
 import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { AvaliationForm } from "@/app/(admin)/admin/(private)/avaliation/form";
@@ -75,7 +75,7 @@ export default function AdminMentoringPage() {
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
-          searchField="attendee"
+          searchField="mentoring"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}
