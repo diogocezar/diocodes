@@ -17,12 +17,12 @@ model Person {
     name              String
     email             String      @unique
     user              User?
-    hostMentoring     Mentoring[] @relation("host")
-    attendeeMentoring Mentoring[] @relation("atendee")
+    hostMentoring     Mentoring[] @relation("host_mentoring")
+    attendeeMentoring Mentoring[] @relation("atendee_mentoring")
+    attendeeInvite    Invite[]    @relation("attendee_invite")
     createdAt         DateTime    @default(now())
     updatedAt         DateTime?
     removedAt         DateTime?
-    mentoringId       String?
 }
 
 model User {
@@ -59,6 +59,8 @@ model Avaliation {
     id             String           @id @default(uuid()) @map("_id")
     mentoring      Mentoring        @relation(fields: [mentoringId], references: [id])
     mentoringId    String           @unique
+    invite         Invite?          @relation(fields: [inviteId], references: [id])
+    inviteId       String?          @unique
     rating         Int
     avaliationTags AvaliationTags[]
     comment        String?
@@ -70,14 +72,28 @@ model Avaliation {
 
 model Mentoring {
     id         String      @id @default(uuid()) @map("_id")
-    host       Person      @relation("host", fields: [hostId], references: [id])
+    host       Person      @relation("host_mentoring", fields: [hostId], references: [id])
     hostId     String
-    attendee   Person      @relation("atendee", fields: [attendeeId], references: [id])
+    attendee   Person      @relation("atendee_mentoring", fields: [attendeeId], references: [id])
     attendeeId String
     startTime  DateTime
     endTime    DateTime
     avaliation Avaliation?
+    invite     Invite[]
     createdAt  DateTime    @default(now())
     updatedAt  DateTime?
     removedAt  DateTime?
+}
+
+model Invite {
+    id          String      @id @default(uuid()) @map("_id")
+    mentoring   Mentoring   @relation(fields: [mentoringId], references: [id])
+    mentoringId String
+    attendee    Person      @relation("attendee_invite", fields: [attendeeId], references: [id])
+    attendeeId  String
+    token       String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime?
+    removedAt   DateTime?
+    Avaliation  Avaliation?
 }

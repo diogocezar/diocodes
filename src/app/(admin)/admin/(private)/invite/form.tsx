@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Tag } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { SchemaUser } from "@/schemas/schema-user";
+import { SchemaInvite } from "@/schemas/schema-invite";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -27,47 +27,66 @@ import { useUserState } from "@/hooks/use-user-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypePerson } from "@/types/type-person";
+import { TypeMentoring } from "@/types/type-mentoring";
 
-export function UserForm() {
+export function InviteForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPerson, setIsLoadingPerson] = useState(false);
-  const [persons, setPersons] = useState<TypePerson[]>([]);
+  const [isLoadingAttendee, setIsLoadingAttendee] = useState(false);
+  const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
+  const [attendee, setAttendee] = useState<TypePerson[]>([]);
+  const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
   const isOpenForm = useUserState((state) => state.isOpenForm);
   const setIsOpenForm = useUserState((state) => state.setIsOpenForm);
   const selectedItem: any = useUserState((state) => state.selectedItem);
   const queryClient = useQueryClient();
-  const url = "/admin/user";
-  const form = useForm<z.infer<typeof SchemaUser>>({
-    resolver: zodResolver(SchemaUser),
+  const url = "/admin/invite";
+  const form = useForm<z.infer<typeof SchemaInvite>>({
+    resolver: zodResolver(SchemaInvite),
   });
   const setValue = form.setValue;
   useEffect(() => {
     if (selectedItem) {
-      setValue("personId", selectedItem?.person?.id);
-      setValue("role", selectedItem?.role);
+      setValue("attendeeId", selectedItem?.attendee?.id);
+      setValue("mentoringId", selectedItem?.mentoring?.id);
     } else {
-      setValue("personId", "");
-      setValue("role", "");
+      setValue("attendeeId", "");
+      setValue("mentoringId", "");
     }
   }, [selectedItem, setValue]);
 
-  const getPersons = useCallback(async () => {
+  const getAttendee = useCallback(async () => {
     try {
-      setIsLoadingPerson(true);
+      setIsLoadingAttendee(true);
       const response = await api.get("admin/person");
-      setPersons(response.data);
+      setAttendee(response.data);
     } catch (error) {
       console.error(error);
     } finally {
-      setIsLoadingPerson(false);
+      setIsLoadingAttendee(false);
     }
   }, []);
 
   useEffect(() => {
-    getPersons();
-  }, [getPersons]);
+    getAttendee();
+  }, [getAttendee]);
 
-  const handleSubmit = async (data: z.infer<typeof SchemaUser>) => {
+  const getMentoring = useCallback(async () => {
+    try {
+      setIsLoadingMentoring(true);
+      const response = await api.get("admin/mentoring");
+      setMentoring(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoadingMentoring(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getMentoring();
+  }, [getMentoring]);
+
+  const handleSubmit = async (data: z.infer<typeof SchemaInvite>) => {
     try {
       setIsLoading(true);
       if (selectedItem.id) {
@@ -78,7 +97,7 @@ export function UserForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_USER] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_INVITE] });
     } catch (error) {
       console.error(error);
     } finally {
@@ -92,12 +111,12 @@ export function UserForm() {
       Icon={<Tag />}
       isOpenForm={isOpenForm}
       setIsOpenForm={setIsOpenForm}
-      title={selectedItem.id ? "Editar usuário" : "Criar usuário"}
+      title={selectedItem.id ? "Editar convite" : "Criar convite"}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <div className="flex flex-col gap-4">
-            {isLoadingPerson ? (
+            {isLoadingAttendee ? (
               <div className="text-foreground flex w-full flex-row items-center gap-2">
                 <Spinner size={20} className="animate-spin" />
                 Carregando...
@@ -105,23 +124,23 @@ export function UserForm() {
             ) : (
               <FormField
                 control={form.control}
-                name="personId"
+                name="attendeeId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Pessoa</FormLabel>
+                    <FormLabel>Participante</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Selecione uma pessoa" />
+                          <SelectValue placeholder="Selecione um participante" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {persons.map((person, index) => (
-                          <SelectItem key={index} value={person?.id}>
-                            {person?.name}
+                        {attendee.map((item, index) => (
+                          <SelectItem key={index} value={item?.id}>
+                            {item?.name}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -131,30 +150,40 @@ export function UserForm() {
                 )}
               />
             )}
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Papel</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione um papel" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="ADMIN">Administrador</SelectItem>
-                      <SelectItem value="USER">Usuário</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {isLoadingMentoring ? (
+              <div className="text-foreground flex w-full flex-row items-center gap-2">
+                <Spinner size={20} className="animate-spin" />
+                Carregando...
+              </div>
+            ) : (
+              <FormField
+                control={form.control}
+                name="mentoringId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mentoria</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione uma mentoria" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {mentoring.map((item, index) => (
+                          <SelectItem key={index} value={item?.id}>
+                            {`${item?.attendee?.name} & ${item?.host?.name} - ${new Date(item?.startTime).toLocaleDateString("pt-BR")}`}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
           <Button
             type="submit"

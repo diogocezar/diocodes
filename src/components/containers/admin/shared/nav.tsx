@@ -13,6 +13,7 @@ import {
   User,
   Plant,
   Users,
+  EnvelopeSimple,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -92,6 +93,20 @@ export default function Nav() {
               >
                 <Star size={18} />
                 Avaliações
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/invite"
+                className={clsx(
+                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  pathname === "invite" ? "text-background" : "text-foreground",
+                  pathname === "invite" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <EnvelopeSimple size={18} />
+                Convites
               </Link>
             </li>
             <li>

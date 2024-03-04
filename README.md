@@ -51,6 +51,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
   - [x] Editar deve puxar as tags cadastradas;
   - [ ] Comentários como textarea;
   - [x] Lista com os campos das avaliações;
+- [ ] Criar crud de invites;
 - [ ] Definir tags e deixá-las no seed;
 - [ ] Criar sistema de sincronização com Cal.com;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
