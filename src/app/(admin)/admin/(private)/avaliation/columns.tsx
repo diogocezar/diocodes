@@ -33,7 +33,7 @@ const formatTags = (row: any) => {
   const { original } = row;
   const { avaliationTags } = original;
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row flex-wrap gap-2">
       {avaliationTags.map((avaliationTag: any) => {
         return (
           <Badge
@@ -67,7 +67,7 @@ const formatRating = (row: any) => {
         <Star key={index} weight="fill" className="text-foreground" size={20} />
       ))}
       {emptyStars.map((_, index) => (
-        <Star key={index} className="text-foreground" size={20} />
+        <Star key={index} className="text-foreground opacity-20" size={20} />
       ))}
     </div>
   );

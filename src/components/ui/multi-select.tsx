@@ -107,7 +107,7 @@ export function MultiSelect({
       </div>
       <div className="relative mt-1">
         {open && selectables.length > 0 ? (
-          <div className="bg-background-dark border-background text-foreground animate-in absolute top-0 z-10 w-full rounded-md border shadow-md outline-none">
+          <div className="bg-background-dark border-background text-foreground animate-in absolute top-0 z-10 max-h-[100px] w-full overflow-auto rounded-md border shadow-md outline-none">
             <CommandGroup className="h-full overflow-auto">
               {selectables.map((item) => {
                 return (
@@ -122,7 +122,7 @@ export function MultiSelect({
                       setSelected((prev) => [...prev, item]);
                       setValue(fieldName, [...selected, item]);
                     }}
-                    className={"cursor-crosshair"}
+                    className="cursor-crosshair"
                   >
                     {item.label}
                   </CommandItem>

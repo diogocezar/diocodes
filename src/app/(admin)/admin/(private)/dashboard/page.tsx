@@ -91,7 +91,7 @@ export default function AdminDashboardPage() {
                 {[1, 2, 3, 4].map((index) => (
                   <Star weight="fill" key={index} />
                 ))}
-                <Star />
+                <Star className="opacity-20" />
               </div>
             </CardContent>
             <CardFooter>

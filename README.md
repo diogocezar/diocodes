@@ -45,7 +45,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Mostrar data e hora na tablela de mentorias;
 - [x] Erro ao editar data e hora;
 - [x] Data de término não pode ser menor que a data de início;
-- [ ] Criar crud de avaliações;
+- [x] Criar crud de avaliações;
   - [x] Alterar a nota para um slider;
   - [x] Aparência do slider;
   - [x] Editar deve puxar as tags cadastradas;
@@ -53,7 +53,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
   - [x] Lista com os campos das avaliações;
 - [x] Criar crud de invites;
 - [x] Fazer uma marcação ✅ nas mentorias que já possuem convite;
-- [ ] Definir tags e deixá-las no seed;
+- [x] Definir tags e deixá-las no seed;
 - [ ] Criar sistema de sincronização com Cal.com acionado por um botão em metorias;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;

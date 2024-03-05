@@ -57,9 +57,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       cell: ({ row }) => (
         <div className="flex flex-row items-center gap-2">
           {row.original?.invite.length > 0 ? (
-            <Circle weight="fill" className="text-green h-4 w-4" />
+            <Circle
+              weight="fill"
+              className="text-green h-2 w-2 animate-pulse"
+            />
           ) : (
-            <Circle className="h-4 w-4" />
+            <Circle className="h-2 w-2" />
           )}
           {row.original?.host?.name}
         </div>
