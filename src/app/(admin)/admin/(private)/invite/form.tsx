@@ -45,13 +45,8 @@ export function InviteForm() {
   });
   const setValue = form.setValue;
   useEffect(() => {
-    if (selectedItem) {
-      setValue("attendeeId", selectedItem?.attendee?.id);
-      setValue("mentoringId", selectedItem?.mentoring?.id);
-    } else {
-      setValue("attendeeId", "");
-      setValue("mentoringId", "");
-    }
+    setValue("attendeeId", selectedItem?.attendee?.id || "");
+    setValue("mentoringId", selectedItem?.mentoring?.id || "");
   }, [selectedItem, setValue]);
 
   const getAttendee = useCallback(async () => {

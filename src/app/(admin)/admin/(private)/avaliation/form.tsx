@@ -31,6 +31,8 @@ import { MultiSelect } from "@/components/ui/multi-select";
 import { TypeTag } from "@/types/type-tag";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
+import { Textarea } from "@/components/ui/textarea";
 
 export function AvaliationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,22 +65,18 @@ export function AvaliationForm() {
 
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
+    defaultValues: {
+      rating: [1],
+    },
   });
   const setValue = form.setValue;
+
   useEffect(() => {
-    if (selectedItem) {
-      setValue("mentoringId", selectedItem?.mentoring?.id);
-      setValue("avaliationTags", formatTags(selectedItem?.avaliationTags));
-      setValue("comment", selectedItem?.comment);
-      setValue("rating", selectedItem?.rating?.toString());
-      setValue("wasSent", selectedItem?.wasSent);
-    } else {
-      setValue("mentoringId", "");
-      setValue("avaliationTags", []);
-      setValue("comment", "");
-      setValue("rating", "");
-      setValue("wasSent", false);
-    }
+    setValue("mentoringId", selectedItem?.mentoring?.id || "");
+    setValue("avaliationTags", formatTags(selectedItem?.avaliationTags || ""));
+    setValue("comment", selectedItem?.comment || "");
+    setValue("rating", [selectedItem?.rating || 1]);
+    setValue("wasSent", selectedItem?.wasSent || false);
   }, [selectedItem, setValue]);
 
   const getMentoring = useCallback(async () => {
@@ -131,7 +129,7 @@ export function AvaliationForm() {
         mentoringId: data.mentoringId,
         avaliationTags,
         comment: data.comment,
-        rating: Number(data.rating),
+        rating: Number(data.rating[0]),
         wasSent: data.wasSent,
       };
       if (selectedItem.id) {
@@ -224,9 +222,15 @@ export function AvaliationForm() {
               name="rating"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nota</FormLabel>
+                  <FormLabel>Nota: {field.value || 1}</FormLabel>
                   <FormControl>
-                    <Input placeholder="5" {...field} />
+                    <Slider
+                      min={1}
+                      max={5}
+                      step={1}
+                      defaultValue={[Number(field.value || 1)]}
+                      onValueChange={field.onChange}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState.errors.rating?.message}
@@ -241,7 +245,10 @@ export function AvaliationForm() {
                 <FormItem>
                   <FormLabel>Comentrário</FormLabel>
                   <FormControl>
-                    <Input placeholder="Foi muito boa a mentoria." {...field} />
+                    <Textarea
+                      placeholder="Foi muito boa a mentoria."
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState.errors.comment?.message}
@@ -253,9 +260,9 @@ export function AvaliationForm() {
               control={form.control}
               name="wasSent"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <FormItem className="flex flex-row items-center justify-between rounded-lg">
                   <div className="space-y-0.5">
-                    <FormLabel className="text-base">
+                    <FormLabel className="text-sm">
                       Já foi enviado por e-mail?
                     </FormLabel>
                   </div>

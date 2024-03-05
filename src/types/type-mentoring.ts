@@ -1,4 +1,5 @@
 import { TypeAvaliation } from "./type-avaliation";
+import { TypeInvite } from "./type-invite";
 import { TypePerson } from "./type-person";
 
 export type TypeMentoring = {
@@ -7,6 +8,7 @@ export type TypeMentoring = {
   hostId: string;
   attendee: TypePerson;
   attendeeId: string;
+  invite: [TypeInvite];
   startTime: Date;
   endTime: Date;
   avaliation?: TypeAvaliation;

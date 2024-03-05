@@ -59,8 +59,6 @@ model Avaliation {
     id             String           @id @default(uuid()) @map("_id")
     mentoring      Mentoring        @relation(fields: [mentoringId], references: [id])
     mentoringId    String           @unique
-    invite         Invite?          @relation(fields: [inviteId], references: [id])
-    inviteId       String?          @unique
     rating         Int
     avaliationTags AvaliationTags[]
     comment        String?
@@ -86,14 +84,13 @@ model Mentoring {
 }
 
 model Invite {
-    id          String      @id @default(uuid()) @map("_id")
-    mentoring   Mentoring   @relation(fields: [mentoringId], references: [id])
+    id          String    @id @default(uuid()) @map("_id")
+    mentoring   Mentoring @relation(fields: [mentoringId], references: [id])
     mentoringId String
-    attendee    Person      @relation("attendee_invite", fields: [attendeeId], references: [id])
+    attendee    Person    @relation("attendee_invite", fields: [attendeeId], references: [id])
     attendeeId  String
     token       String?
-    createdAt   DateTime    @default(now())
+    createdAt   DateTime  @default(now())
     updatedAt   DateTime?
     removedAt   DateTime?
-    Avaliation  Avaliation?
 }

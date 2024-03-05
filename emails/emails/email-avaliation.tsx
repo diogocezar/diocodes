@@ -61,14 +61,18 @@ export const EmailAvaliation = ({
               certo? Espero que sim! 😊
             </Text>
             <Text className="text-base leading-8 text-[#020817]">
-              Escrevo este e-mail te pedir uma ajudinha. É possível preencher
-              uma avaliação sobre a mentoria que tivemos no dia{" "}
+              Escrevo este e-mail te pedir uma ajudinha.
+            </Text>
+            <Text className="text-base leading-8 text-[#020817]">
+              Tivemos uma mentoria em{" "}
               <span className="font-bold text-[#ff79c6]">
                 {new Date(startTime).toLocaleString("pt-BR")}
               </span>
             </Text>
             <Text className="text-base leading-8 text-[#020817]">
-              Essa avaliação irá me ajudar a melhorar como mentor.{" "}
+              Sua avaliação irá me ajudar a melhorar como mentor.{" "}
+            </Text>
+            <Text className="text-base leading-8 text-[#020817]">
               <span className="font-bold text-[#ff79c6]">
                 Prometo que não vai demorar mais que 5 minutos! 👍
               </span>
@@ -80,8 +84,7 @@ export const EmailAvaliation = ({
               Avaliar a Mentoria
             </Button>
             <Text className="text-base leading-8 text-[#020817]">
-              Sua avaliação é muito importante para mim, e vai me ajudar a
-              melhorar cada vez mais! 🚀
+              Muito obrigado pela ajuda! 🚀
             </Text>
           </Section>
           <Hr />

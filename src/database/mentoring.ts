@@ -43,7 +43,7 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
     const result = await db.mentoring.findMany({
       where: { removedAt: null },
-      include: { host: true, attendee: true },
+      include: { host: true, attendee: true, invite: true },
     });
     return result;
   } catch (error) {

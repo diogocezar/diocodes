@@ -33,12 +33,9 @@ export function TagForm() {
     defaultValues: { name: "" },
   });
   const setValue = form.setValue;
+
   useEffect(() => {
-    if (selectedItem) {
-      setValue("name", selectedItem.name);
-    } else {
-      setValue("name", "");
-    }
+    setValue("name", selectedItem.name || "");
   }, [selectedItem, setValue]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaTag>) => {

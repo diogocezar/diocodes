@@ -41,14 +41,10 @@ export function UserForm() {
     resolver: zodResolver(SchemaUser),
   });
   const setValue = form.setValue;
+
   useEffect(() => {
-    if (selectedItem) {
-      setValue("personId", selectedItem?.person?.id);
-      setValue("role", selectedItem?.role);
-    } else {
-      setValue("personId", "");
-      setValue("role", "");
-    }
+    setValue("personId", selectedItem?.person?.id || "");
+    setValue("role", selectedItem?.role || "");
   }, [selectedItem, setValue]);
 
   const getPersons = useCallback(async () => {

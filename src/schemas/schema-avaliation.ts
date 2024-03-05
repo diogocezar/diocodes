@@ -12,9 +12,19 @@ export const SchemaAvaliation = z.object({
       }),
     )
     .optional(),
-  rating: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
-    message: "Você precisa informar um número.",
-  }),
+  rating: z.array(
+    z
+      .number({
+        required_error: "A nota deve ser um número.",
+      })
+      .min(1, {
+        message: "A nota deve ser no mínimo 1.",
+      })
+      .max(5, {
+        message: "A nota deve ser no máximo 5.",
+      })
+      .default(1),
+  ),
   comment: z
     .string({
       required_error: "É necessário informar um comentário.",

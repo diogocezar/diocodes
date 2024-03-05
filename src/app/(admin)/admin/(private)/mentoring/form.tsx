@@ -51,18 +51,12 @@ export function MentoringForm() {
     resolver: zodResolver(SchemaMentoring),
   });
   const setValue = form.setValue;
+
   useEffect(() => {
-    if (selectedItem) {
-      setValue("hostId", selectedItem?.host?.id);
-      setValue("attendeeId", selectedItem?.attendee?.id);
-      setValue("startTime", selectedItem?.startTime);
-      setValue("endTime", selectedItem?.endTime);
-    } else {
-      setValue("hostId", "");
-      setValue("attendeeId", "");
-      setValue("startTime", new Date());
-      setValue("endTime", new Date());
-    }
+    setValue("hostId", selectedItem?.host?.id || "");
+    setValue("attendeeId", selectedItem?.attendee?.id || "");
+    setValue("startTime", selectedItem?.startTime || new Date());
+    setValue("endTime", selectedItem?.endTime || new Date());
   }, [selectedItem, setValue]);
 
   const getPersons = useCallback(async () => {

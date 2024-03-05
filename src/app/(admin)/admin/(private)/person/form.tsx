@@ -33,14 +33,10 @@ export function PersonForm() {
     defaultValues: { name: "", email: "" },
   });
   const setValue = form.setValue;
+
   useEffect(() => {
-    if (selectedItem) {
-      setValue("name", selectedItem.name);
-      setValue("email", selectedItem.email);
-    } else {
-      setValue("name", "");
-      setValue("email", "");
-    }
+    setValue("name", selectedItem.name || "");
+    setValue("email", selectedItem.email || "");
   }, [selectedItem, setValue]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaPerson>) => {

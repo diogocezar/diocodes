@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { TypeMentoring } from "@/types/type-mentoring";
+import { Circle } from "@phosphor-icons/react";
 
 export const columnsNames = [
   { id: "select", name: "select" },
@@ -53,7 +54,16 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.host?.name}</div>,
+      cell: ({ row }) => (
+        <div className="flex flex-row items-center gap-2">
+          {row.original?.invite.length > 0 ? (
+            <Circle weight="fill" className="text-green h-4 w-4" />
+          ) : (
+            <Circle className="h-4 w-4" />
+          )}
+          {row.original?.host?.name}
+        </div>
+      ),
     },
     {
       accessorKey: "attendee",

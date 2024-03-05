@@ -99,7 +99,8 @@ export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
     },
     {
       accessorKey: "mentoring",
-      accessorFn: (row) => row?.mentoring?.attendee?.name,
+      accessorFn: (row) =>
+        `${row?.mentoring?.attendee?.name} ${row?.mentoring?.host?.name}`,
       header: ({ column }) => {
         return (
           <Button
