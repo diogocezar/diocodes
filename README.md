@@ -54,6 +54,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar crud de invites;
 - [x] Fazer uma marcação ✅ nas mentorias que já possuem convite;
 - [x] Definir tags e deixá-las no seed;
+- [x] Definir o máximo de tags por avaliação;
 - [ ] Criar sistema de sincronização com Cal.com acionado por um botão em metorias;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;

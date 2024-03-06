@@ -22,6 +22,7 @@ const formatMentoring = (row: any) => {
 export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
   return [
     {
+      size: 10,
       accessorKey: "select",
       header: ({ table }) => (
         <Checkbox

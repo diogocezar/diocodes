@@ -208,6 +208,7 @@ export function AvaliationForm() {
                     <MultiSelect
                       fieldName="avaliationTags"
                       items={tag}
+                      maxItems={10}
                       setValue={setValue}
                       initialValue={form.getValues("avaliationTags")}
                       placeholder="Selecione as tags"

@@ -15,6 +15,7 @@ export const columnsNames = [
 export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
   return [
     {
+      size: 10,
       accessorKey: "select",
       header: ({ table }) => (
         <Checkbox

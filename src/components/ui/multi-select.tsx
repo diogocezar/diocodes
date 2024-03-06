@@ -14,6 +14,7 @@ type MultiSelectProps = {
   placeholder?: string;
   fieldName: string;
   initialValue?: Items[];
+  maxItems?: number;
 };
 
 export function MultiSelect({
@@ -22,6 +23,7 @@ export function MultiSelect({
   setValue,
   initialValue = [],
   fieldName,
+  maxItems = 10,
 }: MultiSelectProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
@@ -117,10 +119,12 @@ export function MultiSelect({
                       e.preventDefault();
                       e.stopPropagation();
                     }}
-                    onSelect={(value) => {
-                      setInputValue("");
-                      setSelected((prev) => [...prev, item]);
-                      setValue(fieldName, [...selected, item]);
+                    onSelect={() => {
+                      if (selected.length < maxItems) {
+                        setInputValue("");
+                        setSelected((prev) => [...prev, item]);
+                        setValue(fieldName, [...selected, item]);
+                      }
                     }}
                     className="cursor-crosshair"
                   >

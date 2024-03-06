@@ -77,6 +77,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
   return [
     {
       accessorKey: "select",
+      size: 10,
       header: ({ table }) => (
         <Checkbox
           checked={
@@ -133,6 +134,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
     },
     {
       accessorKey: "tags",
+      size: 600,
       header: ({ column }) => {
         return (
           <Button

@@ -49,6 +49,7 @@ type DataTableProps = {
   isLoading: boolean;
   createButtonLabel: string;
   iconCreateButton: JSX.Element;
+  aditionalButtons?: ReactElement;
 };
 
 export function DataTable({
@@ -63,6 +64,7 @@ export function DataTable({
   isLoading,
   createButtonLabel = "Criar",
   iconCreateButton,
+  aditionalButtons,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -116,6 +118,7 @@ export function DataTable({
         </div>
         <div className="flex flex-row items-center gap-4">
           {form}
+          {aditionalButtons}
           <Button
             onClick={() => {
               handleCreate(table.getFilteredSelectedRowModel().rows);
@@ -215,7 +218,12 @@ export function DataTable({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      style={{
+                        width: cell.column.getSize(),
+                      }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
@@ -231,7 +239,7 @@ export function DataTable({
                   className="text-foreground h-24 text-center"
                 >
                   {!isLoading ? (
-                    "Não forram encontrados resultados."
+                    "Não foram encontrados resultados."
                   ) : (
                     <div className="flex w-full flex-row items-center justify-center gap-2">
                       <Spinner size={20} className="animate-spin" />

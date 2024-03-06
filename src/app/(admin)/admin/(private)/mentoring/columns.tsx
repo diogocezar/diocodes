@@ -18,6 +18,7 @@ export const columnsNames = [
 export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
   return [
     {
+      size: 10,
       accessorKey: "select",
       header: ({ table }) => (
         <Checkbox

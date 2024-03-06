@@ -1,6 +1,6 @@
 "use client";
 import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
-import { Plant } from "@phosphor-icons/react";
+import { Plant, ArrowsClockwise } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
@@ -13,6 +13,21 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
+import { Button } from "@/components/ui/button";
+
+function AditionalButtons() {
+  return (
+    <Button
+      onClick={() => {
+        console.log("click");
+      }}
+      className="flex flex-row gap-2 rounded-lg"
+    >
+      <ArrowsClockwise className="h-5 w-5" />
+      Sincronizar
+    </Button>
+  );
+}
 
 export default function AdminMentoringPage() {
   const queryClient = useQueryClient();
@@ -82,6 +97,7 @@ export default function AdminMentoringPage() {
           isLoading={isLoading}
           createButtonLabel="Criar mentoria"
           iconCreateButton={<Plant className="h-5 w-5" />}
+          aditionalButtons={<AditionalButtons />}
         />
       </div>
     </>
