@@ -18,14 +18,10 @@ const generateToken = () => {
   return randomUUID();
 };
 
-const sendInvite = async (
-  mentoring: { startTime: Date },
-  attendee: { email: string; name: string },
-  token: string,
-) => {
+const sendInvite = async (mentoring: any, token: string) => {
   const link = `${EMAIL.LINK}/${token}`;
-  const { startTime } = mentoring;
-  const { email, name } = attendee;
+  const { startTime, attendee } = mentoring;
+  const { name, email } = attendee;
   try {
     await resend.emails.send({
       from: EMAIL.FROM,
@@ -47,12 +43,11 @@ const sendInvite = async (
 export const POST = async (req: Request) => {
   const data = await req.json();
   try {
-    const { mentoringId, attendeeId } = data;
+    const { mentoringId } = data;
     const mentoring = await getMentoring(mentoringId);
-    const attendee = await getPerson(attendeeId);
     const token = generateToken();
 
-    if (mentoring && attendee) await sendInvite(mentoring, attendee, token);
+    if (mentoring) await sendInvite(mentoring, token);
 
     const result = await createInvite({ ...data, token });
     return new Response(JSON.stringify(result), { status: 201 });

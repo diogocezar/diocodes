@@ -7,6 +7,7 @@ export const SchemaMentoring = z.object({
   attendeeId: z.string({
     required_error: "É necessário informar um participante.",
   }),
+  externalMessage: z.string().optional(),
   startTime: z.date({
     required_error: "É necessário informar uma data de início.",
   }),

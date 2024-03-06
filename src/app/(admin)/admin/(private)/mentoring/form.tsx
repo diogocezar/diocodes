@@ -36,6 +36,7 @@ import { useMentoringState } from "@/hooks/use-mentoring-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypePerson } from "@/types/type-person";
+import { Textarea } from "@/components/ui/textarea";
 
 export function MentoringForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +58,7 @@ export function MentoringForm() {
     setValue("attendeeId", selectedItem?.attendee?.id || "");
     setValue("startTime", selectedItem?.startTime || new Date());
     setValue("endTime", selectedItem?.endTime || new Date());
+    setValue("externalMessage", selectedItem?.externalMessage || "");
   }, [selectedItem, setValue]);
 
   const getPersons = useCallback(async () => {
@@ -256,6 +258,21 @@ export function MentoringForm() {
                 </FormItem>
               )}
             />
+            {selectedItem?.externalMessage && (
+              <FormField
+                control={form.control}
+                name="externalMessage"
+                disabled={true}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mensagem</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
           <Button
             type="submit"

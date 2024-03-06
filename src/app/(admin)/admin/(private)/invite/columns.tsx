@@ -7,7 +7,7 @@ import { TypeInvite } from "@/types/type-invite";
 
 export const columnsNames = [
   { id: "select", name: "select" },
-  { id: "attendee", name: "Participante" },
+  { id: "date", name: "Data" },
   { id: "mentoring", name: "Mentoria" },
   { id: "createdAt", name: "Criado em" },
 ];
@@ -17,6 +17,13 @@ const formatMentoring = (row: any) => {
   const { mentoring } = original;
   const { host, attendee } = mentoring;
   return `${attendee.name} & ${host.name}`;
+};
+
+const formatDate = (row: any) => {
+  const { original } = row;
+  const { mentoring } = original;
+  const { startTime } = mentoring;
+  return `${new Date(startTime).toLocaleDateString("pt-BR")} - ${new Date(startTime).toLocaleTimeString("pt-BR")}`;
 };
 
 export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
@@ -45,8 +52,9 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
       enableHiding: false,
     },
     {
-      accessorKey: "attendee",
-      accessorFn: (row) => row?.attendee?.name,
+      accessorKey: "date",
+      size: 10,
+      accessorFn: (row) => row?.mentoring?.attendee?.name,
       header: ({ column }) => {
         return (
           <Button
@@ -54,12 +62,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Participante
+            Mentoria
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
+      cell: ({ row }) => <div>{formatDate(row)}</div>,
     },
     {
       accessorKey: "mentoring",

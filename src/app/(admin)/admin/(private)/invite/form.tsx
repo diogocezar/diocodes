@@ -45,30 +45,13 @@ export function InviteForm() {
   });
   const setValue = form.setValue;
   useEffect(() => {
-    setValue("attendeeId", selectedItem?.attendee?.id || "");
     setValue("mentoringId", selectedItem?.mentoring?.id || "");
   }, [selectedItem, setValue]);
-
-  const getAttendee = useCallback(async () => {
-    try {
-      setIsLoadingAttendee(true);
-      const response = await api.get("admin/person");
-      setAttendee(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoadingAttendee(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getAttendee();
-  }, [getAttendee]);
 
   const getMentoring = useCallback(async () => {
     try {
       setIsLoadingMentoring(true);
-      const response = await api.get("admin/mentoring");
+      const response = await api.get("admin/mentoring/done");
       setMentoring(response.data);
     } catch (error) {
       console.error(error);
@@ -111,40 +94,6 @@ export function InviteForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <div className="flex flex-col gap-4">
-            {isLoadingAttendee ? (
-              <div className="text-foreground flex w-full flex-row items-center gap-2">
-                <Spinner size={20} className="animate-spin" />
-                Carregando...
-              </div>
-            ) : (
-              <FormField
-                control={form.control}
-                name="attendeeId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Participante</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione um participante" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {attendee.map((item, index) => (
-                          <SelectItem key={index} value={item?.id}>
-                            {item?.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
             {isLoadingMentoring ? (
               <div className="text-foreground flex w-full flex-row items-center gap-2">
                 <Spinner size={20} className="animate-spin" />

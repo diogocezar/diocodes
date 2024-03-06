@@ -8,10 +8,9 @@ import { Circle } from "@phosphor-icons/react";
 
 export const columnsNames = [
   { id: "select", name: "select" },
-  { id: "host", name: "Host" },
-  { id: "startTime", name: "Início" },
-  { id: "endTime", name: "Fim" },
   { id: "attendee", name: "Participante" },
+  { id: "date", name: "Data" },
+  { id: "message", name: "Mensagem" },
   { id: "createdAt", name: "Criado em" },
 ];
 
@@ -31,43 +30,24 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
         />
       ),
       cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
-      accessorKey: "host",
-      accessorFn: (row) => row?.host?.name,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Host
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row gap-4">
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
           {row.original?.invite.length > 0 ? (
             <Circle
               weight="fill"
-              className="text-green h-2 w-2 animate-pulse"
+              className="text-green h-4 w-4 animate-pulse"
             />
           ) : (
-            <Circle className="h-2 w-2" />
+            <Circle className="h-4 w-4 opacity-20" />
           )}
-          {row.original?.host?.name}
         </div>
       ),
+      enableSorting: false,
+      enableHiding: false,
     },
     {
       accessorKey: "attendee",
@@ -87,7 +67,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
     },
     {
-      accessorKey: "startTime",
+      accessorKey: "date",
       header: ({ column }) => {
         return (
           <Button
@@ -101,13 +81,19 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
         );
       },
       cell: ({ row }) => (
-        <div>
-          {`${new Date(row.getValue("startTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("startTime")).toLocaleTimeString("pt-BR")}`}
+        <div className="flex flex-col">
+          <span className="text-xs">{`${new Date(row.original?.startTime).toLocaleDateString("pt-BR")}`}</span>
+          <span className="text-xs opacity-40">
+            {new Date(row.original?.startTime).toLocaleTimeString("pt-BR")}
+            {" - "}
+            {new Date(row.original?.endTime).toLocaleTimeString("pt-BR")}
+          </span>
         </div>
       ),
     },
     {
-      accessorKey: "endTime",
+      accessorKey: "externalMessage",
+      size: 50,
       header: ({ column }) => {
         return (
           <Button
@@ -115,14 +101,14 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Fim
+            Mensagem
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
       cell: ({ row }) => (
-        <div>
-          {`${new Date(row.getValue("endTime")).toLocaleDateString("pt-BR")} ${new Date(row.getValue("endTime")).toLocaleTimeString("pt-BR")}`}
+        <div className="h-[30px] w-full overflow-hidden overflow-ellipsis text-xs">
+          {row.getValue("externalMessage")}
         </div>
       ),
     },

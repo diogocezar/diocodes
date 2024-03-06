@@ -8,7 +8,6 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
       const host = await db.person.findUnique({
         where: { email: item.hostEmail },
       });
-      logger.info("Host", host);
       if (!host?.id) {
         throw new Error("Host not found");
       }
@@ -23,7 +22,6 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
       });
-      logger.info("Attendee", attendee);
       const upsert = await db.mentoring.upsert({
         where: {
           externalId: item.externalId,
@@ -49,7 +47,6 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
       });
-      logger.info("Upsert", upsert);
     });
   } catch (error) {
     logger.error(error);
@@ -106,10 +103,29 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
   return [];
 };
 
+export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
+  try {
+    const result = await db.mentoring.findMany({
+      where: {
+        removedAt: null,
+        startTime: { lte: new Date() },
+        avaliation: null,
+      },
+      include: { host: true, attendee: true, invite: true, avaliation: true },
+      orderBy: { startTime: "asc" },
+    });
+    return result;
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
 export const getMentoring = async (id: string): Promise<Mentoring | null> => {
   try {
     const result = await db.mentoring.findUnique({
       where: { id, removedAt: null },
+      include: { attendee: true },
     });
     return result;
   } catch (error) {

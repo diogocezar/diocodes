@@ -55,7 +55,17 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Fazer uma marcação ✅ nas mentorias que já possuem convite;
 - [x] Definir tags e deixá-las no seed;
 - [x] Definir o máximo de tags por avaliação;
-- [ ] Criar sistema de sincronização com Cal.com acionado por um botão em metorias;
+- [x] Criar sistema de sincronização com Cal.com acionado por um botão em metorias;
+- [x] Botão de sincronizar deve ficar carregando;
+- [x] Lista deve ser atualizada depois da sincronização;
+- [x] Layout do toast;
+- [x] Remover o participante do convite, deixando apenas a mentoria;
+- [x] Trazer apenas mentorias que já aconteceram para invite;
+- [x] Aumentar a bolinha da mentoria;
+- [x] Incluir mensagem na mentoria;
+- [ ] Remover o cadastro de uma avaliação que já foi realizada;
+- [ ] Não permitir enviar um convite para uma mentoria que não foi realizada;
+- [ ] Página de Avaliação Pública;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;

@@ -19,7 +19,6 @@ model Person {
     user              User?
     hostMentoring     Mentoring[] @relation("host_mentoring")
     attendeeMentoring Mentoring[] @relation("atendee_mentoring")
-    attendeeInvite    Invite[]    @relation("attendee_invite")
     createdAt         DateTime    @default(now())
     updatedAt         DateTime?
     removedAt         DateTime?
@@ -91,8 +90,6 @@ model Invite {
     id          String    @id @default(uuid()) @map("_id")
     mentoring   Mentoring @relation(fields: [mentoringId], references: [id])
     mentoringId String
-    attendee    Person    @relation("attendee_invite", fields: [attendeeId], references: [id])
-    attendeeId  String
     token       String?
     createdAt   DateTime  @default(now())
     updatedAt   DateTime?

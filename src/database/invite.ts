@@ -39,18 +39,10 @@ export const removeInvite = async (data: any) => {
   }
 };
 
-export const getAllInvites = async (role?: string): Promise<any[]> => {
+export const getAllInvites = async (): Promise<any[]> => {
   try {
-    let where = {};
-    if (role) {
-      where = { removedAt: null, role };
-    } else {
-      where = { removedAt: null };
-    }
     const result = await db.invite.findMany({
-      where,
       include: {
-        attendee: true,
         mentoring: { include: { attendee: true, host: true } },
       },
     });

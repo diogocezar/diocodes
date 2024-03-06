@@ -14,18 +14,44 @@ import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useState } from "react";
 
 function AditionalButtons() {
+  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
   return (
     <Button
+      disabled={isLoading}
       onClick={async () => {
-        const result = await api.get("admin/mentoring/sync");
-        console.log(result);
+        try {
+          setIsLoading(true);
+          const result = await api.get("admin/mentoring/sync");
+          if (result.status === 200) {
+            queryClient.invalidateQueries({
+              queryKey: [QUERY_KEY.ADMIN_MENTORING],
+            });
+            toast.success("Sincronizado com sucesso.");
+          }
+        } catch (error) {
+          toast.error("Houver um erro ao sincronizar.");
+        } finally {
+          setIsLoading(false);
+        }
       }}
-      className="flex flex-row gap-2 rounded-lg"
+      className="rounded-lg"
     >
-      <ArrowsClockwise className="h-5 w-5" />
-      Sincronizar
+      {isLoading ? (
+        <div className="flex flex-row gap-2">
+          <ArrowsClockwise className="h-5 w-5 animate-spin" />
+          Sincronizando...
+        </div>
+      ) : (
+        <div className="flex flex-row gap-2">
+          <ArrowsClockwise className="h-5 w-5" />
+          Sincronizar
+        </div>
+      )}
     </Button>
   );
 }
