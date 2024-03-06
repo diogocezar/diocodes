@@ -1,6 +1,6 @@
 import { CAL } from "@/contants/cal";
-import { compactName } from "@/lib/utils";
 import { api as cal } from "@/services/cal";
+import { upsertMentoringByBooking } from "@/database/mentoring";
 
 const filterValidBooking = (mentoring: any) =>
   mentoring.filter(
@@ -11,9 +11,8 @@ const filterValidBooking = (mentoring: any) =>
 const formatResponse = (validBookings: any) =>
   validBookings.map((item: any): any => {
     return {
-      idCal: item.id,
-      idEventType: item.eventTypeId,
-      videoUrl: item.metadata.videoUrl,
+      externalId: item.id,
+      externalEventId: item.eventTypeId,
       hostEmail: item.user.email,
       attendeeName: item.attendees[0].name,
       attendeeEmail: item.attendees[0].email,
@@ -41,6 +40,11 @@ const removeDuplicates = (ordered: any) =>
       ),
   );
 
+const upsert = async (booking: any) => {
+  await upsertMentoringByBooking(booking);
+  return true;
+};
+
 export const GET = async () => {
   try {
     const result = await cal.get("/bookings");
@@ -50,7 +54,8 @@ export const GET = async () => {
     const response = formatResponse(validBookings);
     const ordered = sortByDate(response);
     const withoutDuplicates = removeDuplicates(ordered);
-    return new Response(JSON.stringify(withoutDuplicates));
+    const upsertResult = await upsert(withoutDuplicates);
+    return new Response(JSON.stringify({ success: upsertResult }));
   } catch (error) {
     return new Response(JSON.stringify({ error }));
   }

@@ -69,18 +69,22 @@ model Avaliation {
 }
 
 model Mentoring {
-    id         String      @id @default(uuid()) @map("_id")
-    host       Person      @relation("host_mentoring", fields: [hostId], references: [id])
-    hostId     String
-    attendee   Person      @relation("atendee_mentoring", fields: [attendeeId], references: [id])
-    attendeeId String
-    startTime  DateTime
-    endTime    DateTime
-    avaliation Avaliation?
-    invite     Invite[]
-    createdAt  DateTime    @default(now())
-    updatedAt  DateTime?
-    removedAt  DateTime?
+    id              String      @id @default(uuid()) @map("_id")
+    externalId      Int?        @unique
+    externalEventId Int?
+    externalStatus  String?
+    externalMessage String?
+    host            Person      @relation("host_mentoring", fields: [hostId], references: [id])
+    hostId          String
+    attendee        Person      @relation("atendee_mentoring", fields: [attendeeId], references: [id])
+    attendeeId      String
+    startTime       DateTime
+    endTime         DateTime
+    avaliation      Avaliation?
+    invite          Invite[]
+    createdAt       DateTime    @default(now())
+    updatedAt       DateTime?
+    removedAt       DateTime?
 }
 
 model Invite {

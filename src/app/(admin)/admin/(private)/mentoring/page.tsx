@@ -18,8 +18,9 @@ import { Button } from "@/components/ui/button";
 function AditionalButtons() {
   return (
     <Button
-      onClick={() => {
-        console.log("click");
+      onClick={async () => {
+        const result = await api.get("admin/mentoring/sync");
+        console.log(result);
       }}
       className="flex flex-row gap-2 rounded-lg"
     >

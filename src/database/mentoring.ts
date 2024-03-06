@@ -2,6 +2,60 @@ import { db } from "@/database/connection";
 import { Mentoring } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
+export const upsertMentoringByBooking = async (booking: any[]) => {
+  try {
+    booking.forEach(async (item) => {
+      const host = await db.person.findUnique({
+        where: { email: item.hostEmail },
+      });
+      logger.info("Host", host);
+      if (!host?.id) {
+        throw new Error("Host not found");
+      }
+      const attendee = await db.person.upsert({
+        where: { email: item.attendeeEmail },
+        update: { updatedAt: new Date() },
+        create: {
+          email: item.attendeeEmail,
+          name: item.attendeeName,
+          createdAt: new Date(),
+          updatedAt: null,
+          removedAt: null,
+        },
+      });
+      logger.info("Attendee", attendee);
+      const upsert = await db.mentoring.upsert({
+        where: {
+          externalId: item.externalId,
+        },
+        update: {
+          startTime: item.startTime,
+          endTime: item.endTime,
+          updatedAt: new Date(),
+          removedAt: null,
+        },
+        create: {
+          id: item.id,
+          externalId: item.externalId,
+          externalEventId: item.externalEventId,
+          externalStatus: item.status,
+          externalMessage: item.requestMessage,
+          hostId: host.id,
+          attendeeId: attendee.id,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          createdAt: new Date(),
+          updatedAt: null,
+          removedAt: null,
+        },
+      });
+      logger.info("Upsert", upsert);
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+};
+
 export const createMentoring = async (mentoring: Mentoring) => {
   try {
     await db.mentoring.create({
