@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { SubSubTitle } from "@/components/app/titles";
+import { SubSubTitle } from "@/components/app/main/titles";
 import { TypeBooking } from "@/types/type-booking";
-import { Paragraph } from "@/components/app/paragraph";
+import { Paragraph } from "@/components/app/main/paragraph";
 import { Spinner } from "@phosphor-icons/react";
-import { Bookings } from "@/components/app/bookings";
+import { Bookings } from "@/components/app/main/bookings";
 
 const WhoBooked = React.forwardRef<
   HTMLDivElement,

@@ -63,9 +63,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Trazer apenas mentorias que já aconteceram para invite;
 - [x] Aumentar a bolinha da mentoria;
 - [x] Incluir mensagem na mentoria;
+- [ ] Layout da Página de Avaliação Pública;
+- [ ] Sincronização não atualiza a lista automaticamente;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
-- [ ] Não permitir enviar um convite para uma mentoria que não foi realizada;
-- [ ] Página de Avaliação Pública;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
@@ -73,12 +73,14 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [ ] Criar funcionalidade de enviar avaliação por e-mail;
 - [ ] Criar back-end para popular dados do Dashboard;
 - [ ] Separar componentes do Dashboard;
+- [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [ ] Obter as informações do Dashboard do Backend;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar aplicação para PRD do GitHub;
 - [ ] Criar service para Cal.com;
 - [ ] Criar proteção das rotas em `/admin`;
 - [ ] Criar página de erros;
+- [ ] Agrupar Tags por categorias na exibição;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 
 ## 🖥️ Tecnologias

@@ -15,15 +15,8 @@ export const columnsNames = [
 const formatMentoring = (row: any) => {
   const { original } = row;
   const { mentoring } = original;
-  const { host, attendee } = mentoring;
-  return `${attendee.name} & ${host.name}`;
-};
-
-const formatDate = (row: any) => {
-  const { original } = row;
-  const { mentoring } = original;
-  const { startTime } = mentoring;
-  return `${new Date(startTime).toLocaleDateString("pt-BR")} - ${new Date(startTime).toLocaleTimeString("pt-BR")}`;
+  const { attendee } = mentoring;
+  return `${attendee.name}`;
 };
 
 export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
@@ -62,12 +55,25 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Mentoria
+            Data
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
       },
-      cell: ({ row }) => <div>{formatDate(row)}</div>,
+      cell: ({ row }) => (
+        <div className="flex flex-col">
+          <span className="text-xs">{`${new Date(row.original?.mentoring?.startTime).toLocaleDateString("pt-BR")}`}</span>
+          <span className="text-xs opacity-40">
+            {new Date(row.original?.mentoring?.startTime).toLocaleTimeString(
+              "pt-BR",
+            )}
+            {" - "}
+            {new Date(row.original?.mentoring?.endTime).toLocaleTimeString(
+              "pt-BR",
+            )}
+          </span>
+        </div>
+      ),
     },
     {
       accessorKey: "mentoring",

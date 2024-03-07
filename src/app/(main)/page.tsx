@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@/components/app/container";
+import { Container } from "@/components/app/main/container";
 import { Header } from "@/components/containers/main/header";
 import { Book } from "@/components/containers/main/book";
 import { Presentation } from "@/components/containers/main/presentation";

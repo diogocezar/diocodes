@@ -23,12 +23,6 @@ const formatMentoring = (row: any) => {
   return `${attendee.name} & ${host.name}`;
 };
 
-const formatDate = (row: any) => {
-  const { original } = row;
-  const { mentoring } = original;
-  return `${new Date(mentoring.startTime).toLocaleDateString("pt-BR")}`;
-};
-
 const formatTags = (row: any) => {
   const { original } = row;
   const { avaliationTags } = original;
@@ -130,11 +124,24 @@ export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
           </Button>
         );
       },
-      cell: ({ row }) => <div>{formatDate(row)}</div>,
+      cell: ({ row }) => (
+        <div className="flex flex-col">
+          <span className="text-xs">{`${new Date(row.original?.mentoring?.startTime).toLocaleDateString("pt-BR")}`}</span>
+          <span className="text-xs opacity-40">
+            {new Date(row.original?.mentoring?.startTime).toLocaleTimeString(
+              "pt-BR",
+            )}
+            {" - "}
+            {new Date(row.original?.mentoring?.endTime).toLocaleTimeString(
+              "pt-BR",
+            )}
+          </span>
+        </div>
+      ),
     },
     {
       accessorKey: "tags",
-      size: 600,
+      size: 400,
       header: ({ column }) => {
         return (
           <Button

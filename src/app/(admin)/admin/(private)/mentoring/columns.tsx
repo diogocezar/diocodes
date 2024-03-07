@@ -75,7 +75,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Início
+            Data
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );

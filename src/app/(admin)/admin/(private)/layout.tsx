@@ -6,7 +6,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-dots flex h-screen">
+    <div className="bg-dots flex min-h-[100vh]">
       <Nav />
       {children}
     </div>

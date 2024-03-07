@@ -47,7 +47,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Nome (Pessoa)
+            Nome
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );
@@ -64,7 +64,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Email (Pessoa)
+            Email
             <ArrowUpDown className="h-4 w-4" />
           </Button>
         );

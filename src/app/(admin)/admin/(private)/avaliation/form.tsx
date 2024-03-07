@@ -29,7 +29,6 @@ import { QUERY_KEY } from "@/contants/query-key";
 import { TypeMentoring } from "@/types/type-mentoring";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { TypeTag } from "@/types/type-tag";
-import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";

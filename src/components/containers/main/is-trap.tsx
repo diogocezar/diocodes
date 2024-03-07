@@ -1,7 +1,7 @@
 import React from "react";
-import { SubSubTitle, SubTitle } from "@/components/app/titles";
-import { Paragraph } from "@/components/app/paragraph";
-import { Hightlight } from "@/components/app/hightlight";
+import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
+import { Paragraph } from "@/components/app/main/paragraph";
+import { Hightlight } from "@/components/app/main/hightlight";
 
 const IsTrap = React.forwardRef<
   HTMLDivElement,

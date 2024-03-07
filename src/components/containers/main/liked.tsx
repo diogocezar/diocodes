@@ -1,7 +1,7 @@
 import React from "react";
-import { SubSubTitle } from "@/components/app/titles";
-import { Paragraph } from "@/components/app/paragraph";
-import { Hightlight } from "@/components/app/hightlight";
+import { SubSubTitle } from "@/components/app/main/titles";
+import { Paragraph } from "@/components/app/main/paragraph";
+import { Hightlight } from "@/components/app/main/hightlight";
 import { Button } from "@/components/ui/button";
 
 const Liked = React.forwardRef<
