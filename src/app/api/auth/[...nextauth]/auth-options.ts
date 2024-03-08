@@ -12,9 +12,9 @@ const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET!,
   callbacks: {
     signIn: async ({ user }) => {
-      //const result = await api.get("/admin/user/admins");
-      //const allowedEmails = result.data;
-      const allowedEmails = ["diogo@diogocezar.com"];
+      const result = await api.get("/admin/user/admins");
+      const allowedEmails = result.data;
+      //const allowedEmails = ["diogo@diogocezar.com"];
       if (allowedEmails.includes(user.email!)) {
         return true;
       }
