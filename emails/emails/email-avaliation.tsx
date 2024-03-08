@@ -66,7 +66,7 @@ export const EmailAvaliation = ({
             <Text className="text-base leading-8 text-[#020817]">
               Tivemos uma mentoria em{" "}
               <span className="font-bold text-[#ff79c6]">
-                {`${new Date(startTime).toLocaleDateString("pt-BR")} - ${new Date(startTime).toLocaleTimeString("pt-BR")}`}
+                {`${new Date(startTime).toLocaleDateString("pt-BR")} - ${new Date(startTime).toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo" })}`}
               </span>
             </Text>
             <Text className="text-base leading-8 text-[#020817]">
