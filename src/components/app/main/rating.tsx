@@ -21,14 +21,16 @@ const StarIcon: React.FC<StarIconProps> = ({ filled, onHover, onClick }) => {
 
 interface RatingProps {
   onChange: (newRating: number) => void;
+  setValue: Function;
 }
 
-const Rating: React.FC<RatingProps> = ({ onChange }) => {
-  const [rating, setRating] = useState<number>(1);
+const Rating: React.FC<RatingProps> = ({ onChange, setValue }) => {
+  const [rating, setRating] = useState<number>(0);
 
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
     onChange(newRating);
+    setValue("rating", newRating);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { getMentoring } from "@/database/mentoring";
+import { createMentoring, getMentoring } from "@/database/mentoring";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -8,10 +8,12 @@ export const GET = async (
   try {
     const id = params.id;
     const result = await getMentoring(id);
-    if (!result) throw new Error("Mentoria não encontrada.");
+    if (!result)
+      return new NextResponse(JSON.stringify({ founded: false }), {
+        status: 200,
+      });
     return new NextResponse(JSON.stringify(result), { status: 200 });
   } catch (error: any) {
-    console.log(error);
     return new NextResponse(JSON.stringify({ error: error?.message }), {
       status: 500,
     });

@@ -29,7 +29,6 @@ import { QUERY_KEY } from "@/contants/query-key";
 import { TypeMentoring } from "@/types/type-mentoring";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { TypeTag } from "@/types/type-tag";
-import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -75,7 +74,6 @@ export function AvaliationForm() {
     setValue("avaliationTags", formatTags(selectedItem?.avaliationTags || ""));
     setValue("comment", selectedItem?.comment || "");
     setValue("rating", [selectedItem?.rating || 1]);
-    setValue("wasSent", selectedItem?.wasSent || false);
   }, [selectedItem, setValue]);
 
   const getMentoring = useCallback(async () => {
@@ -129,7 +127,6 @@ export function AvaliationForm() {
         avaliationTags,
         comment: data.comment,
         rating: Number(data.rating[0]),
-        wasSent: data.wasSent,
       };
       if (selectedItem.id) {
         await api.patch(url, {
@@ -253,25 +250,6 @@ export function AvaliationForm() {
                   <FormMessage>
                     {form.formState.errors.comment?.message}
                   </FormMessage>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="wasSent"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-sm">
-                      Já foi enviado por e-mail?
-                    </FormLabel>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
                 </FormItem>
               )}
             />

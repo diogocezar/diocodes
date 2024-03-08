@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
+import { TypeTag } from "@/types/type-tag";
 
 interface TagsProps {
-  availableTags: string[];
-  onTagSelect: (selectedTags: string[]) => void;
+  availableTags: TypeTag[];
   maxTags: number;
+  setValue: Function;
+  handleTagSelect: Function;
 }
 
 export const Tags: React.FC<TagsProps> = ({
   availableTags,
-  onTagSelect,
   maxTags,
+  setValue,
+  handleTagSelect,
 }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -19,19 +22,20 @@ export const Tags: React.FC<TagsProps> = ({
       ? selectedTags.filter((selectedTag) => selectedTag !== tag)
       : [...selectedTags, tag];
     setSelectedTags(updatedTags);
-    onTagSelect(updatedTags);
+    handleTagSelect(updatedTags);
+    setValue("avaliationTags", updatedTags);
   };
   return (
     <div className="flex flex-row flex-wrap gap-4">
-      {availableTags.map((tag, index) => (
+      {availableTags.map((tag: TypeTag, index) => (
         <Toggle
           key={index}
-          onClick={() => handleTagToggle(tag)}
+          onClick={() => handleTagToggle(tag.id)}
           disabled={
-            selectedTags.length >= maxTags && !selectedTags.includes(tag)
+            selectedTags.length >= maxTags && !selectedTags.includes(tag.id)
           }
         >
-          {tag}
+          {tag.name}
         </Toggle>
       ))}
     </div>

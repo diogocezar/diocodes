@@ -1,46 +1,45 @@
 "use client";
-import { z } from "zod";
 import { Container } from "@/components/app/main/container";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Paragraph } from "@/components/app/main/paragraph";
+import Rating from "@/components/app/main/rating";
+import { Tags } from "@/components/app/main/tags";
+import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
+import { Header } from "@/components/containers/main/header";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { SchemaAvaliation } from "@/schemas/schema-avaliation";
-import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
-import Rating from "@/components/app/main/rating";
-import { useCallback, useEffect, useState } from "react";
-import { Paragraph } from "@/components/app/main/paragraph";
-import { Header } from "@/components/containers/main/header";
-import { Tags } from "@/components/app/main/tags";
+import { Textarea } from "@/components/ui/textarea";
 import { AVALIATION } from "@/contants/avaliation";
+import { cn } from "@/lib/utils";
+import { SchemaAvaliationPublic } from "@/schemas/schema-avaliation-public";
 import { api } from "@/services/api";
 import { TypeTag } from "@/types/type-tag";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@phosphor-icons/react";
-import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const [rating, setRating] = useState<number>(1);
+  const [rating, setRating] = useState<number>(0);
   const [isLoadingTag, setIsLoadingTag] = useState(false);
   const [isLoadingMentoring, setIsLoadingMentoring] = useState(true);
   const [mentoring, setMentoring] = useState<any>({});
-  const [tag, setTag] = useState<any[]>([]);
+  const [tag, setTag] = useState<TypeTag[]>([]);
   const [selectedTag, setSelectedTag] = useState<any[]>([]);
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const getTag = useCallback(async () => {
     try {
       setIsLoadingTag(true);
       const response = await api.get("tag");
-      const data = response.data.map((item: TypeTag) => item.name);
-      setTag(data);
+      setTag(response.data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -55,13 +54,16 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   const getMentoring = useCallback(async () => {
     try {
       const response = await api.get(`mentoring/${params.id}`);
+      const { data } = response;
+      if (data.founded === false) {
+        return (window.location.href = "/");
+      }
       setMentoring(response.data);
-    } catch (error) {
-      router.push("/");
-    } finally {
       setIsLoadingMentoring(false);
+    } catch (error) {
+      console.log(error);
     }
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     getMentoring();
@@ -74,12 +76,36 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
     setSelectedTag(selectedTagsParam);
   };
 
-  const form = useForm<z.infer<typeof SchemaAvaliation>>({
-    resolver: zodResolver(SchemaAvaliation),
+  const form = useForm<z.infer<typeof SchemaAvaliationPublic>>({
+    resolver: zodResolver(SchemaAvaliationPublic),
+    defaultValues: {
+      avaliationTags: [],
+      comment: "",
+    },
   });
 
   async function onSubmit(data: any) {
-    console.log(data);
+    try {
+      setIsLoadingSubmit(true);
+      const avaliationTags = selectedTag.map((item) => {
+        return { id: item };
+      });
+      const response = await api.post(`avaliation`, {
+        rating,
+        mentoringId: params.id,
+        avaliationTags: avaliationTags,
+        comment: data.comment,
+      });
+      console.log(response);
+      if (response.status === 201) {
+        toast.success("Avaliação realizada com sucesso!");
+      }
+    } catch (error) {
+      toast.success("Houve um erro ao salvar a avaliação, tente novamente!");
+      console.log(error);
+    } finally {
+      setIsLoadingSubmit(false);
+    }
   }
 
   const getDate = () => {
@@ -92,7 +118,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
 
   const getStartTime = () => {
     if (!isLoadingMentoring) {
-      const newDate = new Date(mentoring.start);
+      const newDate = new Date(mentoring.startTime);
       return newDate.toLocaleTimeString("pt-BR");
     }
     return "00:00";
@@ -111,11 +137,16 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
     return "Anônimo";
   };
 
+  const setValue = form.setValue;
+
   return (
     <>
       <Container>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col"
+          >
             <Header
               headerTitle="Avalie a sua mentoria"
               headerSubTitle="Obrigado por realizar a avaliação da nossa mentoria!"
@@ -130,16 +161,51 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
               <span className="text-green">{getStartTime()}</span> até{" "}
               <span className="text-green">{getEndTime()}</span>.
             </SubTitle>
-            <SubSubTitle className="mt-8">
+            <SubSubTitle
+              className={cn(
+                form.formState.errors.rating?.message
+                  ? "text-pink"
+                  : "text-green",
+                "mb-12 mt-14",
+              )}
+            >
               De 1 a 5, qual a sua nota para a mentoria?
             </SubSubTitle>
-            <Rating onChange={handleRatingChange} />
-            <Paragraph>
-              Você escolheu a nota <span className="text-green">{rating}</span>.
+            <FormMessage className="mb-8">
+              {form.formState.errors.rating?.message}
+            </FormMessage>
+            <div className="flex w-full flex-col">
+              <FormField
+                name="rating"
+                render={() => (
+                  <FormItem>
+                    <FormControl>
+                      <Rating
+                        setValue={setValue}
+                        onChange={handleRatingChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Paragraph className="font-poppins">
+              Você escolheu a nota{" "}
+              <span className="text-green text-xl">{rating}</span>.
             </Paragraph>
-            <SubSubTitle className="mt-8">
-              Escolha até 10 tags que melhor descrevem a mentoria.
+            <SubSubTitle
+              className={cn(
+                form.formState.errors.avaliationTags?.message
+                  ? "text-pink"
+                  : "text-green",
+                "mt-14",
+              )}
+            >
+              Escolha 10 tags que melhor descrevem a mentoria.
             </SubSubTitle>
+            <FormMessage className="mb-8">
+              {form.formState.errors.avaliationTags?.message}
+            </FormMessage>
             {isLoadingTag ? (
               <div className="text-foreground flex w-full flex-row items-center gap-2">
                 <Spinner size={20} className="animate-spin" />
@@ -147,41 +213,75 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
               </div>
             ) : (
               <div className="flex w-full flex-col">
-                <Tags
-                  maxTags={AVALIATION.MAX_TAGS}
-                  availableTags={tag}
-                  onTagSelect={handleTagSelect}
+                <FormField
+                  name="avaliationTags"
+                  render={() => (
+                    <FormItem>
+                      <FormControl>
+                        <Tags
+                          maxTags={AVALIATION.MAX_TAGS}
+                          availableTags={tag}
+                          handleTagSelect={handleTagSelect}
+                          setValue={setValue}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
                 />
-                <Paragraph className="mt-10">
+                <Paragraph className="font-poppins mt-10">
                   Você escolheu{" "}
-                  <span className="text-green">{selectedTag.length || 0}</span>{" "}
-                  de <span className="text-green">{AVALIATION.MAX_TAGS}</span>.
+                  <span className="text-green text-xl">
+                    {form.getValues("avaliationTags")?.length || 0}
+                  </span>{" "}
+                  de{" "}
+                  <span className="text-green text-xl">
+                    {AVALIATION.MAX_TAGS}
+                  </span>
+                  .
                 </Paragraph>
               </div>
             )}
-            <SubSubTitle className="mt-8">
+            <SubSubTitle
+              className={cn(
+                form.formState.errors.comment?.message
+                  ? "text-pink"
+                  : "text-green",
+                "mt-8",
+              )}
+            >
               Deixe um comentário sobre a mentoria.
             </SubSubTitle>
+            <FormMessage className="mb-8">
+              {form.formState.errors.comment?.message}
+            </FormMessage>
             <FormField
               control={form.control}
               name="comment"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Comentrário</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Foi muito boa a mentoria."
+                      placeholder="Como você classifica a mentoria? O que você achou? Conte-nos mais sobre a sua experiência."
+                      className="h-[200px]"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage>
-                    {form.formState.errors.comment?.message}
-                  </FormMessage>
                 </FormItem>
               )}
             />
-            <Button type="submit" className="mt-20">
-              Enviar
+            <Button
+              type="submit"
+              className="mt-20 max-w-[150px]"
+              disabled={isLoadingSubmit}
+            >
+              {isLoadingSubmit ? (
+                <div className="flex flex-row items-center gap-2">
+                  <Spinner className="h-5 w-5 animate-spin" />
+                  Enviando
+                </div>
+              ) : (
+                "Enviar"
+              )}
             </Button>
           </form>
         </Form>

@@ -61,7 +61,6 @@ model Avaliation {
     rating         Int
     avaliationTags AvaliationTags[]
     comment        String?
-    wasSent        Boolean          @default(false)
     createdAt      DateTime         @default(now())
     updatedAt      DateTime?
     removedAt      DateTime?

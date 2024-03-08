@@ -63,7 +63,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Trazer apenas mentorias que já aconteceram para invite;
 - [x] Aumentar a bolinha da mentoria;
 - [x] Incluir mensagem na mentoria;
-- [ ] Layout da Página de Avaliação Pública;
+- [x] Layout da Página de Avaliação Pública;
+- [x] Finalização da página de Avaliação Pública;
+- [ ] Página de Agradescimento pela Avaliação;
 - [ ] Sincronização não atualiza a lista automaticamente;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
 - [ ] Criar um registro já excluído;

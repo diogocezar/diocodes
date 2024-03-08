@@ -26,6 +26,15 @@ const IsTrap = React.forwardRef<
         As mentorias podem ser agendadas 2 vezes por semana (com papos de 30
         minutos).
       </Paragraph>
+      <Paragraph>
+        Caso você não queira esperar, então é possível realizar uma mentoria{" "}
+        <Hightlight>Premium</Hightlight>, com um valor simbólico de{" "}
+        <Hightlight>R$ 100,00</Hightlight>.
+      </Paragraph>
+      <Paragraph>
+        Por enquanto, basta enviar um e-mail para:{" "}
+        <Hightlight>diogo@diogocezar.com</Hightlight>
+      </Paragraph>
     </>
   );
 });

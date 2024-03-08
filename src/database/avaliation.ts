@@ -6,13 +6,11 @@ export const createAvaliation = async (
   avaliation: Avaliation & { avaliationTags: [] },
 ) => {
   try {
-    const { mentoringId, comment, rating, wasSent, avaliationTags } =
-      avaliation;
+    const { mentoringId, comment, rating, avaliationTags } = avaliation;
     const data = {
       mentoringId,
       comment,
       rating,
-      wasSent,
       avaliationTags: {
         create: avaliationTags.map((tag) => ({
           tagId: (tag as { id: string })?.id,
@@ -25,8 +23,9 @@ export const createAvaliation = async (
     await db.avaliation.create({
       data,
     });
-  } catch (error) {
+  } catch (error: any) {
     logger.error(error);
+    throw new Error(error.message || "Erro ao criar avaliação");
   }
 };
 
