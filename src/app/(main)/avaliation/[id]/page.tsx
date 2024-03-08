@@ -25,6 +25,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [rating, setRating] = useState<number>(0);
@@ -34,6 +35,8 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [tag, setTag] = useState<TypeTag[]>([]);
   const [selectedTag, setSelectedTag] = useState<any[]>([]);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+  const router = useRouter();
+  const isLoading = isLoadingTag || isLoadingMentoring;
 
   const getTag = useCallback(async () => {
     try {
@@ -96,13 +99,14 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
         avaliationTags: avaliationTags,
         comment: data.comment,
       });
-      console.log(response);
       if (response.status === 201) {
-        toast.success("Avaliação realizada com sucesso!");
+        router.push("/avaliation/thanks");
       }
-    } catch (error) {
-      toast.success("Houve um erro ao salvar a avaliação, tente novamente!");
-      console.log(error);
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        return toast.error("A avaliação já foi enviada, obrigado!");
+      }
+      toast.error("Houston, we have a problem!");
     } finally {
       setIsLoadingSubmit(false);
     }
@@ -151,138 +155,147 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
               headerTitle="Avalie a sua mentoria"
               headerSubTitle="Obrigado por realizar a avaliação da nossa mentoria!"
             />
-            <SubTitle>
-              Olá, <span className="text-green">{getAttendee()}</span>, espero
-              que esteja bem!
-            </SubTitle>
-            <SubTitle>
-              Só confirmando, essa avaliação é referente ao papo que tivemos no
-              dia <span className="text-green">{getDate()}</span> das{" "}
-              <span className="text-green">{getStartTime()}</span> até{" "}
-              <span className="text-green">{getEndTime()}</span>.
-            </SubTitle>
-            <SubSubTitle
-              className={cn(
-                form.formState.errors.rating?.message
-                  ? "text-pink"
-                  : "text-green",
-                "mb-12 mt-14",
-              )}
-            >
-              De 1 a 5, qual a sua nota para a mentoria?
-            </SubSubTitle>
-            <FormMessage className="mb-8">
-              {form.formState.errors.rating?.message}
-            </FormMessage>
-            <div className="flex w-full flex-col">
-              <FormField
-                name="rating"
-                render={() => (
-                  <FormItem>
-                    <FormControl>
-                      <Rating
-                        setValue={setValue}
-                        onChange={handleRatingChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <Paragraph className="font-poppins">
-              Você escolheu a nota{" "}
-              <span className="text-green text-xl">{rating}</span>.
-            </Paragraph>
-            <SubSubTitle
-              className={cn(
-                form.formState.errors.avaliationTags?.message
-                  ? "text-pink"
-                  : "text-green",
-                "mt-14",
-              )}
-            >
-              Escolha 10 tags que melhor descrevem a mentoria.
-            </SubSubTitle>
-            <FormMessage className="mb-8">
-              {form.formState.errors.avaliationTags?.message}
-            </FormMessage>
-            {isLoadingTag ? (
-              <div className="text-foreground flex w-full flex-row items-center gap-2">
+            {isLoading ? (
+              <Paragraph className="mb-8 flex flex-row gap-2">
                 <Spinner size={20} className="animate-spin" />
                 Carregando...
-              </div>
+              </Paragraph>
             ) : (
-              <div className="flex w-full flex-col">
+              <div>
+                <SubTitle>
+                  Olá, <span className="text-green">{getAttendee()}</span>,
+                  espero que esteja bem!
+                </SubTitle>
+                <SubTitle>
+                  Essa avaliação é referente ao encontro de{" "}
+                  <span className="text-green">{getDate()}</span> das{" "}
+                  <span className="text-green">{getStartTime()}</span> até{" "}
+                  <span className="text-green">{getEndTime()}</span>.
+                </SubTitle>
+                <SubSubTitle
+                  className={cn(
+                    form.formState.errors.rating?.message
+                      ? "text-pink"
+                      : "text-green",
+                    "mb-12 mt-14",
+                  )}
+                >
+                  Qual a sua nota?
+                </SubSubTitle>
+                <FormMessage className="mb-8">
+                  {form.formState.errors.rating?.message}
+                </FormMessage>
+                <div className="flex w-full flex-col">
+                  <FormField
+                    name="rating"
+                    render={() => (
+                      <FormItem>
+                        <FormControl>
+                          <Rating
+                            setValue={setValue}
+                            onChange={handleRatingChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Paragraph className="font-poppins">
+                  Você escolheu a nota{" "}
+                  <span className="text-green text-xl">{rating}</span>.
+                </Paragraph>
+                <SubSubTitle
+                  className={cn(
+                    form.formState.errors.avaliationTags?.message
+                      ? "text-pink"
+                      : "text-green",
+                    "mt-14",
+                  )}
+                >
+                  Selecione 10 tags
+                </SubSubTitle>
+                <FormMessage className="mb-8">
+                  {form.formState.errors.avaliationTags?.message}
+                </FormMessage>
+                {isLoadingTag ? (
+                  <div className="text-foreground flex w-full flex-row items-center gap-2">
+                    <Spinner size={20} className="animate-spin" />
+                    Carregando...
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col">
+                    <FormField
+                      name="avaliationTags"
+                      render={() => (
+                        <FormItem>
+                          <FormControl>
+                            <Tags
+                              maxTags={AVALIATION.MAX_TAGS}
+                              availableTags={tag}
+                              handleTagSelect={handleTagSelect}
+                              setValue={setValue}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <Paragraph className="font-poppins mt-10">
+                      Você escolheu{" "}
+                      <span className="text-green text-xl">
+                        {form.getValues("avaliationTags")?.length || 0}
+                      </span>{" "}
+                      de{" "}
+                      <span className="text-green text-xl">
+                        {AVALIATION.MAX_TAGS}
+                      </span>
+                      .
+                    </Paragraph>
+                  </div>
+                )}
+                <SubSubTitle
+                  className={cn(
+                    form.formState.errors.comment?.message
+                      ? "text-pink"
+                      : "text-green",
+                    "mt-8",
+                  )}
+                >
+                  Deixe um comentário
+                </SubSubTitle>
+                <FormMessage className="mb-8">
+                  {form.formState.errors.comment?.message}
+                </FormMessage>
                 <FormField
-                  name="avaliationTags"
-                  render={() => (
+                  control={form.control}
+                  name="comment"
+                  render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Tags
-                          maxTags={AVALIATION.MAX_TAGS}
-                          availableTags={tag}
-                          handleTagSelect={handleTagSelect}
-                          setValue={setValue}
+                        <Textarea
+                          placeholder="Como você classifica a mentoria? O que você achou? Conte-nos mais sobre a sua experiência."
+                          className="h-[200px]"
+                          {...field}
                         />
                       </FormControl>
                     </FormItem>
                   )}
                 />
-                <Paragraph className="font-poppins mt-10">
-                  Você escolheu{" "}
-                  <span className="text-green text-xl">
-                    {form.getValues("avaliationTags")?.length || 0}
-                  </span>{" "}
-                  de{" "}
-                  <span className="text-green text-xl">
-                    {AVALIATION.MAX_TAGS}
-                  </span>
-                  .
-                </Paragraph>
+                <Button
+                  type="submit"
+                  className="mt-20 max-w-[150px]"
+                  disabled={isLoadingSubmit}
+                >
+                  {isLoadingSubmit ? (
+                    <div className="flex flex-row items-center gap-2">
+                      <Spinner className="h-5 w-5 animate-spin" />
+                      Enviando
+                    </div>
+                  ) : (
+                    "Enviar"
+                  )}
+                </Button>
               </div>
             )}
-            <SubSubTitle
-              className={cn(
-                form.formState.errors.comment?.message
-                  ? "text-pink"
-                  : "text-green",
-                "mt-8",
-              )}
-            >
-              Deixe um comentário sobre a mentoria.
-            </SubSubTitle>
-            <FormMessage className="mb-8">
-              {form.formState.errors.comment?.message}
-            </FormMessage>
-            <FormField
-              control={form.control}
-              name="comment"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Como você classifica a mentoria? O que você achou? Conte-nos mais sobre a sua experiência."
-                      className="h-[200px]"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              className="mt-20 max-w-[150px]"
-              disabled={isLoadingSubmit}
-            >
-              {isLoadingSubmit ? (
-                <div className="flex flex-row items-center gap-2">
-                  <Spinner className="h-5 w-5 animate-spin" />
-                  Enviando
-                </div>
-              ) : (
-                "Enviar"
-              )}
-            </Button>
           </form>
         </Form>
       </Container>

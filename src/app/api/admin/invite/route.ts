@@ -8,19 +8,13 @@ import {
 import { EmailAvaliation } from "#/emails/emails/email-avaliation";
 import { Resend } from "resend";
 import { EMAIL } from "@/contants/email";
-import { randomUUID } from "crypto";
 import { getMentoring } from "@/database/mentoring";
-import { getPerson } from "@/database/person";
 
 const resend = new Resend(process.env.API_RESEND);
 
-const generateToken = () => {
-  return randomUUID();
-};
-
-const sendInvite = async (mentoring: any, token: string) => {
-  const link = `${EMAIL.LINK}/${token}`;
-  const { startTime, attendee } = mentoring;
+const sendInvite = async (mentoring: any) => {
+  const { startTime, attendee, id } = mentoring;
+  const link = `${EMAIL.LINK}/${id}`;
   const { name, email } = attendee;
   try {
     await resend.emails.send({
@@ -34,7 +28,6 @@ const sendInvite = async (mentoring: any, token: string) => {
         link,
       }) as React.ReactElement,
     });
-    return token;
   } catch (error) {
     console.log(error);
   }
@@ -45,11 +38,10 @@ export const POST = async (req: Request) => {
   try {
     const { mentoringId } = data;
     const mentoring = await getMentoring(mentoringId);
-    const token = generateToken();
 
-    if (mentoring) await sendInvite(mentoring, token);
+    if (mentoring) await sendInvite(mentoring);
 
-    const result = await createInvite({ ...data, token });
+    const result = await createInvite(data);
     return new Response(JSON.stringify(result), { status: 201 });
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });

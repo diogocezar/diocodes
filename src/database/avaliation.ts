@@ -34,8 +34,7 @@ export const updateAvaliation = async (
   avaliation: Avaliation & { avaliationTags: [] },
 ) => {
   try {
-    const { mentoringId, comment, rating, wasSent, avaliationTags } =
-      avaliation;
+    const { mentoringId, comment, rating, avaliationTags } = avaliation;
     await db.avaliationTags.deleteMany({
       where: { avaliationId: id },
     });
@@ -43,7 +42,6 @@ export const updateAvaliation = async (
       mentoringId,
       comment,
       rating,
-      wasSent,
       avaliationTags: {
         create: avaliationTags.map((tag) => ({
           tagId: (tag as { id: string })?.id,
@@ -92,6 +90,21 @@ export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
     const result = await db.avaliation.findUnique({
       where: { id, removedAt: null },
+    });
+    return result;
+  } catch (error) {
+    logger.error(error);
+  }
+  return null;
+};
+
+export const getAvaliationByMentoring = async (
+  mentoringId: string,
+): Promise<Avaliation | null> => {
+  try {
+    const result = await db.avaliation.findUnique({
+      where: { mentoringId, removedAt: null },
+      include: { mentoring: true },
     });
     return result;
   } catch (error) {

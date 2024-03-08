@@ -65,7 +65,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Incluir mensagem na mentoria;
 - [x] Layout da Página de Avaliação Pública;
 - [x] Finalização da página de Avaliação Pública;
-- [ ] Página de Agradescimento pela Avaliação;
+- [x] Página de Agradescimento pela Avaliação;
+- [x] Carregando enquanto tudo não está oks na avaliação;
 - [ ] Sincronização não atualiza a lista automaticamente;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
 - [ ] Criar um registro já excluído;
