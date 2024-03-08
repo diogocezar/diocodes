@@ -67,13 +67,11 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Finalização da página de Avaliação Pública;
 - [x] Página de Agradescimento pela Avaliação;
 - [x] Carregando enquanto tudo não está oks na avaliação;
-- [ ] Sincronização não atualiza a lista automaticamente;
+- [ ] Destacar as mentorias que já ocorreram;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
-- [ ] Criar layout da página de avaliação (para preenchimento);
-- [ ] Criar funcionalidade de enviar avaliação por e-mail;
 - [ ] Criar back-end para popular dados do Dashboard;
 - [ ] Separar componentes do Dashboard;
 - [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
