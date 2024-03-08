@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { TypeMentoring } from "@/types/type-mentoring";
-import { Circle } from "@phosphor-icons/react";
+import { Circle, PaperPlaneTilt, CheckCircle } from "@phosphor-icons/react";
 
 export const columnsNames = [
   { id: "select", name: "select" },
@@ -30,19 +30,22 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
         />
       ),
       cell: ({ row }) => (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row items-center gap-4">
           <Checkbox
             checked={row.getIsSelected()}
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
           />
           {row.original?.invite.length > 0 ? (
-            <Circle
-              weight="fill"
-              className="text-green h-4 w-4 animate-pulse"
-            />
+            <Circle weight="fill" className="text-green h-5 w-5" />
           ) : (
-            <Circle className="h-4 w-4 opacity-20" />
+            <div>
+              {new Date(row.original?.startTime) < new Date() ? (
+                <Circle className="text-green h-5 w-5 opacity-20" />
+              ) : (
+                <Circle className="h-5 w-5 opacity-20" />
+              )}
+            </div>
           )}
         </div>
       ),

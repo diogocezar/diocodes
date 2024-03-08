@@ -67,7 +67,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Finalização da página de Avaliação Pública;
 - [x] Página de Agradescimento pela Avaliação;
 - [x] Carregando enquanto tudo não está oks na avaliação;
-- [ ] Destacar as mentorias que já ocorreram;
+- [x] Destacar as mentorias que já ocorreram;
+- [x] Criar aplicação para PRD do GitHub;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
 - [ ] Criar um registro já excluído;
 - [ ] Conferir todos os filtros;
@@ -77,7 +78,6 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [ ] Obter as informações do Dashboard do Backend;
 - [ ] Criar layout da página de avaliações;
-- [ ] Criar aplicação para PRD do GitHub;
 - [ ] Criar service para Cal.com;
 - [ ] Criar proteção das rotas em `/admin`;
 - [ ] Criar página de erros;
