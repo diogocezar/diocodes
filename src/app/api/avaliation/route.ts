@@ -7,7 +7,6 @@ export const POST = async (req: Request) => {
   const data = await req.json();
   try {
     const avaliation = await getAvaliationByMentoring(data.mentoringId);
-    console.log(avaliation);
     if (avaliation)
       return new Response(
         JSON.stringify({ error: "Avaliation already exists" }),

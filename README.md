@@ -69,7 +69,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Carregando enquanto tudo não está oks na avaliação;
 - [x] Destacar as mentorias que já ocorreram;
 - [x] Criar aplicação para PRD do GitHub;
-- [ ] Criar o login em PRD;
+- [x] Criar o login em PRD;
+- [ ] Horário da mentoria no email está errado;
 - [ ] Rever as mensagens de erro no build da Vercel;
 - [ ] Remover o cadastro de uma avaliação que já foi realizada;
 - [ ] Criar um registro já excluído;

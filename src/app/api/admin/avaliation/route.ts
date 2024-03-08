@@ -7,7 +7,6 @@ import {
 
 export const POST = async (req: Request) => {
   const data = await req.json();
-  console.log(data);
   try {
     const result = await createAvaliation(data);
     return new Response(JSON.stringify(result), { status: 201 });

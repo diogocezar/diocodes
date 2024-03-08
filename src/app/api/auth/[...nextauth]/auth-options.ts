@@ -14,7 +14,6 @@ const authOptions: AuthOptions = {
     signIn: async ({ user }) => {
       const result = await api.get("/admin/user/admins");
       const allowedEmails = result.data;
-      //const allowedEmails = ["diogo@diogocezar.com"];
       if (allowedEmails.includes(user.email!)) {
         return true;
       }
