@@ -8,18 +8,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Graph } from "@/components/containers/admin/dashboard/graph";
-import { RecentBookings } from "@/components/containers/admin/dashboard/recent-bookings";
-import { ChartBar, Star } from "@phosphor-icons/react";
+import { RecentMentoring } from "@/components/containers/admin/dashboard/recent-mentoring";
 import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "@/services/api";
 import { TypeDashboard } from "@/types/type-dashboard";
-import { Spinner } from "@phosphor-icons/react";
+import {
+  Spinner,
+  Plant,
+  Star,
+  ChartBar,
+  EnvelopeSimple,
+  Tag,
+  Users,
+} from "@phosphor-icons/react";
 
 export default function AdminDashboardPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [dashboard, setDashboard] = useState<TypeDashboard>(
-    {} as TypeDashboard,
+    {} as TypeDashboard
   );
   const getDashboard = useCallback(async () => {
     try {
@@ -49,8 +56,8 @@ export default function AdminDashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Mentorias Realizadas
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Plant className="h-6 w-6" /> Mentorias Realizadas
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -61,8 +68,8 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Mentorias a Realizar
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Plant className="h-6 w-6" /> Mentorias Agendadas
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -73,8 +80,8 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Total de Mentorias
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Plant className="h-6 w-6" /> Total de Mentorias
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -85,8 +92,8 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Total de Avaliações
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Star className="h-6 w-6" /> Total de Avaliações
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -99,8 +106,8 @@ export default function AdminDashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Convites Enviados
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <EnvelopeSimple className="h-6 w-6" /> Convites Enviados
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -109,7 +116,9 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">Tags</CardTitle>
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Tag className="h-6 w-6" /> Tags Cadastradas
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-7xl font-bold">{dashboard.tag}</div>
@@ -117,7 +126,9 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">Pessoas</CardTitle>
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Users className="h-6 w-6" /> Pessoas
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-7xl font-bold">{dashboard.person}</div>
@@ -125,8 +136,8 @@ export default function AdminDashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-base font-bold">
-                    Nota das Mentorias
+                  <CardTitle className="text-green flex flex-row gap-2 text-base font-bold">
+                    <Star className="h-6 w-6" /> Média de Avaliações
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -136,7 +147,7 @@ export default function AdminDashboardPage() {
                         <Star key={index} weight="fill" />
                       ) : (
                         <Star key={index} className="opacity-20" />
-                      ),
+                      )
                     )}
                   </div>
                 </CardContent>
@@ -160,10 +171,10 @@ export default function AdminDashboardPage() {
               </Card>
               <Card className="col-span-3">
                 <CardHeader>
-                  <CardTitle className="mb-4">Últimos Agendamentos</CardTitle>
+                  <CardTitle className="mb-4">Próximas Mentorias</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <RecentBookings />
+                  <RecentMentoring mentoring={dashboard.recentMentoring} />
                 </CardContent>
               </Card>
             </div>

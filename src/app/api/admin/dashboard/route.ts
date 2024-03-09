@@ -7,6 +7,7 @@ import {
   dashboardCountMentoringToBe,
   dashboardCountPerson,
   dashboardCountTag,
+  dashboardGetRecentMentoring,
 } from "@/database/dashboard";
 import { TypeDashboard } from "@/types/type-dashboard";
 
@@ -20,6 +21,7 @@ export const GET = async () => {
     const tag = await dashboardCountTag();
     const person = await dashboardCountPerson();
     const graph = await dashboardAvaliationsByMonth();
+    const recentMentoring = await dashboardGetRecentMentoring();
     const result: TypeDashboard = {
       mentoringDone,
       mentoringToBe,
@@ -30,6 +32,7 @@ export const GET = async () => {
       tag,
       person,
       graph,
+      recentMentoring,
     };
     return new Response(JSON.stringify(result), { status: 200 });
   } catch (error) {

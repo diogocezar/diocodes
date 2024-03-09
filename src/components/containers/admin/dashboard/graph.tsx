@@ -1,6 +1,13 @@
 "use client";
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { Document } from "mongodb";
 
 type GraphProps = {
@@ -27,6 +34,18 @@ function getMonth(month: string) {
   return result;
 }
 
+const CustomTooltip = ({ payload }: any) => {
+  console.log(payload);
+  if (payload && payload.length) {
+    return (
+      <div className="bg-card text-foreground rounded-sm p-2">
+        <p>Média do mês: {payload[0].payload?.total}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export function Graph({ data }: GraphProps) {
   const transformedData = data?.map((item) => {
     return {
@@ -39,23 +58,19 @@ export function Graph({ data }: GraphProps) {
       <BarChart data={transformedData}>
         <XAxis
           dataKey="name"
-          stroke="#888888"
+          stroke="var(--foreground)"
           fontSize={12}
-          tickLine={false}
-          axisLine={false}
+          tickLine={true}
+          axisLine={true}
         />
         <YAxis
-          stroke="#888888"
+          stroke="var(--foreground)"
           fontSize={12}
-          tickLine={false}
-          axisLine={false}
+          tickLine={true}
+          axisLine={true}
         />
-        <Bar
-          dataKey="total"
-          fill="currentColor"
-          radius={[4, 4, 0, 0]}
-          className="fill-primary"
-        />
+        <Bar dataKey="total" fill="var(--green)" radius={[8, 8, 0, 0]} />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
       </BarChart>
     </ResponsiveContainer>
   );

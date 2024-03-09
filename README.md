@@ -80,17 +80,17 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Ordenar os select por ordem alfabética;
 - [x] Conferir todos os filtros;
 - [x] Criar back-end para popular dados do Dashboard;
-- [ ] Criar lista de últimos agendamentos;
-- [ ] Verificar pq o dashboard invoca 2 vezes o back-end;
+- [x] Layout do Dashboard;
+- [x] Criar lista de últimos agendamentos;
+- [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [ ] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
-- [ ] Separar componentes do Dashboard;
-- [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [ ] Obter as informações do Dashboard do Backend;
 - [ ] Criar layout da página de avaliações;
 - [ ] Criar service para Cal.com;
 - [ ] Criar proteção das rotas em `/admin`;
 - [ ] Criar página de erros;
+- [ ] Verificar pq o dashboard invoca 2 vezes o back-end;
 - [ ] Agrupar Tags por categorias na exibição;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 

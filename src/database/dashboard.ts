@@ -1,5 +1,7 @@
 import { db } from "@/database/connection";
 import { logger } from "@/lib/logger";
+import { TypeMentoring } from "@/types/type-mentoring";
+import { Mentoring } from "@prisma/client";
 import { MongoClient, Document } from "mongodb";
 
 export const dashboardCountMentoringDone = async (): Promise<number> => {
@@ -102,6 +104,29 @@ export const dashboardCountPerson = async (): Promise<number> => {
     logger.error(error);
   }
   return 0;
+};
+
+export const dashboardGetRecentMentoring = async (): Promise<
+  { attendee: { name: string; email: string }; id: string; startTime: Date }[]
+> => {
+  try {
+    const result = await db.mentoring.findMany({
+      where: { removedAt: null, startTime: { gte: new Date() } },
+      include: {
+        attendee: true,
+      },
+      take: 6,
+      orderBy: { startTime: "asc" },
+    });
+    return result.map((item) => ({
+      id: item.id,
+      attendee: item.attendee,
+      startTime: item.startTime,
+    }));
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
 };
 
 export const dashboardAvaliationsByMonth = async (): Promise<Document[]> => {
