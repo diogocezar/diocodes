@@ -14,15 +14,33 @@ export const createAvaliation = async (
       avaliationTags: {
         create: avaliationTags.map((tag) => ({
           tagId: (tag as { id: string })?.id,
+          removedAt: null,
         })),
       },
       createdAt: new Date(),
       updatedAt: null,
       removedAt: null,
     };
-    await db.avaliation.create({
-      data,
+    const exists = await db.avaliation.findFirst({
+      where: { mentoringId },
     });
+    if (exists) {
+      const where = {
+        avaliationId: exists.id,
+      };
+      await db.avaliationTags.updateMany({
+        where,
+        data: { removedAt: new Date() },
+      });
+      await db.avaliation.update({
+        where: { id: exists.id },
+        data: { ...data, removedAt: null, updatedAt: new Date() },
+      });
+    } else {
+      await db.avaliation.create({
+        data,
+      });
+    }
   } catch (error: any) {
     logger.error(error);
     throw new Error(error.message || "Erro ao criar avaliação");
@@ -65,6 +83,10 @@ export const removeAvaliation = async (data: any) => {
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
+    await db.avaliationTags.updateMany({
+      where: { avaliationId: { in: data.idsToDelete } },
+      data: { removedAt: new Date() },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -73,9 +95,16 @@ export const removeAvaliation = async (data: any) => {
 export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   try {
     const result = await db.avaliation.findMany({
-      where: { removedAt: null },
+      where: {
+        removedAt: null,
+      },
       include: {
-        avaliationTags: { include: { tag: true } },
+        avaliationTags: {
+          where: {
+            removedAt: null,
+          },
+          include: { tag: true },
+        },
         mentoring: { include: { attendee: true, host: true } },
       },
     });

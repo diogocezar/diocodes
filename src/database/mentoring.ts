@@ -55,14 +55,24 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
 
 export const createMentoring = async (mentoring: Mentoring) => {
   try {
-    await db.mentoring.create({
-      data: {
-        ...mentoring,
-        createdAt: new Date(),
-        updatedAt: null,
-        removedAt: null,
-      },
+    const exists = await db.mentoring.findFirst({
+      where: { id: mentoring.id },
     });
+    if (exists) {
+      await db.mentoring.update({
+        where: { id: exists.id },
+        data: { ...mentoring, removedAt: null, updatedAt: new Date() },
+      });
+    } else {
+      await db.mentoring.create({
+        data: {
+          ...mentoring,
+          createdAt: new Date(),
+          updatedAt: null,
+          removedAt: null,
+        },
+      });
+    }
   } catch (error) {
     logger.error(error);
   }
@@ -94,7 +104,15 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
     const result = await db.mentoring.findMany({
       where: { removedAt: null },
-      include: { host: true, attendee: true, invite: true },
+      include: {
+        host: true,
+        attendee: true,
+        invite: {
+          where: {
+            removedAt: null,
+          },
+        },
+      },
       orderBy: { startTime: "asc" },
     });
     return result;
@@ -110,7 +128,6 @@ export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
       where: {
         removedAt: null,
         startTime: { lte: new Date() },
-        avaliation: null,
       },
       include: { host: true, attendee: true, invite: true, avaliation: true },
       orderBy: { startTime: "asc" },

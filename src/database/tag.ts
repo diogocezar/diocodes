@@ -36,7 +36,12 @@ export const removeTag = async (data: any) => {
 
 export const getAllTags = async (): Promise<Tag[]> => {
   try {
-    const result = await db.tag.findMany({ where: { removedAt: null } });
+    const result = await db.tag.findMany({
+      where: {
+        removedAt: null,
+      },
+      include: { avaliationTags: true },
+    });
     return result;
   } catch (error) {
     logger.error(error);

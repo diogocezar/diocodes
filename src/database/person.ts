@@ -41,7 +41,10 @@ export const removePerson = async (data: any) => {
 
 export const getAllPersons = async (): Promise<Person[]> => {
   try {
-    const result = await db.person.findMany({ where: { removedAt: null } });
+    const result = await db.person.findMany({
+      where: { removedAt: null },
+      orderBy: { name: "asc" },
+    });
     return result;
   } catch (error) {
     logger.error(error);

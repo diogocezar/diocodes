@@ -118,7 +118,7 @@ export function InviteForm() {
                       <SelectContent>
                         {mentoring.map((item, index) => (
                           <SelectItem key={index} value={item?.id}>
-                            {`${item?.attendee?.name} & ${item?.host?.name} - ${new Date(item?.startTime).toLocaleDateString("pt-BR")}`}
+                            {`${new Date(item?.startTime).toLocaleDateString("pt-BR")} - ${item?.attendee?.name}`}
                           </SelectItem>
                         ))}
                       </SelectContent>

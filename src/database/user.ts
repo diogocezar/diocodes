@@ -10,7 +10,7 @@ export const createUser = async (user: User) => {
     if (exists) {
       await db.user.update({
         where: { id: exists.id },
-        data: { removedAt: null, updatedAt: new Date() },
+        data: { removedAt: null, updatedAt: new Date(), role: user.role },
       });
     } else {
       await db.user.create({

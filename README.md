@@ -70,10 +70,14 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Destacar as mentorias que já ocorreram;
 - [x] Criar aplicação para PRD do GitHub;
 - [x] Criar o login em PRD;
-- [ ] Horário da mentoria no email está errado;
-- [ ] Rever as mensagens de erro no build da Vercel;
-- [ ] Remover o cadastro de uma avaliação que já foi realizada;
-- [ ] Criar um registro já excluído;
+- [x] Horário da mentoria no email está errado;
+- [x] Revisar todas as remoções;
+- [x] Sinalizar como verde somente se não tiver excluído; (Mentoria)
+- [x] Criar um registro já excluído;
+  - [x] Avaliations;
+  - [x] Mentoring;
+- [x] Não mostrar as tags nas avaliações que possuem relacionamento de AvaliationTags como removed;
+- [x] Ordenar os select por ordem alfabética;
 - [ ] Conferir todos os filtros;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
 - [ ] Criar back-end para popular dados do Dashboard;

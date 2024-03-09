@@ -39,8 +39,6 @@ export const POST = async (req: Request) => {
     const { mentoringId } = data;
     const mentoring = await getMentoring(mentoringId);
 
-    console.log(mentoring);
-
     if (mentoring) await sendInvite(mentoring);
 
     const result = await createInvite(data);

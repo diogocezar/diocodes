@@ -79,7 +79,7 @@ export function AvaliationForm() {
   const getMentoring = useCallback(async () => {
     try {
       setIsLoadingMentoring(true);
-      const response = await api.get("admin/mentoring");
+      const response = await api.get("admin/mentoring/done");
       setMentoring(response.data);
     } catch (error) {
       console.error(error);
@@ -179,7 +179,7 @@ export function AvaliationForm() {
                       <SelectContent>
                         {mentoring.map((item, index) => (
                           <SelectItem key={index} value={item?.id}>
-                            {`${item?.attendee?.name} & ${item?.host?.name} - ${new Date(item?.startTime).toLocaleDateString("pt-BR")}`}
+                            {`${new Date(item?.startTime).toLocaleDateString("pt-BR")} - ${item?.attendee?.name}`}
                           </SelectItem>
                         ))}
                       </SelectContent>
