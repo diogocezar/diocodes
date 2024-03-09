@@ -45,8 +45,13 @@ const upsert = async (booking: any) => {
   return true;
 };
 
-export const GET = async () => {
+export const GET = async (req: Request) => {
   try {
+    if (
+      req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`
+    ) {
+      return new Response("Unauthorized", { status: 401 });
+    }
     const result = await cal.get("/bookings");
     const { data } = result;
     const { bookings } = data;

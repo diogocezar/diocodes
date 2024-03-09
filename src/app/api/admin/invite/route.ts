@@ -23,7 +23,7 @@ const sendInvite = async (mentoring: any) => {
       ? [EMAIL.COPY_EMAIL]
       : [EMAIL.COPY_EMAIL, email];
   try {
-    await resend.emails.send({
+    const config = {
       from: EMAIL.FROM,
       to,
       subject: EMAIL.SUBJECT,
@@ -32,7 +32,8 @@ const sendInvite = async (mentoring: any) => {
         startTime,
         link,
       }) as React.ReactElement,
-    });
+    };
+    await resend.emails.send(config);
   } catch (error) {
     console.log(error);
   }
