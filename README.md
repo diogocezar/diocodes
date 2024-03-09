@@ -88,7 +88,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Permitir o envio das avaliações para os e-mails originais;
 - [x] Criar cron que atualiza os dados do Cal.com a cada hora;
 - [x] Resolver a sincronização;
-- [x] Criar proteção das rotas em `/admin`;
+- [x] Criar proteção das rotas privadas;
 - [ ] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
 - [ ] Criar página de erros;
