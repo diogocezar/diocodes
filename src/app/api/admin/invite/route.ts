@@ -16,11 +16,14 @@ const sendInvite = async (mentoring: any) => {
   const { startTime, attendee, id } = mentoring;
   const link = `${EMAIL.LINK}/${id}`;
   const { name, email } = attendee;
+  const to =
+    process.env.NODE_ENV === "development"
+      ? [EMAIL.COPY_EMAIL]
+      : [EMAIL.COPY_EMAIL, email];
   try {
     await resend.emails.send({
       from: EMAIL.FROM,
-      //to: [EMAIL.COPY_EMAIL, email],
-      to: [EMAIL.COPY_EMAIL],
+      to,
       subject: EMAIL.SUBJECT,
       react: EmailAvaliation({
         attendee: name,

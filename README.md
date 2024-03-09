@@ -70,6 +70,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Destacar as mentorias que já ocorreram;
 - [x] Criar aplicação para PRD do GitHub;
 - [x] Criar o login em PRD;
+- [v] Criar service para Cal.com;
 - [x] Horário da mentoria no email está errado;
 - [x] Revisar todas as remoções;
 - [x] Sinalizar como verde somente se não tiver excluído; (Mentoria)
@@ -81,13 +82,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Conferir todos os filtros;
 - [x] Criar back-end para popular dados do Dashboard;
 - [x] Layout do Dashboard;
+- [x] Obter as informações do Dashboard do Backend;
 - [x] Criar lista de últimos agendamentos;
-- [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
+- [x] Puxar dados de Mentoring, ao invés do Cal.com (na home);
+- [x] Permitir o envio das avaliações para os e-mails originais;
 - [ ] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
-- [ ] Obter as informações do Dashboard do Backend;
-- [ ] Criar layout da página de avaliações;
-- [ ] Criar service para Cal.com;
 - [ ] Criar proteção das rotas em `/admin`;
 - [ ] Criar página de erros;
 - [ ] Verificar pq o dashboard invoca 2 vezes o back-end;

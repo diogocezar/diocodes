@@ -1,42 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SubSubTitle } from "@/components/app/main/titles";
-import { TypeBooking } from "@/types/type-booking";
 import { Paragraph } from "@/components/app/main/paragraph";
 import { Spinner } from "@phosphor-icons/react";
-import { Bookings } from "@/components/app/main/bookings";
+import { Mentoring } from "@/components/app/main/mentoring";
+import { TypeMentoring } from "@/types/type-mentoring";
+import { api } from "@/services/api";
 
 const WhoBooked = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(() => {
-  const [bookings, setBookints] = useState(Array<TypeBooking>);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    (async function () {
-      setIsLoading(true);
-      try {
-        const request = await fetch("/api/booking");
-        const bookings = await request.json();
-        setBookints(bookings);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+  const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
+  const [mentoring, setMentoring] = useState(Array<TypeMentoring>);
+  const getMentoring = useCallback(async () => {
+    try {
+      setIsLoadingMentoring(true);
+      const response = await api.get("mentoring");
+      setMentoring(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoadingMentoring(false);
+    }
   }, []);
+
+  useEffect(() => {
+    getMentoring();
+  }, [getMentoring]);
   return (
     <>
       <SubSubTitle>Quem já reservou?</SubSubTitle>
-      {isLoading ? (
+      {isLoadingMentoring ? (
         <Paragraph className="mb-8 flex flex-row gap-2">
           <Spinner size={20} className="animate-spin" />
           Carregando...
         </Paragraph>
       ) : (
         <ul className="mb-8 flex w-full flex-row flex-wrap">
-          {bookings.map((booking: TypeBooking, index) => (
-            <Bookings key={index} booking={booking} />
+          {mentoring.map((item: TypeMentoring, index) => (
+            <Mentoring
+              key={index}
+              startTime={item.startTime}
+              attendee={item.attendee}
+            />
           ))}
         </ul>
       )}
