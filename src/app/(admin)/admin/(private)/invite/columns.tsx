@@ -45,8 +45,24 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
       enableHiding: false,
     },
     {
+      accessorKey: "mentoring",
+      accessorFn: (row) => row?.mentoring?.attendee?.name,
+      header: ({ column }) => {
+        return (
+          <Button
+            className="flex flex-row items-center gap-2"
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Mentoria
+            <ArrowUpDown className="h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{formatMentoring(row)}</div>,
+    },
+    {
       accessorKey: "date",
-      size: 10,
       accessorFn: (row) => row?.mentoring?.attendee?.name,
       header: ({ column }) => {
         return (
@@ -74,23 +90,6 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
           </span>
         </div>
       ),
-    },
-    {
-      accessorKey: "mentoring",
-      accessorFn: (row) => row?.mentoring?.attendee?.name,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Mentoria
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <div>{formatMentoring(row)}</div>,
     },
     {
       accessorKey: "createdAt",

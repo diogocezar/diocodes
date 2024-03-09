@@ -1,9 +1,38 @@
-import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
+import {
+  dashboardAvaliationsByMonth,
+  dashboardCountAvaliation,
+  dashboardCountAvaliationAvg,
+  dashboardCountInvite,
+  dashboardCountMentoringDone,
+  dashboardCountMentoringToBe,
+  dashboardCountPerson,
+  dashboardCountTag,
+} from "@/database/dashboard";
+import { TypeDashboard } from "@/types/type-dashboard";
 
 export const GET = async () => {
-  const session = await getServerSession(authOptions);
-  if (!session?.user) {
-    return Response.redirect("http://localhost:3000/");
+  try {
+    const mentoringDone = await dashboardCountMentoringDone();
+    const mentoringToBe = await dashboardCountMentoringToBe();
+    const avaliation = await dashboardCountAvaliation();
+    const avaliationAvarage = await dashboardCountAvaliationAvg();
+    const invite = await dashboardCountInvite();
+    const tag = await dashboardCountTag();
+    const person = await dashboardCountPerson();
+    const graph = await dashboardAvaliationsByMonth();
+    const result: TypeDashboard = {
+      mentoringDone,
+      mentoringToBe,
+      mentoring: mentoringDone + mentoringToBe,
+      avaliation,
+      avaliationAvarage,
+      invite,
+      tag,
+      person,
+      graph,
+    };
+    return new Response(JSON.stringify(result), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

@@ -26,14 +26,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUserState } from "@/hooks/use-user-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
-import { TypePerson } from "@/types/type-person";
 import { TypeMentoring } from "@/types/type-mentoring";
 
 export function InviteForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingAttendee, setIsLoadingAttendee] = useState(false);
   const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
-  const [attendee, setAttendee] = useState<TypePerson[]>([]);
   const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
   const isOpenForm = useUserState((state) => state.isOpenForm);
   const setIsOpenForm = useUserState((state) => state.setIsOpenForm);

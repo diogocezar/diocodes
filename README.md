@@ -78,9 +78,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
   - [x] Mentoring;
 - [x] Não mostrar as tags nas avaliações que possuem relacionamento de AvaliationTags como removed;
 - [x] Ordenar os select por ordem alfabética;
-- [ ] Conferir todos os filtros;
+- [x] Conferir todos os filtros;
+- [x] Criar back-end para popular dados do Dashboard;
+- [ ] Criar lista de últimos agendamentos;
+- [ ] Verificar pq o dashboard invoca 2 vezes o back-end;
+- [ ] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
-- [ ] Criar back-end para popular dados do Dashboard;
 - [ ] Separar componentes do Dashboard;
 - [ ] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [ ] Obter as informações do Dashboard do Backend;

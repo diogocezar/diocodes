@@ -1,62 +1,42 @@
 "use client";
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Document } from "mongodb";
 
-const data = [
-  {
-    name: "Jan",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Fev",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Mar",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Abr",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Mai",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Jun",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Jul",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Ago",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Set",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Out",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Nov",
-    total: Math.floor(Math.random() * 4),
-  },
-  {
-    name: "Dez",
-    total: Math.floor(Math.random() * 4),
-  },
-];
+type GraphProps = {
+  data: Document[];
+};
 
-export function Graph() {
+function getMonth(month: string) {
+  const monthNumber = parseInt(month, 10);
+  const months = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
+  const result = months[monthNumber - 1];
+  return result;
+}
+
+export function Graph({ data }: GraphProps) {
+  const transformedData = data?.map((item) => {
+    return {
+      name: getMonth(item._id),
+      total: item.avgRating,
+    };
+  });
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
+      <BarChart data={transformedData}>
         <XAxis
           dataKey="name"
           stroke="#888888"

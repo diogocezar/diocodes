@@ -19,8 +19,8 @@ export const columnsNames = [
 const formatMentoring = (row: any) => {
   const { original } = row;
   const { mentoring } = original;
-  const { host, attendee } = mentoring;
-  return `${attendee.name} & ${host.name}`;
+  const { attendee } = mentoring;
+  return `${attendee.name}`;
 };
 
 const formatTags = (row: any) => {

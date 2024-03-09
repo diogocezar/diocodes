@@ -75,7 +75,7 @@ export default function AdminInvitePage() {
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
-          searchField="attendee"
+          searchField="mentoring"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}
