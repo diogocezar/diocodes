@@ -48,6 +48,7 @@ const upsert = async (booking: any) => {
 export const GET = async () => {
   try {
     const result = await cal.get("/bookings");
+    console.log(result);
     const { data } = result;
     const { bookings } = data;
     const validBookings = filterValidBooking(bookings);

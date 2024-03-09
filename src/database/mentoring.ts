@@ -47,6 +47,7 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
       });
+      console.log(upsert);
     });
   } catch (error) {
     logger.error(error);
