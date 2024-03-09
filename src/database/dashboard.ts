@@ -106,7 +106,18 @@ export const dashboardCountPerson = async (): Promise<number> => {
 
 export const dashboardAvaliationsByMonth = async (): Promise<Document[]> => {
   try {
+    const year = new Date().getFullYear();
+    const first = new Date(year, 0, 1, 0, 0, 0, 0);
+    const last = new Date(year, 11, 31, 23, 59, 59, 999);
     const agg = [
+      {
+        $match: {
+          createdAt: {
+            $gte: new Date(first),
+            $lt: new Date(last),
+          },
+        },
+      },
       {
         $group: {
           _id: {
