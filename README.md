@@ -86,6 +86,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar lista de últimos agendamentos;
 - [x] Puxar dados de Mentoring, ao invés do Cal.com (na home);
 - [x] Permitir o envio das avaliações para os e-mails originais;
+- [ ] Criar cron que atualiza os dados do Cal.com a cada hora;
 - [ ] Resolver a sincronização;
 - [ ] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;

@@ -22,7 +22,7 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
       });
-      const upsert = await db.mentoring.upsert({
+      await db.mentoring.upsert({
         where: {
           externalId: item.externalId,
         },
@@ -47,7 +47,6 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
       });
-      console.log(upsert);
     });
   } catch (error) {
     logger.error(error);

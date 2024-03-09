@@ -10,6 +10,8 @@ import { Resend } from "resend";
 import { EMAIL } from "@/contants/email";
 import { getMentoring } from "@/database/mentoring";
 
+export const fetchCache = "force-no-store";
+
 const resend = new Resend(process.env.API_RESEND);
 
 const sendInvite = async (mentoring: any) => {

@@ -17,7 +17,6 @@ const WhoBooked = React.forwardRef<
       setIsLoadingMentoring(true);
       const response = await api.get("mentoring");
       setMentoring(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     } finally {

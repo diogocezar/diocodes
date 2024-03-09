@@ -11,6 +11,8 @@ import {
 } from "@/database/dashboard";
 import { TypeDashboard } from "@/types/type-dashboard";
 
+export const fetchCache = "force-no-store";
+
 export const GET = async () => {
   try {
     const mentoringDone = await dashboardCountMentoringDone();

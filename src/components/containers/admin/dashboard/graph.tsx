@@ -35,7 +35,6 @@ function getMonth(month: string) {
 }
 
 const CustomTooltip = ({ payload }: any) => {
-  console.log(payload);
   if (payload && payload.length) {
     return (
       <div className="bg-card text-foreground rounded-sm p-2">

@@ -31,11 +31,11 @@ const formatTags = (row: any) => {
       {avaliationTags.map((avaliationTag: any) => {
         return (
           <Badge
-            key={avaliationTag.tag.name}
+            key={avaliationTag?.tag?.name}
             className="bg-background text-foreground rounded-md px-4 py-1 text-sm font-normal"
             variant="secondary"
           >
-            {avaliationTag.tag.name}
+            {avaliationTag?.tag?.name}
           </Badge>
         );
       })}
