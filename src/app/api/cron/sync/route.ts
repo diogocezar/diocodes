@@ -2,6 +2,9 @@ import { CAL } from "@/contants/cal";
 import { api as cal } from "@/services/cal";
 import { upsertMentoringByBooking } from "@/database/mentoring";
 
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 const filterValidBooking = (mentoring: any) =>
   mentoring.filter(
     (item: any) =>

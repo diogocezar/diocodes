@@ -11,6 +11,7 @@ import {
 } from "@/database/dashboard";
 import { TypeDashboard } from "@/types/type-dashboard";
 
+export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 export const GET = async () => {

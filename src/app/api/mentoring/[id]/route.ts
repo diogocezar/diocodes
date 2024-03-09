@@ -1,5 +1,8 @@
-import { createMentoring, getMentoring } from "@/database/mentoring";
+import { getMentoring } from "@/database/mentoring";
 import { NextRequest, NextResponse } from "next/server";
+
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 export const GET = async (
   request: NextRequest,

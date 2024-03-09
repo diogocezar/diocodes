@@ -1,5 +1,8 @@
 import { getAllPersons } from "@/database/person";
 
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 export const GET = async () => {
   try {
     const result = await getAllPersons();
