@@ -94,8 +94,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 - [x] Próxima semana disponível na página principal;
 - [x] Criar botão de mentoria pro;
-- [ ] Destacar mentorias pro na página principal;
-- [ ] Criar botão de reenvio do convite;
+- [x] Destacar mentorias pro na página principal;
+- [x] Criar botão de reenvio do convite;
 
 ## 🖥️ Tecnologias
 

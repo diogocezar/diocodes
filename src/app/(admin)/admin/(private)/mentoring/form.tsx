@@ -45,7 +45,7 @@ export function MentoringForm() {
   const [persons, setPersons] = useState<TypePerson[]>([]);
   const isOpenForm = useMentoringState((state) => state.isOpenForm);
   const setIsOpenForm = useMentoringState((state) => state.setIsOpenForm);
-  const selectedItem: any = useMentoringState((state) => state.selectedItem);
+  const selectedItem = useMentoringState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const url = "/admin/mentoring";
 

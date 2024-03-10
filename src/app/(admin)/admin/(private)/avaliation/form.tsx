@@ -32,31 +32,43 @@ import { TypeTag } from "@/types/type-tag";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
+import { useAvaliationState } from "@/hooks/use-avaliation-state";
+
+type TypeLocalItems = Record<"value" | "label", string>;
+
+type TypeLocalTag = {
+  tag: {
+    id: number;
+    name: string;
+  };
+};
+
+type TypeLocalFormatTag = TypeLocalTag | { label: string; value: number };
 
 export function AvaliationForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
   const [isLoadingTag, setIsLoadingTag] = useState(false);
   const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
-  const [tag, setTag] = useState<any[]>([]);
-  const isOpenForm = useMentoringState((state) => state.isOpenForm);
-  const setIsOpenForm = useMentoringState((state) => state.setIsOpenForm);
-  const selectedItem: any = useMentoringState((state) => state.selectedItem);
+  const [tag, setTag] = useState<TypeLocalItems[]>([]);
+  const isOpenForm = useAvaliationState((state) => state.isOpenForm);
+  const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
+  const selectedItem = useAvaliationState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const url = "/admin/avaliation";
 
-  const formatTags = (tags: any) => {
+  const formatTags = (tags: TypeLocalFormatTag[]) => {
     if (!tags) return [];
-    return tags.map((item: any) => {
-      if (item.tag) {
+    return tags.map((item: TypeLocalFormatTag) => {
+      if ("tag" in item) {
         return {
-          label: item.tag.name,
-          value: item.tag.id,
+          label: item.tag?.name,
+          value: item.tag?.id,
         };
       } else {
         return {
-          label: item.label,
-          value: item.value,
+          label: item?.label,
+          value: item?.value,
         };
       }
     });
@@ -71,12 +83,22 @@ export function AvaliationForm() {
 
   const setValue = form.setValue;
 
-  useEffect(() => {
+  const bootstrap = useCallback(() => {
     setValue("mentoringId", selectedItem?.mentoring?.id || "");
-    setValue("avaliationTags", formatTags(selectedItem?.avaliationTags || ""));
+    setValue(
+      "avaliationTags",
+      formatTags(selectedItem?.avaliationTags || "").map((item) => ({
+        ...item,
+        value: item.value.toString(),
+      })),
+    );
     setValue("comment", selectedItem?.comment || "");
     setValue("rating", [selectedItem?.rating || 1]);
-  }, [selectedItem, setValue]);
+  }, [setValue, selectedItem]);
+
+  useEffect(() => {
+    bootstrap();
+  }, [bootstrap]);
 
   const getMentoring = useCallback(async () => {
     try {
@@ -119,11 +141,13 @@ export function AvaliationForm() {
   const handleSubmit = async (data: z.infer<typeof SchemaAvaliation>) => {
     try {
       setIsLoading(true);
-      const avaliationTags = data?.avaliationTags?.map((item: any) => {
-        return {
-          id: item.value,
-        };
-      });
+      const avaliationTags = data?.avaliationTags?.map(
+        (item: { value: string }) => {
+          return {
+            id: item?.value,
+          };
+        },
+      );
       const formData = {
         mentoringId: data.mentoringId,
         avaliationTags,
@@ -182,7 +206,9 @@ export function AvaliationForm() {
                       <SelectContent>
                         {mentoring.map((item, index) => (
                           <SelectItem key={index} value={item?.id}>
-                            {`${new Date(item?.startTime).toLocaleDateString("pt-BR")} - ${item?.attendee?.name}`}
+                            {`${new Date(item?.startTime).toLocaleDateString(
+                              "pt-BR",
+                            )} - ${item?.attendee?.name}`}
                           </SelectItem>
                         ))}
                       </SelectContent>

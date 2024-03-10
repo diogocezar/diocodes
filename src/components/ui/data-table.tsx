@@ -37,6 +37,10 @@ import {
 import { ChevronDown } from "lucide-react";
 import React, { ReactElement } from "react";
 
+type AditionalButtonsProps = {
+  table: any;
+};
+
 type DataTableProps = {
   form: ReactElement;
   data: any[];
@@ -49,7 +53,7 @@ type DataTableProps = {
   isLoading: boolean;
   createButtonLabel: string;
   iconCreateButton: JSX.Element;
-  aditionalButtons?: ReactElement;
+  aditionalButtons?: ReactElement<AditionalButtonsProps>;
 };
 
 export function DataTable({
@@ -118,7 +122,11 @@ export function DataTable({
         </div>
         <div className="flex flex-row items-center gap-4">
           {form}
-          {aditionalButtons}
+          {!isLoading &&
+            aditionalButtons &&
+            React.cloneElement(aditionalButtons, {
+              table,
+            })}
           <Button
             onClick={() => {
               handleCreate(table.getFilteredSelectedRowModel().rows);

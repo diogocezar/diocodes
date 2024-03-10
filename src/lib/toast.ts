@@ -1,8 +1,10 @@
 import { toast } from "sonner";
 
-export const dispatchError = (error: any) => {
+export const dispatchError = (error: any, message?: string) => {
   console.error(`🔥 Houve um erro: ${error}`);
-  toast.error("🚨 Oops! Houve um problema. Tente novamente mais tarde!", {
+  const displayMessage =
+    message || "🚨 Houve um erro. Tente novamente mais tarde!";
+  toast.error(displayMessage, {
     cancel: {
       label: "Ok",
     },

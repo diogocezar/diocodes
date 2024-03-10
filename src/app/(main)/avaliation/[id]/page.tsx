@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { dispatchError } from "@/lib/toast";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [rating, setRating] = useState<number>(0);
@@ -64,7 +65,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
       setMentoring(response.data);
       setIsLoadingMentoring(false);
     } catch (error) {
-      console.log(error);
+      dispatchError(error);
     }
   }, [params.id]);
 

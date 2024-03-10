@@ -23,19 +23,19 @@ import {
 import { Spinner } from "@phosphor-icons/react";
 import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
-import { useUserState } from "@/hooks/use-user-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypeMentoring } from "@/types/type-mentoring";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
+import { useInviteState } from "@/hooks/use-invite-state";
 
 export function InviteForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
   const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
-  const isOpenForm = useUserState((state) => state.isOpenForm);
-  const setIsOpenForm = useUserState((state) => state.setIsOpenForm);
-  const selectedItem: any = useUserState((state) => state.selectedItem);
+  const isOpenForm = useInviteState((state) => state.isOpenForm);
+  const setIsOpenForm = useInviteState((state) => state.setIsOpenForm);
+  const selectedItem = useInviteState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const url = "/admin/invite";
   const form = useForm<z.infer<typeof SchemaInvite>>({

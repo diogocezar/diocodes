@@ -1,6 +1,6 @@
 "use client";
 import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
-import { Plant, ArrowsClockwise } from "@phosphor-icons/react";
+import { Plant, ArrowsClockwise, Spinner } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
@@ -14,8 +14,8 @@ import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { useState } from "react";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 function AditionalButtons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,10 +28,10 @@ function AditionalButtons() {
           setIsLoading(true);
           const result = await api.get("admin/mentoring/sync");
           if (result.status === 200) {
-            toast.success("Sincronizado com sucesso.");
+            dispatchSuccess("Sincronizado com sucesso!");
           }
         } catch (error) {
-          toast.error("Houver um erro ao sincronizar.");
+          dispatchError("Houve um problema ao sincronizar");
         } finally {
           setIsLoading(false);
           queryClient.invalidateQueries({
@@ -43,7 +43,7 @@ function AditionalButtons() {
     >
       {isLoading ? (
         <div className="flex flex-row gap-2">
-          <ArrowsClockwise className="h-5 w-5 animate-spin" />
+          <Spinner className="h-5 w-5 animate-spin" />
           Sincronizando...
         </div>
       ) : (
