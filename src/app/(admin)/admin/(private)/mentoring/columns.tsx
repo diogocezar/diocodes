@@ -4,11 +4,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { TypeMentoring } from "@/types/type-mentoring";
-import { Circle, PaperPlaneTilt, CheckCircle } from "@phosphor-icons/react";
+import { Circle } from "@phosphor-icons/react";
+import { CAL } from "@/contants/cal";
 
 export const columnsNames = [
   { id: "select", name: "select" },
   { id: "attendee", name: "Participante" },
+  { id: "type", name: "Tipo" },
   { id: "date", name: "Data" },
   { id: "message", name: "Mensagem" },
   { id: "createdAt", name: "Criado em" },
@@ -68,6 +70,28 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
         );
       },
       cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
+    },
+    {
+      accessorKey: "type",
+      header: ({ column }) => {
+        return (
+          <Button
+            className="flex flex-row items-center gap-2"
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Tipo
+            <ArrowUpDown className="h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div>
+          {row.original?.externalEventId === CAL.MENTORING_FREE
+            ? "Grátis"
+            : "Premium"}
+        </div>
+      ),
     },
     {
       accessorKey: "date",

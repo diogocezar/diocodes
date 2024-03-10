@@ -4,6 +4,10 @@ import { TypePerson } from "./type-person";
 
 export type TypeMentoring = {
   id: string;
+  externalId: Number;
+  externalEventId: Number;
+  externalStatus: string;
+  externalMessage: string;
   host: TypePerson;
   hostId: string;
   attendee: TypePerson;

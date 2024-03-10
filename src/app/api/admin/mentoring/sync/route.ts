@@ -8,7 +8,9 @@ export const fetchCache = "force-no-store";
 const filterValidBooking = (mentoring: any) =>
   mentoring.filter(
     (item: any) =>
-      item.eventTypeId === CAL.MENTORING_FREE && item.status !== "CANCELLED",
+      (item.eventTypeId === CAL.MENTORING_FREE ||
+        item.eventTypeId === CAL.MENTORING_PREMIUM) &&
+      item.status !== "CANCELLED",
   );
 
 const formatResponse = (validBookings: any) =>
