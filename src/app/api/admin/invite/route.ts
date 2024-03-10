@@ -19,10 +19,7 @@ const sendInvite = async (mentoring: any) => {
   const { startTime, attendee, id } = mentoring;
   const link = `${EMAIL.LINK}/${id}`;
   const { name, email } = attendee;
-  const to =
-    process.env.NODE_ENV === "development"
-      ? [EMAIL.COPY_EMAIL]
-      : [EMAIL.COPY_EMAIL, email];
+  const to = [email, EMAIL.COPY_EMAIL];
   try {
     const config = {
       from: EMAIL.FROM,
