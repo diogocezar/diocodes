@@ -1,11 +1,15 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
 import { TypeMentoring } from "@/types/type-mentoring";
-import { Circle } from "@phosphor-icons/react";
-import { CAL } from "@/contants/cal";
+import {
+  formatAttendee,
+  formatCreatedAt,
+  formatDate,
+  formatExternalMessage,
+  formatSelectWithDots,
+  formatType,
+} from "@/lib/format-columns";
+import { formatHeader, formatHeaderSelect } from "@/lib/format-columns-header";
 
 export const columnsNames = [
   { id: "select", name: "select" },
@@ -21,143 +25,40 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
     {
       size: 10,
       accessorKey: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            (!isLoading && table.getIsAllPageRowsSelected()) ||
-            (!isLoading && table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <div className="flex flex-row items-center gap-4">
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
-          {row.original?.invite.length > 0 ? (
-            <Circle weight="fill" className="text-green h-5 w-5" />
-          ) : (
-            <div>
-              {new Date(row.original?.startTime) < new Date() ? (
-                <Circle className="text-green h-5 w-5 opacity-20" />
-              ) : (
-                <Circle className="h-5 w-5 opacity-20" />
-              )}
-            </div>
-          )}
-        </div>
-      ),
+      header: ({ table }) => formatHeaderSelect(isLoading, table),
+      cell: ({ row }) => formatSelectWithDots(row),
       enableSorting: false,
       enableHiding: false,
     },
     {
       accessorKey: "attendee",
       accessorFn: (row) => row?.attendee?.name,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Participante
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <div>{row.original?.attendee?.name}</div>,
+      header: ({ column }) => formatHeader("Participante", column),
+      cell: ({ row }) => <div>{formatAttendee(row)}</div>,
     },
     {
       accessorKey: "type",
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Tipo
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div>
-          {row.original?.externalEventId === CAL.MENTORING_FREE
-            ? "Grátis"
-            : "Premium"}
-        </div>
-      ),
+      header: ({ column }) => formatHeader("Tipo", column),
+      cell: ({ row }) => <div>{formatType(row)}</div>,
     },
     {
       accessorKey: "date",
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Data
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
+      header: ({ column }) => formatHeader("Data", column),
+      cell: ({ row }) => {
+        const { startTime, endTime } = row.original;
+        return formatDate(startTime, endTime);
       },
-      cell: ({ row }) => (
-        <div className="flex flex-col">
-          <span className="text-xs">{`${new Date(row.original?.startTime).toLocaleDateString("pt-BR")}`}</span>
-          <span className="text-xs opacity-40">
-            {new Date(row.original?.startTime).toLocaleTimeString("pt-BR")}
-            {" - "}
-            {new Date(row.original?.endTime).toLocaleTimeString("pt-BR")}
-          </span>
-        </div>
-      ),
     },
     {
       accessorKey: "externalMessage",
       size: 50,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Mensagem
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="h-[30px] w-full overflow-hidden overflow-ellipsis text-xs">
-          {row.getValue("externalMessage")}
-        </div>
-      ),
+      header: ({ column }) => formatHeader("Mensagem", column),
+      cell: ({ row }) => formatExternalMessage(row),
     },
     {
       accessorKey: "createdAt",
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Criado em
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div>
-          {new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR")}
-        </div>
-      ),
+      header: ({ column }) => formatHeader("Criado em", column),
+      cell: ({ row }) => <div>{formatCreatedAt(row)}</div>,
     },
   ];
 };

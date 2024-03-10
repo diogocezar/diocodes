@@ -70,7 +70,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Destacar as mentorias que já ocorreram;
 - [x] Criar aplicação para PRD do GitHub;
 - [x] Criar o login em PRD;
-- [v] Criar service para Cal.com;
+- [x] Criar service para Cal.com;
 - [x] Horário da mentoria no email está errado;
 - [x] Revisar todas as remoções;
 - [x] Sinalizar como verde somente se não tiver excluído; (Mentoria)
@@ -89,8 +89,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar cron que atualiza os dados do Cal.com a cada hora;
 - [x] Resolver a sincronização;
 - [x] Criar proteção das rotas privadas;
-- [ ] Separar todos os filtros das colunas em funções;
+- [x] Separar todos os filtros das colunas em funções;
 - [ ] Sonner de erros na tentativa de cadastrar os formulários;
+- [ ] Criar botão de reenvio do convite;
 - [ ] Criar página de erros;
 - [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 

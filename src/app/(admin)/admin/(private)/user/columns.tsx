@@ -1,9 +1,12 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
 import { TypeUser } from "@/types/type-user";
+import {
+  formatCreatedAt,
+  formatRowValue,
+  formatSelect,
+} from "@/lib/format-columns";
+import { formatHeader, formatHeaderSelect } from "@/lib/format-columns-header";
 
 export const columnsNames = [
   { id: "select", name: "select" },
@@ -17,95 +20,32 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
     {
       size: 10,
       accessorKey: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            (!isLoading && table.getIsAllPageRowsSelected()) ||
-            (!isLoading && table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
+      header: ({ table }) => formatHeaderSelect(isLoading, table),
+      cell: ({ row }) => formatSelect(row),
       enableSorting: false,
       enableHiding: false,
     },
     {
       accessorKey: "name",
       accessorFn: (row) => row?.person?.name,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Nome
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
+      header: ({ column }) => formatHeader("Nome", column),
       cell: ({ row }) => <div>{row.original?.person?.name}</div>,
     },
     {
       accessorKey: "email",
       accessorFn: (row) => row?.person?.email,
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Email
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
+      header: ({ column }) => formatHeader("Email", column),
       cell: ({ row }) => <div>{row.original?.person?.email}</div>,
     },
     {
       accessorKey: "role",
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Permissão
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <div>{row.getValue("role")}</div>,
+      header: ({ column }) => formatHeader("Permissão", column),
+      cell: ({ row }) => <div>{formatRowValue(row, "role")}</div>,
     },
     {
       accessorKey: "createdAt",
-      header: ({ column }) => {
-        return (
-          <Button
-            className="flex flex-row items-center gap-2"
-            variant="link"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Criado em
-            <ArrowUpDown className="h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div>
-          {new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR")}
-        </div>
-      ),
+      header: ({ column }) => formatHeader("Criado em", column),
+      cell: ({ row }) => <div>{formatCreatedAt(row)}</div>,
     },
   ];
 };

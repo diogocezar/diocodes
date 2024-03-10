@@ -10,7 +10,7 @@ export const GET = async (req: Request) => {
     ) {
       return new Response("Unauthorized", { status: 401 });
     }
-    const result = sync(true);
+    const result = await sync({ debug: true });
     return new Response(JSON.stringify({ result }), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });

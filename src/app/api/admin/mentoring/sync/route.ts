@@ -5,7 +5,7 @@ export const fetchCache = "force-no-store";
 
 export const GET = async () => {
   try {
-    const result = sync(false);
+    const result = await sync({ debug: true });
     return new Response(JSON.stringify({ result }), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });

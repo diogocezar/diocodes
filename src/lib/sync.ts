@@ -48,7 +48,7 @@ export const upsert = async (booking: any) => {
   return true;
 };
 
-export const sync = async (debug: boolean = false) => {
+export const sync = async ({ debug = false }: { debug: boolean }) => {
   debug && logger.info("🚀 Starting Sync");
 
   debug && logger.info("Getting Bookings from Cal API");
