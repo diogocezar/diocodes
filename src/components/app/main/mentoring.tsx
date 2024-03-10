@@ -12,7 +12,7 @@ type MentoringProps = {
 const Mentoring = ({ startTime, attendee, isFree }: MentoringProps) => {
   return (
     <li
-      className={`shadow-w-full md:w-[50%] lg:w-[33.3%] xl:w-[25%] ${new Date(startTime) > new Date() ? "opacity-100" : "opacity-100"}`}
+      className={`shadow-w-full w-full md:w-[50%] lg:w-[33.3%] xl:w-[25%] ${new Date(startTime) > new Date() ? "opacity-100" : "opacity-50"}`}
     >
       <div className="group">
         <div
