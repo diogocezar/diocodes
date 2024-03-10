@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@phosphor-icons/react";
+import { Calendar, Star } from "@phosphor-icons/react";
 
 const Book = React.forwardRef<
   HTMLDivElement,
@@ -21,15 +21,24 @@ const Book = React.forwardRef<
   }, []);
   return (
     <>
-      <div className="flex flex-row justify-center">
+      <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:mb-0 md:flex-row md:justify-start">
+        <Button
+          data-cal-namespace=""
+          data-cal-link="diogocezar/mentoria-diogao-premium"
+          data-cal-config='{"layout":"month_view"}'
+          className="bg-green hover:bg-card hover:text-green mt-0 flex w-full flex-row items-center justify-center gap-2 sm:w-[350px] md:mt-10 md:justify-center"
+        >
+          <Star size={20} />
+          Mentoria Pro <span className="text-xs">(R$ 120,00)</span>
+        </Button>
         <Button
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao"
           data-cal-config='{"layout":"month_view"}'
-          className="mt-10 flex flex-row items-center justify-start gap-2 md:mt-14 md:justify-center"
+          className="sm:justify-left hover:bg-card hover:text-green mt-10 flex w-full flex-row items-center justify-center gap-2 sm:w-[350px] md:mt-10"
         >
           <Calendar size={20} />
-          Agendar Mentoria
+          Mentoria Free
         </Button>
       </div>
     </>

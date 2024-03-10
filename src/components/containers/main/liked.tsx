@@ -12,14 +12,14 @@ const Liked = React.forwardRef<
     <>
       <SubSubTitle>Tá! Curti! Como eu faço?</SubSubTitle>
       <Paragraph>
-        Marque um papo comigo clicando no{" "}
+        Marque uma mentoria <Hightlight>free</Hightlight> comigo clicando em{" "}
         <Button
           variant={"link"}
+          className="font-fira"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          <Hightlight className="underline">Agendar Mentoria</Hightlight>
+          <Hightlight className="underline">Mentoria Free</Hightlight>
         </Button>
-        .
       </Paragraph>
       <Paragraph>
         Não se esqueça de preencher o campo{" "}

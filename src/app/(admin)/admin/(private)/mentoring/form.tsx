@@ -37,6 +37,7 @@ import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypePerson } from "@/types/type-person";
 import { Textarea } from "@/components/ui/textarea";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function MentoringForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +68,7 @@ export function MentoringForm() {
       const response = await api.get("admin/person");
       setPersons(response.data);
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoadingPerson(false);
     }
@@ -89,8 +90,9 @@ export function MentoringForm() {
         await api.post(url, data);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_MENTORING] });
+      dispatchSuccess("Mentoria salva com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);

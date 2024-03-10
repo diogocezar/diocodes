@@ -7,7 +7,7 @@ const filterValidBooking = (mentoring: any) =>
   mentoring.filter(
     (item: any) =>
       (item.eventTypeId === CAL.MENTORING_FREE ||
-        item.eventTypeId === CAL.MENTORING_PREMIUM) &&
+        item.eventTypeId === CAL.MENTORING_PRO) &&
       item.status !== "CANCELLED",
   );
 

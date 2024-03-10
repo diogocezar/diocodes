@@ -20,6 +20,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function TagForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +53,9 @@ export function TagForm() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.ADMIN_TAG],
       });
+      dispatchSuccess("Tag salva com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);

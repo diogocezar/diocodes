@@ -19,6 +19,7 @@ import { useState } from "react";
 
 function AditionalButtons() {
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
   return (
     <Button
       disabled={isLoading}
@@ -33,6 +34,9 @@ function AditionalButtons() {
           toast.error("Houver um erro ao sincronizar.");
         } finally {
           setIsLoading(false);
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEY.ADMIN_MENTORING],
+          });
         }
       }}
       className="rounded-lg"

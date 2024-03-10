@@ -2,6 +2,7 @@ import React from "react";
 import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
 import { Paragraph } from "@/components/app/main/paragraph";
 import { Hightlight } from "@/components/app/main/hightlight";
+import { Button } from "@/components/ui/button";
 
 const IsTrap = React.forwardRef<
   HTMLDivElement,
@@ -26,10 +27,22 @@ const IsTrap = React.forwardRef<
         As mentorias podem ser agendadas 2 vezes por semana (com papos de 30
         minutos).
       </Paragraph>
+      <SubSubTitle>Poxa, não tem como furar a fila?</SubSubTitle>
       <Paragraph>
-        Caso você não queira esperar, então é possível realizar uma mentoria{" "}
-        <Hightlight>Premium</Hightlight>, com um valor simbólico de{" "}
-        <Hightlight>R$ 100,00</Hightlight>.
+        Caso você não queira esperar, estou também disponibilizando uma mentoria{" "}
+        <Hightlight>Pro</Hightlight>, com o valor de{" "}
+        <Hightlight>R$ 120,00</Hightlight> por{" "}
+        <Hightlight>45 minutos</Hightlight>.
+      </Paragraph>
+      <Paragraph>
+        Marque uma mentoria <Hightlight>pro</Hightlight> comigo clicando em{" "}
+        <Button
+          variant={"link"}
+          className="font-fira"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <Hightlight className="underline">Mentoria Pro</Hightlight>
+        </Button>
       </Paragraph>
       <Paragraph>
         Por enquanto, basta enviar um e-mail para:{" "}

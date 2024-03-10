@@ -27,6 +27,7 @@ import { useUserState } from "@/hooks/use-user-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypeMentoring } from "@/types/type-mentoring";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function InviteForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +52,7 @@ export function InviteForm() {
       const response = await api.get("admin/mentoring/done");
       setMentoring(response.data);
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoadingMentoring(false);
     }
@@ -73,8 +74,9 @@ export function InviteForm() {
         await api.post(url, data);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_INVITE] });
+      dispatchSuccess("Convite salvo com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);

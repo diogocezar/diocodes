@@ -27,6 +27,7 @@ import { useUserState } from "@/hooks/use-user-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { TypePerson } from "@/types/type-person";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function UserForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +54,7 @@ export function UserForm() {
       const response = await api.get("admin/person");
       setPersons(response.data);
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoadingPerson(false);
     }
@@ -75,8 +76,9 @@ export function UserForm() {
         await api.post(url, data);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_USER] });
+      dispatchSuccess("Usuário salvo com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);

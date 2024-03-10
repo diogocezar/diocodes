@@ -31,6 +31,7 @@ import { MultiSelect } from "@/components/ui/multi-select";
 import { TypeTag } from "@/types/type-tag";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function AvaliationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +68,7 @@ export function AvaliationForm() {
       rating: [1],
     },
   });
+
   const setValue = form.setValue;
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export function AvaliationForm() {
       const response = await api.get("admin/mentoring/done");
       setMentoring(response.data);
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoadingMentoring(false);
     }
@@ -104,7 +106,7 @@ export function AvaliationForm() {
       });
       setTag(data);
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoadingTag(false);
     }
@@ -137,8 +139,9 @@ export function AvaliationForm() {
         await api.post(url, formData);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_AVALIATION] });
+      dispatchSuccess("Avaliação salva com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);

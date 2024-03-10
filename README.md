@@ -90,10 +90,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Resolver a sincronização;
 - [x] Criar proteção das rotas privadas;
 - [x] Separar todos os filtros das colunas em funções;
-- [ ] Sonner de erros na tentativa de cadastrar os formulários;
+- [x] Sonner de erros na tentativa de cadastrar os formulários;
+- [x] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
+- [x] Próxima semana disponível na página principal;
+- [x] Criar botão de mentoria pro;
+- [ ] Destacar mentorias pro na página principal;
 - [ ] Criar botão de reenvio do convite;
-- [ ] Criar página de erros;
-- [ ] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
 
 ## 🖥️ Tecnologias
 

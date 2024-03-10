@@ -20,6 +20,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { usePersonState } from "@/hooks/use-person-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
+import { dispatchError, dispatchSuccess } from "@/lib/toast";
 
 export function PersonForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,8 +52,9 @@ export function PersonForm() {
         await api.post(url, data);
       }
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_PERSON] });
+      dispatchSuccess("Pessoa salva com sucesso!");
     } catch (error) {
-      console.error(error);
+      dispatchError(error);
     } finally {
       setIsLoading(false);
       setIsOpenForm(false);
