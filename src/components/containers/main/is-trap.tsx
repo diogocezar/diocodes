@@ -44,10 +44,6 @@ const IsTrap = React.forwardRef<
           <Hightlight className="underline">Mentoria Pro</Hightlight>
         </Button>
       </Paragraph>
-      <Paragraph>
-        Por enquanto, basta enviar um e-mail para:{" "}
-        <Hightlight>diogo@diogocezar.com</Hightlight>
-      </Paragraph>
     </>
   );
 });
