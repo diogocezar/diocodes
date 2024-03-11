@@ -101,6 +101,28 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 
 https://time.openstatus.dev/
 https://craft.mxkaske.dev/post/fancy-multi-select
+https://dev.to/marcelomichels/criando-e-restaurando-backup-no-mongodb-5f41
+
+## Backup do Mongo
+
+```bash
+mongodump --uri "mongodb://mongodb0.example.com:27017" --gzip -d nomedobanco
+
+mongorestore --uri "mongodb://mongodb0.example.com:27017" --gzip ./dump/
+
+mongorestore --uri "mongodb://mongodb0.example.com:27017" --gzip ./dump/nomedobanco -d nomedobanco
+```
+
+### Script para realizar backup do Banco de Dados
+
+```bash
+mongodump --uri "mongodb://mongodb0.example.com:27017" --gzip
+D=$(date '+%Y-%m-%d-%H')
+zip -r $D.zip ./dump/
+aws s3 cp $D.zip s3://<s3-bucket-name>/$D --profile michels
+rm -rf ./dump/
+rm -f $D.zip
+```
 
 ## 📦 Instalação
 
