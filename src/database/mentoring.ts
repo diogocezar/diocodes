@@ -107,6 +107,11 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
       include: {
         host: true,
         attendee: true,
+        avaliation: {
+          where: {
+            removedAt: null,
+          },
+        },
         invite: {
           where: {
             removedAt: null,

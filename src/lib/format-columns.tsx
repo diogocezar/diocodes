@@ -2,6 +2,12 @@ import { Badge } from "@/components/ui/badge";
 import { Star, Circle } from "@phosphor-icons/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CAL } from "@/contants/cal";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);
@@ -38,6 +44,10 @@ export const formatSelect = (row: any) => {
 };
 
 export const formatSelectWithDots = (row: any) => {
+  const hasInvite = row.original?.invite.length > 0;
+  const hasAvaliation = row.original?.avaliation === null;
+  console.log(hasAvaliation);
+  const isPast = new Date(row.original?.startTime) < new Date();
   return (
     <div className="flex flex-row items-center gap-4">
       <Checkbox
@@ -45,14 +55,57 @@ export const formatSelectWithDots = (row: any) => {
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
       />
-      {row.original?.invite.length > 0 ? (
-        <Circle weight="fill" className="text-green h-5 w-5" />
+      {hasInvite ? (
+        hasAvaliation ? (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Circle className="text-pink h-5 w-5 cursor-pointer" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Já foi enviado um convite</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        ) : (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Circle
+                  weight="fill"
+                  className="text-green h-5 w-5 cursor-pointer"
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Já possui uma avaliação</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )
       ) : (
         <div>
-          {new Date(row.original?.startTime) < new Date() ? (
-            <Circle className="text-green h-5 w-5 opacity-20" />
+          {isPast ? (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Circle className="text-green h-5 w-5 cursor-pointer" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Já aconteceu!</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           ) : (
-            <Circle className="h-5 w-5 opacity-20" />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Circle className="h-5 w-5 cursor-pointer opacity-50" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Está agendado</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
       )}

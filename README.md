@@ -96,6 +96,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar botão de mentoria pro;
 - [x] Destacar mentorias pro na página principal;
 - [x] Criar botão de reenvio do convite;
+- [x] Diferenciar mentorias que já foram avaliadas;
+- [ ] Colocar a média de avaliações na página principal;
+- [ ] Colocar depoimentos na página principal;
 
 ## 🖥️ Tecnologias
 
