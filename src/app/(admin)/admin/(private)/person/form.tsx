@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SchemaPerson } from "@/schemas/schema-person";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -33,12 +33,17 @@ export function PersonForm() {
     resolver: zodResolver(SchemaPerson),
     defaultValues: { name: "", email: "" },
   });
+
   const setValue = form.setValue;
 
-  useEffect(() => {
+  const bootstrap = useCallback(() => {
     setValue("name", selectedItem.name || "");
     setValue("email", selectedItem.email || "");
-  }, [selectedItem, setValue]);
+  }, [setValue, selectedItem]);
+
+  useEffect(() => {
+    bootstrap();
+  }, [bootstrap]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaPerson>) => {
     try {

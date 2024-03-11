@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SchemaTag } from "@/schemas/schema-tag";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -33,11 +33,16 @@ export function TagForm() {
     resolver: zodResolver(SchemaTag),
     defaultValues: { name: "" },
   });
+
   const setValue = form.setValue;
 
-  useEffect(() => {
+  const bootstrap = useCallback(() => {
     setValue("name", selectedItem.name || "");
-  }, [selectedItem, setValue]);
+  }, [setValue, selectedItem]);
+
+  useEffect(() => {
+    bootstrap();
+  }, [bootstrap]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaTag>) => {
     try {

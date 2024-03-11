@@ -25,42 +25,30 @@ import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
-import { TypeMentoring } from "@/types/type-mentoring";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useInviteState } from "@/hooks/use-invite-state";
+import { useGetMentoring } from "@/hooks/use-get-mentoring";
 
 export function InviteForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
-  const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
   const isOpenForm = useInviteState((state) => state.isOpenForm);
   const setIsOpenForm = useInviteState((state) => state.setIsOpenForm);
   const selectedItem = useInviteState((state) => state.selectedItem);
   const queryClient = useQueryClient();
+  const { mentoring, isLoadingMentoring } = useGetMentoring();
   const url = "/admin/invite";
   const form = useForm<z.infer<typeof SchemaInvite>>({
     resolver: zodResolver(SchemaInvite),
   });
   const setValue = form.setValue;
-  useEffect(() => {
+
+  const bootstrap = useCallback(() => {
     setValue("mentoringId", selectedItem?.mentoring?.id || "");
-  }, [selectedItem, setValue]);
-
-  const getMentoring = useCallback(async () => {
-    try {
-      setIsLoadingMentoring(true);
-      const response = await api.get("admin/mentoring/done");
-      setMentoring(response.data);
-    } catch (error) {
-      dispatchError(error);
-    } finally {
-      setIsLoadingMentoring(false);
-    }
-  }, []);
+  }, [setValue, selectedItem]);
 
   useEffect(() => {
-    getMentoring();
-  }, [getMentoring]);
+    bootstrap();
+  }, [bootstrap]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaInvite>) => {
     try {

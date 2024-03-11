@@ -10,21 +10,21 @@ import { DataTable } from "@/components/ui/data-table";
 import { AvaliationForm } from "@/app/(admin)/admin/(private)/avaliation/form";
 import { api } from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useMentoringState } from "@/hooks/use-mentoring-state";
+import { useAvaliationState } from "@/hooks/use-avaliation-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 
 export default function AdminMentoringPage() {
   const queryClient = useQueryClient();
-  const setIsOpenForm = useMentoringState((state) => state.setIsOpenForm);
-  const isOpenConfirmDelete = useMentoringState(
+  const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
+  const isOpenConfirmDelete = useAvaliationState(
     (state) => state.isOpenConfirmDelete,
   );
-  const setIsOpenConfirmDelete = useMentoringState(
+  const setIsOpenConfirmDelete = useAvaliationState(
     (state) => state.setIsOpenConfirmDelete,
   );
-  const setSelectedItem = useMentoringState((state) => state.setSelectedItem);
-  const selectedItem = useMentoringState((state) => state.selectedItem);
+  const setSelectedItem = useAvaliationState((state) => state.setSelectedItem);
+  const selectedItem = useAvaliationState((state) => state.selectedItem);
   const url = "/admin/avaliation";
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.ADMIN_AVALIATION],

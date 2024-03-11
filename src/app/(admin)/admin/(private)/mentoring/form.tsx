@@ -35,48 +35,36 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMentoringState } from "@/hooks/use-mentoring-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
-import { TypePerson } from "@/types/type-person";
 import { Textarea } from "@/components/ui/textarea";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
+import { useGetPerson } from "@/hooks/use-get-person";
 
 export function MentoringForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPerson, setIsLoadingPerson] = useState(false);
-  const [persons, setPersons] = useState<TypePerson[]>([]);
   const isOpenForm = useMentoringState((state) => state.isOpenForm);
   const setIsOpenForm = useMentoringState((state) => state.setIsOpenForm);
   const selectedItem = useMentoringState((state) => state.selectedItem);
   const queryClient = useQueryClient();
+  const { person, isLoadingPerson } = useGetPerson();
   const url = "/admin/mentoring";
 
   const form = useForm<z.infer<typeof SchemaMentoring>>({
     resolver: zodResolver(SchemaMentoring),
   });
+
   const setValue = form.setValue;
 
-  useEffect(() => {
+  const bootstrap = useCallback(() => {
     setValue("hostId", selectedItem?.host?.id || "");
     setValue("attendeeId", selectedItem?.attendee?.id || "");
     setValue("startTime", selectedItem?.startTime || new Date());
     setValue("endTime", selectedItem?.endTime || new Date());
     setValue("externalMessage", selectedItem?.externalMessage || "");
-  }, [selectedItem, setValue]);
-
-  const getPersons = useCallback(async () => {
-    try {
-      setIsLoadingPerson(true);
-      const response = await api.get("admin/person");
-      setPersons(response.data);
-    } catch (error) {
-      dispatchError(error);
-    } finally {
-      setIsLoadingPerson(false);
-    }
-  }, []);
+  }, [setValue, selectedItem]);
 
   useEffect(() => {
-    getPersons();
-  }, [getPersons]);
+    bootstrap();
+  }, [bootstrap]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaMentoring>) => {
     try {
@@ -100,6 +88,7 @@ export function MentoringForm() {
   };
 
   const disabledStartDate = useCallback((date: Date) => date < new Date(), []);
+
   const disabledEndDate = useCallback(
     (date: Date) => date < form.getValues("startTime"),
     [form],
@@ -138,9 +127,9 @@ export function MentoringForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {persons.map((person, index) => (
-                            <SelectItem key={index} value={person?.id}>
-                              {person?.name}
+                          {person.map((item, index) => (
+                            <SelectItem key={index} value={item?.id}>
+                              {item?.name}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -165,9 +154,9 @@ export function MentoringForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {persons.map((person, index) => (
-                            <SelectItem key={index} value={person?.id}>
-                              {person?.name}
+                          {person.map((item, index) => (
+                            <SelectItem key={index} value={item?.id}>
+                              {item?.name}
                             </SelectItem>
                           ))}
                         </SelectContent>

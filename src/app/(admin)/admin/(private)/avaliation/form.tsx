@@ -23,43 +23,40 @@ import {
 import { Spinner } from "@phosphor-icons/react";
 import { api } from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMentoringState } from "@/hooks/use-mentoring-state";
 import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
-import { TypeMentoring } from "@/types/type-mentoring";
 import { MultiSelect } from "@/components/ui/multi-select";
-import { TypeTag } from "@/types/type-tag";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useAvaliationState } from "@/hooks/use-avaliation-state";
+import { useGetMentoring } from "@/hooks/use-get-mentoring";
+import { useGetTag } from "@/hooks/use-get-tag";
 
-type TypeLocalItems = Record<"value" | "label", string>;
-
-type TypeLocalTag = {
+type TypeAvaliationTag = {
   tag: {
     id: number;
     name: string;
   };
 };
 
-type TypeLocalFormatTag = TypeLocalTag | { label: string; value: number };
+type TypeAvaliationFormatTag =
+  | TypeAvaliationTag
+  | { label: string; value: number };
 
 export function AvaliationForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingMentoring, setIsLoadingMentoring] = useState(false);
-  const [isLoadingTag, setIsLoadingTag] = useState(false);
-  const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
-  const [tag, setTag] = useState<TypeLocalItems[]>([]);
   const isOpenForm = useAvaliationState((state) => state.isOpenForm);
   const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
   const selectedItem = useAvaliationState((state) => state.selectedItem);
   const queryClient = useQueryClient();
+  const { mentoring, isLoadingMentoring } = useGetMentoring();
+  const { tag, isLoadingTag } = useGetTag();
   const url = "/admin/avaliation";
 
-  const formatTags = (tags: TypeLocalFormatTag[]) => {
+  const formatTags = (tags: TypeAvaliationFormatTag[]) => {
     if (!tags) return [];
-    return tags.map((item: TypeLocalFormatTag) => {
+    return tags.map((item: TypeAvaliationFormatTag) => {
       if ("tag" in item) {
         return {
           label: item.tag?.name,
@@ -99,44 +96,6 @@ export function AvaliationForm() {
   useEffect(() => {
     bootstrap();
   }, [bootstrap]);
-
-  const getMentoring = useCallback(async () => {
-    try {
-      setIsLoadingMentoring(true);
-      const response = await api.get("admin/mentoring/done");
-      setMentoring(response.data);
-    } catch (error) {
-      dispatchError(error);
-    } finally {
-      setIsLoadingMentoring(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getMentoring();
-  }, [getMentoring]);
-
-  const getTag = useCallback(async () => {
-    try {
-      setIsLoadingTag(true);
-      const response = await api.get("admin/tag");
-      const data = response.data.map((item: TypeTag) => {
-        return {
-          label: item.name,
-          value: item.id,
-        };
-      });
-      setTag(data);
-    } catch (error) {
-      dispatchError(error);
-    } finally {
-      setIsLoadingTag(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getTag();
-  }, [getTag]);
 
   const handleSubmit = async (data: z.infer<typeof SchemaAvaliation>) => {
     try {
@@ -272,6 +231,7 @@ export function AvaliationForm() {
                   <FormLabel>Comentrário</FormLabel>
                   <FormControl>
                     <Textarea
+                      className="min-h-[200px]"
                       placeholder="Foi muito boa a mentoria."
                       {...field}
                     />
