@@ -102,7 +102,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Padronizar ações dos botões de editar, criar e excluir;
 - [x] Destacar linhas que são PRO;
 - [x] Colocar badge PRO;
-- [ ] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
+- [x] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
 - [ ] Enviar e-mail quando avaliação for respondida;
 - [ ] Menu Fixed e Scroll somente na parte do conteúdo;
 - [ ] Colocar a média de avaliações na página principal;

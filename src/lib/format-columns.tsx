@@ -39,6 +39,10 @@ export const formatType = (row: any) => {
   );
 };
 
+export const formatTagQuantity = (row: any) => {
+  return row.original?.avaliationTags?.length || 0;
+};
+
 export const formatAttendee = (row: any) => {
   const { original } = row;
   const { attendee } = original;
