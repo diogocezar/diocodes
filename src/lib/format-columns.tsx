@@ -22,9 +22,21 @@ export const formatExternalMessage = (row: any) => {
 };
 
 export const formatType = (row: any) => {
-  return row?.original?.externalEventId === CAL.MENTORING_FREE
-    ? "Grátis"
-    : "Pro";
+  return row?.original?.externalEventId === CAL.MENTORING_FREE ? (
+    <Badge
+      className="bg-background text-foreground rounded-md px-4 py-1 text-xs font-normal"
+      variant="secondary"
+    >
+      Free
+    </Badge>
+  ) : (
+    <Badge
+      className="bg-green text-background rounded-md px-4 py-1 text-xs font-bold"
+      variant="secondary"
+    >
+      Pro
+    </Badge>
+  );
 };
 
 export const formatAttendee = (row: any) => {
