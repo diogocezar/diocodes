@@ -121,7 +121,9 @@ export function AvaliationForm() {
       } else {
         await api.post(url, formData);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_AVALIATION] });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.ADMIN_AVALIATION],
+      });
       dispatchSuccess("Avaliação salva com sucesso!");
     } catch (error) {
       dispatchError(error);

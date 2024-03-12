@@ -56,7 +56,9 @@ export function PersonForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_PERSON] });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.ADMIN_PERSON],
+      });
       dispatchSuccess("Pessoa salva com sucesso!");
     } catch (error) {
       dispatchError(error);

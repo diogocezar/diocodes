@@ -9,13 +9,13 @@ import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { UserForm } from "@/app/(admin)/admin/(private)/user/form";
 import { api } from "@/services/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useUserState } from "@/hooks/use-user-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
+import { useControls } from "@/hooks/use-controls";
 
 export default function AdminUserPage() {
-  const queryClient = useQueryClient();
   const setIsOpenForm = useUserState((state) => state.setIsOpenForm);
   const isOpenConfirmDelete = useUserState(
     (state) => state.isOpenConfirmDelete,
@@ -25,42 +25,29 @@ export default function AdminUserPage() {
   );
   const setSelectedItem = useUserState((state) => state.setSelectedItem);
   const selectedItem = useUserState((state) => state.selectedItem);
-  const url = "/admin/user";
+
+  const URL = "/admin/user";
+
+  const { handleConfirmDelete, handleDelete, handleEdit, handleCreate } =
+    useControls({
+      url: URL,
+      queryKey: QUERY_KEY.ADMIN_PERSON,
+      setSelectedItem,
+      setIsOpenConfirmDelete,
+      selectedItem,
+      setIsOpenForm,
+    });
+
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.ADMIN_USER],
     queryFn: async () => {
-      const { data } = await api.get(url);
+      const { data } = await api.get(URL);
       return data;
     },
   });
 
   const dataTableColumns = columns(isLoading);
 
-  const handleConfirmDelete = (item: any) => {
-    setSelectedItem(item);
-    setIsOpenConfirmDelete(true);
-  };
-
-  const handleDelete = async () => {
-    const items = selectedItem;
-    const idsToDelete = items.map((item: any) => item.original.id);
-    await api.delete(url, {
-      data: { idsToDelete: idsToDelete },
-    });
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_USER],
-    });
-  };
-
-  const handleEdit = async (item: any) => {
-    setSelectedItem(item[0].original);
-    setIsOpenForm(true);
-  };
-
-  const handleCreate = () => {
-    setSelectedItem({});
-    setIsOpenForm(true);
-  };
   return (
     <>
       <div className="flex-1 p-8 pt-6">

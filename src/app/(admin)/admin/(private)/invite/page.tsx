@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useInviteState } from "@/hooks/use-invite-state";
+import { useControls } from "@/hooks/use-controls";
 
 function AditionalButtons({ table }: any) {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +41,7 @@ function AditionalButtons({ table }: any) {
             dispatchError("Houve um erro ao enviar o e-mail");
           } finally {
             setIsLoading(false);
-            queryClient.invalidateQueries({
+            await queryClient.invalidateQueries({
               queryKey: [QUERY_KEY.ADMIN_MENTORING],
             });
           }
@@ -64,7 +65,6 @@ function AditionalButtons({ table }: any) {
 }
 
 export default function AdminInvitePage() {
-  const queryClient = useQueryClient();
   const setIsOpenForm = useInviteState((state) => state.setIsOpenForm);
   const isOpenConfirmDelete = useInviteState(
     (state) => state.isOpenConfirmDelete,
@@ -74,42 +74,29 @@ export default function AdminInvitePage() {
   );
   const setSelectedItem = useInviteState((state) => state.setSelectedItem);
   const selectedItem = useInviteState((state) => state.selectedItem);
-  const url = "/admin/invite";
+
+  const URL = "/admin/invite";
+
+  const { handleConfirmDelete, handleDelete, handleEdit, handleCreate } =
+    useControls({
+      url: URL,
+      queryKey: QUERY_KEY.ADMIN_INVITE,
+      setSelectedItem,
+      setIsOpenConfirmDelete,
+      selectedItem,
+      setIsOpenForm,
+    });
+
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.ADMIN_INVITE],
     queryFn: async () => {
-      const { data } = await api.get(url);
+      const { data } = await api.get(URL);
       return data;
     },
   });
 
   const dataTableColumns = columns(isLoading);
 
-  const handleConfirmDelete = (item: any) => {
-    setSelectedItem(item);
-    setIsOpenConfirmDelete(true);
-  };
-
-  const handleDelete = async () => {
-    const items = selectedItem;
-    const idsToDelete = items.map((item: any) => item.original.id);
-    await api.delete(url, {
-      data: { idsToDelete: idsToDelete },
-    });
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_INVITE],
-    });
-  };
-
-  const handleEdit = async (item: any) => {
-    setSelectedItem(item[0].original);
-    setIsOpenForm(true);
-  };
-
-  const handleCreate = () => {
-    setSelectedItem({});
-    setIsOpenForm(true);
-  };
   return (
     <>
       <div className="flex-1 p-8 pt-6">

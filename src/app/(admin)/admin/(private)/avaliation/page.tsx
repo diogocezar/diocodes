@@ -9,13 +9,13 @@ import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { AvaliationForm } from "@/app/(admin)/admin/(private)/avaliation/form";
 import { api } from "@/services/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useAvaliationState } from "@/hooks/use-avaliation-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
+import { useControls } from "@/hooks/use-controls";
 
 export default function AdminMentoringPage() {
-  const queryClient = useQueryClient();
   const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
   const isOpenConfirmDelete = useAvaliationState(
     (state) => state.isOpenConfirmDelete,
@@ -25,42 +25,29 @@ export default function AdminMentoringPage() {
   );
   const setSelectedItem = useAvaliationState((state) => state.setSelectedItem);
   const selectedItem = useAvaliationState((state) => state.selectedItem);
-  const url = "/admin/avaliation";
+
+  const URL = "/admin/avaliation";
+
+  const { handleConfirmDelete, handleDelete, handleEdit, handleCreate } =
+    useControls({
+      url: URL,
+      queryKey: QUERY_KEY.ADMIN_AVALIATION,
+      setSelectedItem,
+      setIsOpenConfirmDelete,
+      selectedItem,
+      setIsOpenForm,
+    });
+
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.ADMIN_AVALIATION],
     queryFn: async () => {
-      const { data } = await api.get(url);
+      const { data } = await api.get(URL);
       return data;
     },
   });
 
   const dataTableColumns = columns(isLoading);
 
-  const handleConfirmDelete = (item: any) => {
-    setSelectedItem(item);
-    setIsOpenConfirmDelete(true);
-  };
-
-  const handleDelete = async () => {
-    const items = selectedItem;
-    const idsToDelete = items.map((item: any) => item.original.id);
-    await api.delete(url, {
-      data: { idsToDelete: idsToDelete },
-    });
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_AVALIATION],
-    });
-  };
-
-  const handleEdit = async (item: any) => {
-    setSelectedItem(item[0].original);
-    setIsOpenForm(true);
-  };
-
-  const handleCreate = () => {
-    setSelectedItem({});
-    setIsOpenForm(true);
-  };
   return (
     <>
       <div className="flex-1 p-8 pt-6">

@@ -9,13 +9,13 @@ import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { TagForm } from "@/app/(admin)/admin/(private)/tag/form";
 import { api } from "@/services/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useTagState } from "@/hooks/use-tag-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
+import { useControls } from "@/hooks/use-controls";
 
 export default function AdminAvaliationTagPage() {
-  const queryClient = useQueryClient();
   const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
   const isOpenConfirmDelete = useTagState((state) => state.isOpenConfirmDelete);
   const setIsOpenConfirmDelete = useTagState(
@@ -23,41 +23,28 @@ export default function AdminAvaliationTagPage() {
   );
   const setSelectedItem = useTagState((state) => state.setSelectedItem);
   const selectedItem = useTagState((state) => state.selectedItem);
-  const url = "/admin/tag";
+
+  const URL = "/admin/tag";
+
+  const { handleConfirmDelete, handleDelete, handleEdit, handleCreate } =
+    useControls({
+      url: URL,
+      queryKey: QUERY_KEY.ADMIN_TAG,
+      setSelectedItem,
+      setIsOpenConfirmDelete,
+      selectedItem,
+      setIsOpenForm,
+    });
+
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.ADMIN_TAG],
     queryFn: async () => {
-      const { data } = await api.get(url);
+      const { data } = await api.get(URL);
       return data;
     },
   });
+
   const dataTableColumns = columns(isLoading);
-
-  const handleConfirmDelete = (item: any) => {
-    setSelectedItem(item);
-    setIsOpenConfirmDelete(true);
-  };
-
-  const handleDelete = async () => {
-    const items = selectedItem;
-    const idsToDelete = items.map((item: any) => item.original.id);
-    await api.delete(url, {
-      data: { idsToDelete: idsToDelete },
-    });
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEY.ADMIN_TAG],
-    });
-  };
-
-  const handleEdit = async (item: any) => {
-    setSelectedItem(item[0].original);
-    setIsOpenForm(true);
-  };
-
-  const handleCreate = () => {
-    setSelectedItem({});
-    setIsOpenForm(true);
-  };
 
   return (
     <>

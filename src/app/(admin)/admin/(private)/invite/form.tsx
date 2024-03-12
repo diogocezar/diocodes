@@ -61,7 +61,9 @@ export function InviteForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_INVITE] });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.ADMIN_INVITE],
+      });
       dispatchSuccess("Convite salvo com sucesso!");
     } catch (error) {
       dispatchError(error);

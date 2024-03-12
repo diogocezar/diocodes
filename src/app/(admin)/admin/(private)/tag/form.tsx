@@ -55,7 +55,7 @@ export function TagForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.ADMIN_TAG],
       });
       dispatchSuccess("Tag salva com sucesso!");

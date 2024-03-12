@@ -65,7 +65,7 @@ export function UserForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_USER] });
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_USER] });
       dispatchSuccess("Usuário salvo com sucesso!");
     } catch (error) {
       dispatchError(error);

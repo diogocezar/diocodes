@@ -77,7 +77,9 @@ export function MentoringForm() {
       } else {
         await api.post(url, data);
       }
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_MENTORING] });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.ADMIN_MENTORING],
+      });
       dispatchSuccess("Mentoria salva com sucesso!");
     } catch (error) {
       dispatchError(error);

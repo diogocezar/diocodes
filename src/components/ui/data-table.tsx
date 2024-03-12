@@ -129,7 +129,6 @@ export function DataTable({
             })}
           <Button
             onClick={() => {
-              console.log("Passou aqui!");
               handleCreate(table.getFilteredSelectedRowModel().rows);
             }}
             className="flex flex-row gap-2 rounded-lg"
