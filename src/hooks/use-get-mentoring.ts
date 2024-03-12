@@ -17,7 +17,7 @@ export const useGetMentoring = (url: string = "admin/mentoring/done") => {
     } finally {
       setIsLoadingMentoring(false);
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     getMentoring();

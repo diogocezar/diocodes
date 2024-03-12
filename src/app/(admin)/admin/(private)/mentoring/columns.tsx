@@ -6,7 +6,7 @@ import {
   formatCreatedAt,
   formatDate,
   formatExternalMessage,
-  formatSelectWithDots,
+  formatSelectMentoring,
   formatType,
 } from "@/lib/format-columns";
 import { formatHeader, formatHeaderSelect } from "@/lib/format-columns-header";
@@ -26,7 +26,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       size: 10,
       accessorKey: "select",
       header: ({ table }) => formatHeaderSelect(isLoading, table),
-      cell: ({ row }) => formatSelectWithDots(row),
+      cell: ({ row }) => formatSelectMentoring(row),
       enableSorting: false,
       enableHiding: false,
     },

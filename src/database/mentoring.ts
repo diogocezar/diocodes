@@ -134,8 +134,21 @@ export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
         removedAt: null,
         startTime: { lte: new Date() },
       },
-      include: { host: true, attendee: true, invite: true, avaliation: true },
-      orderBy: { startTime: "asc" },
+      include: {
+        host: true,
+        attendee: true,
+        avaliation: {
+          where: {
+            removedAt: null,
+          },
+        },
+        invite: {
+          where: {
+            removedAt: null,
+          },
+        },
+      },
+      orderBy: { startTime: "desc" },
     });
     return result;
   } catch (error) {

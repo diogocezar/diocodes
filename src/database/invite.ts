@@ -44,7 +44,14 @@ export const getAllInvites = async (): Promise<any[]> => {
     const result = await db.invite.findMany({
       where: { removedAt: null },
       include: {
-        mentoring: { include: { attendee: true, host: true } },
+        mentoring: {
+          include: {
+            attendee: true,
+            host: true,
+            invite: true,
+            avaliation: true,
+          },
+        },
       },
     });
     return result;

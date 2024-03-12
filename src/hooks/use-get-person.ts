@@ -17,7 +17,7 @@ export const useGetPerson = (url: string = "admin/person") => {
     } finally {
       setIsLoadingPerson(false);
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     getPerson();

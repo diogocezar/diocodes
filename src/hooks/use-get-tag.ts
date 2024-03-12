@@ -25,7 +25,7 @@ export const useGetTag = (url: string = "admin/tag") => {
     } finally {
       setIsLoadingTag(false);
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     getTag();

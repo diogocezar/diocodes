@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TypeInvite } from "@/types/type-invite";
 import {
   formatMentoring,
-  formatSelect,
+  formatSelectInvite,
   formatDate,
   formatCreatedAt,
 } from "@/lib/format-columns";
@@ -22,7 +22,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeInvite>[] => {
       size: 10,
       accessorKey: "select",
       header: ({ table }) => formatHeaderSelect(isLoading, table),
-      cell: ({ row }) => formatSelect(row),
+      cell: ({ row }) => formatSelectInvite(row),
       enableSorting: false,
       enableHiding: false,
     },

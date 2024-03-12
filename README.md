@@ -97,6 +97,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Destacar mentorias pro na página principal;
 - [x] Criar botão de reenvio do convite;
 - [x] Diferenciar mentorias que já foram avaliadas;
+- [x] Ordenar os convites pela data (DESC);
+- [x] Colocar Dots de Avaliação Realizada nos Convites;
+- [ ] Destacar linhas que são PRO;
+- [ ] Colocar badge PRO;
+- [ ] Enviar e-mail quando avaliação for respondida;
+- [ ] Menu Fixed e Scroll somente na parte do conteúdo;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
 

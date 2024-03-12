@@ -24,7 +24,7 @@ export const formatExternalMessage = (row: any) => {
 export const formatType = (row: any) => {
   return row?.original?.externalEventId === CAL.MENTORING_FREE
     ? "Grátis"
-    : "Premium";
+    : "Pro";
 };
 
 export const formatAttendee = (row: any) => {
@@ -43,10 +43,9 @@ export const formatSelect = (row: any) => {
   );
 };
 
-export const formatSelectWithDots = (row: any) => {
+export const formatSelectMentoring = (row: any) => {
   const hasInvite = row.original?.invite.length > 0;
   const hasAvaliation = row.original?.avaliation === null;
-  console.log(hasAvaliation);
   const isPast = new Date(row.original?.startTime) < new Date();
   return (
     <div className="flex flex-row items-center gap-4">
@@ -108,6 +107,45 @@ export const formatSelectWithDots = (row: any) => {
             </TooltipProvider>
           )}
         </div>
+      )}
+    </div>
+  );
+};
+
+export const formatSelectInvite = (row: any) => {
+  const hasAvaliation = row.original.mentoring.avaliation;
+  return (
+    <div className="flex flex-row items-center gap-4">
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+      {hasAvaliation ? (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Circle
+                weight="fill"
+                className="text-green h-5 w-5 cursor-pointer"
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Avaliação já foi enviada</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ) : (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Circle className="text-green h-5 w-5 cursor-pointer" />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Ainda não enviou a avaliação</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
     </div>
   );
