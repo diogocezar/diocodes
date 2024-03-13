@@ -24,7 +24,7 @@ export default function Nav() {
   const { image, name } = session?.user || {};
   const pathname = usePathname().replace("/admin/", "");
   return (
-    <div className="bg-background-dark flex w-[240px] min-w-[240px] flex-col gap-4 overflow-y-auto px-4 py-6">
+    <div className="bg-background-dark fixed flex h-screen w-[240px] min-w-[240px] flex-col gap-4 overflow-y-auto px-4 py-6">
       <div className="flex h-full flex-col justify-between">
         <div className="flex flex-col gap-4">
           <div className="flex h-14 w-full flex-row items-center gap-4">

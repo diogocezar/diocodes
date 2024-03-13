@@ -103,8 +103,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Destacar linhas que são PRO;
 - [x] Colocar badge PRO;
 - [x] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
+- [x] Menu Fixed e Scroll somente na parte do conteúdo;
 - [ ] Enviar e-mail quando avaliação for respondida;
-- [ ] Menu Fixed e Scroll somente na parte do conteúdo;
+- [ ] Ao realizar uma ação, desselecionar os ítens da tabela;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
 
