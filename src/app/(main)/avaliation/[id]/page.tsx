@@ -77,6 +77,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
     setRating(newRating);
   };
   const handleTagSelect = (selectedTagsParam: string[]) => {
+    console.log(selectedTagsParam);
     setSelectedTag(selectedTagsParam);
   };
 
@@ -92,11 +93,12 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
     try {
       setIsLoadingSubmit(true);
       const avaliationTags = selectedTag.map((item) => {
-        return { id: item };
+        return { id: item.id, name: item.name };
       });
       const response = await api.post(`avaliation`, {
         rating,
         mentoringId: params.id,
+        mentoring,
         avaliationTags: avaliationTags,
         comment: data.comment,
       });

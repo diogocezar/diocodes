@@ -32,12 +32,12 @@ export const createAvaliation = async (
         where,
         data: { removedAt: new Date() },
       });
-      await db.avaliation.update({
+      return await db.avaliation.update({
         where: { id: exists.id },
         data: { ...data, removedAt: null, updatedAt: new Date() },
       });
     } else {
-      await db.avaliation.create({
+      return await db.avaliation.create({
         data,
       });
     }
@@ -68,7 +68,7 @@ export const updateAvaliation = async (
       updatedAt: new Date(),
       removedAt: null,
     };
-    await db.avaliation.update({
+    return await db.avaliation.update({
       where: { id },
       data,
     });
@@ -94,7 +94,7 @@ export const removeAvaliation = async (data: any) => {
 
 export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   try {
-    const result = await db.avaliation.findMany({
+    return await db.avaliation.findMany({
       where: {
         removedAt: null,
       },
@@ -108,7 +108,6 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
         mentoring: { include: { attendee: true, host: true } },
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -117,10 +116,9 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
 
 export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
-    const result = await db.avaliation.findUnique({
+    return await db.avaliation.findUnique({
       where: { id, removedAt: null },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }

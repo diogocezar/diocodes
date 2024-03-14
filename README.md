@@ -104,7 +104,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Colocar badge PRO;
 - [x] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
 - [x] Menu Fixed e Scroll somente na parte do conteúdo;
-- [ ] Enviar e-mail quando avaliação for respondida;
+- [x] Enviar e-mail quando avaliação for respondida;
+- [ ] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
+- [ ] Rever todos os retornos dos databases de acordo com `avalitaion.ts`;
 - [ ] Ao realizar uma ação, desselecionar os ítens da tabela;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;

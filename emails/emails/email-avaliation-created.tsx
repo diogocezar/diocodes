@@ -21,7 +21,6 @@ interface EmailAvaliationCreatedProps {
   comment: string;
   startTime: Date;
 }
-
 export const EmailAvaliationCreated = ({
   attendee,
   rating,
@@ -32,11 +31,11 @@ export const EmailAvaliationCreated = ({
   const normalizedValue = Math.min(Math.max(rating, 1), 5);
   const filledStars = Array.from(
     { length: normalizedValue },
-    (_, index) => index + 1,
+    (_, index) => index + 1
   );
   const emptyStars = Array.from(
     { length: 5 - normalizedValue },
-    (_, index) => index + 1 + normalizedValue,
+    (_, index) => index + 1 + normalizedValue
   );
   return (
     <Html>
@@ -76,7 +75,11 @@ export const EmailAvaliationCreated = ({
               <Text className="text-base leading-8 text-[#020817]">
                 A mentoria foi realizada em{" "}
                 <span className="font-bold text-[#ff79c6]">
-                  {`${new Date(startTime).toLocaleDateString("pt-BR")} - ${new Date(startTime).toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo" })}`}
+                  {`${new Date(startTime).toLocaleDateString(
+                    "pt-BR"
+                  )} - ${new Date(startTime).toLocaleTimeString("pt-BR", {
+                    timeZone: "America/Sao_Paulo",
+                  })}`}
                 </span>
               </Text>
               <Text className="text-base leading-8 text-[#020817]">
@@ -107,9 +110,9 @@ export const EmailAvaliationCreated = ({
                           d="M135.34,28.9l23.23,55.36a8,8,0,0,0,6.67,4.88l59.46,5.14a8,8,0,0,1,4.54,14.07L184.13,147.7a8.08,8.08,0,0,0-2.54,7.89l13.52,58.54a8,8,0,0,1-11.89,8.69l-51.1-31a7.93,7.93,0,0,0-8.24,0l-51.1,31a8,8,0,0,1-11.89-8.69l13.52-58.54a8.08,8.08,0,0,0-2.54-7.89L26.76,108.35A8,8,0,0,1,31.3,94.28l59.46-5.14a8,8,0,0,0,6.67-4.88L120.66,28.9A8,8,0,0,1,135.34,28.9Z"
                           fill="none"
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="16"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="16"
                         />
                       </svg>
                     </div>
@@ -118,9 +121,12 @@ export const EmailAvaliationCreated = ({
               </Text>
               <Text className="text-base leading-8 text-[#020817]">
                 As tags selecionadas foram:
-                <div className="flex flex-row gap-2 text-[#50fa7b]">
+                <div className="flex flex-row flex-wrap gap-2 text-[#50fa7b]">
                   {tags.map((item) => (
-                    <span className="rounded-md bg-[#282a36] px-4 py-2">
+                    <span
+                      key={item}
+                      className="rounded-md bg-[#282a36] px-4 py-2"
+                    >
                       {item}
                     </span>
                   ))}
@@ -146,7 +152,18 @@ export const EmailAvaliationCreated = ({
 EmailAvaliationCreated.PreviewProps = {
   attendee: "Diogo Cezar",
   rating: 3,
-  tags: ["Teste1", "Teste2"],
+  tags: [
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+    "Explicação Clara",
+  ],
   comment: "Testando um comentário.",
   startTime: new Date(),
 } as EmailAvaliationCreatedProps;

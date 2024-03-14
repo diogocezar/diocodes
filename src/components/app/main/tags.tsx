@@ -15,9 +15,11 @@ export const Tags: React.FC<TagsProps> = ({
   setValue,
   handleTagSelect,
 }) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<
+    { id: string; name: string }[]
+  >([]);
 
-  const handleTagToggle = (tag: string) => {
+  const handleTagToggle = (tag: { id: string; name: string }) => {
     const updatedTags = selectedTags.includes(tag)
       ? selectedTags.filter((selectedTag) => selectedTag !== tag)
       : [...selectedTags, tag];
@@ -30,9 +32,9 @@ export const Tags: React.FC<TagsProps> = ({
       {availableTags.map((tag: TypeTag, index) => (
         <Toggle
           key={index}
-          onClick={() => handleTagToggle(tag.id)}
+          onClick={() => handleTagToggle({ id: tag.id, name: tag.name })}
           disabled={
-            selectedTags.length >= maxTags && !selectedTags.includes(tag.id)
+            selectedTags.length >= maxTags && !selectedTags.includes(tag)
           }
         >
           {tag.name}
