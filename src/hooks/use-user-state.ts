@@ -7,6 +7,8 @@ type UserStateProps = {
   setIsOpenConfirmDelete: (newState: any) => void;
   selectedItem: any;
   setSelectedItem: (newState: any) => void;
+  table: any;
+  setTable: (newState: any) => void;
 };
 
 export const useUserState = create<UserStateProps>()((set) => ({
@@ -17,4 +19,6 @@ export const useUserState = create<UserStateProps>()((set) => ({
     set({ isOpenConfirmDelete: newState }),
   selectedItem: {},
   setSelectedItem: (newState: object) => set({ selectedItem: newState }),
+  table: {},
+  setTable: (newState: object) => set({ table: newState }),
 }));

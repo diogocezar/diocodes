@@ -25,6 +25,8 @@ export default function AdminUserPage() {
   );
   const setSelectedItem = useUserState((state) => state.setSelectedItem);
   const selectedItem = useUserState((state) => state.selectedItem);
+  const setTable = useUserState((state) => state.setTable);
+  const table = useUserState((state) => state.table);
 
   const URL = "/admin/user";
 
@@ -36,6 +38,7 @@ export default function AdminUserPage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -69,6 +72,7 @@ export default function AdminUserPage() {
           isLoading={isLoading}
           createButtonLabel="Criar usuário"
           iconCreateButton={<User className="h-5 w-5" />}
+          setTable={setTable}
         />
       </div>
     </>

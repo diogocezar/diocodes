@@ -44,6 +44,7 @@ function AditionalButtons({ table }: any) {
             await queryClient.invalidateQueries({
               queryKey: [QUERY_KEY.ADMIN_MENTORING],
             });
+            table.toggleAllRowsSelected(false);
           }
         }}
         className="rounded-lg"
@@ -74,6 +75,8 @@ export default function AdminInvitePage() {
   );
   const setSelectedItem = useInviteState((state) => state.setSelectedItem);
   const selectedItem = useInviteState((state) => state.selectedItem);
+  const setTable = useInviteState((state) => state.setTable);
+  const table = useInviteState((state) => state.table);
 
   const URL = "/admin/invite";
 
@@ -85,6 +88,7 @@ export default function AdminInvitePage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -119,6 +123,7 @@ export default function AdminInvitePage() {
           createButtonLabel="Criar convite"
           iconCreateButton={<EnvelopeSimple className="h-5 w-5" />}
           aditionalButtons={<AditionalButtons />}
+          setTable={setTable}
         />
       </div>
     </>

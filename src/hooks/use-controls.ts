@@ -8,6 +8,7 @@ type UseControlsProps = {
   setIsOpenConfirmDelete: Function;
   selectedItem: any;
   setIsOpenForm: Function;
+  table: any;
 };
 
 export const useControls = ({
@@ -17,6 +18,7 @@ export const useControls = ({
   selectedItem,
   setIsOpenConfirmDelete,
   setIsOpenForm,
+  table,
 }: UseControlsProps) => {
   const queryClient = useQueryClient();
 
@@ -34,16 +36,19 @@ export const useControls = ({
     await queryClient.invalidateQueries({
       queryKey: [queryKey],
     });
+    table.toggleAllRowsSelected(false);
   };
 
   const handleEdit = async (item: any) => {
     setSelectedItem(item[0].original);
     setIsOpenForm(true);
+    table.toggleAllRowsSelected(false);
   };
 
   const handleCreate = () => {
     setSelectedItem({});
     setIsOpenForm(true);
+    table.toggleAllRowsSelected(false);
   };
 
   return { handleConfirmDelete, handleDelete, handleEdit, handleCreate };

@@ -67,6 +67,8 @@ export default function AdminMentoringPage() {
   );
   const setSelectedItem = useMentoringState((state) => state.setSelectedItem);
   const selectedItem = useMentoringState((state) => state.selectedItem);
+  const setTable = useMentoringState((state) => state.setTable);
+  const table = useMentoringState((state) => state.table);
 
   const URL = "/admin/mentoring";
 
@@ -78,6 +80,7 @@ export default function AdminMentoringPage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -112,6 +115,7 @@ export default function AdminMentoringPage() {
           createButtonLabel="Criar mentoria"
           iconCreateButton={<Plant className="h-5 w-5" />}
           aditionalButtons={<AditionalButtons />}
+          setTable={setTable}
         />
       </div>
     </>

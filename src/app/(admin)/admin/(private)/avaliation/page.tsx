@@ -25,6 +25,8 @@ export default function AdminMentoringPage() {
   );
   const setSelectedItem = useAvaliationState((state) => state.setSelectedItem);
   const selectedItem = useAvaliationState((state) => state.selectedItem);
+  const setTable = useAvaliationState((state) => state.setTable);
+  const table = useAvaliationState((state) => state.table);
 
   const URL = "/admin/avaliation";
 
@@ -36,6 +38,7 @@ export default function AdminMentoringPage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -69,6 +72,7 @@ export default function AdminMentoringPage() {
           isLoading={isLoading}
           createButtonLabel="Criar avaliação"
           iconCreateButton={<Star className="h-5 w-5" />}
+          setTable={setTable}
         />
       </div>
     </>

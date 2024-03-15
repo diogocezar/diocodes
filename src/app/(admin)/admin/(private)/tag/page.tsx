@@ -23,6 +23,8 @@ export default function AdminAvaliationTagPage() {
   );
   const setSelectedItem = useTagState((state) => state.setSelectedItem);
   const selectedItem = useTagState((state) => state.selectedItem);
+  const setTable = useTagState((state) => state.setTable);
+  const table = useTagState((state) => state.table);
 
   const URL = "/admin/tag";
 
@@ -34,6 +36,7 @@ export default function AdminAvaliationTagPage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -67,6 +70,7 @@ export default function AdminAvaliationTagPage() {
           isLoading={isLoading}
           createButtonLabel="Criar tag"
           iconCreateButton={<TagIcon className="h-5 w-5" />}
+          setTable={setTable}
         />
       </div>
     </>

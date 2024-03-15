@@ -25,6 +25,8 @@ export default function AdminPersonPage() {
   );
   const setSelectedItem = usePersonState((state) => state.setSelectedItem);
   const selectedItem = usePersonState((state) => state.selectedItem);
+  const setTable = usePersonState((state) => state.setTable);
+  const table = usePersonState((state) => state.table);
 
   const URL = "/admin/person";
 
@@ -36,6 +38,7 @@ export default function AdminPersonPage() {
       setIsOpenConfirmDelete,
       selectedItem,
       setIsOpenForm,
+      table,
     });
 
   const { data, isLoading } = useQuery({
@@ -69,6 +72,7 @@ export default function AdminPersonPage() {
           isLoading={isLoading}
           createButtonLabel="Criar pessoa"
           iconCreateButton={<Users className="h-5 w-5" />}
+          setTable={setTable}
         />
       </div>
     </>

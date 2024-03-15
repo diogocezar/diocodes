@@ -54,6 +54,7 @@ type DataTableProps = {
   createButtonLabel: string;
   iconCreateButton: JSX.Element;
   aditionalButtons?: ReactElement<AditionalButtonsProps>;
+  setTable: Function;
 };
 
 export function DataTable({
@@ -69,6 +70,7 @@ export function DataTable({
   createButtonLabel = "Criar",
   iconCreateButton,
   aditionalButtons,
+  setTable,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -97,13 +99,19 @@ export function DataTable({
       rowSelection,
     },
   });
+
+  setTable(table);
+
   const disabledFilter = isLoading;
+  const disabledCreate =
+    !isLoading && table.getFilteredSelectedRowModel().rows.length !== 0;
   const disabledDelete = !(
     !isLoading && table.getFilteredSelectedRowModel().rows.length
   );
   const disabledEdit = !(
     !isLoading && table.getFilteredSelectedRowModel().rows.length === 1
   );
+
   return (
     <div className="mt-0 w-full pt-8">
       <div className="mb-4 flex h-[60px] items-center justify-between">
@@ -128,6 +136,7 @@ export function DataTable({
               table,
             })}
           <Button
+            disabled={disabledCreate}
             onClick={() => {
               handleCreate(table.getFilteredSelectedRowModel().rows);
             }}
@@ -140,7 +149,7 @@ export function DataTable({
             className="flex flex-row gap-2 rounded-lg"
             disabled={disabledDelete}
             onClick={() => {
-              handleDelete(table.getFilteredSelectedRowModel().rows);
+              handleDelete(table.getFilteredSelectedRowModel().rows, table);
             }}
           >
             <Trash className="h-5 w-5" /> Excluir
@@ -149,7 +158,7 @@ export function DataTable({
             className="flex flex-row gap-2 rounded-lg"
             disabled={disabledEdit}
             onClick={() => {
-              handleEdit(table.getFilteredSelectedRowModel().rows);
+              handleEdit(table.getFilteredSelectedRowModel().rows, table);
             }}
           >
             <PaintBrush className="h-5 w-5" /> Editar

@@ -109,14 +109,13 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Verificação se já existe ao tentar criar (Pessoa, User);
 - [x] Ajustar o tipo de dados de booking no upsert;
 - [x] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
-- [ ] Ao realizar uma ação, desselecionar os ítens da tabela;
-- [ ] Criar filtros nas tabelas;
-- [ ] Criar paginação nas tabelas;
-- [ ] Ajustar todas as tipagens;
+- [x] Ao realizar uma ação, desselecionar os ítens da tabela;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
-
-72799720-e60f-4b2a-be72-59890a969cc8
+- [ ] Mudar o dropdown de filtrar colunas para ativar ou desativar;
+- [ ] Criar todos os botões como um dropdown; (Nas listagens)
+- [ ] Criar paginação nas tabelas;
+- [ ] Ajustar todas as tipagens;
 
 ## 🖥️ Tecnologias
 
