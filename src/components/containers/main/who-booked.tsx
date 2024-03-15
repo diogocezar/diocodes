@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
-import { Paragraph } from "@/components/app/main/paragraph";
-import { Spinner } from "@phosphor-icons/react";
 import { Mentoring } from "@/components/app/main/mentoring";
 import { TypeMentoring } from "@/types/type-mentoring";
 import { api } from "@/services/api";
 import { Hightlight } from "@/components/app/main/hightlight";
 import { CAL } from "@/contants/cal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const WhoBooked = React.forwardRef<
   HTMLDivElement,
@@ -43,10 +42,22 @@ const WhoBooked = React.forwardRef<
     <>
       <SubSubTitle>Quem já reservou?</SubSubTitle>
       {isLoadingMentoring ? (
-        <Paragraph className="mb-8 flex flex-row gap-2">
-          <Spinner size={20} className="animate-spin" />
-          Carregando...
-        </Paragraph>
+        <div className="flex w-full flex-row flex-wrap">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
+            <div
+              key={index}
+              className="w-full space-y-4 md:w-[50%] lg:w-[33.3%] xl:w-[25%]"
+            >
+              <div className="mt-10">
+                <Skeleton className="mb-4 h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[180px]" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div>
           <SubTitle>

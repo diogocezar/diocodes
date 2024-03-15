@@ -1,5 +1,6 @@
 import React from "react";
 import { Calendar } from "@phosphor-icons/react";
+import { compactName } from "@/lib/utils";
 
 type MentoringProps = {
   startTime: Date;
@@ -26,7 +27,7 @@ const Mentoring = ({ startTime, attendee, isFree }: MentoringProps) => {
             <span
               className={`${!isFree ? "text-background-dark group-hover:text-foreground" : "text-foreground"}`}
             >
-              {attendee?.name.toUpperCase()}{" "}
+              {compactName(attendee?.name.toUpperCase())}{" "}
               {!isFree && (
                 <span className="bg-background-dark text-foreground ml-1 rounded-md px-3 text-xs">
                   PRO

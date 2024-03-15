@@ -110,6 +110,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Ajustar o tipo de dados de booking no upsert;
 - [x] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
 - [x] Ao realizar uma ação, desselecionar os ítens da tabela;
+- [ ] Colocar skeleton nos loadings página principal;
+- [ ] Colocar skeleton nos loadings das tabelas;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
 - [ ] Mudar o dropdown de filtrar colunas para ativar ou desativar;
