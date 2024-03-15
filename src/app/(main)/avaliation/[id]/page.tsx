@@ -18,82 +18,43 @@ import { AVALIATION } from "@/contants/avaliation";
 import { cn } from "@/lib/utils";
 import { SchemaAvaliationPublic } from "@/schemas/schema-avaliation-public";
 import { api } from "@/services/api";
-import { TypeTag } from "@/types/type-tag";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@phosphor-icons/react";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { dispatchError } from "@/lib/toast";
+import { useGetTag } from "@/hooks/use-get-tag";
+import { useGetOneMentoring } from "@/hooks/use-get-mentoring";
+import { TypeTagValueLabel } from "@/types/type-tag";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [rating, setRating] = useState<number>(0);
-  const [isLoadingTag, setIsLoadingTag] = useState(false);
-  const [isLoadingMentoring, setIsLoadingMentoring] = useState(true);
-  const [mentoring, setMentoring] = useState<any>({});
-  const [tag, setTag] = useState<TypeTag[]>([]);
-  const [selectedTag, setSelectedTag] = useState<any[]>([]);
+  const [selectedTag, setSelectedTag] = useState<TypeTagValueLabel[]>([]);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const router = useRouter();
-  const isLoading = isLoadingTag || isLoadingMentoring;
+  const { tag, isLoadingTag } = useGetTag();
+  const { mentoring, isLoadingMentoring } = useGetOneMentoring(params.id);
 
-  const getTag = useCallback(async () => {
-    try {
-      setIsLoadingTag(true);
-      const response = await api.get("tag");
-      setTag(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoadingTag(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getTag();
-  }, [getTag]);
-
-  const getMentoring = useCallback(async () => {
-    try {
-      const response = await api.get(`mentoring/${params.id}`);
-      const { data } = response;
-      if (data.founded === false) {
-        return (window.location.href = "/");
-      }
-      setMentoring(response.data);
-      setIsLoadingMentoring(false);
-    } catch (error) {
-      dispatchError(error);
-    }
-  }, [params.id]);
-
-  useEffect(() => {
-    getMentoring();
-  }, [getMentoring]);
+  const isLoading = isLoadingTag && isLoadingMentoring;
 
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
   };
-  const handleTagSelect = (selectedTagsParam: string[]) => {
-    console.log(selectedTagsParam);
+  const handleTagSelect = (selectedTagsParam: TypeTagValueLabel[]) => {
     setSelectedTag(selectedTagsParam);
   };
 
   const form = useForm<z.infer<typeof SchemaAvaliationPublic>>({
     resolver: zodResolver(SchemaAvaliationPublic),
-    defaultValues: {
-      avaliationTags: [],
-      comment: "",
-    },
   });
 
   async function onSubmit(data: any) {
     try {
       setIsLoadingSubmit(true);
-      const avaliationTags = selectedTag.map((item) => {
-        return { id: item.id, name: item.name };
+      const avaliationTags = selectedTag.map((item: TypeTagValueLabel) => {
+        return { id: item.value, name: item.label };
       });
       const response = await api.post(`avaliation`, {
         rating,
@@ -116,35 +77,26 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   }
 
   const getDate = () => {
-    if (!isLoadingMentoring) {
-      const newDate = new Date(mentoring.startTime);
-      return newDate.toLocaleDateString("pt-BR");
-    }
-    return "00:00";
+    return mentoring?.startTime?.toLocaleDateString("pt-BR");
   };
 
   const getStartTime = () => {
-    if (!isLoadingMentoring) {
-      const newDate = new Date(mentoring.startTime);
-      return newDate.toLocaleTimeString("pt-BR");
-    }
-    return "00:00";
+    return mentoring?.startTime?.toLocaleTimeString("pt-BR");
   };
 
   const getEndTime = () => {
-    if (!isLoadingMentoring) {
-      const newDate = new Date(mentoring.endTime);
-      return newDate.toLocaleTimeString("pt-BR");
-    }
-    return "00:00";
+    return mentoring?.startTime?.toLocaleTimeString("pt-BR");
   };
 
   const getAttendee = () => {
-    if (!isLoadingMentoring) return mentoring.attendee.name;
-    return "Anônimo";
+    return mentoring?.attendee?.name;
   };
 
   const setValue = form.setValue;
+
+  if (mentoring?.founded === false) {
+    return (window.location.href = "/");
+  }
 
   return (
     <>
@@ -215,7 +167,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                     "mt-14",
                   )}
                 >
-                  Selecione 10 tags
+                  Selecione {AVALIATION.MAX_TAGS} tags
                 </SubSubTitle>
                 <FormMessage className="mb-8">
                   {form.formState.errors.avaliationTags?.message}

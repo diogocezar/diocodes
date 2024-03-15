@@ -20,3 +20,5 @@ export type TypeMentoring = {
   removedAt?: Date;
   updatedAt?: Date;
 };
+
+export type TypeMentoringSearchOne = TypeMentoring & { founded: boolean };

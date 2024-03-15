@@ -4,7 +4,16 @@ import { logger } from "@/lib/logger";
 
 export const createPerson = async (person: Person) => {
   try {
-    await db.person.create({
+    const exists = await db.person.findFirst({
+      where: { name: person.name },
+    });
+    if (exists) {
+      return await db.person.update({
+        where: { id: exists.id },
+        data: { ...person, removedAt: null, updatedAt: new Date() },
+      });
+    }
+    return await db.person.create({
       data: {
         ...person,
         createdAt: new Date(),
@@ -19,7 +28,7 @@ export const createPerson = async (person: Person) => {
 
 export const updatePerson = async (id: string, person: Person) => {
   try {
-    await db.person.update({
+    return await db.person.update({
       where: { id },
       data: { ...person, updatedAt: new Date() },
     });
@@ -30,7 +39,7 @@ export const updatePerson = async (id: string, person: Person) => {
 
 export const removePerson = async (data: any) => {
   try {
-    await db.person.updateMany({
+    return await db.person.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -41,11 +50,10 @@ export const removePerson = async (data: any) => {
 
 export const getAllPersons = async (): Promise<Person[]> => {
   try {
-    const result = await db.person.findMany({
+    return await db.person.findMany({
       where: { removedAt: null },
       orderBy: { name: "asc" },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -54,10 +62,9 @@ export const getAllPersons = async (): Promise<Person[]> => {
 
 export const getPerson = async (id: string): Promise<Person | null> => {
   try {
-    const result = await db.person.findUnique({
+    return await db.person.findUnique({
       where: { id, removedAt: null },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }

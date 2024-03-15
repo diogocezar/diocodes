@@ -1,10 +1,14 @@
+import { AVALIATION } from "@/contants/avaliation";
 import { z } from "zod";
 
 export const SchemaAvaliationPublic = z.object({
   rating: z.number({ required_error: "É necessário informar uma nota." }),
   avaliationTags: z
-    .object({ id: z.string(), name: z.string() })
+    .object({ value: z.string(), label: z.string() })
     .array()
-    .length(10, "É necessário informar 10 tags."),
+    .length(
+      AVALIATION.MAX_TAGS,
+      `É necessário informar ${AVALIATION.MAX_TAGS} tags.`,
+    ),
   comment: z.string().min(10, "O comentário deve ter no mínimo 10 caracteres."),
 });

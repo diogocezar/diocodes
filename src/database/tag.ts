@@ -4,7 +4,16 @@ import { logger } from "@/lib/logger";
 
 export const createTag = async (tag: Tag) => {
   try {
-    await db.tag.create({
+    const exists = await db.tag.findFirst({
+      where: { name: tag.name },
+    });
+    if (exists) {
+      return await db.mentoring.update({
+        where: { id: exists.id },
+        data: { ...tag, removedAt: null, updatedAt: new Date() },
+      });
+    }
+    return await db.tag.create({
       data: { ...tag, createdAt: new Date(), updatedAt: null, removedAt: null },
     });
   } catch (error) {
@@ -14,7 +23,7 @@ export const createTag = async (tag: Tag) => {
 
 export const updateTag = async (id: string, tag: Tag) => {
   try {
-    await db.tag.update({
+    return await db.tag.update({
       where: { id },
       data: { ...tag, updatedAt: new Date() },
     });
@@ -25,7 +34,7 @@ export const updateTag = async (id: string, tag: Tag) => {
 
 export const removeTag = async (data: any) => {
   try {
-    await db.tag.updateMany({
+    return await db.tag.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -36,13 +45,12 @@ export const removeTag = async (data: any) => {
 
 export const getAllTags = async (): Promise<Tag[]> => {
   try {
-    const result = await db.tag.findMany({
+    return await db.tag.findMany({
       where: {
         removedAt: null,
       },
       include: { avaliationTags: true },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -51,8 +59,7 @@ export const getAllTags = async (): Promise<Tag[]> => {
 
 export const getTag = async (id: string): Promise<Tag | null> => {
   try {
-    const result = await db.tag.findUnique({ where: { id, removedAt: null } });
-    return result;
+    return await db.tag.findUnique({ where: { id, removedAt: null } });
   } catch (error) {
     logger.error(error);
   }

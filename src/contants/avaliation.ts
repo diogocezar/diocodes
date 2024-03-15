@@ -1,3 +1,3 @@
 export const AVALIATION = {
-  MAX_TAGS: 10,
+  MAX_TAGS: 6,
 };

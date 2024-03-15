@@ -1,10 +1,11 @@
 import { db } from "@/database/connection";
 import { Mentoring } from "@prisma/client";
 import { logger } from "@/lib/logger";
+import { TypeBooking } from "@/types/type-booking";
 
-export const upsertMentoringByBooking = async (booking: any[]) => {
+export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
   try {
-    booking.forEach(async (item) => {
+    booking.forEach(async (item: TypeBooking) => {
       const host = await db.person.findUnique({
         where: { email: item.hostEmail },
       });
@@ -33,7 +34,6 @@ export const upsertMentoringByBooking = async (booking: any[]) => {
           removedAt: null,
         },
         create: {
-          id: item.id,
           externalId: item.externalId,
           externalEventId: item.externalEventId,
           externalStatus: item.status,
@@ -59,20 +59,19 @@ export const createMentoring = async (mentoring: Mentoring) => {
       where: { id: mentoring.id },
     });
     if (exists) {
-      await db.mentoring.update({
+      return await db.mentoring.update({
         where: { id: exists.id },
         data: { ...mentoring, removedAt: null, updatedAt: new Date() },
       });
-    } else {
-      await db.mentoring.create({
-        data: {
-          ...mentoring,
-          createdAt: new Date(),
-          updatedAt: null,
-          removedAt: null,
-        },
-      });
     }
+    return await db.mentoring.create({
+      data: {
+        ...mentoring,
+        createdAt: new Date(),
+        updatedAt: null,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -80,7 +79,7 @@ export const createMentoring = async (mentoring: Mentoring) => {
 
 export const updateMentoring = async (id: string, mentoring: Mentoring) => {
   try {
-    await db.mentoring.update({
+    return await db.mentoring.update({
       where: { id },
       data: { ...mentoring, updatedAt: new Date() },
     });
@@ -91,7 +90,7 @@ export const updateMentoring = async (id: string, mentoring: Mentoring) => {
 
 export const removeMentoring = async (data: any) => {
   try {
-    await db.mentoring.updateMany({
+    return await db.mentoring.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -102,7 +101,7 @@ export const removeMentoring = async (data: any) => {
 
 export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
-    const result = await db.mentoring.findMany({
+    return await db.mentoring.findMany({
       where: { removedAt: null },
       include: {
         host: true,
@@ -120,7 +119,6 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
       },
       orderBy: { startTime: "asc" },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -129,7 +127,7 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
 
 export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
   try {
-    const result = await db.mentoring.findMany({
+    return await db.mentoring.findMany({
       where: {
         removedAt: null,
         startTime: { lte: new Date() },
@@ -150,7 +148,6 @@ export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
       },
       orderBy: { startTime: "desc" },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -159,11 +156,10 @@ export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
 
 export const getMentoring = async (id: string): Promise<Mentoring | null> => {
   try {
-    const result = await db.mentoring.findUnique({
+    return await db.mentoring.findUnique({
       where: { id, removedAt: null },
       include: { attendee: true },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }

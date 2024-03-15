@@ -105,11 +105,18 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
 - [x] Menu Fixed e Scroll somente na parte do conteúdo;
 - [x] Enviar e-mail quando avaliação for respondida;
-- [ ] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
-- [ ] Rever todos os retornos dos databases de acordo com `avalitaion.ts`;
+- [x] Rever todos os retornos dos databases de acordo com `avalitaion.ts`;
+- [x] Verificação se já existe ao tentar criar (Pessoa, User);
+- [x] Ajustar o tipo de dados de booking no upsert;
+- [x] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
 - [ ] Ao realizar uma ação, desselecionar os ítens da tabela;
+- [ ] Criar filtros nas tabelas;
+- [ ] Criar paginação nas tabelas;
+- [ ] Ajustar todas as tipagens;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
+
+72799720-e60f-4b2a-be72-59890a969cc8
 
 ## 🖥️ Tecnologias
 

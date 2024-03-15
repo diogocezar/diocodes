@@ -8,20 +8,19 @@ export const createUser = async (user: User) => {
       where: { personId: user.personId },
     });
     if (exists) {
-      await db.user.update({
+      return await db.user.update({
         where: { id: exists.id },
         data: { removedAt: null, updatedAt: new Date(), role: user.role },
       });
-    } else {
-      await db.user.create({
-        data: {
-          ...user,
-          createdAt: new Date(),
-          updatedAt: null,
-          removedAt: null,
-        },
-      });
     }
+    return await db.user.create({
+      data: {
+        ...user,
+        createdAt: new Date(),
+        updatedAt: null,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -29,7 +28,7 @@ export const createUser = async (user: User) => {
 
 export const updateUser = async (id: string, user: User) => {
   try {
-    await db.user.update({
+    return await db.user.update({
       where: { id },
       data: { ...user, updatedAt: new Date() },
     });
@@ -40,7 +39,7 @@ export const updateUser = async (id: string, user: User) => {
 
 export const removeUser = async (data: any) => {
   try {
-    await db.user.updateMany({
+    return await db.user.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -57,11 +56,10 @@ export const getAllUsers = async (role?: string): Promise<any[]> => {
     } else {
       where = { removedAt: null };
     }
-    const result = await db.user.findMany({
+    return await db.user.findMany({
       where,
       include: { person: true },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -70,8 +68,7 @@ export const getAllUsers = async (role?: string): Promise<any[]> => {
 
 export const getUser = async (id: string): Promise<User | null> => {
   try {
-    const result = await db.user.findUnique({ where: { id, removedAt: null } });
-    return result;
+    return await db.user.findUnique({ where: { id, removedAt: null } });
   } catch (error) {
     logger.error(error);
   }

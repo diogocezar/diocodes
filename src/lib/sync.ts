@@ -2,17 +2,18 @@ import { CAL } from "@/contants/cal";
 import { upsertMentoringByBooking } from "@/database/mentoring";
 import { api as cal } from "@/services/cal";
 import { logger } from "./logger";
+import { TypeBookingCal, TypeBooking } from "@/types/type-booking";
 
-const filterValidBooking = (mentoring: any) =>
+const filterValidBooking = (mentoring: TypeBookingCal[]) =>
   mentoring.filter(
-    (item: any) =>
+    (item: TypeBookingCal) =>
       (item.eventTypeId === CAL.MENTORING_FREE ||
         item.eventTypeId === CAL.MENTORING_PRO) &&
       item.status !== "CANCELLED",
   );
 
-const formatResponse = (validBookings: any) =>
-  validBookings.map((item: any): any => {
+const formatResponse = (validBookings: TypeBookingCal[]) =>
+  validBookings.map((item: TypeBookingCal): TypeBooking => {
     return {
       externalId: item.id,
       externalEventId: item.eventTypeId,
@@ -26,24 +27,24 @@ const formatResponse = (validBookings: any) =>
     };
   });
 
-const sortByDate = (formatedResponse: any) =>
-  formatedResponse.sort((a: any, b: any) => {
+const sortByDate = (formatedResponse: TypeBooking[]) =>
+  formatedResponse.sort((a: TypeBooking, b: TypeBooking) => {
     return new Date(a.startTime).getTime() - new Date(b.startTime).getTime();
   });
 
-export const removeDuplicates = (ordered: any) =>
+export const removeDuplicates = (ordered: TypeBooking[]) =>
   ordered.filter(
-    (item: any, index: number, self: any[]) =>
+    (item: TypeBooking, index: number, self: TypeBooking[]) =>
       index ===
       self.findIndex(
         (t) =>
-          t.attendee === item.attendee &&
+          t.attendeeEmail === item.attendeeEmail &&
           t.startTime === item.startTime &&
           t.endTime === item.endTime,
       ),
   );
 
-export const upsert = async (booking: any) => {
+export const upsert = async (booking: TypeBooking[]) => {
   await upsertMentoringByBooking(booking);
   return true;
 };

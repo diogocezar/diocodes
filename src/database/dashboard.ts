@@ -1,18 +1,15 @@
 import { db } from "@/database/connection";
 import { logger } from "@/lib/logger";
-import { TypeMentoring } from "@/types/type-mentoring";
-import { Mentoring } from "@prisma/client";
 import { MongoClient, Document } from "mongodb";
 
 export const dashboardCountMentoringDone = async (): Promise<number> => {
   try {
-    const result = await db.mentoring.count({
+    return await db.mentoring.count({
       where: {
         removedAt: null,
         startTime: { lte: new Date() },
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -21,13 +18,12 @@ export const dashboardCountMentoringDone = async (): Promise<number> => {
 
 export const dashboardCountMentoringToBe = async (): Promise<number> => {
   try {
-    const result = await db.mentoring.count({
+    return await db.mentoring.count({
       where: {
         removedAt: null,
         startTime: { gte: new Date() },
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -36,12 +32,11 @@ export const dashboardCountMentoringToBe = async (): Promise<number> => {
 
 export const dashboardCountAvaliation = async (): Promise<number> => {
   try {
-    const result = await db.avaliation.count({
+    return await db.avaliation.count({
       where: {
         removedAt: null,
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -66,12 +61,11 @@ export const dashboardCountAvaliationAvg = async (): Promise<number> => {
 
 export const dashboardCountInvite = async (): Promise<number> => {
   try {
-    const result = await db.invite.count({
+    return await db.invite.count({
       where: {
         removedAt: null,
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -80,12 +74,11 @@ export const dashboardCountInvite = async (): Promise<number> => {
 
 export const dashboardCountTag = async (): Promise<number> => {
   try {
-    const result = await db.tag.count({
+    return await db.tag.count({
       where: {
         removedAt: null,
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -94,12 +87,11 @@ export const dashboardCountTag = async (): Promise<number> => {
 
 export const dashboardCountPerson = async (): Promise<number> => {
   try {
-    const result = await db.person.count({
+    return await db.person.count({
       where: {
         removedAt: null,
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }

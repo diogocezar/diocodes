@@ -1,17 +1,14 @@
 import { dispatchError } from "@/lib/toast";
 import { api } from "@/services/api";
-import { TypeTag } from "@/types/type-tag";
+import { TypeTag, TypeTagValueLabel } from "@/types/type-tag";
 import { useState, useEffect, useCallback } from "react";
 
-type TypeLocalItems = Record<"value" | "label", string>;
-
 export const useGetTag = (url: string = "admin/tag") => {
-  const [tag, setTag] = useState<TypeLocalItems[]>([]);
-  const [isLoadingTag, setIsLoadingTag] = useState(false);
+  const [tag, setTag] = useState<TypeTagValueLabel[]>([]);
+  const [isLoadingTag, setIsLoadingTag] = useState(true);
 
   const getTag = useCallback(async () => {
     try {
-      setIsLoadingTag(true);
       const response = await api.get(url);
       const data = response.data.map((item: TypeTag) => {
         return {

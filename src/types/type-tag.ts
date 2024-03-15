@@ -6,3 +6,5 @@ export type TypeTag = {
   removedAt?: Date;
   updatedAt?: Date;
 };
+
+export type TypeTagValueLabel = Record<"value" | "label", string>;

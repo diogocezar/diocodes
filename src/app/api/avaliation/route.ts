@@ -40,7 +40,7 @@ export const POST = async (req: Request) => {
     if (avaliation)
       return new Response(
         JSON.stringify({ error: "Avaliation already exists" }),
-        { status: 400 }
+        { status: 400 },
       );
     const result = await createAvaliation(data);
     if (result) {

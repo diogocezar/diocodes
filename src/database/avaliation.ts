@@ -129,11 +129,10 @@ export const getAvaliationByMentoring = async (
   mentoringId: string,
 ): Promise<Avaliation | null> => {
   try {
-    const result = await db.avaliation.findUnique({
+    return await db.avaliation.findUnique({
       where: { mentoringId, removedAt: null },
       include: { mentoring: true },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }

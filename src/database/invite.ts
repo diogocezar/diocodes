@@ -4,7 +4,7 @@ import { logger } from "@/lib/logger";
 
 export const createInvite = async (invite: Invite) => {
   try {
-    await db.invite.create({
+    return await db.invite.create({
       data: {
         ...invite,
         createdAt: new Date(),
@@ -19,7 +19,7 @@ export const createInvite = async (invite: Invite) => {
 
 export const updateInvite = async (id: string, invite: Invite) => {
   try {
-    await db.invite.update({
+    return await db.invite.update({
       where: { id },
       data: { ...invite, updatedAt: new Date() },
     });
@@ -30,7 +30,7 @@ export const updateInvite = async (id: string, invite: Invite) => {
 
 export const removeInvite = async (data: any) => {
   try {
-    await db.invite.updateMany({
+    return await db.invite.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -41,7 +41,7 @@ export const removeInvite = async (data: any) => {
 
 export const getAllInvites = async (): Promise<any[]> => {
   try {
-    const result = await db.invite.findMany({
+    return await db.invite.findMany({
       where: { removedAt: null },
       include: {
         mentoring: {
@@ -54,7 +54,6 @@ export const getAllInvites = async (): Promise<any[]> => {
         },
       },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
@@ -63,10 +62,9 @@ export const getAllInvites = async (): Promise<any[]> => {
 
 export const getInvite = async (id: string): Promise<Invite | null> => {
   try {
-    const result = await db.invite.findUnique({
+    return await db.invite.findUnique({
       where: { id, removedAt: null },
     });
-    return result;
   } catch (error) {
     logger.error(error);
   }
