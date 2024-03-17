@@ -2,13 +2,18 @@ import { db } from "@/database/connection";
 import { logger } from "@/lib/logger";
 import { MongoClient, Document } from "mongodb";
 
+const MIN_FAKE_SLOW_TIME = 100;
+const MAX_FAKE_SLOW_TIME = 450;
+
 const fakeSlowResult = <T,>(result: T): Promise<T> => {
   return new Promise((resolve) => {
     setTimeout(
       () => {
         resolve(result);
       },
-      Math.floor(Math.random() * (400 - 100 + 1)) + 100,
+      Math.floor(
+        Math.random() * (MAX_FAKE_SLOW_TIME - MIN_FAKE_SLOW_TIME + 1),
+      ) + MIN_FAKE_SLOW_TIME,
     );
   });
 };
@@ -201,7 +206,7 @@ export const getAvaliationsByMonth = async (): Promise<Document[]> => {
     const cursor = coll.aggregate(agg);
     const result = await cursor.toArray();
     await client.close();
-    return result;
+    return fakeSlowResult(result);
   } catch (error) {
     logger.error(error);
   }

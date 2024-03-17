@@ -12,6 +12,8 @@ import PersonTotal from "@/components/containers/admin/dashboard/person/person-t
 import AvaliationAverage from "@/components/containers/admin/dashboard/avaliation/avaliation-average";
 import AvaliationByMonth from "@/components/containers/admin/dashboard/graph/avaliation-by-month";
 import MentoringNext from "@/components/containers/admin/dashboard/mentoring/mentoring-next";
+import SkeletonDahboardGraph from "@/components/skeletons/skeleton-dashboard-graph";
+import SkeletonDahboardList from "@/components/skeletons/skeleton-dashboard-list";
 
 export default async function AdminDashboardPage() {
   return (
@@ -45,11 +47,13 @@ export default async function AdminDashboardPage() {
               <AvaliationAverage />
             </Suspense>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Suspense fallback={<SkeletonDahboardTile />}>
+          <div className="grid gap-4 md:grid-cols-7">
+            <Suspense fallback={<SkeletonDahboardGraph />}>
+              {/* <SkeletonDahboardGraph /> */}
               <AvaliationByMonth />
             </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
+            <Suspense fallback={<SkeletonDahboardList />}>
+              {/* <SkeletonDahboardList /> */}
               <MentoringNext />
             </Suspense>
           </div>

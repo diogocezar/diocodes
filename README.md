@@ -116,6 +116,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Separar chamadas do dashboard em diferentes endpoints;
 - [x] Preparar streaming UI;
 - [x] Colocar skeleton nos paineis do dashboard;
+- [ ] Ajustar os skeletons do gráfico, próximas mentorias e média de avaliações;
 - [ ] Fazer as tabelas ocuparem todo o espaço da página;
 - [ ] Passar dinamicamente a quantidade de ítens por página;
 - [ ] Colocar skeleton nos loadings das tabelas;
