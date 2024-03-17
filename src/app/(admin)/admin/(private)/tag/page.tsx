@@ -1,5 +1,4 @@
 "use client";
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { Tag as TagIcon } from "@phosphor-icons/react";
 import {
   columns,
@@ -14,6 +13,7 @@ import { useTagState } from "@/hooks/use-tag-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 export default function AdminAvaliationTagPage() {
   const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
@@ -51,8 +51,7 @@ export default function AdminAvaliationTagPage() {
 
   return (
     <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Tags" Icon={<TagIcon />} />
+      <PageCommon>
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
@@ -71,8 +70,9 @@ export default function AdminAvaliationTagPage() {
           createButtonLabel="Criar tag"
           iconCreateButton={<TagIcon className="h-5 w-5" />}
           setTable={setTable}
+          pageSize={15}
         />
-      </div>
+      </PageCommon>
     </>
   );
 }

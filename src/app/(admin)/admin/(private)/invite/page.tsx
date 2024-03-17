@@ -1,5 +1,4 @@
 "use client";
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { EnvelopeSimple, Spinner, ArrowClockwise } from "@phosphor-icons/react";
 import {
   columns,
@@ -17,6 +16,7 @@ import { useState } from "react";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useInviteState } from "@/hooks/use-invite-state";
 import { useControls } from "@/hooks/use-controls";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 function AditionalButtons({ table }: any) {
   const [isLoading, setIsLoading] = useState(false);
@@ -103,8 +103,7 @@ export default function AdminInvitePage() {
 
   return (
     <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Convites" Icon={<EnvelopeSimple />} />
+      <PageCommon>
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
@@ -124,8 +123,9 @@ export default function AdminInvitePage() {
           iconCreateButton={<EnvelopeSimple className="h-5 w-5" />}
           aditionalButtons={<AditionalButtons />}
           setTable={setTable}
+          pageSize={15}
         />
-      </div>
+      </PageCommon>
     </>
   );
 }

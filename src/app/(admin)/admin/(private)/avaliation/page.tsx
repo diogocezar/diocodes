@@ -1,5 +1,4 @@
 "use client";
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { Star } from "@phosphor-icons/react";
 import {
   columns,
@@ -14,6 +13,7 @@ import { useAvaliationState } from "@/hooks/use-avaliation-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 export default function AdminMentoringPage() {
   const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
@@ -53,8 +53,7 @@ export default function AdminMentoringPage() {
 
   return (
     <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Avaliações" Icon={<Star />} />
+      <PageCommon>
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
@@ -73,8 +72,9 @@ export default function AdminMentoringPage() {
           createButtonLabel="Criar avaliação"
           iconCreateButton={<Star className="h-5 w-5" />}
           setTable={setTable}
+          pageSize={8}
         />
-      </div>
+      </PageCommon>
     </>
   );
 }

@@ -8,7 +8,7 @@ export default async function RootLayout({
   return (
     <div className="bg-dots flex h-screen">
       <Nav />
-      <div className="ml-[240px] w-full">{children}</div>
+      <div className="ml-[240px] h-screen w-full">{children}</div>
     </div>
   );
 }

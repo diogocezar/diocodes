@@ -1,5 +1,4 @@
 "use client";
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { Plant, ArrowsClockwise, Spinner } from "@phosphor-icons/react";
 import {
   columns,
@@ -17,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useControls } from "@/hooks/use-controls";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 function AditionalButtons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -95,8 +95,7 @@ export default function AdminMentoringPage() {
 
   return (
     <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Mentorias" Icon={<Plant />} />
+      <PageCommon>
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
@@ -116,8 +115,9 @@ export default function AdminMentoringPage() {
           iconCreateButton={<Plant className="h-5 w-5" />}
           aditionalButtons={<AditionalButtons />}
           setTable={setTable}
+          pageSize={15}
         />
-      </div>
+      </PageCommon>
     </>
   );
 }

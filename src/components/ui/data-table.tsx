@@ -55,6 +55,7 @@ type DataTableProps = {
   iconCreateButton: JSX.Element;
   aditionalButtons?: ReactElement<AditionalButtonsProps>;
   setTable: Function;
+  pageSize: number;
 };
 
 export function DataTable({
@@ -71,6 +72,7 @@ export function DataTable({
   iconCreateButton,
   aditionalButtons,
   setTable,
+  pageSize = 15,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -81,7 +83,7 @@ export function DataTable({
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    initialState: { pagination: { pageSize: 15 } },
+    initialState: { pagination: { pageSize } },
     data,
     columns,
     onSortingChange: setSorting,
@@ -113,7 +115,7 @@ export function DataTable({
   );
 
   return (
-    <div className="mt-0 w-full pt-8">
+    <div className="mt-0 flex h-screen w-full flex-col p-6">
       <div className="mb-4 flex h-[60px] items-center justify-between">
         <div className="min-w-sm w-1/4">
           <MagnifyingGlass className="text-muted-foreground absolute ml-[13px] mt-[13px] h-5 w-5" />
@@ -203,32 +205,32 @@ export function DataTable({
           </DropdownMenu>
         </div>
       </div>
-      <div className="bg-card shadow-lg">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      className="text-foreground bg-background-dark text-base font-bold"
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {!isLoading && table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+      <div className="bg-card h-full overflow-hidden rounded-lg shadow-lg">
+        {!isLoading && table.getRowModel().rows?.length ? (
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead
+                        key={header.id}
+                        className="text-foreground bg-background-dark text-base font-bold"
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   className="text-foreground"
@@ -248,26 +250,23 @@ export function DataTable({
                     </TableCell>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="text-foreground h-24 text-center"
-                >
-                  {!isLoading ? (
-                    "Não foram encontrados resultados."
-                  ) : (
-                    <div className="flex w-full flex-row items-center justify-center gap-2">
-                      <Spinner size={20} className="animate-spin" />
-                      Carregando...
-                    </div>
-                  )}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <div className="text-foreground text-sm font-medium">
+              {isLoading ? (
+                <div className="flex flex-row gap-2">
+                  <Spinner size={20} className="animate-spin" />
+                  <p>Carregando...</p>
+                </div>
+              ) : (
+                "Nenhum registro encontrado."
+              )}
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-end py-4 pb-0">
         <div className="text-muted-foreground flex-1 text-sm">

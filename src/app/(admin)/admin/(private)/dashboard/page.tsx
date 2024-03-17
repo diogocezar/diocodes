@@ -1,7 +1,5 @@
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import MentoringDone from "@/components/containers/admin/dashboard/mentoring/mentoring-done";
 import { Suspense } from "react";
-import { ChartBar } from "@phosphor-icons/react/dist/ssr";
 import SkeletonDahboardTile from "@/components/skeletons/skeleton-dashboard-tile";
 import MentoringToBe from "@/components/containers/admin/dashboard/mentoring/mentoring-to-be";
 import MentoringTotal from "@/components/containers/admin/dashboard/mentoring/mentoring-total";
@@ -14,49 +12,47 @@ import AvaliationByMonth from "@/components/containers/admin/dashboard/graph/ava
 import MentoringNext from "@/components/containers/admin/dashboard/mentoring/mentoring-next";
 import SkeletonDahboardGraph from "@/components/skeletons/skeleton-dashboard-graph";
 import SkeletonDahboardList from "@/components/skeletons/skeleton-dashboard-list";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 export default async function AdminDashboardPage() {
   return (
-    <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Dashboard" Icon={<ChartBar />} />
-        <div className="mt-8 space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <MentoringDone />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <MentoringToBe />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <MentoringTotal />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <AvaliationTotal />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <InviteSent />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <TagTotal />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <PersonTotal />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardTile />}>
-              <AvaliationAverage />
-            </Suspense>
-          </div>
-          <div className="grid gap-4 md:grid-cols-7">
-            <Suspense fallback={<SkeletonDahboardGraph />}>
-              <AvaliationByMonth />
-            </Suspense>
-            <Suspense fallback={<SkeletonDahboardList />}>
-              <MentoringNext />
-            </Suspense>
-          </div>
+    <PageCommon>
+      <div className="space-y-4 p-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringDone />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringToBe />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringTotal />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <AvaliationTotal />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <InviteSent />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <TagTotal />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <PersonTotal />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <AvaliationAverage />
+          </Suspense>
+        </div>
+        <div className="grid gap-4 md:grid-cols-7">
+          <Suspense fallback={<SkeletonDahboardGraph />}>
+            <AvaliationByMonth />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardList />}>
+            <MentoringNext />
+          </Suspense>
         </div>
       </div>
-    </>
+    </PageCommon>
   );
 }

@@ -117,12 +117,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Preparar streaming UI;
 - [x] Colocar skeleton nos paineis do dashboard;
 - [x] Ajustar os skeletons do gráfico, próximas mentorias e média de avaliações;
-- [ ] Fazer as tabelas ocuparem todo o espaço da página;
-- [ ] Passar dinamicamente a quantidade de ítens por página;
-- [ ] Colocar skeleton nos loadings das tabelas;
+- [x] Fazer as tabelas ocuparem todo o espaço da página;
+- [x] Passar dinamicamente a quantidade de ítens por página;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
 - [ ] Mudar o dropdown de filtrar colunas para ativar ou desativar;
+- [ ] Colocar gravatar nos e-mails em mentorias, avaliações e convites;
 - [ ] Criar todos os botões como um dropdown; (Nas listagens)
 - [ ] Criar paginação nas tabelas;
 - [ ] Ajustar todas as tipagens;

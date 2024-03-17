@@ -1,5 +1,4 @@
 "use client";
-import { AdminTitle } from "@/components/containers/admin/shared/admin-title";
 import { User } from "@phosphor-icons/react";
 import {
   columns,
@@ -14,6 +13,7 @@ import { useUserState } from "@/hooks/use-user-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
+import PageCommon from "@/components/containers/admin/shared/page-common";
 
 export default function AdminUserPage() {
   const setIsOpenForm = useUserState((state) => state.setIsOpenForm);
@@ -53,8 +53,7 @@ export default function AdminUserPage() {
 
   return (
     <>
-      <div className="flex-1 p-8 pt-6">
-        <AdminTitle title="Usuários" Icon={<User />} />
+      <PageCommon>
         <ConfirmDelete
           isOpenConfirmDelete={isOpenConfirmDelete}
           setIsOpenConfirmDelete={setIsOpenConfirmDelete}
@@ -73,8 +72,9 @@ export default function AdminUserPage() {
           createButtonLabel="Criar usuário"
           iconCreateButton={<User className="h-5 w-5" />}
           setTable={setTable}
+          pageSize={15}
         />
-      </div>
+      </PageCommon>
     </>
   );
 }
