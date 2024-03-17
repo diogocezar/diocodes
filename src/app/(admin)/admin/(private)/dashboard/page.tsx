@@ -49,11 +49,9 @@ export default async function AdminDashboardPage() {
           </div>
           <div className="grid gap-4 md:grid-cols-7">
             <Suspense fallback={<SkeletonDahboardGraph />}>
-              {/* <SkeletonDahboardGraph /> */}
               <AvaliationByMonth />
             </Suspense>
             <Suspense fallback={<SkeletonDahboardList />}>
-              {/* <SkeletonDahboardList /> */}
               <MentoringNext />
             </Suspense>
           </div>
