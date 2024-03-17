@@ -2,55 +2,89 @@ import { db } from "@/database/connection";
 import { logger } from "@/lib/logger";
 import { MongoClient, Document } from "mongodb";
 
-export const dashboardCountMentoringDone = async (): Promise<number> => {
-  try {
-    return await db.mentoring.count({
-      where: {
-        removedAt: null,
-        startTime: { lte: new Date() },
+const fakeSlowResult = <T,>(result: T): Promise<T> => {
+  return new Promise((resolve) => {
+    setTimeout(
+      () => {
+        resolve(result);
       },
-    });
+      Math.floor(Math.random() * (400 - 100 + 1)) + 100,
+    );
+  });
+};
+
+export const countMentoringDone = async (): Promise<number> => {
+  try {
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
+          removedAt: null,
+          startTime: { lte: new Date() },
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardCountMentoringToBe = async (): Promise<number> => {
+export const countMentoringToBe = async (): Promise<number> => {
   try {
-    return await db.mentoring.count({
-      where: {
-        removedAt: null,
-        startTime: { gte: new Date() },
-      },
-    });
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
+          removedAt: null,
+          startTime: { gte: new Date() },
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardCountAvaliation = async (): Promise<number> => {
+export const countMentoringTotal = async (): Promise<number> => {
   try {
-    return await db.avaliation.count({
-      where: {
-        removedAt: null,
-      },
-    });
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardCountAvaliationAvg = async (): Promise<number> => {
+export const countAvaliationTotal = async (): Promise<number> => {
   try {
-    const result = await db.avaliation.aggregate({
-      _avg: { rating: true },
-      where: {
-        removedAt: null,
-      },
-    });
+    return await fakeSlowResult(
+      db.avaliation.count({
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
+  } catch (error) {
+    logger.error(error);
+  }
+  return 0;
+};
+
+export const averageAvaliationTotal = async (): Promise<number> => {
+  try {
+    const result = await fakeSlowResult(
+      db.avaliation.aggregate({
+        _avg: { rating: true },
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
     if (!result) return 0;
     return result._avg.rating!;
   } catch (error) {
@@ -59,57 +93,65 @@ export const dashboardCountAvaliationAvg = async (): Promise<number> => {
   return 0;
 };
 
-export const dashboardCountInvite = async (): Promise<number> => {
+export const countInviteTotal = async (): Promise<number> => {
   try {
-    return await db.invite.count({
-      where: {
-        removedAt: null,
-      },
-    });
+    return await fakeSlowResult(
+      db.invite.count({
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardCountTag = async (): Promise<number> => {
+export const countTagTotal = async (): Promise<number> => {
   try {
-    return await db.tag.count({
-      where: {
-        removedAt: null,
-      },
-    });
+    return await fakeSlowResult(
+      db.tag.count({
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardCountPerson = async (): Promise<number> => {
+export const countPersonTotal = async (): Promise<number> => {
   try {
-    return await db.person.count({
-      where: {
-        removedAt: null,
-      },
-    });
+    return await fakeSlowResult(
+      db.person.count({
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
   } catch (error) {
     logger.error(error);
   }
   return 0;
 };
 
-export const dashboardGetRecentMentoring = async (): Promise<
+export const getNextMentoring = async (): Promise<
   { attendee: { name: string; email: string }; id: string; startTime: Date }[]
 > => {
   try {
-    const result = await db.mentoring.findMany({
-      where: { removedAt: null, startTime: { gte: new Date() } },
-      include: {
-        attendee: true,
-      },
-      take: 6,
-      orderBy: { startTime: "asc" },
-    });
+    const result = await fakeSlowResult(
+      db.mentoring.findMany({
+        where: { removedAt: null, startTime: { gte: new Date() } },
+        include: {
+          attendee: true,
+        },
+        take: 6,
+        orderBy: { startTime: "asc" },
+      }),
+    );
     return result.map((item) => ({
       id: item.id,
       attendee: item.attendee,
@@ -121,7 +163,7 @@ export const dashboardGetRecentMentoring = async (): Promise<
   return [];
 };
 
-export const dashboardAvaliationsByMonth = async (): Promise<Document[]> => {
+export const getAvaliationsByMonth = async (): Promise<Document[]> => {
   try {
     const year = new Date().getFullYear();
     const first = new Date(year, 0, 1, 0, 0, 0, 0);

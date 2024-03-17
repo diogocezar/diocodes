@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import * as crypto from "crypto";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,4 +18,11 @@ export function compactName(name: string): string {
     return `${nameArray[0]} ${nameArray[nameArray.length - 1]}`;
   }
   return name;
+}
+
+export function generateGravatarHash(email: string): string {
+  return crypto
+    .createHash("sha256")
+    .update(email.trim().toLowerCase())
+    .digest("hex");
 }

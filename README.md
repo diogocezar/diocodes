@@ -112,6 +112,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Pegar as mentorias utilizando hooks na página principal;
 - [x] Ao realizar uma ação, desselecionar os ítens da tabela;
 - [x] Colocar skeleton nos loadings página principal;
+- [x] Tentar obter o gravatar dos emails;
+- [x] Separar chamadas do dashboard em diferentes endpoints;
+- [x] Preparar streaming UI;
+- [x] Colocar skeleton nos paineis do dashboard;
+- [ ] Fazer as tabelas ocuparem todo o espaço da página;
+- [ ] Passar dinamicamente a quantidade de ítens por página;
 - [ ] Colocar skeleton nos loadings das tabelas;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
@@ -125,6 +131,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 https://time.openstatus.dev/
 https://craft.mxkaske.dev/post/fancy-multi-select
 https://dev.to/marcelomichels/criando-e-restaurando-backup-no-mongodb-5f41
+https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
 
 ## Backup do Mongo
 

@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { Document } from "mongodb";
 
-type GraphProps = {
+type GraphAvaliationByMonthProps = {
   data: Document[];
 };
 
@@ -45,7 +45,7 @@ const CustomTooltip = ({ payload }: any) => {
   return null;
 };
 
-export function Graph({ data }: GraphProps) {
+export function GraphAvaliationByMonth({ data }: GraphAvaliationByMonthProps) {
   const transformedData = data?.map((item) => {
     return {
       name: getMonth(item._id),
