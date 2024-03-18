@@ -119,12 +119,14 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Ajustar os skeletons do gráfico, próximas mentorias e média de avaliações;
 - [x] Fazer as tabelas ocuparem todo o espaço da página;
 - [x] Passar dinamicamente a quantidade de ítens por página;
+- [x] Colocar gravatar nos e-mails em mentorias, avaliações e convites;
+- [x] Criar todos os botões como um dropdown; (Nas listagens)
+- [x] Aditional buttons como opções;
+- [x] Posição do toast;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Colocar depoimentos na página principal;
-- [ ] Mudar o dropdown de filtrar colunas para ativar ou desativar;
-- [ ] Colocar gravatar nos e-mails em mentorias, avaliações e convites;
-- [ ] Criar todos os botões como um dropdown; (Nas listagens)
 - [ ] Criar paginação nas tabelas;
+- [ ] Implementar stripe para pagamentos;
 - [ ] Ajustar todas as tipagens;
 
 ## 🖥️ Tecnologias

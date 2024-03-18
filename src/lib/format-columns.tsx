@@ -8,6 +8,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { generateGravatarHash } from "./utils";
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);
@@ -43,10 +45,33 @@ export const formatTagQuantity = (row: any) => {
   return row.original?.avaliationTags?.length || 0;
 };
 
+export const formatNameEmailWithAvatar = (email: string, name: string) => {
+  return (
+    <div className="flex flex-row items-center gap-2">
+      <Avatar className="h-6 w-6">
+        <AvatarImage
+          src={`https://gravatar.com/avatar/${generateGravatarHash(email)}`}
+          alt="Gravatar"
+        />
+      </Avatar>
+      {name}
+    </div>
+  );
+};
+
+export const formatMentoring = (row: any) => {
+  const { original } = row;
+  const { mentoring } = original;
+  const { attendee } = mentoring;
+  const { name, email } = attendee;
+  return formatNameEmailWithAvatar(email, name);
+};
+
 export const formatAttendee = (row: any) => {
   const { original } = row;
   const { attendee } = original;
-  return `${attendee.name}`;
+  const { name, email } = attendee;
+  return formatNameEmailWithAvatar(email, name);
 };
 
 export const formatSelect = (row: any) => {
@@ -182,13 +207,6 @@ export const formatDate = (startTime: Date, endTime: Date) => {
 
 export const formatCreatedAt = (row: any) => {
   return new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR");
-};
-
-export const formatMentoring = (row: any) => {
-  const { original } = row;
-  const { mentoring } = original;
-  const { attendee } = mentoring;
-  return `${attendee.name}`;
 };
 
 export const formatTags = (row: any) => {

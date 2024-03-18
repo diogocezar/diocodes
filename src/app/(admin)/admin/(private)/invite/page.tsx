@@ -17,6 +17,7 @@ import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useInviteState } from "@/hooks/use-invite-state";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 function AditionalButtons({ table }: any) {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,8 +27,9 @@ function AditionalButtons({ table }: any) {
   const mentoringId = rows[0]?.original?.mentoringId;
   return (
     <>
-      <Button
+      <DropdownMenuItem
         disabled={disabled}
+        className="flex flex-row gap-2 rounded-lg"
         onClick={async () => {
           try {
             setIsLoading(true);
@@ -47,7 +49,6 @@ function AditionalButtons({ table }: any) {
             table.toggleAllRowsSelected(false);
           }
         }}
-        className="rounded-lg"
       >
         {isLoading ? (
           <div className="flex flex-row gap-2">
@@ -60,7 +61,7 @@ function AditionalButtons({ table }: any) {
             Reenviar
           </div>
         )}
-      </Button>
+      </DropdownMenuItem>
     </>
   );
 }

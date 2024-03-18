@@ -9,7 +9,7 @@ export const dispatchError = (error: any, message?: string) => {
       label: "Ok",
     },
     duration: 5000,
-    position: "top-right",
+    position: "bottom-right",
   });
 };
 
@@ -19,6 +19,6 @@ export const dispatchSuccess = (message: string) => {
       label: "Ok",
     },
     duration: 5000,
-    position: "top-right",
+    position: "bottom-right",
   });
 };

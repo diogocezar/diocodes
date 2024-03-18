@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TypeUser } from "@/types/type-user";
 import {
   formatCreatedAt,
+  formatNameEmailWithAvatar,
   formatRowValue,
   formatSelect,
 } from "@/lib/format-columns";
@@ -29,13 +30,20 @@ export const columns = (isLoading: boolean): ColumnDef<TypeUser>[] => {
       accessorKey: "name",
       accessorFn: (row) => row?.person?.name,
       header: ({ column }) => formatHeader("Nome", column),
-      cell: ({ row }) => <div>{row.original?.person?.name}</div>,
+      cell: ({ row }) => (
+        <div>
+          {formatNameEmailWithAvatar(
+            formatRowValue(row, "email"),
+            formatRowValue(row, "name"),
+          )}
+        </div>
+      ),
     },
     {
       accessorKey: "email",
       accessorFn: (row) => row?.person?.email,
       header: ({ column }) => formatHeader("Email", column),
-      cell: ({ row }) => <div>{row.original?.person?.email}</div>,
+      cell: ({ row }) => <div>{formatRowValue(row, "email")}</div>,
     },
     {
       accessorKey: "role",

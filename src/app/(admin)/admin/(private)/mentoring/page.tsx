@@ -12,18 +12,19 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 function AditionalButtons() {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   return (
-    <Button
+    <DropdownMenuItem
       disabled={isLoading}
+      className="flex flex-row gap-2 rounded-lg"
       onClick={async () => {
         try {
           setIsLoading(true);
@@ -40,7 +41,6 @@ function AditionalButtons() {
           });
         }
       }}
-      className="rounded-lg"
     >
       {isLoading ? (
         <div className="flex flex-row gap-2">
@@ -53,7 +53,7 @@ function AditionalButtons() {
           Sincronizar
         </div>
       )}
-    </Button>
+    </DropdownMenuItem>
   );
 }
 

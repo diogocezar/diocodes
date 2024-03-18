@@ -3,6 +3,8 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -18,6 +20,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Funnel,
+  DotsThreeOutlineVertical,
   MagnifyingGlass,
   PaintBrush,
   Spinner,
@@ -132,39 +135,53 @@ export function DataTable({
         </div>
         <div className="flex flex-row items-center gap-4">
           {form}
-          {!isLoading &&
-            aditionalButtons &&
-            React.cloneElement(aditionalButtons, {
-              table,
-            })}
-          <Button
-            disabled={disabledCreate}
-            onClick={() => {
-              handleCreate(table.getFilteredSelectedRowModel().rows);
-            }}
-            className="flex flex-row gap-2 rounded-lg"
-          >
-            {iconCreateButton}
-            {createButtonLabel}
-          </Button>
-          <Button
-            className="flex flex-row gap-2 rounded-lg"
-            disabled={disabledDelete}
-            onClick={() => {
-              handleDelete(table.getFilteredSelectedRowModel().rows, table);
-            }}
-          >
-            <Trash className="h-5 w-5" /> Excluir
-          </Button>
-          <Button
-            className="flex flex-row gap-2 rounded-lg"
-            disabled={disabledEdit}
-            onClick={() => {
-              handleEdit(table.getFilteredSelectedRowModel().rows, table);
-            }}
-          >
-            <PaintBrush className="h-5 w-5" /> Editar
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="flex flex-row items-center gap-2 rounded-lg">
+                <DotsThreeOutlineVertical className="h-5 w-5" /> Opções
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="center"
+              className="bg-background-dark text-foreground w-full border-0"
+            >
+              <DropdownMenuItem
+                disabled={disabledCreate}
+                className="flex flex-row gap-2 rounded-lg"
+                onClick={() => {
+                  handleCreate(table.getFilteredSelectedRowModel().rows);
+                }}
+              >
+                {iconCreateButton}
+                <span>{createButtonLabel}</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                disabled={disabledEdit}
+                className="flex flex-row gap-2 rounded-lg"
+                onClick={() => {
+                  handleEdit(table.getFilteredSelectedRowModel().rows);
+                }}
+              >
+                <PaintBrush className="h-5 w-5" />
+                <span>Editar</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                disabled={disabledDelete}
+                className="flex flex-row gap-2 rounded-lg"
+                onClick={() => {
+                  handleDelete(table.getFilteredSelectedRowModel().rows, table);
+                }}
+              >
+                <Trash className="h-5 w-5" />
+                <span>Excluir</span>
+              </DropdownMenuItem>
+              {!isLoading &&
+                aditionalButtons &&
+                React.cloneElement(aditionalButtons, {
+                  table,
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -172,13 +189,13 @@ export function DataTable({
                 className="flex flex-row gap-2"
                 disabled={disabledFilter}
               >
-                <Funnel className="h-5 w-5" /> Filtrar Colunas{" "}
+                <Funnel className="h-5 w-5" /> Filtrar
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="center"
-              className="bg-card w-full border-0"
+              className="bg-background-dark text-foreground w-full border-0"
             >
               {table
                 .getAllColumns()
