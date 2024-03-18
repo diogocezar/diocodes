@@ -123,8 +123,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Criar todos os botões como um dropdown; (Nas listagens)
 - [x] Aditional buttons como opções;
 - [x] Posição do toast;
+- [x] Colocar depoimentos na página principal;s
 - [ ] Colocar a média de avaliações na página principal;
-- [ ] Colocar depoimentos na página principal;
 - [ ] Criar paginação nas tabelas;
 - [ ] Implementar stripe para pagamentos;
 - [ ] Ajustar todas as tipagens;

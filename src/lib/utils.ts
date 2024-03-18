@@ -26,3 +26,21 @@ export function generateGravatarHash(email: string): string {
     .update(email.trim().toLowerCase())
     .digest("hex");
 }
+
+export function capitalizeString(str: string) {
+  if (typeof str !== "string" || str.length === 0) {
+    return "";
+  }
+
+  const words = str.split(" ");
+
+  const capitalized = words.map((word) => {
+    if (word.length > 0) {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    } else {
+      return "";
+    }
+  });
+
+  return capitalized.join(" ");
+}
