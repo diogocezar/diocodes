@@ -10,15 +10,15 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useGetAvaliation } from "@/hooks/use-get-avaliation";
-import { Spinner } from "@phosphor-icons/react/dist/ssr";
 import { capitalizeString } from "@/lib/utils";
+import SkeletonTestimonials from "@/components/skeletons/skeleton-testimonials";
 
 const Testimonials = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(() => {
   const plugin = React.useRef(
-    Autoplay({ delay: 2500, stopOnInteraction: true, jumps: true }),
+    Autoplay({ delay: 3500, stopOnInteraction: true, jumps: true }),
   );
   const { avaliation, isLoadingAvaliation } = useGetAvaliation();
   return (
@@ -28,10 +28,7 @@ const Testimonials = React.forwardRef<
         Veja os depoimentos de quem já fez a mentoria e o que eles acharam.
       </Paragraph>
       {isLoadingAvaliation ? (
-        <div className="text-foreground flex w-full flex-row items-center gap-2">
-          <Spinner size={20} className="animate-spin" />
-          Carregando...
-        </div>
+        <SkeletonTestimonials />
       ) : (
         <Carousel
           plugins={[plugin.current]}
