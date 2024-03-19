@@ -8,8 +8,7 @@ import { Why } from "@/components/containers/main/why";
 import { Who } from "@/components/containers/main/who";
 import { IsTrap } from "@/components/containers/main/is-trap";
 import { Liked } from "@/components/containers/main/liked";
-import { Testimonials } from "@/components/containers/main/testimonials";
-import { Statistics } from "@/components/containers/main/statistics";
+// import { Testimonials } from "@/components/containers/main/testimonials";
 
 export default function MainPage() {
   return (
@@ -19,8 +18,7 @@ export default function MainPage() {
         <Presentation />
         <Book />
         <WhoBooked />
-        <Testimonials />
-        {/* <Statistics /> */}
+        {/* <Testimonials /> */}
         <Why />
         <Who />
         <IsTrap />

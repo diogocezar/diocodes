@@ -90,6 +90,7 @@ export const averageAvaliationTotal = async (): Promise<number> => {
         },
       }),
     );
+    console.log(result);
     if (!result) return 0;
     return result._avg.rating!;
   } catch (error) {
