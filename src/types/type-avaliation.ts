@@ -8,6 +8,7 @@ export type TypeAvaliation = {
   avaliationTags: TypeAvaliationTags[];
   rating: number;
   comment: string;
+  showComment: boolean;
   wasSent: boolean;
   createdAt: Date;
   removedAt?: Date;

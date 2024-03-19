@@ -61,6 +61,7 @@ model Avaliation {
     rating         Int
     avaliationTags AvaliationTags[]
     comment        String?
+    showComment    Boolean          @default(true)
     createdAt      DateTime         @default(now())
     updatedAt      DateTime?
     removedAt      DateTime?

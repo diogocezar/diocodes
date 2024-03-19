@@ -114,6 +114,23 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   return [];
 };
 
+export const getAllComments = async (): Promise<Avaliation[]> => {
+  try {
+    return await db.avaliation.findMany({
+      where: {
+        removedAt: null,
+        showComment: true,
+      },
+      include: {
+        mentoring: { include: { attendee: true } },
+      },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
 export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
     return await db.avaliation.findUnique({

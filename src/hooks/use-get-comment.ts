@@ -3,18 +3,18 @@ import { api } from "@/services/api";
 import { TypeAvaliation } from "@/types/type-avaliation";
 import { useState, useEffect, useCallback } from "react";
 
-export const useGetAvaliation = (url: string = "admin/avaliation") => {
-  const [avaliation, setAvaliation] = useState<TypeAvaliation[]>([]);
-  const [isLoadingAvaliation, setIsLoadingAvaliation] = useState(true);
+export const useGetComment = (url: string = "comment") => {
+  const [comment, setComment] = useState<TypeAvaliation[]>([]);
+  const [isLoadingComment, setIsLoadingComment] = useState(true);
 
   const getAvaliation = useCallback(async () => {
     try {
       const response = await api.get(url);
-      setAvaliation(response.data);
+      setComment(response.data);
     } catch (error) {
       dispatchError(error);
     } finally {
-      setIsLoadingAvaliation(false);
+      setIsLoadingComment(false);
     }
   }, [url]);
 
@@ -22,5 +22,5 @@ export const useGetAvaliation = (url: string = "admin/avaliation") => {
     getAvaliation();
   }, [getAvaliation]);
 
-  return { avaliation, isLoadingAvaliation };
+  return { comment, isLoadingComment };
 };

@@ -9,7 +9,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useGetAvaliation } from "@/hooks/use-get-avaliation";
+import { useGetComment } from "@/hooks/use-get-comment";
 import { capitalizeString } from "@/lib/utils";
 import SkeletonTestimonials from "@/components/skeletons/skeleton-testimonials";
 
@@ -20,14 +20,14 @@ const Testimonials = React.forwardRef<
   const plugin = React.useRef(
     Autoplay({ delay: 3500, stopOnInteraction: true, jumps: true }),
   );
-  const { avaliation, isLoadingAvaliation } = useGetAvaliation();
+  const { comment, isLoadingComment } = useGetComment();
   return (
     <>
       <SubSubTitle>Depoimentos</SubSubTitle>
       <Paragraph>
         Veja os depoimentos de quem já fez a mentoria e o que eles acharam.
       </Paragraph>
-      {isLoadingAvaliation ? (
+      {isLoadingComment ? (
         <SkeletonTestimonials />
       ) : (
         <Carousel
@@ -37,17 +37,17 @@ const Testimonials = React.forwardRef<
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent className="mb-10 sm:mb-2">
-            {avaliation?.map((item, index) => (
+            {comment?.map((item, index) => (
               <CarouselItem key={index} className="">
                 <div className="p-1">
                   <Card className="rounded-none">
                     <CardContent className="flex h-[200px] items-center justify-center rounded-none p-6">
                       <span className="text-xl font-semibold">
-                        {item.comment}
+                        {item?.comment}
                       </span>
                     </CardContent>
                     <CardFooter className="font-poppins text-green font-bold capitalize">
-                      {capitalizeString(item.mentoring.attendee.name)}
+                      {capitalizeString(item?.mentoring?.attendee?.name)}
                     </CardFooter>
                   </Card>
                 </div>

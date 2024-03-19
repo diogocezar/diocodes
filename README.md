@@ -125,6 +125,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Posição do toast;
 - [x] Colocar depoimentos na página principal;
 - [x] Colocar skeleton nos depoimentos;
+- [ ] Incluir showComment no crud de avaliação;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Criar paginação nas tabelas;
 - [ ] Implementar stripe para pagamentos;
