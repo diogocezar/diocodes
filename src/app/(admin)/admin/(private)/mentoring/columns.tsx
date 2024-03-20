@@ -7,6 +7,7 @@ import {
   formatDate,
   formatExternalMessage,
   formatSelectMentoring,
+  formatStatus,
   formatType,
 } from "@/lib/format-columns";
 import { formatHeader, formatHeaderSelect } from "@/lib/format-columns-header";
@@ -15,6 +16,7 @@ export const columnsNames = [
   { id: "select", name: "select" },
   { id: "attendee", name: "Participante" },
   { id: "type", name: "Tipo" },
+  { id: "status", name: "Status" },
   { id: "date", name: "Data" },
   { id: "message", name: "Mensagem" },
   { id: "createdAt", name: "Criado em" },
@@ -40,6 +42,11 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       accessorKey: "type",
       header: ({ column }) => formatHeader("Tipo", column),
       cell: ({ row }) => <div>{formatType(row)}</div>,
+    },
+    {
+      accessorKey: "type",
+      header: ({ column }) => formatHeader("Status", column),
+      cell: ({ row }) => <div>{formatStatus(row)}</div>,
     },
     {
       accessorKey: "date",

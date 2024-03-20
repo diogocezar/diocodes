@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { generateGravatarHash } from "./utils";
+import { capitalizeString, compactName, generateGravatarHash } from "./utils";
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);
@@ -17,9 +17,18 @@ export const formatRowValue = (row: any, field: string) => {
 
 export const formatExternalMessage = (row: any) => {
   return (
-    <div className="h-[30px] w-full overflow-hidden overflow-ellipsis text-xs">
-      {row.getValue("externalMessage")}
-    </div>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="line-clamp-2 w-full overflow-hidden overflow-ellipsis text-xs">
+            {row.getValue("externalMessage")}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent className="bg-background-dark w-[300px] text-xs">
+          <p>{row.getValue("externalMessage")}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
@@ -41,6 +50,24 @@ export const formatType = (row: any) => {
   );
 };
 
+export const formatStatus = (row: any) => {
+  return row?.original?.externalStatus === CAL.STATUS_ACCEPTED ? (
+    <Badge
+      className="bg-green text-background rounded-md px-4 py-1 text-xs font-bold"
+      variant="secondary"
+    >
+      Confirmado
+    </Badge>
+  ) : (
+    <Badge
+      className="bg-background-dark text-foreground rounded-md px-4 py-1 text-xs font-bold"
+      variant="secondary"
+    >
+      Cancelado
+    </Badge>
+  );
+};
+
 export const formatTagQuantity = (row: any) => {
   return row.original?.avaliationTags?.length || 0;
 };
@@ -54,7 +81,7 @@ export const formatNameEmailWithAvatar = (email: string, name: string) => {
           alt="Gravatar"
         />
       </Avatar>
-      {name}
+      {capitalizeString(compactName(name))}
     </div>
   );
 };

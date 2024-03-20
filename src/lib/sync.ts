@@ -7,9 +7,8 @@ import { TypeBookingCal, TypeBooking } from "@/types/type-booking";
 const filterValidBooking = (mentoring: TypeBookingCal[]) =>
   mentoring.filter(
     (item: TypeBookingCal) =>
-      (item.eventTypeId === CAL.MENTORING_FREE ||
-        item.eventTypeId === CAL.MENTORING_PRO) &&
-      item.status !== "CANCELLED",
+      item.eventTypeId === CAL.MENTORING_FREE ||
+      item.eventTypeId === CAL.MENTORING_PRO,
   );
 
 const formatResponse = (validBookings: TypeBookingCal[]) =>

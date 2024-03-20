@@ -189,7 +189,7 @@ export function DataTable({
                 className="flex flex-row gap-2"
                 disabled={disabledFilter}
               >
-                <Funnel className="h-5 w-5" /> Filtrar
+                <Funnel className="h-5 w-5" /> Colunas
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>

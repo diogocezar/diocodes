@@ -28,6 +28,8 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
           externalId: item.externalId,
         },
         update: {
+          externalStatus: item.status,
+          externalMessage: item.requestMessage,
           startTime: item.startTime,
           endTime: item.endTime,
           updatedAt: new Date(),
@@ -125,11 +127,38 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
   return [];
 };
 
+export const getAllAcceptedMentorings = async (): Promise<Mentoring[]> => {
+  try {
+    return await db.mentoring.findMany({
+      where: { removedAt: null, externalStatus: "ACCEPTED" },
+      include: {
+        host: true,
+        attendee: true,
+        avaliation: {
+          where: {
+            removedAt: null,
+          },
+        },
+        invite: {
+          where: {
+            removedAt: null,
+          },
+        },
+      },
+      orderBy: { startTime: "asc" },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
 export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
   try {
     return await db.mentoring.findMany({
       where: {
         removedAt: null,
+        externalStatus: "ACCEPTED",
         startTime: { lte: new Date() },
       },
       include: {

@@ -1,3 +1,4 @@
+import { CAL } from "@/contants/cal";
 import { db } from "@/database/connection";
 import { logger } from "@/lib/logger";
 import { MongoClient, Document } from "mongodb";
@@ -24,6 +25,7 @@ export const countMentoringDone = async (): Promise<number> => {
       await db.mentoring.count({
         where: {
           removedAt: null,
+          externalStatus: CAL.STATUS_ACCEPTED,
           startTime: { lte: new Date() },
         },
       }),
@@ -40,6 +42,7 @@ export const countMentoringToBe = async (): Promise<number> => {
       await db.mentoring.count({
         where: {
           removedAt: null,
+          externalStatus: CAL.STATUS_ACCEPTED,
           startTime: { gte: new Date() },
         },
       }),
@@ -55,6 +58,7 @@ export const countMentoringTotal = async (): Promise<number> => {
     return fakeSlowResult(
       await db.mentoring.count({
         where: {
+          externalStatus: CAL.STATUS_ACCEPTED,
           removedAt: null,
         },
       }),
