@@ -10,8 +10,9 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useGetComment } from "@/hooks/use-get-comment";
-import { capitalizeString } from "@/lib/utils";
+import { capitalizeString, compactName } from "@/lib/utils";
 import SkeletonTestimonials from "@/components/skeletons/skeleton-testimonials";
+import { ChatCircleText } from "@phosphor-icons/react/dist/ssr";
 
 const Testimonials = React.forwardRef<
   HTMLDivElement,
@@ -42,12 +43,17 @@ const Testimonials = React.forwardRef<
                 <div className="p-1">
                   <Card className="rounded-none">
                     <CardContent className="flex h-[200px] items-center justify-center rounded-none p-6">
-                      <span className="text-xl font-semibold">
+                      <span className="line-clamp-5 overflow-ellipsis text-[14px] font-semibold md:text-lg lg:text-xl">
+                        {'"'}
                         {item?.comment}
+                        {'"'}
                       </span>
                     </CardContent>
-                    <CardFooter className="font-poppins text-green font-bold capitalize">
-                      {capitalizeString(item?.mentoring?.attendee?.name)}
+                    <CardFooter className="font-poppins text-green text-[14px] font-bold capitalize md:text-lg lg:text-xl">
+                      <ChatCircleText className="mr-1 h-6 w-6" />
+                      {compactName(
+                        capitalizeString(item?.mentoring?.attendee?.name),
+                      )}
                     </CardFooter>
                   </Card>
                 </div>

@@ -228,7 +228,8 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                       <FormControl>
                         <Textarea
                           placeholder="Como você classifica a mentoria? O que você achou? Conte-nos mais sobre a sua experiência."
-                          className="h-[200px]"
+                          className="h-[100px]"
+                          maxLength={250}
                           {...field}
                         />
                       </FormControl>

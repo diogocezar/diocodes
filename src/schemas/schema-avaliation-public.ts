@@ -10,5 +10,8 @@ export const SchemaAvaliationPublic = z.object({
       AVALIATION.MAX_TAGS,
       `É necessário informar ${AVALIATION.MAX_TAGS} tags.`,
     ),
-  comment: z.string().min(10, "O comentário deve ter no mínimo 10 caracteres."),
+  comment: z
+    .string()
+    .min(10, "O comentário deve ter no mínimo 10 caracteres.")
+    .max(250, "O comentário deve ter no máximo 250 caracteres."),
 });

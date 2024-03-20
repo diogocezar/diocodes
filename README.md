@@ -125,6 +125,17 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Posição do toast;
 - [x] Colocar depoimentos na página principal;
 - [x] Colocar skeleton nos depoimentos;
+- [x] Colocar quantidade máxima de caracteres nos depoimentos;
+- [x] Ajustar a responsividade dos depoimentos;
+- [ ] Na página principal, carregar menos mentorias (período);
+- [ ] Capitalizar o nome dos entrevistados ao exibir e sincronizar;
+- [ ] Mostrar externalStatus na lista de mentorias;
+- [ ] Ao passar o mouse na mensagem, mostrar ela completa;
+- [ ] Colocar no Dashboard quantidade de mentorias canceladas;
+- [ ] Se o status tiver como cancelado, então deve-se remover a mentoria da lista;
+- [ ] Sincronização precisa funcionar no site em PRD;
+- [ ] Sincronização deve desabilitar o botão de opções;
+- [ ] Reenvio de emails deve desabilitar o botão de opções;
 - [ ] Incluir showComment no crud de avaliação;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Criar paginação nas tabelas;
