@@ -34,7 +34,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [selectedTag, setSelectedTag] = useState<TypeTagValueLabel[]>([]);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const router = useRouter();
-  const { tag, isLoadingTag } = useGetTag();
+  const { tag, isLoadingTag } = useGetTag("tag");
   const { mentoring, isLoadingMentoring } = useGetOneMentoring(params.id);
 
   const isLoading = isLoadingTag && isLoadingMentoring;

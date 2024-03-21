@@ -131,6 +131,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Capitalizar o nome dos entrevistados ao exibir;
 - [x] Mostrar externalStatus na lista de mentorias;
 - [x] Ao passar o mouse na mensagem, mostrar ela completa;
+- [ ] Hora final na página de avaliação publica;
+- [ ] Enquanto carrega a página de avaliação pública, o footer precisa ocupar toda a altura da página;
 - [ ] Na página principal, carregar menos mentorias (período);
 - [ ] Colocar no Dashboard quantidade de mentorias canceladas;
 - [ ] Se o status tiver como cancelado, então deve-se remover a mentoria da lista;
