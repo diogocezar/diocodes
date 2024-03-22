@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { capitalizeString, compactName, generateGravatarHash } from "./utils";
+import { Switch } from "@/components/ui/switch";
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);
@@ -232,6 +233,14 @@ export const formatDate = (startTime: Date, endTime: Date) => {
   );
 };
 
+export const formatShowComment = (row: any) => {
+  return row.getValue("showComment")!! === true ? (
+    <Switch className="important:mt-0" checked={true} disabled={true} />
+  ) : (
+    <Switch className="important:mt-0" checked={false} disabled={true} />
+  );
+};
+
 export const formatCreatedAt = (row: any) => {
   return new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR");
 };
@@ -245,7 +254,7 @@ export const formatTags = (row: any) => {
         return (
           <Badge
             key={avaliationTag?.tag?.name}
-            className="bg-background text-foreground rounded-md px-4 py-1 text-sm font-normal"
+            className="bg-background text-foreground rounded-md px-2 py-1 text-xs font-normal"
             variant="secondary"
           >
             {avaliationTag?.tag?.name}

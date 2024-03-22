@@ -25,7 +25,7 @@ export const useGetMentoring = (url: string = "admin/mentoring/done") => {
   return { mentoring, isLoadingMentoring };
 };
 
-export const useGetOneMentoring = (id: string) => {
+export const useGetMentoringById = (id: string) => {
   const url = `mentoring/${id}`;
   const [mentoring, setMentoring] = useState<TypeMentoringSearchOne>();
   const [isLoadingMentoring, setIsLoadingMentoring] = useState(true);

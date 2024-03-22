@@ -131,19 +131,21 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Capitalizar o nome dos entrevistados ao exibir;
 - [x] Mostrar externalStatus na lista de mentorias;
 - [x] Ao passar o mouse na mensagem, mostrar ela completa;
-- [ ] Hora final na página de avaliação publica;
-- [ ] Enquanto carrega a página de avaliação pública, o footer precisa ocupar toda a altura da página;
-- [ ] Na página principal, carregar menos mentorias (período);
-- [ ] Colocar no Dashboard quantidade de mentorias canceladas;
-- [ ] Se o status tiver como cancelado, então deve-se remover a mentoria da lista;
-- [ ] Sincronização precisa funcionar no site em PRD;
-- [ ] Sincronização deve desabilitar o botão de opções;
-- [ ] Reenvio de emails deve desabilitar o botão de opções;
-- [ ] Incluir showComment no crud de avaliação;
+- [x] Colocar a coluna de mostrar comentário na listagem de avaliações;
+- [x] Problema ao atualizar uma avaliação (as tags estão sendo excluídas);
+- [x] Hora final na página de avaliação publica;
+- [x] Enquanto carrega a página de avaliação pública, o footer precisa ocupar toda a altura da página;
+- [x] Ajustar código fonte disponível no GitHub;
+- [x] Próximas mentorias desconsiderar os cancelados (Dashboard);
+- [x] Colocar no Dashboard quantidade de mentorias canceladas;
+- [x] Sincronização deve desabilitar o botão de opções;
+- [x] Reenvio de emails deve desabilitar o botão de opções;
+- [x] Incluir showComment no crud de avaliação;
 - [ ] Colocar a média de avaliações na página principal;
-- [ ] Criar paginação nas tabelas;
 - [ ] Implementar stripe para pagamentos;
 - [ ] Ajustar todas as tipagens;
+- [ ] Na página principal, carregar menos mentorias (período);
+- [ ] Sincronização precisa funcionar no site em PRD;
 
 ## 🖥️ Tecnologias
 

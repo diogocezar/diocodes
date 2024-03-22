@@ -13,6 +13,10 @@ import MentoringNext from "@/components/containers/admin/dashboard/mentoring/men
 import SkeletonDahboardGraph from "@/components/skeletons/skeleton-dashboard-graph";
 import SkeletonDahboardList from "@/components/skeletons/skeleton-dashboard-list";
 import PageCommon from "@/components/containers/admin/shared/page-common";
+import MentoringCanceled from "@/components/containers/admin/dashboard/mentoring/mentoring-canceled";
+import MentoringPro from "@/components/containers/admin/dashboard/mentoring/mentoring-pro";
+import MentoringFree from "@/components/containers/admin/dashboard/mentoring/mentoring-free";
+import MentoringReceived from "@/components/containers/admin/dashboard/mentoring/mentoring-received";
 
 export default async function AdminDashboardPage() {
   return (
@@ -26,7 +30,19 @@ export default async function AdminDashboardPage() {
             <MentoringToBe />
           </Suspense>
           <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringCanceled />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
             <MentoringTotal />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringPro />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringFree />
+          </Suspense>
+          <Suspense fallback={<SkeletonDahboardTile />}>
+            <MentoringReceived />
           </Suspense>
           <Suspense fallback={<SkeletonDahboardTile />}>
             <AvaliationTotal />

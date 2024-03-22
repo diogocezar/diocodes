@@ -52,7 +52,8 @@ export const updateAvaliation = async (
   avaliation: Avaliation & { avaliationTags: [] },
 ) => {
   try {
-    const { mentoringId, comment, rating, avaliationTags } = avaliation;
+    const { mentoringId, comment, rating, avaliationTags, showComment } =
+      avaliation;
     await db.avaliationTags.deleteMany({
       where: { avaliationId: id },
     });
@@ -60,17 +61,21 @@ export const updateAvaliation = async (
       mentoringId,
       comment,
       rating,
-      avaliationTags: {
-        create: avaliationTags.map((tag) => ({
-          tagId: (tag as { id: string })?.id,
-        })),
-      },
+      showComment,
       updatedAt: new Date(),
       removedAt: null,
     };
-    return await db.avaliation.update({
+    const avaliationTagsToCreate = avaliationTags.map((tag) => ({
+      avaliationId: id,
+      tagId: (tag as { id: string })?.id,
+      removedAt: null,
+    }));
+    await db.avaliation.update({
       where: { id },
       data,
+    });
+    await db.avaliationTags.createMany({
+      data: avaliationTagsToCreate,
     });
   } catch (error) {
     logger.error(error);

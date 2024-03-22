@@ -13,7 +13,7 @@ import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { dispatchError, dispatchSuccess } from "@/lib/toast";
+import { dispatchError, dispatchPromise, dispatchSuccess } from "@/lib/toast";
 import { useInviteState } from "@/hooks/use-invite-state";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
@@ -33,14 +33,11 @@ function AditionalButtons({ table }: any) {
         onClick={async () => {
           try {
             setIsLoading(true);
-            const result = await api.post("admin/invite/resend", {
+
+            const promise = api.post("admin/invite/resend", {
               mentoringId,
             });
-            if (result.status === 201) {
-              dispatchSuccess("E-mail enviado com sucesso!");
-            }
-          } catch (error) {
-            dispatchError("Houve um erro ao enviar o e-mail");
+            dispatchPromise("Enviando um novo convite...", promise);
           } finally {
             setIsLoading(false);
             await queryClient.invalidateQueries({

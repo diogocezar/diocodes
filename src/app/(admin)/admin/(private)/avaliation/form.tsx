@@ -32,6 +32,7 @@ import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { useAvaliationState } from "@/hooks/use-avaliation-state";
 import { useGetMentoring } from "@/hooks/use-get-mentoring";
 import { useGetTag } from "@/hooks/use-get-tag";
+import { Switch } from "@/components/ui/switch";
 
 type TypeAvaliationTag = {
   tag: {
@@ -74,7 +75,8 @@ export function AvaliationForm() {
   const form = useForm<z.infer<typeof SchemaAvaliation>>({
     resolver: zodResolver(SchemaAvaliation),
     defaultValues: {
-      rating: [1],
+      rating: [selectedItem?.rating || 1],
+      showComment: Boolean(selectedItem?.showComment),
     },
   });
 
@@ -91,6 +93,7 @@ export function AvaliationForm() {
     );
     setValue("comment", selectedItem?.comment || "");
     setValue("rating", [selectedItem?.rating || 1]);
+    setValue("showComment", Boolean(selectedItem?.showComment));
   }, [setValue, selectedItem]);
 
   useEffect(() => {
@@ -112,6 +115,7 @@ export function AvaliationForm() {
         avaliationTags,
         comment: data.comment,
         rating: Number(data.rating[0]),
+        showComment: data.showComment,
       };
       if (selectedItem.id) {
         await api.patch(url, {
@@ -215,7 +219,7 @@ export function AvaliationForm() {
                       min={1}
                       max={5}
                       step={1}
-                      defaultValue={[Number(field.value || 1)]}
+                      defaultValue={[Number(field.value) || 1]}
                       onValueChange={field.onChange}
                     />
                   </FormControl>
@@ -240,6 +244,25 @@ export function AvaliationForm() {
                   </FormControl>
                   <FormMessage>
                     {form.formState.errors.comment?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="showComment"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center gap-2">
+                  <FormLabel className="h-2">Exibir comentário?</FormLabel>
+                  <FormControl>
+                    <Switch
+                      className="important:mt-0"
+                      onCheckedChange={field.onChange}
+                      checked={field.value}
+                    />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.showComment?.message}
                   </FormMessage>
                 </FormItem>
               )}

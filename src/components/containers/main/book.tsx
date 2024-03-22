@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
 import { Calendar, Star } from "@phosphor-icons/react";
+import { PRICE } from "@/contants/price";
+import { formatCurrency } from "@/lib/utils";
 
 const Book = React.forwardRef<
   HTMLDivElement,
@@ -29,7 +31,8 @@ const Book = React.forwardRef<
           className="bg-green hover:bg-card hover:text-green mb-2 mt-6 flex w-full flex-row items-center justify-center gap-2 sm:w-[300px] md:mb-8 md:mt-10 md:justify-center"
         >
           <Star size={20} />
-          Mentoria Pro <span className="text-xs">(R$ 120,00)</span>
+          Mentoria Pro{" "}
+          <span className="text-xs">{formatCurrency(PRICE.MENTORING_PRO)}</span>
         </Button>
         <Button
           data-cal-namespace=""

@@ -8,6 +8,7 @@ import {
   formatCreatedAt,
   formatSelect,
   formatDate,
+  formatShowComment,
 } from "@/lib/format-columns";
 import { formatHeader, formatHeaderSelect } from "@/lib/format-columns-header";
 
@@ -17,6 +18,7 @@ export const columnsNames = [
   { id: "date", name: "Data" },
   { id: "tags", name: "Tags" },
   { id: "rating", name: "Nota" },
+  { id: "showComment", name: "Mostrar Comentário" },
   { id: "createdAt", name: "Criado em" },
 ];
 
@@ -55,6 +57,11 @@ export const columns = (isLoading: boolean): ColumnDef<TypeAvaliation>[] => {
       accessorKey: "rating",
       header: ({ column }) => formatHeader("Nota", column),
       cell: ({ row }) => <div>{formatRating(row)}</div>,
+    },
+    {
+      accessorKey: "showComment",
+      header: ({ column }) => formatHeader("Comentário", column),
+      cell: ({ row }) => <div>{formatShowComment(row)}</div>,
     },
     {
       accessorKey: "createdAt",

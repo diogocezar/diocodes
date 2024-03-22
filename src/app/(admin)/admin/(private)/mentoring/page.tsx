@@ -13,7 +13,7 @@ import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useState } from "react";
-import { dispatchError, dispatchSuccess } from "@/lib/toast";
+import { dispatchError, dispatchPromise, dispatchSuccess } from "@/lib/toast";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -28,12 +28,8 @@ function AditionalButtons() {
       onClick={async () => {
         try {
           setIsLoading(true);
-          const result = await api.get("admin/mentoring/sync");
-          if (result.status === 200) {
-            dispatchSuccess("Sincronizado com sucesso!");
-          }
-        } catch (error) {
-          dispatchError("Houve um problema ao sincronizar");
+          const promise = api.get("admin/mentoring/sync");
+          dispatchPromise("Sincronizando mentorias...", promise);
         } finally {
           setIsLoading(false);
           await queryClient.invalidateQueries({

@@ -26,7 +26,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useGetTag } from "@/hooks/use-get-tag";
-import { useGetOneMentoring } from "@/hooks/use-get-mentoring";
+import { useGetMentoringById } from "@/hooks/use-get-mentoring";
 import { TypeTagValueLabel } from "@/types/type-tag";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
@@ -35,7 +35,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const router = useRouter();
   const { tag, isLoadingTag } = useGetTag("tag");
-  const { mentoring, isLoadingMentoring } = useGetOneMentoring(params.id);
+  const { mentoring, isLoadingMentoring } = useGetMentoringById(params.id);
 
   const isLoading = isLoadingTag && isLoadingMentoring;
 
@@ -85,7 +85,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
   };
 
   const getEndTime = () => {
-    return mentoring?.startTime?.toLocaleTimeString("pt-BR");
+    return mentoring?.endTime?.toLocaleTimeString("pt-BR");
   };
 
   const getAttendee = () => {
@@ -100,7 +100,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <Container>
+      <Container className="min-h-[calc(100vh-200px)]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

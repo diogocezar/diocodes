@@ -11,12 +11,13 @@ const Footer = React.forwardRef<
   return (
     <>
       <footer className="bg-background-dark mt-10 w-full shadow-2xl">
-        <div className="flex flex-col items-center justify-between gap-6 p-5 pt-10 md:flex-row md:gap-0 md:p-24 md:pt-12 lg:p-12 lg:pt-14">
-          <div>
+        <div className="flex flex-col items-center justify-between gap-6 p-5 pt-10 md:flex-row md:gap-0 md:p-16 md:pt-12 lg:p-12 lg:pt-14">
+          <div className="text-foreground flex flex-col items-center justify-center gap-2 text-center text-sm md:items-start">
+            Código fonte disponível em
             <Link href="https://github.com/diogocezar/diocodes" target="_blank">
               <Button
                 variant={"destructive"}
-                className="flex flex-row justify-center gap-2"
+                className="flex flex-row justify-center gap-2 px-5 py-3 text-base"
               >
                 <GithubLogo size={20} />
                 GitHub

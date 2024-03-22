@@ -44,3 +44,10 @@ export function capitalizeString(str: string) {
 
   return capitalized.join(" ");
 }
+
+export function formatCurrency(value: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
+}

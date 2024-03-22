@@ -53,12 +53,61 @@ export const countMentoringToBe = async (): Promise<number> => {
   return 0;
 };
 
-export const countMentoringTotal = async (): Promise<number> => {
+export const countMentoringCanceled = async (): Promise<number> => {
+  try {
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
+          externalStatus: CAL.STATUS_CANCELLED,
+          removedAt: null,
+        },
+      }),
+    );
+  } catch (error) {
+    logger.error(error);
+  }
+  return 0;
+};
+
+export const countMentoringPro = async (): Promise<number> => {
   try {
     return fakeSlowResult(
       await db.mentoring.count({
         where: {
           externalStatus: CAL.STATUS_ACCEPTED,
+          externalEventId: CAL.MENTORING_PRO,
+          removedAt: null,
+        },
+      }),
+    );
+  } catch (error) {
+    logger.error(error);
+  }
+  return 0;
+};
+
+export const countMentoringFree = async (): Promise<number> => {
+  try {
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
+          externalStatus: CAL.STATUS_ACCEPTED,
+          externalEventId: CAL.MENTORING_FREE,
+          removedAt: null,
+        },
+      }),
+    );
+  } catch (error) {
+    logger.error(error);
+  }
+  return 0;
+};
+
+export const countMentoringTotal = async (): Promise<number> => {
+  try {
+    return fakeSlowResult(
+      await db.mentoring.count({
+        where: {
           removedAt: null,
         },
       }),
@@ -153,7 +202,11 @@ export const getNextMentoring = async (): Promise<
   try {
     const result = await fakeSlowResult(
       db.mentoring.findMany({
-        where: { removedAt: null, startTime: { gte: new Date() } },
+        where: {
+          removedAt: null,
+          startTime: { gte: new Date() },
+          externalStatus: CAL.STATUS_ACCEPTED,
+        },
         include: {
           attendee: true,
         },

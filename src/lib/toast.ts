@@ -22,3 +22,15 @@ export const dispatchSuccess = (message: string) => {
     position: "bottom-right",
   });
 };
+
+export const dispatchPromise = (message: string, promise: Promise<any>) => {
+  toast.promise(promise, {
+    loading: message || "Carregando...",
+    cancel: {
+      label: "Ok",
+    },
+    success: "✅ Sucesso!",
+    error: "🚨 Houve um erro. Tente novamente mais tarde!",
+    position: "bottom-right",
+  });
+};

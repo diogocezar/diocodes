@@ -30,4 +30,5 @@ export const SchemaAvaliation = z.object({
       required_error: "É necessário informar um comentário.",
     })
     .optional(),
+  showComment: z.boolean().default(true),
 });
