@@ -13,7 +13,7 @@ import { useMentoringState } from "@/hooks/use-mentoring-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useState } from "react";
-import { dispatchError, dispatchPromise, dispatchSuccess } from "@/lib/toast";
+import { dispatchPromise } from "@/lib/toast";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";

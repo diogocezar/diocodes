@@ -8,12 +8,51 @@ import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { PersonForm } from "@/app/(admin)/admin/(private)/person/form";
 import { api } from "@/services/api";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { usePersonState } from "@/hooks/use-person-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { dispatchPromise } from "@/lib/toast";
+import { ArrowBendRightUp, Spinner } from "@phosphor-icons/react/dist/ssr";
+import { useState } from "react";
+
+function AditionalButtons() {
+  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
+  return (
+    <DropdownMenuItem
+      disabled={isLoading}
+      className="flex flex-row gap-2 rounded-lg"
+      onClick={async () => {
+        try {
+          setIsLoading(true);
+          const promise = api.get("admin/person/sync");
+          dispatchPromise("Sincronizando mentorias...", promise);
+        } finally {
+          setIsLoading(false);
+          await queryClient.invalidateQueries({
+            queryKey: [QUERY_KEY.ADMIN_MENTORING],
+          });
+        }
+      }}
+    >
+      {isLoading ? (
+        <div className="flex flex-row gap-2">
+          <Spinner className="h-5 w-5 animate-spin" />
+          Enviando...
+        </div>
+      ) : (
+        <div className="flex flex-row gap-2">
+          <ArrowBendRightUp className="h-5 w-5" />
+          Sincronizar Audiência
+        </div>
+      )}
+    </DropdownMenuItem>
+  );
+}
 
 export default function AdminPersonPage() {
   const setIsOpenForm = usePersonState((state) => state.setIsOpenForm);
@@ -71,6 +110,7 @@ export default function AdminPersonPage() {
           isLoading={isLoading}
           createButtonLabel="Criar pessoa"
           iconCreateButton={<Users className="h-5 w-5" />}
+          aditionalButtons={<AditionalButtons />}
           setTable={setTable}
           pageSize={15}
         />
