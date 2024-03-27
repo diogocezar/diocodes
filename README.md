@@ -141,6 +141,9 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Sincronização deve desabilitar o botão de opções;
 - [x] Reenvio de emails deve desabilitar o botão de opções;
 - [x] Incluir showComment no crud de avaliação;
+- [ ] Criar audiência com base nas pessoas cadastradas;
+- [ ] Enviar e-mail falando sobre stripe;
+- [ ] Webhook que dispara um e-mail sobre pagamento realizado com sucesso, e informa página para agendamento;
 - [ ] Colocar a média de avaliações na página principal;
 - [ ] Implementar stripe para pagamentos;
 - [ ] Ajustar todas as tipagens;

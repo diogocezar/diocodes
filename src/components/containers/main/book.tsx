@@ -35,8 +35,12 @@ const Book = React.forwardRef<
           Mentoria Pro{" "}
           <span className="text-xs">{formatCurrency(PRICE.MENTORING_PRO)}</span>
         </Button> */}
-        <Link href="https://buy.stripe.com/4gw3cy9fV7cQ6wE000" target="_blank">
-          <Button className="bg-green hover:bg-card hover:text-green mb-2 mt-6 flex w-full flex-row items-center justify-center gap-2 sm:w-[300px] md:mb-8 md:mt-10 md:justify-center">
+        <Link
+          href="https://buy.stripe.com/4gw3cy9fV7cQ6wE000"
+          target="_blank"
+          className="w-full sm:w-auto"
+        >
+          <Button className="mb-2 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-green hover:bg-card hover:text-green sm:w-[300px] md:mb-8 md:mt-10 md:justify-center">
             <Star size={20} />
             Mentoria Pro{" "}
             <span className="text-xs">
@@ -48,7 +52,7 @@ const Book = React.forwardRef<
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao"
           data-cal-config='{"layout":"month_view"}'
-          className="sm:justify-left hover:bg-card hover:text-green mt-0 flex w-full flex-row items-center justify-center gap-2 sm:w-[300px] md:mt-10"
+          className="sm:justify-left mt-0 flex w-full flex-row items-center justify-center gap-2 hover:bg-card hover:text-green sm:w-[300px] md:mt-10"
         >
           <Calendar size={20} />
           Mentoria Free
