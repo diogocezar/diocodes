@@ -18,7 +18,7 @@ const sendAvaliationNotification = async (avaliation: any) => {
     const config = {
       from: EMAIL.FROM,
       to: [EMAIL.COPY_EMAIL],
-      subject: EMAIL.SUBJECT,
+      subject: EMAIL.SUBJECT_AVALIATION_SENT,
       react: EmailAvaliationCreated({
         attendee: mentoring.attendee.name,
         startTime: mentoring.startTime,

@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Mentorias | Diocodes.dev",
   description:
-    "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
+    "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
   keywords: [
     "mentorias gratuitas em tecnologia",
     "mentoria para profissionais de TI",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title:
       "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
     description:
-      "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas, recursos de aprendizado, carreira e orientação em programação.",
+      "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
     images: [
       {
         url: "https://diocodes.dev/diocodes.png",

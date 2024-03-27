@@ -25,7 +25,7 @@ const sendInvite = async (mentoring: any) => {
     const config = {
       from: EMAIL.FROM,
       to,
-      subject: EMAIL.SUBJECT,
+      subject: EMAIL.SUBJECT_INVITE,
       react: EmailAvaliation({
         attendee: name,
         startTime,
