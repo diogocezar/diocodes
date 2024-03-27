@@ -25,16 +25,6 @@ const Book = React.forwardRef<
   return (
     <>
       <div className="mb-4 flex flex-col items-center justify-center gap-4 sm:mb-0 md:flex-row md:justify-start">
-        {/* <Button
-          data-cal-namespace=""
-          data-cal-link="diogocezar/mentoria-diogao-pro"
-          data-cal-config='{"layout":"month_view"}'
-          className="bg-green hover:bg-card hover:text-green mb-2 mt-6 flex w-full flex-row items-center justify-center gap-2 sm:w-[300px] md:mb-8 md:mt-10 md:justify-center"
-        >
-          <Star size={20} />
-          Mentoria Pro{" "}
-          <span className="text-xs">{formatCurrency(PRICE.MENTORING_PRO)}</span>
-        </Button> */}
         <Link
           href="https://buy.stripe.com/4gw3cy9fV7cQ6wE000"
           target="_blank"

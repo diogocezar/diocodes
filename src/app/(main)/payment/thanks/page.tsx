@@ -23,7 +23,7 @@ export default function MainPage() {
   }, []);
   return (
     <>
-      <Container className="h-[calc(100vh-200px)]">
+      <Container className="h-[calc(100vh-225px)] md:h-[calc(100vh-230px)] lg:h-[calc(100vh-220px)]">
         <Header
           headerTitle="Obrigado pelo pagamento!"
           headerSubTitle="Agora você tem acesso a todos os benefícios da mentoria Pro!"
@@ -38,11 +38,6 @@ export default function MainPage() {
           <Star size={20} />
           Agendar Mentoria Pro
         </Button>
-        <Link href="/">
-          <Button type="button" className="mt-20">
-            Página Principal
-          </Button>
-        </Link>
       </Container>
     </>
   );

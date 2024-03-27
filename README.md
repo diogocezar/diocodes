@@ -143,6 +143,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Incluir showComment no crud de avaliação;
 - [x] Incluir link de redirect depois do pagamento;
 - [x] Criar audiência com base nas pessoas cadastradas;
+- [x] Ajustar responsividade dos botões na tela de pagamentos;
 - [ ] Enviar e-mail falando sobre stripe;
 - [ ] Webhook que dispara um e-mail sobre pagamento realizado com sucesso, e informa página para agendamento;
 - [ ] Colocar a média de avaliações na página principal;
