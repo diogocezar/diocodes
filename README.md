@@ -144,6 +144,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Incluir link de redirect depois do pagamento;
 - [x] Criar audiência com base nas pessoas cadastradas;
 - [x] Ajustar responsividade dos botões na tela de pagamentos;
+- [ ] Adicionar calendário no quem já reservou;
 - [ ] Enviar e-mail falando sobre stripe;
 - [ ] Webhook que dispara um e-mail sobre pagamento realizado com sucesso, e informa página para agendamento;
 - [ ] Colocar a média de avaliações na página principal;
