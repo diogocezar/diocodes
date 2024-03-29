@@ -12,7 +12,7 @@ const WhoBooked = React.forwardRef<
 >(() => {
   const { mentoring, isLoadingMentoring } = useGetMentoring("mentoring");
   return (
-    <>
+    <div className="md:hidden">
       <SubSubTitle>Quem já reservou?</SubSubTitle>
       {isLoadingMentoring ? (
         <SkeletonWhoBooked />
@@ -30,7 +30,7 @@ const WhoBooked = React.forwardRef<
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 });
 

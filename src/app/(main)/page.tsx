@@ -9,6 +9,7 @@ import { Who } from "@/components/containers/main/who";
 import { IsTrap } from "@/components/containers/main/is-trap";
 import { Liked } from "@/components/containers/main/liked";
 import { Testimonials } from "@/components/containers/main/testimonials";
+import Calendar from "@/components/containers/main/calendar";
 
 export default function MainPage() {
   return (
@@ -17,6 +18,7 @@ export default function MainPage() {
         <Header />
         <Presentation />
         <Book />
+        <Calendar />
         <WhoBooked />
         <Testimonials />
         <Why />

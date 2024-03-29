@@ -1,0 +1,72 @@
+:root {
+    --fc-border-color: var(--background-dark);
+}
+
+.fc-toolbar-title {
+    font-family: var(--font-poppins);
+    color: var(--pink);
+    text-weight: bold;
+}
+
+.fc-col-header-cell-cushion {
+    font-family: var(--font-poppins);
+    color: var(--green);
+}
+
+.fc-daygrid-day-number {
+    font-family: var(--font-poppins);
+    font-size: 1rem;
+    text-align: center;
+    color: var(--foreground);
+    background: rgb(0 0 0 / 30%);
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    line-height: 28px;
+    margin: 10px;
+}
+
+.fc-col-header-cell {
+    background: rgb(0 0 0 / 60%);
+}
+
+.fc-daygrid-day-frame {
+    background: rgb(0 0 0 / 30%);
+}
+
+.fc-event {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.fc-event-main-frame {
+    font-size: 0.7rem;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: rgb(0 0 0 / 60%);
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: rgb(0 0 0 / 60%);
+    border: none;
+    color: var(--foreground);
+}
+
+.fc .fc-button-primary:hover {
+    background-color: var(--green);
+    border: none;
+    color: var(--background-dark);
+}
+
+.fc .fc-button-primary {
+    background-color: rgb(0 0 0 / 60%);
+    border: none;
+    color: var(--foreground);
+    offset: 0;
+}
