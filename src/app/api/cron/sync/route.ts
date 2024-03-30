@@ -3,7 +3,7 @@ import { sync } from "@/lib/sync";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
-export const GET = async (req: Request) => {
+export const POST = async (req: Request) => {
   try {
     if (
       req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`

@@ -68,6 +68,7 @@
     "recharts": "^2.12.1",
     "resend": "^3.2.0",
     "sonner": "^1.4.1",
+    "stripe": "^14.23.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",

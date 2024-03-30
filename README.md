@@ -147,12 +147,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Adicionar calendário no quem já reservou;
 - [x] Enviar e-mail falando sobre stripe;
 - [x] Implementar stripe para pagamentos;
+- [x] Webhook da CAL para sincronizar os banco de dados;
 - [ ] Incluir calendário no dashboard;
 - [ ] Criar uma OG Image;
 - [ ] Webhooks da stripe para envio de e-mails;
-- [ ] Colocar a média de avaliações na página principal;
+- [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
-- [ ] Sincronização precisa funcionar no site em PRD;
 
 ## 🖥️ Tecnologias
 
