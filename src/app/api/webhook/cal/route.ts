@@ -12,8 +12,8 @@ export const POST = async (req: Request) => {
     if (!secret || !signature || !payload)
       throw new Error("Missing secret, payload or signature.");
     var hmacDigest = crypto
-      .createHmac("sha1", secret)
-      .update(payload)
+      .createHmac("sha256", secret)
+      .update(JSON.stringify(payload))
       .digest("hex");
     console.log({ secret, signature, hmacDigest, payload });
     if (signature !== hmacDigest) {
