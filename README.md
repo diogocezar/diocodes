@@ -146,10 +146,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Ajustar responsividade dos botões na tela de pagamentos;
 - [x] Adicionar calendário no quem já reservou;
 - [x] Enviar e-mail falando sobre stripe;
+- [x] Implementar stripe para pagamentos;
+- [ ] Incluir calendário no dashboard;
+- [ ] Criar uma OG Image;
+- [ ] Webhooks da stripe para envio de e-mails;
 - [ ] Colocar a média de avaliações na página principal;
-- [ ] Implementar stripe para pagamentos;
 - [ ] Ajustar todas as tipagens;
-- [ ] Na página principal, carregar menos mentorias (período);
 - [ ] Sincronização precisa funcionar no site em PRD;
 
 ## 🖥️ Tecnologias
