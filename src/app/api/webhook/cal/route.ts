@@ -13,10 +13,9 @@ export const POST = async (req: Request) => {
       throw new Error("Missing secret, payload or signature.");
     var hmacDigest = crypto
       .createHmac("sha1", secret)
-      .update(JSON.stringify(payload))
+      .update(payload)
       .digest("hex");
-    console.log(hmacDigest);
-    console.log({ secret, signature, hmacDigest });
+    console.log({ secret, signature, hmacDigest, payload });
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
