@@ -17,6 +17,29 @@ import { dispatchPromise } from "@/lib/toast";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
+import { CAL } from "@/contants/cal";
+
+function AditionalSearch({ table }: any) {
+  const [isChecked, setIsChecked] = useState(true);
+  return (
+    <div className="flex flex-row items-center gap-2">
+      <span className="text-xs text-foreground">Confirmados?</span>
+      <Switch
+        className="important:mt-0"
+        onCheckedChange={(event) => {
+          table
+            .getColumn("externalStatus")
+            ?.setFilterValue(
+              event ? CAL.STATUS_ACCEPTED : CAL.STATUS_CANCELLED,
+            );
+          setIsChecked(!isChecked);
+        }}
+        checked={isChecked}
+      />
+    </div>
+  );
+}
 
 function AditionalButtons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -110,6 +133,7 @@ export default function AdminMentoringPage() {
           createButtonLabel="Criar mentoria"
           iconCreateButton={<Plant className="h-5 w-5" />}
           aditionalButtons={<AditionalButtons />}
+          aditionalSearch={<AditionalSearch />}
           setTable={setTable}
           pageSize={15}
         />

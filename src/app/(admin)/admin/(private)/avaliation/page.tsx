@@ -15,7 +15,7 @@ import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
 
-export default function AdminMentoringPage() {
+export default function AdminAvaliationPage() {
   const setIsOpenForm = useAvaliationState((state) => state.setIsOpenForm);
   const isOpenConfirmDelete = useAvaliationState(
     (state) => state.isOpenConfirmDelete,

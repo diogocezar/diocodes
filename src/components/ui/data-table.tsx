@@ -4,7 +4,6 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -57,6 +56,7 @@ type DataTableProps = {
   createButtonLabel: string;
   iconCreateButton: JSX.Element;
   aditionalButtons?: ReactElement<AditionalButtonsProps>;
+  aditionalSearch?: ReactElement<AditionalButtonsProps>;
   setTable: Function;
   pageSize: number;
 };
@@ -74,6 +74,7 @@ export function DataTable({
   createButtonLabel = "Criar",
   iconCreateButton,
   aditionalButtons,
+  aditionalSearch,
   setTable,
   pageSize = 15,
 }: DataTableProps) {
@@ -105,8 +106,6 @@ export function DataTable({
     },
   });
 
-  setTable(table);
-
   const disabledFilter = isLoading;
   const disabledCreate =
     !isLoading && table.getFilteredSelectedRowModel().rows.length !== 0;
@@ -117,11 +116,13 @@ export function DataTable({
     !isLoading && table.getFilteredSelectedRowModel().rows.length === 1
   );
 
+  setTable(table);
+
   return (
     <div className="mt-0 flex h-screen w-full flex-col p-6">
       <div className="mb-4 flex h-[60px] items-center justify-between">
-        <div className="min-w-sm w-1/4">
-          <MagnifyingGlass className="text-muted-foreground absolute ml-[13px] mt-[13px] h-5 w-5" />
+        <div className="min-w-sm flex w-1/3 flex-row items-center gap-4">
+          <MagnifyingGlass className="absolute ml-[13px] mt-[2px] h-5 w-5 text-muted-foreground" />
           <Input
             placeholder="Procurar..."
             value={
@@ -132,6 +133,11 @@ export function DataTable({
             }
             className="rouded-lg pl-10"
           />
+          {!isLoading &&
+            aditionalSearch &&
+            React.cloneElement(aditionalSearch, {
+              table,
+            })}
         </div>
         <div className="flex flex-row items-center gap-4">
           {form}
@@ -143,7 +149,7 @@ export function DataTable({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="center"
-              className="bg-background-dark text-foreground w-full border-0"
+              className="w-full border-0 bg-background-dark text-foreground"
             >
               <DropdownMenuItem
                 disabled={disabledCreate}
@@ -195,7 +201,7 @@ export function DataTable({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="center"
-              className="bg-background-dark text-foreground w-full border-0"
+              className="w-full border-0 bg-background-dark text-foreground"
             >
               {table
                 .getAllColumns()
@@ -222,7 +228,7 @@ export function DataTable({
           </DropdownMenu>
         </div>
       </div>
-      <div className="bg-card h-full overflow-hidden rounded-lg shadow-lg">
+      <div className="h-full overflow-hidden rounded-lg bg-card shadow-lg">
         {!isLoading && table.getRowModel().rows?.length ? (
           <Table>
             <TableHeader>
@@ -232,7 +238,7 @@ export function DataTable({
                     return (
                       <TableHead
                         key={header.id}
-                        className="text-foreground bg-background-dark text-base font-bold"
+                        className="bg-background-dark text-base font-bold text-foreground"
                       >
                         {header.isPlaceholder
                           ? null
@@ -272,7 +278,7 @@ export function DataTable({
           </Table>
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <div className="text-foreground text-sm font-medium">
+            <div className="text-sm font-medium text-foreground">
               {isLoading ? (
                 <div className="flex flex-row gap-2">
                   <Spinner size={20} className="animate-spin" />
@@ -286,7 +292,7 @@ export function DataTable({
         )}
       </div>
       <div className="flex items-center justify-end py-4 pb-0">
-        <div className="text-muted-foreground flex-1 text-sm">
+        <div className="flex-1 text-sm text-muted-foreground">
           {!isLoading ? table.getFilteredSelectedRowModel().rows.length : 0} de{" "}
           {!isLoading ? table.getFilteredRowModel().rows.length : 0} linhas
           selecionada(s).

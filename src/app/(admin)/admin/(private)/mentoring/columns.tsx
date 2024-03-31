@@ -16,9 +16,9 @@ export const columnsNames = [
   { id: "select", name: "select" },
   { id: "attendee", name: "Participante" },
   { id: "type", name: "Tipo" },
-  { id: "status", name: "Status" },
+  { id: "externalStatus", name: "Status" },
   { id: "date", name: "Data" },
-  { id: "message", name: "Mensagem" },
+  { id: "externalMessage", name: "Mensagem" },
   { id: "createdAt", name: "Criado em" },
 ];
 
@@ -44,7 +44,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeMentoring>[] => {
       cell: ({ row }) => <div>{formatType(row)}</div>,
     },
     {
-      accessorKey: "type",
+      accessorKey: "externalStatus",
       header: ({ column }) => formatHeader("Status", column),
       cell: ({ row }) => <div>{formatStatus(row)}</div>,
     },

@@ -152,7 +152,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Incluir calendário no admin;
 - [x] Barrinha de Tags selecionadas;
 - [x] No responsivo deixar lista de mentorias ocupando menos espaço;
-- [ ] Opação de filtrar/remover mentorias canceladas da listagem;
+- [x] Opação de filtrar/remover mentorias canceladas da listagem;
 - [ ] Criar uma OG Image;
 - [ ] Fazer skeleton do calendário;
 - [ ] Colocar estatísticas do dashboard na página principal;
