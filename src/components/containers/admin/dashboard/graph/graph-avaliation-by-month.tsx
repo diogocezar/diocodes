@@ -37,7 +37,7 @@ function getMonth(month: string) {
 const CustomTooltip = ({ payload }: any) => {
   if (payload && payload.length) {
     return (
-      <div className="bg-card text-foreground rounded-sm p-2">
+      <div className="rounded-sm bg-card p-2 text-foreground">
         <p>Média do mês: {payload[0].payload?.total}</p>
       </div>
     );
@@ -67,6 +67,7 @@ export function GraphAvaliationByMonth({ data }: GraphAvaliationByMonthProps) {
           fontSize={12}
           tickLine={true}
           axisLine={true}
+          domain={[0, 5]}
         />
         <Bar dataKey="total" fill="var(--green)" radius={[8, 8, 0, 0]} />
         <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />

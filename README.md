@@ -151,8 +151,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Webhooks da stripe para envio de email;
 - [x] Incluir calendário no admin;
 - [x] Barrinha de Tags selecionadas;
+- [x] No responsivo deixar lista de mentorias ocupando menos espaço;
 - [ ] Opação de filtrar/remover mentorias canceladas da listagem;
-- [ ] No responsivo deixar lista de mentorias ocupando menos espaço;
 - [ ] Criar uma OG Image;
 - [ ] Fazer skeleton do calendário;
 - [ ] Colocar estatísticas do dashboard na página principal;

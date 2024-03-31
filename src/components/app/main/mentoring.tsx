@@ -17,28 +17,24 @@ const Mentoring = ({ startTime, attendee, isFree }: MentoringProps) => {
     >
       <div className="group">
         <div
-          className={`${!isFree ? "bg-green group-hover:bg-purple" : "bg-card"} group-hover:bg-background-dark m-2 gap-2 p-6 transition duration-300 ease-in-out`}
+          className={`${!isFree ? "bg-green group-hover:bg-purple" : "bg-card"} m-1 flex flex-row items-center gap-2 p-4 transition duration-300 ease-in-out group-hover:bg-background-dark`}
         >
-          <div className="text-foreground font-poppins mb-2 text-sm font-bold">
-            <Calendar
-              size={32}
-              className={`${!isFree ? "text-background group-hover:text-background-dark" : "text-green"}  mb-3`}
-            />{" "}
+          <div className="font-poppins text-sm font-bold text-foreground">
             <span
               className={`${!isFree ? "text-background-dark group-hover:text-foreground" : "text-foreground"}`}
             >
               {compactName(attendee?.name.toUpperCase())}{" "}
               {!isFree && (
-                <span className="bg-background-dark text-foreground ml-1 rounded-md px-3 text-xs">
+                <span className="ml-1 rounded-md bg-background-dark px-3 text-xs text-foreground">
                   PRO
                 </span>
               )}
             </span>
           </div>
           <div
-            className={`${!isFree ? "text-background group-hover:text-background-dark" : "text-green"} group-hover:text-foreground text-xs font-medium transition duration-300 ease-in-out`}
+            className={`${!isFree ? "text-background group-hover:text-background-dark" : "text-green"} text-xs font-medium transition duration-300 ease-in-out group-hover:text-foreground`}
           >
-            {new Date(startTime).toLocaleString("pt-BR")}
+            {new Date(startTime).toLocaleDateString("pt-BR")}
           </div>
         </div>
       </div>

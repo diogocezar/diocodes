@@ -29,6 +29,7 @@ export default function Calendar() {
             eventColor="#50fa7b"
             eventTextColor="#0e0f12"
             eventDisplay="block"
+            contentHeight="auto"
             locale={ptBrLocale}
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"

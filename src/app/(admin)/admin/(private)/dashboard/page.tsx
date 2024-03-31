@@ -17,6 +17,7 @@ import MentoringCanceled from "@/components/containers/admin/dashboard/mentoring
 import MentoringPro from "@/components/containers/admin/dashboard/mentoring/mentoring-pro";
 import MentoringFree from "@/components/containers/admin/dashboard/mentoring/mentoring-free";
 import MentoringReceived from "@/components/containers/admin/dashboard/mentoring/mentoring-received";
+import Calendar from "@/components/containers/admin/calendar/calendar";
 
 export default async function AdminDashboardPage() {
   return (
@@ -60,6 +61,7 @@ export default async function AdminDashboardPage() {
             <AvaliationAverage />
           </Suspense>
         </div>
+        <Calendar />
         <div className="grid gap-4 md:grid-cols-7">
           <Suspense fallback={<SkeletonDahboardGraph />}>
             <AvaliationByMonth />

@@ -6,9 +6,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-dots flex h-screen">
+    <div className="bg-dots flex">
       <Nav />
-      <div className="ml-[240px] h-screen w-full">{children}</div>
+      <div className="ml-[240px] w-full">{children}</div>
     </div>
   );
 }

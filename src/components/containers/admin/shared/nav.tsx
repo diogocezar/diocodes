@@ -19,7 +19,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { Calendar } from "@/components/ui/calendar";
 
 export default function Nav() {
   const { data: session } = useSession();
@@ -63,22 +62,6 @@ export default function Nav() {
               >
                 <ChartBar size={18} />
                 Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/calendar"
-                className={clsx(
-                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
-                  pathname === "calendar"
-                    ? "text-background"
-                    : "text-foreground",
-                  pathname === "calendar" &&
-                    "bg-pink hover:bg-background hover:text-foreground",
-                )}
-              >
-                <CalendarIcon size={18} />
-                Calendário
               </Link>
             </li>
             <li>
@@ -169,21 +152,18 @@ export default function Nav() {
                 Usuários
               </Link>
             </li>
-            <li>
-              <Link
-                href={"/"}
-                target="_blank"
-                className={clsx(
-                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground hover:bg-background",
-                )}
-              >
-                <Browsers size={18} />
-                Acessar o site
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
+          <Link href="/" target="_blank">
+            <Button
+              variant="link"
+              className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
+            >
+              <Browsers size={18} />
+              Acessar o site
+            </Button>
+          </Link>
           <Button
             variant="link"
             onClick={() => signOut({ redirect: true, callbackUrl: "/admin" })}
