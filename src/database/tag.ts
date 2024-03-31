@@ -1,6 +1,34 @@
 import { db } from "@/database/connection";
 import { Tag } from "@prisma/client";
 import { logger } from "@/lib/logger";
+import { MongoClient } from "mongodb";
+
+export const getMaxUsedTag = async () => {
+  try {
+    const client = await MongoClient.connect(process.env.URI_MONGODB!);
+    const coll = client
+      .db("diocodes")
+      .collection("AvaliationTags")
+      .aggregate(
+        [
+          {
+            $group: {
+              _id: "$tagId",
+              count: { $sum: 1 },
+            },
+          },
+          { $sort: { count: -1 } },
+          { $limit: 1 },
+        ],
+        { maxTimeMS: 60000, allowDiskUse: true },
+      );
+    const result = await coll.toArray();
+    await client.close();
+    return result[0].count;
+  } catch (error) {
+    logger.error(error);
+  }
+};
 
 export const createTag = async (tag: Tag) => {
   try {

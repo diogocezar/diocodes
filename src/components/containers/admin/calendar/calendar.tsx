@@ -3,7 +3,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import ptBrLocale from "@fullcalendar/core/locales/pt-br";
 import { useGetMentoring } from "@/hooks/use-get-mentoring";
-import { SubSubTitle } from "@/components/app/main/titles";
 import SkeletonWhoBooked from "@/components/skeletons/skeleton-who-booked";
 import { compactName } from "@/lib/utils";
 import { CAL } from "@/contants/cal";
@@ -21,16 +20,14 @@ export default function Calendar() {
     };
   });
   return (
-    <div className="hidden w-full sm:hidden md:block lg:block">
-      <SubSubTitle>Agenda de Mentorias</SubSubTitle>
+    <div className="h-auto w-full">
       {isLoadingMentoring ? (
         <SkeletonWhoBooked />
       ) : (
-        <div className="w-full">
+        <div className="h-auto w-full">
           <FullCalendar
             eventColor="#50fa7b"
             eventTextColor="#0e0f12"
-            contentHeight={900}
             eventDisplay="block"
             locale={ptBrLocale}
             plugins={[dayGridPlugin]}

@@ -11,6 +11,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { capitalizeString, compactName, generateGravatarHash } from "./utils";
 import { Switch } from "@/components/ui/switch";
+import { Progress } from "@/components/ui/progress";
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);
@@ -25,7 +26,7 @@ export const formatExternalMessage = (row: any) => {
             {row.getValue("externalMessage")}
           </div>
         </TooltipTrigger>
-        <TooltipContent className="bg-background-dark w-[300px] text-xs">
+        <TooltipContent className="w-[300px] bg-background-dark text-xs">
           <p>{row.getValue("externalMessage")}</p>
         </TooltipContent>
       </Tooltip>
@@ -36,14 +37,14 @@ export const formatExternalMessage = (row: any) => {
 export const formatType = (row: any) => {
   return row?.original?.externalEventId === CAL.MENTORING_FREE ? (
     <Badge
-      className="bg-background text-foreground rounded-md px-4 py-1 text-xs font-normal"
+      className="rounded-md bg-background px-4 py-1 text-xs font-normal text-foreground"
       variant="secondary"
     >
       Free
     </Badge>
   ) : (
     <Badge
-      className="bg-green text-background rounded-md px-4 py-1 text-xs font-bold"
+      className="rounded-md bg-green px-4 py-1 text-xs font-bold text-background"
       variant="secondary"
     >
       Pro
@@ -54,14 +55,14 @@ export const formatType = (row: any) => {
 export const formatStatus = (row: any) => {
   return row?.original?.externalStatus === CAL.STATUS_ACCEPTED ? (
     <Badge
-      className="bg-green text-background rounded-md px-4 py-1 text-xs font-bold"
+      className="rounded-md bg-green px-4 py-1 text-xs font-bold text-background"
       variant="secondary"
     >
       Confirmado
     </Badge>
   ) : (
     <Badge
-      className="bg-background-dark text-foreground rounded-md px-4 py-1 text-xs font-bold"
+      className="rounded-md bg-background-dark px-4 py-1 text-xs font-bold text-foreground"
       variant="secondary"
     >
       Cancelado
@@ -69,8 +70,17 @@ export const formatStatus = (row: any) => {
   );
 };
 
-export const formatTagQuantity = (row: any) => {
-  return row.original?.avaliationTags?.length || 0;
+export const formatTagQuantity = (row: any, maxTagUsed: number) => {
+  const value = row.original?.avaliationTags?.length || 0;
+  const percentage = (value / maxTagUsed) * 100;
+  return (
+    <div className="flex flex-row gap-2">
+      <Progress value={percentage} className="w-[60%]" />
+      <span className="text-xs text-foreground">
+        {value} / {maxTagUsed}
+      </span>
+    </div>
+  );
 };
 
 export const formatNameEmailWithAvatar = (email: string, name: string) => {
@@ -128,7 +138,7 @@ export const formatSelectMentoring = (row: any) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Circle className="text-pink h-5 w-5 cursor-pointer" />
+                <Circle className="h-5 w-5 cursor-pointer text-pink" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Já foi enviado um convite</p>
@@ -141,7 +151,7 @@ export const formatSelectMentoring = (row: any) => {
               <TooltipTrigger asChild>
                 <Circle
                   weight="fill"
-                  className="text-green h-5 w-5 cursor-pointer"
+                  className="h-5 w-5 cursor-pointer text-green"
                 />
               </TooltipTrigger>
               <TooltipContent>
@@ -156,7 +166,7 @@ export const formatSelectMentoring = (row: any) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Circle className="text-green h-5 w-5 cursor-pointer" />
+                  <Circle className="h-5 w-5 cursor-pointer text-green" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Já aconteceu!</p>
@@ -196,7 +206,7 @@ export const formatSelectInvite = (row: any) => {
             <TooltipTrigger asChild>
               <Circle
                 weight="fill"
-                className="text-green h-5 w-5 cursor-pointer"
+                className="h-5 w-5 cursor-pointer text-green"
               />
             </TooltipTrigger>
             <TooltipContent>
@@ -208,7 +218,7 @@ export const formatSelectInvite = (row: any) => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Circle className="text-green h-5 w-5 cursor-pointer" />
+              <Circle className="h-5 w-5 cursor-pointer text-green" />
             </TooltipTrigger>
             <TooltipContent>
               <p>Ainda não enviou a avaliação</p>
@@ -254,7 +264,7 @@ export const formatTags = (row: any) => {
         return (
           <Badge
             key={avaliationTag?.tag?.name}
-            className="bg-background text-foreground rounded-md px-2 py-1 text-xs font-normal"
+            className="rounded-md bg-background px-2 py-1 text-xs font-normal text-foreground"
             variant="secondary"
           >
             {avaliationTag?.tag?.name}

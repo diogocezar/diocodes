@@ -14,6 +14,7 @@ import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
+import { useMaxTagUsed } from "@/hooks/use-get-tag";
 
 export default function AdminAvaliationTagPage() {
   const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
@@ -25,6 +26,7 @@ export default function AdminAvaliationTagPage() {
   const selectedItem = useTagState((state) => state.selectedItem);
   const setTable = useTagState((state) => state.setTable);
   const table = useTagState((state) => state.table);
+  const { maxTagUsed } = useMaxTagUsed();
 
   const URL = "/admin/tag";
 
@@ -47,7 +49,7 @@ export default function AdminAvaliationTagPage() {
     },
   });
 
-  const dataTableColumns = columns(isLoading);
+  const dataTableColumns = columns(isLoading, maxTagUsed);
 
   return (
     <>

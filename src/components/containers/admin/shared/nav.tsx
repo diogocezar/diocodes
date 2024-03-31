@@ -14,17 +14,19 @@ import {
   Plant,
   Users,
   EnvelopeSimple,
+  Calendar as CalendarIcon,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { Calendar } from "@/components/ui/calendar";
 
 export default function Nav() {
   const { data: session } = useSession();
   const { image, name } = session?.user || {};
   const pathname = usePathname().replace("/admin/", "");
   return (
-    <div className="bg-background-dark fixed flex h-screen w-[240px] min-w-[240px] flex-col gap-4 overflow-y-auto px-4 py-6">
+    <div className="fixed flex h-screen w-[240px] min-w-[240px] flex-col gap-4 overflow-y-auto bg-background-dark px-4 py-6">
       <div className="flex h-full flex-col justify-between">
         <div className="flex flex-col gap-4">
           <div className="flex h-14 w-full flex-row items-center gap-4">
@@ -41,7 +43,7 @@ export default function Nav() {
                     .join("")}
               </AvatarFallback>
             </Avatar>
-            <div className="text-foreground text-lg font-bold">
+            <div className="text-lg font-bold text-foreground">
               {name && compactName(name)}
             </div>
           </div>
@@ -51,7 +53,7 @@ export default function Nav() {
               <Link
                 href="/admin/dashboard"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "dashboard"
                     ? "text-background"
                     : "text-foreground",
@@ -65,9 +67,25 @@ export default function Nav() {
             </li>
             <li>
               <Link
+                href="/admin/calendar"
+                className={clsx(
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                  pathname === "calendar"
+                    ? "text-background"
+                    : "text-foreground",
+                  pathname === "calendar" &&
+                    "bg-pink hover:bg-background hover:text-foreground",
+                )}
+              >
+                <CalendarIcon size={18} />
+                Calendário
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/admin/mentoring"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "mentoring"
                     ? "text-background"
                     : "text-foreground",
@@ -83,7 +101,7 @@ export default function Nav() {
               <Link
                 href="/admin/avaliation"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "avaliation"
                     ? "text-background"
                     : "text-foreground",
@@ -99,7 +117,7 @@ export default function Nav() {
               <Link
                 href="/admin/invite"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "invite" ? "text-background" : "text-foreground",
                   pathname === "invite" &&
                     "bg-pink hover:bg-background hover:text-foreground",
@@ -113,7 +131,7 @@ export default function Nav() {
               <Link
                 href="/admin/tag"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "tag" ? "text-background" : "text-foreground",
                   pathname === "tag" &&
                     "bg-pink hover:bg-background hover:text-foreground",
@@ -127,7 +145,7 @@ export default function Nav() {
               <Link
                 href="/admin/person"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "person" ? "text-background" : "text-foreground",
                   pathname === "person" &&
                     "bg-pink hover:bg-background hover:text-foreground",
@@ -141,7 +159,7 @@ export default function Nav() {
               <Link
                 href="/admin/user"
                 className={clsx(
-                  "hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
                   pathname === "user" ? "text-background" : "text-foreground",
                   pathname === "user" &&
                     "bg-pink hover:bg-background hover:text-foreground",
@@ -156,7 +174,7 @@ export default function Nav() {
                 href={"/"}
                 target="_blank"
                 className={clsx(
-                  "text-foreground hover:bg-background flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold",
+                  "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground hover:bg-background",
                 )}
               >
                 <Browsers size={18} />
@@ -169,7 +187,7 @@ export default function Nav() {
           <Button
             variant="link"
             onClick={() => signOut({ redirect: true, callbackUrl: "/admin" })}
-            className="text-foreground m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold"
+            className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
           >
             <SignOut size={18} />
             Deslogar

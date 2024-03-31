@@ -149,8 +149,12 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Implementar stripe para pagamentos;
 - [x] Webhook da CAL para sincronizar os banco de dados;
 - [x] Webhooks da stripe para envio de email;
-- [ ] Incluir calendário no dashboard;
+- [x] Incluir calendário no admin;
+- [x] Barrinha de Tags selecionadas;
+- [ ] Opação de filtrar/remover mentorias canceladas da listagem;
+- [ ] No responsivo deixar lista de mentorias ocupando menos espaço;
 - [ ] Criar uma OG Image;
+- [ ] Fazer skeleton do calendário;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
 

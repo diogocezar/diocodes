@@ -16,7 +16,10 @@ export const columnsNames = [
   { id: "createdAt", name: "Criado em" },
 ];
 
-export const columns = (isLoading: boolean): ColumnDef<TypeTag>[] => {
+export const columns = (
+  isLoading: boolean,
+  maxTagUsed: number,
+): ColumnDef<TypeTag>[] => {
   return [
     {
       size: 10,
@@ -35,7 +38,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeTag>[] => {
       accessorKey: "occurrences",
       accessorFn: (row) => row.avaliationTags.length,
       header: ({ column }) => formatHeader("Ocorrências", column),
-      cell: ({ row }) => <div>{formatTagQuantity(row)}</div>,
+      cell: ({ row }) => <div>{formatTagQuantity(row, maxTagUsed)}</div>,
     },
     {
       accessorKey: "createdAt",

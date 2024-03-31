@@ -30,3 +30,22 @@ export const useGetTag = (url: string = "admin/tag") => {
 
   return { tag, isLoadingTag };
 };
+
+export const useMaxTagUsed = (url: string = "admin/tag") => {
+  const [maxTagUsed, setMaxTagUsed] = useState<number>(0);
+
+  const getMaxTagUsed = useCallback(async () => {
+    try {
+      const response = await api.get(`${url}/max-tag-used`);
+      setMaxTagUsed(response.data);
+    } catch (error) {
+      dispatchError(error);
+    }
+  }, [url]);
+
+  useEffect(() => {
+    getMaxTagUsed();
+  }, [getMaxTagUsed]);
+
+  return { maxTagUsed };
+};
