@@ -31,11 +31,11 @@ export const EmailAvaliationCreated = ({
   const normalizedValue = Math.min(Math.max(rating, 1), 5);
   const filledStars = Array.from(
     { length: normalizedValue },
-    (_, index) => index + 1
+    (_, index) => index + 1,
   );
   const emptyStars = Array.from(
     { length: 5 - normalizedValue },
-    (_, index) => index + 1 + normalizedValue
+    (_, index) => index + 1 + normalizedValue,
   );
   return (
     <Html>
@@ -76,7 +76,7 @@ export const EmailAvaliationCreated = ({
                 A mentoria foi realizada em{" "}
                 <span className="font-bold text-[#ff79c6]">
                   {`${new Date(startTime).toLocaleDateString(
-                    "pt-BR"
+                    "pt-BR",
                   )} - ${new Date(startTime).toLocaleTimeString("pt-BR", {
                     timeZone: "America/Sao_Paulo",
                   })}`}

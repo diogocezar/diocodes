@@ -55,7 +55,7 @@ export const metadata: Metadata = {
       "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
     images: [
       {
-        url: "https://diocodes.dev/diocodes.png",
+        url: "https://diocodes.dev/og.png",
         width: 280,
         height: 280,
         alt: "Mentorias com o Diogão",

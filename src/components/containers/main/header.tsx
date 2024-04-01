@@ -1,6 +1,7 @@
 import React from "react";
 import { HeaderImage } from "@/components/app/main/image";
 import Diocodes from "@/assets/diocodes";
+import Image from "next/image";
 import { SubTitle, Title } from "@/components/app/main/titles";
 
 type HeaderProps = {
@@ -20,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
         ) : (
           <>
             Mentoria Gratuita em Tecnologia com{" "}
-            <span className="text-green text-4xl md:text-7xl">Diogão</span>
+            <span className="text-4xl text-green md:text-7xl">Diogão</span>
           </>
         )}
       </Title>
