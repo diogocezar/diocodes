@@ -2,178 +2,66 @@
 
 Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o código fonte do site, bem como instruções para rodar o projeto localmente.
 
-## 📝 Sumário
+## Objetivo
 
-- [Diocodes Website](#diocodes-website)
-  - [📝 Sumário](#-sumário)
-  - [✅ Tarefas](#-tarefas)
-  - [📦 Instalação](#-instalação)
-  - [🚀 Rodando o projeto localmente](#-rodando-o-projeto-localmente)
+Este projeto tem como objetivo ser um sistema de gerenciamento de mentorias, onde é possível cadastrar mentorias, avaliações, pessoas e usuários.
 
-## ✅ Tarefas
+Além disse serve como um repositório de estudos, onde é possível usar como exemplo as implementações realizadas aqui para a construção de um sistema completo utilizando algumas das tecnologias mais utilizadas no mercado.
 
-- [x] Criar sistema de autenticação;
-- [x] Permitir apenas login de usuários específicos;
-- [x] Criar layout da página de login;
-- [x] Layout do login responsivo;
-- [x] Criar layout do Dashboard;
-- [x] Separar Menu do Dashboard;
-- [x] Menu selecionado de acordo com a rota;
-- [x] Criar layout básico de uma data table;
-- [x] Criação de Tags;
-- [x] Loading da tabela;
-- [x] Desabilitar componentes enquanto carrega tabela;
-- [x] Exclusão de Tags;
-- [x] Edição de Tags;
-- [x] Layout do modal de confirmação;
-- [x] Organização dos Componentes no CRUD;
-- [x] Confirmação ao excluir;
-- [x] Criar services;
-- [x] Ajustar updatedAt e removedAt;
-- [x] Criar curd de pessoas;
-- [x] Criar crud de usuários;
-- [x] Permitir login apenas de usuários cadastrados;
-- [x] Estilo para o loading do select;
-- [x] Ajustar layout do select (opções);
-- [x] Procurar por pessoa no cadastro de usuário;
-- [x] Criar crud de mentorias;
-- [x] Criar layout base para sistema de administração;
-- [x] Ajustar bug do check encima do select;
-- [x] Ajustar layout do datepicker;
-- [x] Criar componente de tempo;
-- [x] Salvar a data e hora no banco de dados;
-- [x] Mostrar data e hora na tablela de mentorias;
-- [x] Erro ao editar data e hora;
-- [x] Data de término não pode ser menor que a data de início;
-- [x] Criar crud de avaliações;
-  - [x] Alterar a nota para um slider;
-  - [x] Aparência do slider;
-  - [x] Editar deve puxar as tags cadastradas;
-  - [x] Comentários como textarea;
-  - [x] Lista com os campos das avaliações;
-- [x] Criar crud de invites;
-- [x] Fazer uma marcação ✅ nas mentorias que já possuem convite;
-- [x] Definir tags e deixá-las no seed;
-- [x] Definir o máximo de tags por avaliação;
-- [x] Criar sistema de sincronização com Cal.com acionado por um botão em metorias;
-- [x] Botão de sincronizar deve ficar carregando;
-- [x] Lista deve ser atualizada depois da sincronização;
-- [x] Layout do toast;
-- [x] Remover o participante do convite, deixando apenas a mentoria;
-- [x] Trazer apenas mentorias que já aconteceram para invite;
-- [x] Aumentar a bolinha da mentoria;
-- [x] Incluir mensagem na mentoria;
-- [x] Layout da Página de Avaliação Pública;
-- [x] Finalização da página de Avaliação Pública;
-- [x] Página de Agradescimento pela Avaliação;
-- [x] Carregando enquanto tudo não está oks na avaliação;
-- [x] Destacar as mentorias que já ocorreram;
-- [x] Criar aplicação para PRD do GitHub;
-- [x] Criar o login em PRD;
-- [x] Criar service para Cal.com;
-- [x] Horário da mentoria no email está errado;
-- [x] Revisar todas as remoções;
-- [x] Sinalizar como verde somente se não tiver excluído; (Mentoria)
-- [x] Criar um registro já excluído;
-  - [x] Avaliations;
-  - [x] Mentoring;
-- [x] Não mostrar as tags nas avaliações que possuem relacionamento de AvaliationTags como removed;
-- [x] Ordenar os select por ordem alfabética;
-- [x] Conferir todos os filtros;
-- [x] Criar back-end para popular dados do Dashboard;
-- [x] Layout do Dashboard;
-- [x] Obter as informações do Dashboard do Backend;
-- [x] Criar lista de últimos agendamentos;
-- [x] Puxar dados de Mentoring, ao invés do Cal.com (na home);
-- [x] Permitir o envio das avaliações para os e-mails originais;
-- [x] Criar cron que atualiza os dados do Cal.com a cada hora;
-- [x] Resolver a sincronização;
-- [x] Criar proteção das rotas privadas;
-- [x] Separar todos os filtros das colunas em funções;
-- [x] Sonner de erros na tentativa de cadastrar os formulários;
-- [x] Tratar erros na página de login `http://localhost:3000/admin?error=AccessDenied`
-- [x] Próxima semana disponível na página principal;
-- [x] Criar botão de mentoria pro;
-- [x] Destacar mentorias pro na página principal;
-- [x] Criar botão de reenvio do convite;
-- [x] Diferenciar mentorias que já foram avaliadas;
-- [x] Ordenar os convites pela data (DESC);
-- [x] Colocar Dots de Avaliação Realizada nos Convites;
-- [x] Padronizar ações dos botões de editar, criar e excluir;
-- [x] Destacar linhas que são PRO;
-- [x] Colocar badge PRO;
-- [x] Colocar a quantidade de vezes em que uma tag apareceu nas avaliações em sua listagem;
-- [x] Menu Fixed e Scroll somente na parte do conteúdo;
-- [x] Enviar e-mail quando avaliação for respondida;
-- [x] Rever todos os retornos dos databases de acordo com `avalitaion.ts`;
-- [x] Verificação se já existe ao tentar criar (Pessoa, User);
-- [x] Ajustar o tipo de dados de booking no upsert;
-- [x] Na página de avaliação obter as informações das tags e da mentorias com os hooks já criados;
-- [x] Pegar as mentorias utilizando hooks na página principal;
-- [x] Ao realizar uma ação, desselecionar os ítens da tabela;
-- [x] Colocar skeleton nos loadings página principal;
-- [x] Tentar obter o gravatar dos emails;
-- [x] Separar chamadas do dashboard em diferentes endpoints;
-- [x] Preparar streaming UI;
-- [x] Colocar skeleton nos paineis do dashboard;
-- [x] Ajustar os skeletons do gráfico, próximas mentorias e média de avaliações;
-- [x] Fazer as tabelas ocuparem todo o espaço da página;
-- [x] Passar dinamicamente a quantidade de ítens por página;
-- [x] Colocar gravatar nos e-mails em mentorias, avaliações e convites;
-- [x] Criar todos os botões como um dropdown; (Nas listagens)
-- [x] Aditional buttons como opções;
-- [x] Posição do toast;
-- [x] Colocar depoimentos na página principal;
-- [x] Colocar skeleton nos depoimentos;
-- [x] Colocar quantidade máxima de caracteres nos depoimentos;
-- [x] Ajustar a responsividade dos depoimentos;
-- [x] Considerar mentorias canceladas e tirá-las das listas;
-- [x] Capitalizar o nome dos entrevistados ao exibir;
-- [x] Mostrar externalStatus na lista de mentorias;
-- [x] Ao passar o mouse na mensagem, mostrar ela completa;
-- [x] Colocar a coluna de mostrar comentário na listagem de avaliações;
-- [x] Problema ao atualizar uma avaliação (as tags estão sendo excluídas);
-- [x] Hora final na página de avaliação publica;
-- [x] Enquanto carrega a página de avaliação pública, o footer precisa ocupar toda a altura da página;
-- [x] Ajustar código fonte disponível no GitHub;
-- [x] Próximas mentorias desconsiderar os cancelados (Dashboard);
-- [x] Colocar no Dashboard quantidade de mentorias canceladas;
-- [x] Sincronização deve desabilitar o botão de opções;
-- [x] Reenvio de emails deve desabilitar o botão de opções;
-- [x] Incluir showComment no crud de avaliação;
-- [x] Incluir link de redirect depois do pagamento;
-- [x] Criar audiência com base nas pessoas cadastradas;
-- [x] Ajustar responsividade dos botões na tela de pagamentos;
-- [x] Adicionar calendário no quem já reservou;
-- [x] Enviar e-mail falando sobre stripe;
-- [x] Implementar stripe para pagamentos;
-- [x] Webhook da CAL para sincronizar os banco de dados;
-- [x] Webhooks da stripe para envio de email;
-- [x] Incluir calendário no admin;
-- [x] Barrinha de Tags selecionadas;
-- [x] No responsivo deixar lista de mentorias ocupando menos espaço;
-- [x] Opação de filtrar/remover mentorias canceladas da listagem;
-- [x] Criar uma OG Image;
-- [x] Collapse menu;
-- [x] Botão de colapsar ocupando menos espaço;
-- [x] Label do loading do sincronizar audiência;
-- [x] Erro de hidratação;
-- [x] Estilo do tooltip dos menus;
-- [x] Estilo dos eventos no calendário do admin;
-- [x] Layout Botão de filtrar mentorias (switch);
-- [x] Títulos nos Dashboards;
-- [x] Integração com o Google;
-- [ ] Colocar estatísticas do dashboard na página principal;
-- [ ] Ajustar todas as tipagens;
+Neste projeto utilizou-se as seguintes tecnologias:
 
-## 🖥️ Tecnologias
+- NextJS;
+- ReactJS;
+- TypeScript;
+- Shadcn;
+- Prisma;
+- MongoDB;
+- TailwindCSS;
+- Axios;
+- Zod;
+- NextAuth;
 
-https://time.openstatus.dev/
-https://craft.mxkaske.dev/post/fancy-multi-select
-https://dev.to/marcelomichels/criando-e-restaurando-backup-no-mongodb-5f41
-https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
+## Sistemas de terceiros
 
-## Backup do Mongo
+- Cal.com - É o sistema utilizado para realizar os agendamentos de mentorias;
+- Stripe - É o sistema utilizado para a realização de pagamentos;
+- Resend.io - É o sistema utilizado para o envio de e-mails;
+
+## Variáveis de Ambiente
+
+Todas as variáveis de ambiente utilizadas neste projeto estão no arquivo `.env.example`. Para rodar o projeto localmente é necessário criar um arquivo `.env` e adicionar as variáveis de ambiente necessárias.
+
+## Emails
+
+O sistema de e-emails utilizado neste projeto utiliza o Resend.io. Para configurar o envio de e-mails é necessário criar uma conta no Resend.io e adicionar as variáveis de ambiente necessárias.
+
+A pasta `emails` contém os templates de e-mails utilizados no projeto.
+
+Nesta pasta também é possível executar um projeto no ambiente de desenvolvimento que mostra uma preview de como os templates de e-mails ficarão.
+
+Para rodar o projeto de e-mails basta utilizar o comando `pnpm dev` na pasta `emails`.
+
+## Prisma
+
+O Prisma é o ORM utilizado neste projeto. Para rodar o projeto localmente é necessário rodar o comando `pnpm prisma:generate` para gerar os arquivos necessários para o Prisma.
+
+O arquivo de seed do Prisma está na pasta `prisma/seed.ts`. Para rodar o seed basta utilizar o comando `pnpm prisma:seed`.
+
+Caso queira enviar a estrutura do banco de dados para o MongoDB é necessário rodar o comando `pnpm prisma:push`.
+
+Caso queira analisar os dados com o Prisma Studio é necessário rodar o comando `pnpm prisma:studio`.
+
+## Deploy
+
+Este projeto utiliza a Vercel para a realização de seu deploy.
+
+## Banco de Dados
+
+Este projeto utiliza o Atlas MongoDB para o armazenamento de seus dados.
+
+### Como realizar o Backup do MongoDB?
+
+Caso precise realizar um backup do seu banco de dados:
 
 ```bash
 mongodump --uri "mongodb://mongodb0.example.com:27017" --gzip -d nomedobanco
@@ -183,6 +71,8 @@ mongorestore --uri "mongodb://mongodb0.example.com:27017" --gzip ./dump/nomedoba
 
 ### Script para realizar backup do Banco de Dados
 
+Caso queira gerar um script para realizar o backup do banco de dados, basta utilizar o seguinte script:
+
 ```bash
 mongodump --uri "mongodb://mongodb0.example.com:27017" --gzip
 D=$(date '+%Y-%m-%d-%H')
@@ -191,6 +81,62 @@ aws s3 cp $D.zip s3://<s3-bucket-name>/$D --profile michels
 rm -rf ./dump/
 rm -f $D.zip
 ```
+
+## Autenticação
+
+Para a autenticação deste projeto, utiliza-se o NextAuth. Para configurar a autenticação é necessário adicionar as variáveis de ambiente necessárias.
+
+Neste projeto estão configuradas as seguintes autenticações:
+
+- GitHub;
+- Google;
+
+## Webhook de Pagamentos
+
+Para a realização de pagamentos, utiliza-se o Stripe.
+
+Este sistema expõe um webhook para que quando um pagamento seja efetuado, um email seja enviado para o administrador.
+
+## Webhook de Agendamentos
+
+Sempre que um agendamento é realizado, um webhook é enviado para o sistema que realiza a sincronização de pessoas e agendamentos.
+
+## Funcionalidades
+
+### Dashboard
+
+O dashboard é a página inicial do sistema. Nela é possível visualizar as as estatísticas das mentorias, bem como um calendário com as mentorias agendadas.
+
+### Mentorias
+
+Nesta página é possível visualizar todas as mentorias cadastradas no sistema.
+
+### Avaliações
+
+Nesta página é possível visualizar todas as avaliações cadastradas no sistema.
+
+### Convites
+
+Nesta página é possível visualizar todos os convites cadastrados no sistema.
+
+### Tags
+
+Nesta página é possível visualizar todas as tags cadastradas no sistema.
+
+### Pessoas
+
+Nesta página é possível visualizar todas as pessoas cadastradas no sistema.
+
+### Usuários
+
+Nesta página é possível visualizar todos os usuários cadastrados no sistema.
+
+## 🖥️ Links Úteis
+
+https://time.openstatus.dev/
+https://craft.mxkaske.dev/post/fancy-multi-select
+https://dev.to/marcelomichels/criando-e-restaurando-backup-no-mongodb-5f41
+https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
 
 ## 📦 Instalação
 
