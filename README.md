@@ -153,8 +153,8 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Barrinha de Tags selecionadas;
 - [x] No responsivo deixar lista de mentorias ocupando menos espaço;
 - [x] Opação de filtrar/remover mentorias canceladas da listagem;
-- [ ] Criar uma OG Image;
-- [ ] Fazer skeleton do calendário;
+- [x] Criar uma OG Image;
+- [x] Collapse menu;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
 
