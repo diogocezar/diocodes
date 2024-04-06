@@ -4,6 +4,7 @@ import { GithubLogo } from "@phosphor-icons/react";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { GoogleLogo } from "@phosphor-icons/react/dist/ssr";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,6 +23,18 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         >
           <GithubLogo size={20} />
           GitHub
+        </Button>
+        <Button
+          variant={"destructive"}
+          className="flex flex-row justify-center gap-2"
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: `/admin/dashboard`,
+            })
+          }
+        >
+          <GoogleLogo size={20} />
+          Conta do Google
         </Button>
       </div>
     </div>

@@ -162,6 +162,7 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Estilo dos eventos no calendário do admin;
 - [x] Layout Botão de filtrar mentorias (switch);
 - [x] Títulos nos Dashboards;
+- [x] Integração com o Google;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
 
