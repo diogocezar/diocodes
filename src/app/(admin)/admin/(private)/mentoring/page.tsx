@@ -24,9 +24,11 @@ function AditionalSearch({ table }: any) {
   const [isChecked, setIsChecked] = useState(true);
   return (
     <div className="flex flex-row items-center gap-2">
-      <span className="text-xs text-foreground">Confirmados?</span>
+      <span className="text-xs text-foreground">
+        {isChecked ? "Confirmados" : "Cancelados"}
+      </span>
       <Switch
-        className="important:mt-0"
+        className="important:mt-0 data-[state=unchecked]:bg-background-dark data-[state=checked]:bg-green"
         onCheckedChange={(event) => {
           table
             .getColumn("externalStatus")

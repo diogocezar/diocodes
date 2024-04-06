@@ -70,3 +70,19 @@
     color: var(--foreground);
     offset: 0;
 }
+
+.admin-calendar .fc-event {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px;
+    border-radius: 0.5rem;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.admin-calendar .fc-toolbar-title {
+    font-family: var(--font-poppins);
+    color: var(--green);
+    text-weight: bold;
+}

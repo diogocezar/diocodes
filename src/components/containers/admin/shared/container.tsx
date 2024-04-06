@@ -7,10 +7,12 @@ export default function Container({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const setIsOpened = useOpenedState((state) => state.setIsOpened);
   const isOpened = useOpenedState((state) => state.isOpened);
   return (
-    <div style={{ marginLeft: isOpened ? 240 : 72 }} className="w-full">
+    <div
+      style={{ marginLeft: isOpened ? 240 : 72 }}
+      className="w-full relative z-0"
+    >
       {children}
     </div>
   );

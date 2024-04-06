@@ -29,7 +29,7 @@ export const dispatchPromise = (message: string, promise: Promise<any>) => {
     cancel: {
       label: "Ok",
     },
-    success: "✅ Sucesso!",
+    success: "A operação foi realizada com sucesso.",
     error: "🚨 Houve um erro. Tente novamente mais tarde!",
     position: "bottom-right",
   });

@@ -36,7 +36,7 @@ export default function Nav() {
   return (
     <div
       style={{ width: isOpened ? 240 : 72 }}
-      className="fixed flex h-screen flex-col gap-4 overflow-y-auto bg-background-dark px-4 py-6"
+      className="fixed flex h-screen flex-col gap-4 bg-background-dark px-4 py-6 z-50"
     >
       <div className="flex h-full flex-col justify-between">
         <div className="flex flex-col gap-4">
@@ -54,13 +54,13 @@ export default function Nav() {
                     .join("")}
               </AvatarFallback>
             </Avatar>
-            <div className="text-sm font-bold text-foreground line-clamp-1">
+            <div className="text-lg font-bold text-foreground line-clamp-1">
               {name && compactName(name)}
             </div>
             {isOpened && (
-              <div className="flex items-center justify-center w-[35px]">
+              <div className="flex items-center justify-center w-[35px] h-[35px] absolute right-[-15px]">
                 <Button
-                  className="flex h-9 bg-pink cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-green m-0"
+                  className="flex w-full h-9 bg-green cursor-crosshair flex-row items-center justify-center gap-2 rounded-lg px-1 py-1 font-bold hover:bg-pink m-0"
                   onClick={() => setIsOpened(!isOpened)}
                 >
                   <ChevronsLeft size={16} />
@@ -74,7 +74,7 @@ export default function Nav() {
               <li>
                 <Button
                   onClick={() => setIsOpened(!isOpened)}
-                  className="flex h-9 bg-pink cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-green m-0"
+                  className="flex h-9 bg-green cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-pink m-0"
                 >
                   <ChevronsRight size={16} />
                 </Button>
@@ -100,7 +100,9 @@ export default function Nav() {
                     </Link>
                   </TooltipTrigger>
                   {!isOpened && (
-                    <TooltipContent side="right">Dashboard</TooltipContent>
+                    <TooltipContent side="right" className="opacity-100">
+                      Dashboard
+                    </TooltipContent>
                   )}
                 </Tooltip>
               </TooltipProvider>
@@ -258,44 +260,50 @@ export default function Nav() {
           </ul>
         </div>
         <div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="w-full">
-                <Link href="/" target="_blank">
-                  <Button
-                    variant="link"
-                    className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
-                  >
-                    <Browsers size={18} />
-                    {isOpened && "Acessar o site"}
-                  </Button>
-                </Link>
-              </TooltipTrigger>
-              {!isOpened && (
-                <TooltipContent side="right">Acessar o site</TooltipContent>
-              )}
-            </Tooltip>
-          </TooltipProvider>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="w-full">
-                <Button
-                  variant="link"
-                  onClick={() =>
-                    signOut({ redirect: true, callbackUrl: "/admin" })
-                  }
-                  className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
-                >
-                  <SignOut size={18} />
-                  {isOpened && "Deslogar"}
-                </Button>
-              </TooltipTrigger>
-              {!isOpened && (
-                <TooltipContent side="right">Deslogar</TooltipContent>
-              )}
-            </Tooltip>
-          </TooltipProvider>
+          <Separator />
+          <ul className="mt-4 flex flex-col gap-3">
+            <li>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="w-full" asChild>
+                    <Link href="/" target="_blank">
+                      <Button
+                        variant="link"
+                        className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
+                      >
+                        <Browsers size={18} />
+                        {isOpened && "Acessar o site"}
+                      </Button>
+                    </Link>
+                  </TooltipTrigger>
+                  {!isOpened && (
+                    <TooltipContent side="right">Acessar o site</TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            </li>
+            <li>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="w-full" asChild>
+                    <Button
+                      variant="link"
+                      onClick={() =>
+                        signOut({ redirect: true, callbackUrl: "/admin" })
+                      }
+                      className="m-0 flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold text-foreground"
+                    >
+                      <SignOut size={18} />
+                      {isOpened && "Deslogar"}
+                    </Button>
+                  </TooltipTrigger>
+                  {!isOpened && (
+                    <TooltipContent side="right">Deslogar</TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

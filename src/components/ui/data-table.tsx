@@ -25,6 +25,7 @@ import {
   Spinner,
   Trash,
 } from "@phosphor-icons/react";
+import { ArrowSquareRight, CursorClick } from "@phosphor-icons/react/dist/ssr";
 import {
   ColumnFiltersState,
   SortingState,
@@ -144,7 +145,7 @@ export function DataTable({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="flex flex-row items-center gap-2 rounded-lg">
-                <DotsThreeOutlineVertical className="h-5 w-5" /> Opções
+                <CursorClick className="h-5 w-5" /> Opções
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -230,7 +231,7 @@ export function DataTable({
       </div>
       <div className="h-full overflow-hidden rounded-lg bg-card shadow-lg">
         {!isLoading && table.getRowModel().rows?.length ? (
-          <Table>
+          <Table className="z-0">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>

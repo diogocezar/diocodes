@@ -18,11 +18,13 @@ import MentoringPro from "@/components/containers/admin/dashboard/mentoring/ment
 import MentoringFree from "@/components/containers/admin/dashboard/mentoring/mentoring-free";
 import MentoringReceived from "@/components/containers/admin/dashboard/mentoring/mentoring-received";
 import Calendar from "@/components/containers/admin/calendar/calendar";
+import { DashboardTitle } from "@/components/app/admin/titles";
 
 export default async function AdminDashboardPage() {
   return (
     <PageCommon>
-      <div className="space-y-4 p-6">
+      <div className="p-6">
+        <DashboardTitle className="mb-4">Estatísticas</DashboardTitle>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Suspense fallback={<SkeletonDahboardTile />}>
             <MentoringDone />
@@ -61,7 +63,9 @@ export default async function AdminDashboardPage() {
             <AvaliationAverage />
           </Suspense>
         </div>
+        <DashboardTitle className="mt-10 mb-4">Calendário</DashboardTitle>
         <Calendar />
+        <DashboardTitle className="mt-10 mb-4">Análises</DashboardTitle>
         <div className="grid gap-4 md:grid-cols-7">
           <Suspense fallback={<SkeletonDahboardGraph />}>
             <AvaliationByMonth />

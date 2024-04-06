@@ -30,7 +30,7 @@ function AditionalButtons() {
         try {
           setIsLoading(true);
           const promise = api.get("admin/person/sync");
-          dispatchPromise("Sincronizando mentorias...", promise);
+          dispatchPromise("Sincronizando audiência...", promise);
         } finally {
           setIsLoading(false);
           await queryClient.invalidateQueries({

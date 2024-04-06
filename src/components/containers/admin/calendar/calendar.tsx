@@ -24,7 +24,7 @@ export default function Calendar() {
       {isLoadingMentoring ? (
         <SkeletonWhoBooked />
       ) : (
-        <div className="h-auto w-full">
+        <div className="h-auto w-full admin-calendar">
           <FullCalendar
             eventColor="#50fa7b"
             eventTextColor="#0e0f12"

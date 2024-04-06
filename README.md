@@ -155,6 +155,13 @@ Olá, bem vindo ao repositório do site da Diocodes. Aqui você encontrará o c�
 - [x] Opação de filtrar/remover mentorias canceladas da listagem;
 - [x] Criar uma OG Image;
 - [x] Collapse menu;
+- [x] Botão de colapsar ocupando menos espaço;
+- [x] Label do loading do sincronizar audiência;
+- [x] Erro de hidratação;
+- [x] Estilo do tooltip dos menus;
+- [x] Estilo dos eventos no calendário do admin;
+- [x] Layout Botão de filtrar mentorias (switch);
+- [x] Títulos nos Dashboards;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
 
@@ -169,9 +176,7 @@ https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-str
 
 ```bash
 mongodump --uri "mongodb://mongodb0.example.com:27017" --gzip -d nomedobanco
-
 mongorestore --uri "mongodb://mongodb0.example.com:27017" --gzip ./dump/
-
 mongorestore --uri "mongodb://mongodb0.example.com:27017" --gzip ./dump/nomedobanco -d nomedobanco
 ```
 
