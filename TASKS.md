@@ -153,5 +153,9 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Layout Botão de filtrar mentorias (switch);
 - [x] Títulos nos Dashboards;
 - [x] Integração com o Google;
+- [x] Configurar Dockerfile;
+- [x] Configurar Deploy do GitHub Actions;
+- [x] Instalar o Jest;
+- [x] Configurar os testes para database;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;

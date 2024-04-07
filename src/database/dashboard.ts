@@ -1,12 +1,12 @@
 import { CAL } from "@/contants/cal";
-import { db } from "@/database/connection";
+import prisma from "@/database/client";
 import { logger } from "@/lib/logger";
 import { MongoClient, Document } from "mongodb";
 
 const MIN_FAKE_SLOW_TIME = 100;
 const MAX_FAKE_SLOW_TIME = 450;
 
-const fakeSlowResult = <T,>(result: T): Promise<T> => {
+const fakeSlowResult = <T>(result: T): Promise<T> => {
   return new Promise((resolve) => {
     setTimeout(
       () => {
@@ -22,7 +22,7 @@ const fakeSlowResult = <T,>(result: T): Promise<T> => {
 export const countMentoringDone = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           removedAt: null,
           externalStatus: CAL.STATUS_ACCEPTED,
@@ -39,7 +39,7 @@ export const countMentoringDone = async (): Promise<number> => {
 export const countMentoringToBe = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           removedAt: null,
           externalStatus: CAL.STATUS_ACCEPTED,
@@ -56,7 +56,7 @@ export const countMentoringToBe = async (): Promise<number> => {
 export const countMentoringCanceled = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           externalStatus: CAL.STATUS_CANCELLED,
           removedAt: null,
@@ -72,7 +72,7 @@ export const countMentoringCanceled = async (): Promise<number> => {
 export const countMentoringPro = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           externalStatus: CAL.STATUS_ACCEPTED,
           externalEventId: CAL.MENTORING_PRO,
@@ -89,7 +89,7 @@ export const countMentoringPro = async (): Promise<number> => {
 export const countMentoringFree = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           externalStatus: CAL.STATUS_ACCEPTED,
           externalEventId: CAL.MENTORING_FREE,
@@ -106,7 +106,7 @@ export const countMentoringFree = async (): Promise<number> => {
 export const countMentoringTotal = async (): Promise<number> => {
   try {
     return fakeSlowResult(
-      await db.mentoring.count({
+      await prisma.mentoring.count({
         where: {
           removedAt: null,
         },
@@ -121,7 +121,7 @@ export const countMentoringTotal = async (): Promise<number> => {
 export const countAvaliationTotal = async (): Promise<number> => {
   try {
     return await fakeSlowResult(
-      db.avaliation.count({
+      prisma.avaliation.count({
         where: {
           removedAt: null,
         },
@@ -136,7 +136,7 @@ export const countAvaliationTotal = async (): Promise<number> => {
 export const averageAvaliationTotal = async (): Promise<number> => {
   try {
     const result = await fakeSlowResult(
-      db.avaliation.aggregate({
+      prisma.avaliation.aggregate({
         _avg: { rating: true },
         where: {
           removedAt: null,
@@ -154,7 +154,7 @@ export const averageAvaliationTotal = async (): Promise<number> => {
 export const countInviteTotal = async (): Promise<number> => {
   try {
     return await fakeSlowResult(
-      db.invite.count({
+      prisma.invite.count({
         where: {
           removedAt: null,
         },
@@ -169,7 +169,7 @@ export const countInviteTotal = async (): Promise<number> => {
 export const countTagTotal = async (): Promise<number> => {
   try {
     return await fakeSlowResult(
-      db.tag.count({
+      prisma.tag.count({
         where: {
           removedAt: null,
         },
@@ -184,7 +184,7 @@ export const countTagTotal = async (): Promise<number> => {
 export const countPersonTotal = async (): Promise<number> => {
   try {
     return await fakeSlowResult(
-      db.person.count({
+      prisma.person.count({
         where: {
           removedAt: null,
         },
@@ -201,7 +201,7 @@ export const getNextMentoring = async (): Promise<
 > => {
   try {
     const result = await fakeSlowResult(
-      db.mentoring.findMany({
+      prisma.mentoring.findMany({
         where: {
           removedAt: null,
           startTime: { gte: new Date() },

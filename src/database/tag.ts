@@ -1,4 +1,4 @@
-import { db } from "@/database/connection";
+import prisma from "@/database/client";
 import { Tag } from "@prisma/client";
 import { logger } from "@/lib/logger";
 import { MongoClient } from "mongodb";
@@ -32,16 +32,16 @@ export const getMaxUsedTag = async () => {
 
 export const createTag = async (tag: Tag) => {
   try {
-    const exists = await db.tag.findFirst({
+    const exists = await prisma.tag.findFirst({
       where: { name: tag.name },
     });
     if (exists) {
-      return await db.mentoring.update({
+      return await prisma.mentoring.update({
         where: { id: exists.id },
         data: { ...tag, removedAt: null, updatedAt: new Date() },
       });
     }
-    return await db.tag.create({
+    return await prisma.tag.create({
       data: { ...tag, createdAt: new Date(), updatedAt: null, removedAt: null },
     });
   } catch (error) {
@@ -51,7 +51,7 @@ export const createTag = async (tag: Tag) => {
 
 export const updateTag = async (id: string, tag: Tag) => {
   try {
-    return await db.tag.update({
+    return await prisma.tag.update({
       where: { id },
       data: { ...tag, updatedAt: new Date() },
     });
@@ -62,7 +62,7 @@ export const updateTag = async (id: string, tag: Tag) => {
 
 export const removeTag = async (data: any) => {
   try {
-    return await db.tag.updateMany({
+    return await prisma.tag.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -73,7 +73,7 @@ export const removeTag = async (data: any) => {
 
 export const getAllTags = async (): Promise<Tag[]> => {
   try {
-    return await db.tag.findMany({
+    return await prisma.tag.findMany({
       where: {
         removedAt: null,
       },
@@ -87,7 +87,7 @@ export const getAllTags = async (): Promise<Tag[]> => {
 
 export const getTag = async (id: string): Promise<Tag | null> => {
   try {
-    return await db.tag.findUnique({ where: { id, removedAt: null } });
+    return await prisma.tag.findUnique({ where: { id, removedAt: null } });
   } catch (error) {
     logger.error(error);
   }

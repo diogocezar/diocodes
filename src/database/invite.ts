@@ -1,10 +1,10 @@
-import { db } from "@/database/connection";
+import prisma from "@/database/client";
 import { Invite } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
 export const createInvite = async (invite: Invite) => {
   try {
-    return await db.invite.create({
+    return await prisma.invite.create({
       data: {
         ...invite,
         createdAt: new Date(),
@@ -19,7 +19,7 @@ export const createInvite = async (invite: Invite) => {
 
 export const updateInvite = async (id: string, invite: Invite) => {
   try {
-    return await db.invite.update({
+    return await prisma.invite.update({
       where: { id },
       data: { ...invite, updatedAt: new Date() },
     });
@@ -30,7 +30,7 @@ export const updateInvite = async (id: string, invite: Invite) => {
 
 export const removeInvite = async (data: any) => {
   try {
-    return await db.invite.updateMany({
+    return await prisma.invite.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -41,7 +41,7 @@ export const removeInvite = async (data: any) => {
 
 export const getAllInvites = async (): Promise<any[]> => {
   try {
-    return await db.invite.findMany({
+    return await prisma.invite.findMany({
       where: { removedAt: null },
       include: {
         mentoring: {
@@ -62,7 +62,7 @@ export const getAllInvites = async (): Promise<any[]> => {
 
 export const getInvite = async (id: string): Promise<Invite | null> => {
   try {
-    return await db.invite.findUnique({
+    return await prisma.invite.findUnique({
       where: { id, removedAt: null },
     });
   } catch (error) {

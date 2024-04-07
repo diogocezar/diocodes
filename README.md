@@ -55,6 +55,8 @@ Caso queira analisar os dados com o Prisma Studio é necessário rodar o comando
 
 Este projeto utiliza a Vercel para a realização de seu deploy.
 
+Adicionalmente, configura-se o Dockerfile e o Github actions para uma possível subida no Google Cloud Run.
+
 ## Banco de Dados
 
 Este projeto utiliza o Atlas MongoDB para o armazenamento de seus dados.

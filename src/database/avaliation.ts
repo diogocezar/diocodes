@@ -1,4 +1,4 @@
-import { db } from "@/database/connection";
+import prisma from "@/database/client";
 import { Avaliation } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
@@ -21,23 +21,23 @@ export const createAvaliation = async (
       updatedAt: null,
       removedAt: null,
     };
-    const exists = await db.avaliation.findFirst({
+    const exists = await prisma.avaliation.findFirst({
       where: { mentoringId },
     });
     if (exists) {
       const where = {
         avaliationId: exists.id,
       };
-      await db.avaliationTags.updateMany({
+      await prisma.avaliationTags.updateMany({
         where,
         data: { removedAt: new Date() },
       });
-      return await db.avaliation.update({
+      return await prisma.avaliation.update({
         where: { id: exists.id },
         data: { ...data, removedAt: null, updatedAt: new Date() },
       });
     } else {
-      return await db.avaliation.create({
+      return await prisma.avaliation.create({
         data,
       });
     }
@@ -54,7 +54,7 @@ export const updateAvaliation = async (
   try {
     const { mentoringId, comment, rating, avaliationTags, showComment } =
       avaliation;
-    await db.avaliationTags.deleteMany({
+    await prisma.avaliationTags.deleteMany({
       where: { avaliationId: id },
     });
     const data = {
@@ -70,11 +70,11 @@ export const updateAvaliation = async (
       tagId: (tag as { id: string })?.id,
       removedAt: null,
     }));
-    await db.avaliation.update({
+    await prisma.avaliation.update({
       where: { id },
       data,
     });
-    await db.avaliationTags.createMany({
+    await prisma.avaliationTags.createMany({
       data: avaliationTagsToCreate,
     });
   } catch (error) {
@@ -84,11 +84,11 @@ export const updateAvaliation = async (
 
 export const removeAvaliation = async (data: any) => {
   try {
-    await db.avaliation.updateMany({
+    await prisma.avaliation.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
-    await db.avaliationTags.updateMany({
+    await prisma.avaliationTags.updateMany({
       where: { avaliationId: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -99,7 +99,7 @@ export const removeAvaliation = async (data: any) => {
 
 export const getAllAvaliations = async (): Promise<Avaliation[]> => {
   try {
-    return await db.avaliation.findMany({
+    return await prisma.avaliation.findMany({
       where: {
         removedAt: null,
       },
@@ -121,7 +121,7 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
 
 export const getAllComments = async (): Promise<Avaliation[]> => {
   try {
-    return await db.avaliation.findMany({
+    return await prisma.avaliation.findMany({
       where: {
         removedAt: null,
         showComment: true,
@@ -138,7 +138,7 @@ export const getAllComments = async (): Promise<Avaliation[]> => {
 
 export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
-    return await db.avaliation.findUnique({
+    return await prisma.avaliation.findUnique({
       where: { id, removedAt: null },
     });
   } catch (error) {
@@ -151,7 +151,7 @@ export const getAvaliationByMentoring = async (
   mentoringId: string,
 ): Promise<Avaliation | null> => {
   try {
-    return await db.avaliation.findUnique({
+    return await prisma.avaliation.findUnique({
       where: { mentoringId, removedAt: null },
       include: { mentoring: true },
     });

@@ -1,4 +1,4 @@
-import { db } from "@/database/connection";
+import prisma from "@/database/client";
 import { Mentoring } from "@prisma/client";
 import { logger } from "@/lib/logger";
 import { TypeBooking } from "@/types/type-booking";
@@ -6,13 +6,13 @@ import { TypeBooking } from "@/types/type-booking";
 export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
   try {
     booking.forEach(async (item: TypeBooking) => {
-      const host = await db.person.findUnique({
+      const host = await prisma.person.findUnique({
         where: { email: item.hostEmail },
       });
       if (!host?.id) {
         throw new Error("Host not found");
       }
-      const attendee = await db.person.upsert({
+      const attendee = await prisma.person.upsert({
         where: { email: item.attendeeEmail },
         update: { updatedAt: new Date() },
         create: {
@@ -23,7 +23,7 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
           removedAt: null,
         },
       });
-      await db.mentoring.upsert({
+      await prisma.mentoring.upsert({
         where: {
           externalId: item.externalId,
         },
@@ -57,16 +57,16 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
 
 export const createMentoring = async (mentoring: Mentoring) => {
   try {
-    const exists = await db.mentoring.findFirst({
+    const exists = await prisma.mentoring.findFirst({
       where: { id: mentoring.id },
     });
     if (exists) {
-      return await db.mentoring.update({
+      return await prisma.mentoring.update({
         where: { id: exists.id },
         data: { ...mentoring, removedAt: null, updatedAt: new Date() },
       });
     }
-    return await db.mentoring.create({
+    return await prisma.mentoring.create({
       data: {
         ...mentoring,
         createdAt: new Date(),
@@ -81,7 +81,7 @@ export const createMentoring = async (mentoring: Mentoring) => {
 
 export const updateMentoring = async (id: string, mentoring: Mentoring) => {
   try {
-    return await db.mentoring.update({
+    return await prisma.mentoring.update({
       where: { id },
       data: { ...mentoring, updatedAt: new Date() },
     });
@@ -92,7 +92,7 @@ export const updateMentoring = async (id: string, mentoring: Mentoring) => {
 
 export const removeMentoring = async (data: any) => {
   try {
-    return await db.mentoring.updateMany({
+    return await prisma.mentoring.updateMany({
       where: { id: { in: data.idsToDelete } },
       data: { removedAt: new Date() },
     });
@@ -103,7 +103,7 @@ export const removeMentoring = async (data: any) => {
 
 export const getAllMentorings = async (): Promise<Mentoring[]> => {
   try {
-    return await db.mentoring.findMany({
+    return await prisma.mentoring.findMany({
       where: { removedAt: null },
       include: {
         host: true,
@@ -129,7 +129,7 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
 
 export const getAllAcceptedMentorings = async (): Promise<Mentoring[]> => {
   try {
-    return await db.mentoring.findMany({
+    return await prisma.mentoring.findMany({
       where: { removedAt: null, externalStatus: "ACCEPTED" },
       include: {
         host: true,
@@ -155,7 +155,7 @@ export const getAllAcceptedMentorings = async (): Promise<Mentoring[]> => {
 
 export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
   try {
-    return await db.mentoring.findMany({
+    return await prisma.mentoring.findMany({
       where: {
         removedAt: null,
         externalStatus: "ACCEPTED",
@@ -185,7 +185,7 @@ export const getAllDoneMentoring = async (): Promise<Mentoring[]> => {
 
 export const getMentoring = async (id: string): Promise<Mentoring | null> => {
   try {
-    return await db.mentoring.findUnique({
+    return await prisma.mentoring.findUnique({
       where: { id, removedAt: null },
       include: { attendee: true },
     });

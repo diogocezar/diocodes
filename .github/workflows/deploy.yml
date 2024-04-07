@@ -1,0 +1,83 @@
+name: Deploy to Cloud Run from Source
+
+on:
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: diocodes
+  SERVICE: diocodes
+  REGION: us-east1
+  ORGANIZATION_NAME: diogocezar.com
+  PACKAGE_NAME: diocodes
+  GAR_LOCATION: us-east1
+  REPOSITORY: diocodes
+
+jobs:
+  build-push:
+    environment: prod
+    permissions:
+      contents: "read"
+      id-token: "write"
+      packages: "read"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: GCloud Authenticate
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Build and tag image
+        run: |-
+          docker build --tag "gcr.io/${{env.PROJECT_ID}}/${{env.REPOSITORY}}:${{github.sha}}" --build-arg="environment=production" --build-arg="github_token=${{ secrets.GITHUB_TOKEN }}" .
+
+      - name: Push image to GCR
+        run: |-
+          gcloud --quiet auth configure-docker
+          docker push gcr.io/${{env.PROJECT_ID}}/${{env.REPOSITORY}}:${{github.sha}}
+
+  deploy:
+    environment: prod
+    needs: build-push
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Google Auth
+        id: auth
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+          token_format: "access_token"
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: gcr.io/${{env.PROJECT_ID}}/${{env.REPOSITORY}}:${{github.sha}}
+          env_vars: |
+            API_CAL=${{secrets.API_CAL}}
+            API_RESEND=${{secrets.API_RESEND}}
+            URI_MONGODB=${{secrets.URI_MONGODB}}
+            GITHUB_ID=${{secrets.GITHUB_ID}}
+            GITHUB_SECRET=${{secrets.GITHUB_SECRET}}
+            GOOGLE_CLIENT_SECRET=${{secrets.GOOGLE_CLIENT_SECRET}}
+            NEXTAUTH_SECRET=${{secrets.NEXTAUTH_SECRET}}
+            NEXTAUTH_URL=${{secrets.NEXTAUTH_URL}}
+            NODE_ENV=${{secrets.NODE_ENV}}
+            STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}
+            WEBHOOK_CAL_SECRET=${{secrets.WEBHOOK_CAL_SECRET}}
+            WEBHOOK_STRIPE_SECRET=${{secrets.WEBHOOK_STRIPE_SECRET}}
+            WEBHOOK_STRIPE_SECRET_TEST=${{secrets.WEBHOOK_STRIPE_SECRET_TEST}}
