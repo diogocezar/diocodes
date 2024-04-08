@@ -36,7 +36,7 @@ export const createTag = async (tag: Tag) => {
       where: { name: tag.name },
     });
     if (exists) {
-      return await prisma.mentoring.update({
+      return await prisma.tag.update({
         where: { id: exists.id },
         data: { ...tag, removedAt: null, updatedAt: new Date() },
       });
