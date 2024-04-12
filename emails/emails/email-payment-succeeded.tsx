@@ -41,7 +41,9 @@ export const EmailPaymentSucceeded = ({
           fontStyle="normal"
         />
       </Head>
-      <Preview>Houve um novo pagamento</Preview>
+      <Preview>
+        Tivemos um novo pagamento de {formatCurrency(amount)} feito por {name}
+      </Preview>
       <Tailwind>
         <Body className="mt-12">
           <Container>

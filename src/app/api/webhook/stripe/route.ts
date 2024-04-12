@@ -62,7 +62,7 @@ export const POST = async (req: Request) => {
         logger.error("Missing name, phone or email.");
         return;
       }
-      await sendPaymentSucceeded({ name, email, phone, amount });
+      await sendPaymentSucceeded({ name, email, phone, amount: amount / 100 });
     }
     return new Response(JSON.stringify({ event }), { status: 200 });
   } catch (error) {
