@@ -65,13 +65,13 @@ export const EmailPaymentSucceeded = ({
               )}
               {email && (
                 <Text className="text-base leading-8 text-[#020817]">
-                  Houve um novo pagamento realizado por{" "}
+                  Email{" "}
                   <span className="font-bold text-[#ff79c6]">{email}</span>
                 </Text>
               )}
               {phone && (
                 <Text className="text-base leading-8 text-[#020817]">
-                  Telefone para contato{" "}
+                  Telefone{" "}
                   <span className="font-bold text-[#ff79c6]">{phone}</span>
                 </Text>
               )}
