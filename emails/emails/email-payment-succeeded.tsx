@@ -16,12 +16,14 @@ import { Tailwind } from "@react-email/tailwind";
 import { formatCurrency } from "@/lib/utils";
 
 interface EmailPaymentSucceededProps {
-  name: string | undefined;
-  phone: string | null | undefined;
+  name: string;
+  email: string;
+  phone: string;
   amount: number;
 }
 export const EmailPaymentSucceeded = ({
   name,
+  email,
   phone,
   amount,
 }: EmailPaymentSucceededProps) => {
@@ -61,6 +63,12 @@ export const EmailPaymentSucceeded = ({
                   <span className="font-bold text-[#ff79c6]">{name}</span>
                 </Text>
               )}
+              {email && (
+                <Text className="text-base leading-8 text-[#020817]">
+                  Houve um novo pagamento realizado por{" "}
+                  <span className="font-bold text-[#ff79c6]">{email}</span>
+                </Text>
+              )}
               {phone && (
                 <Text className="text-base leading-8 text-[#020817]">
                   Telefone para contato{" "}
@@ -88,6 +96,7 @@ export const EmailPaymentSucceeded = ({
 
 EmailPaymentSucceeded.PreviewProps = {
   name: "Diogo Cezar",
+  email: "diogo@diogocezar.com",
   phone: "43 933000663",
   amount: 120,
 } as EmailPaymentSucceededProps;

@@ -11,11 +11,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 const resend = new Resend(process.env.API_RESEND);
 
 const sendPaymentSucceeded = async (payload: {
-  name: string | undefined;
-  phone: string | null | undefined;
+  name: string;
+  email: string;
+  phone: string;
   amount: number;
 }) => {
-  const { name, phone, amount } = payload;
+  const { name, email, phone, amount } = payload;
   try {
     const config = {
       from: EMAIL.FROM,
@@ -23,6 +24,7 @@ const sendPaymentSucceeded = async (payload: {
       subject: EMAIL.SUBJECT_PAYMENT_SUCCEEDED,
       react: EmailPaymentSucceeded({
         name,
+        email,
         phone,
         amount,
       }) as React.ReactElement,
@@ -50,13 +52,17 @@ export const POST = async (req: Request) => {
         logger.error("Missing amount or customer.");
         return;
       }
-      const stripeCustomer = await stripe.customers.retrieve(
+      const stripeCustomer: Stripe.Customer = (await stripe.customers.retrieve(
         customer.toString(),
-      );
+      )) as Stripe.Customer;
       logger.info("Stripe customer");
       logger.info(JSON.stringify(stripeCustomer, null, 2));
-
-      //await sendPaymentSucceeded({ name, phone, amount });
+      const { name, phone, email } = stripeCustomer;
+      if (!name || !phone || !email) {
+        logger.error("Missing name, phone or email.");
+        return;
+      }
+      await sendPaymentSucceeded({ name, email, phone, amount });
     }
     return new Response(JSON.stringify({ event }), { status: 200 });
   } catch (error) {
