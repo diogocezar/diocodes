@@ -157,5 +157,9 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Configurar Deploy do GitHub Actions;
 - [x] Instalar o Jest;
 - [x] Configurar os testes para database;
+- [ ] Alterar a paginação para remover o conflito com o Sonner;
+- [ ] Trazer as avaliações mais recentes primeiro;
+- [ ] Trazer os convites mais recentes primeiro;
+- [ ] Colocar screenshoots das telas no Readme;
 - [ ] Colocar estatísticas do dashboard na página principal;
 - [ ] Ajustar todas as tipagens;
