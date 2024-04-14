@@ -5,4 +5,5 @@ export const QUERY_KEY = {
   ADMIN_MENTORING: "admin/mentoring",
   ADMIN_AVALIATION: "admin/avaliation",
   ADMIN_INVITE: "admin/invite",
+  ADMIN_PAYMENT: "admin/payment",
 };

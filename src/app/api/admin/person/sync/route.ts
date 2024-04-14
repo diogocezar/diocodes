@@ -18,7 +18,6 @@ export const GET = async () => {
         unsubscribed: false,
         audienceId: RESEND.AUDIENCE_ID_GENERAL,
       });
-      console.log(result);
     }
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {

@@ -14,6 +14,7 @@ import {
   Plant,
   Users,
   EnvelopeSimple,
+  PiggyBank,
 } from "@phosphor-icons/react";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -102,6 +103,33 @@ export default function Nav() {
                   {!isOpened && (
                     <TooltipContent side="right" className="opacity-100">
                       Dashboard
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            </li>
+            <li>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <Link
+                      href="/admin/payment"
+                      className={clsx(
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        pathname === "payment"
+                          ? "text-background"
+                          : "text-foreground",
+                        pathname === "payment" &&
+                          "bg-pink hover:bg-background hover:text-foreground",
+                      )}
+                    >
+                      <PiggyBank size={18} />
+                      {isOpened && "Pagamentos"}
+                    </Link>
+                  </TooltipTrigger>
+                  {!isOpened && (
+                    <TooltipContent side="right" className="opacity-100">
+                      Pagamentos
                     </TooltipContent>
                   )}
                 </Tooltip>

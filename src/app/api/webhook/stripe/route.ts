@@ -36,6 +36,7 @@ const savePayment = async (payload: {
       amount,
       personId: upsertedPerson?.id || "",
       mentoringId: null,
+      date: new Date(),
       createdAt: new Date(),
       updatedAt: null,
       removedAt: null,

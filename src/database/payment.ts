@@ -52,6 +52,7 @@ export const getAllPayments = async (): Promise<any[]> => {
             avaliation: true,
           },
         },
+        person: true,
       },
     });
   } catch (error) {

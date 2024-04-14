@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 import { sync } from "@/lib/sync";
 import crypto from "crypto";
 
@@ -15,14 +16,14 @@ export const POST = async (req: Request) => {
       .createHmac("sha256", secret)
       .update(JSON.stringify(payload))
       .digest("hex");
-    console.log({ secret, signature, hmacDigest, payload });
+    logger.info({ secret, signature, hmacDigest, payload });
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
     const result = await sync({ debug: true });
     return new Response(JSON.stringify({ result }), { status: 200 });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

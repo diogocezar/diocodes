@@ -105,6 +105,7 @@ model Payment {
   mentoringId String?
   person      Person     @relation(fields: [personId], references: [id])
   personId    String
+  date        DateTime   @default(now())
   createdAt   DateTime   @default(now())
   updatedAt   DateTime?
   removedAt   DateTime?
