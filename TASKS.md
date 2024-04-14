@@ -158,6 +158,7 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Instalar o Jest;
 - [x] Configurar os testes para database;
 - [x] Salvar pagamentos no webhook da stripe;
+- [ ] Criar crud de pagamentos;
 - [ ] Enviar e-mail também para quem pagou a mentoria;
 - [ ] Alterar a paginação para remover o conflito com o Sonner;
 - [ ] Trazer as avaliações mais recentes primeiro;

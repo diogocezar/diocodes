@@ -4,9 +4,7 @@ import { EMAIL } from "@/contants/email";
 import { logger } from "@/lib/logger";
 import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
 import { createPayment } from "@/database/payment";
-import { Person, Payment } from "@prisma/client";
 import { upsertPerson } from "@/database/person";
-import { randomUUID } from "crypto";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -42,7 +40,9 @@ const savePayment = async (payload: {
       updatedAt: null,
       removedAt: null,
     };
-    await createPayment(payment);
+    const result = await createPayment(payment);
+    logger.info("Payment saved.");
+    logger.info(JSON.stringify(result, null, 2));
   } catch (error) {
     logger.error(error);
   }
@@ -68,6 +68,7 @@ const sendPaymentSucceeded = async (payload: {
       }) as React.ReactElement,
     };
     await resend.emails.send(config);
+    logger.info("Email sent.");
   } catch (error) {
     logger.error(error);
   }
