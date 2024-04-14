@@ -22,8 +22,7 @@ const savePayment = async (payload: {
 }) => {
   const { name, email, phone, amount } = payload;
   try {
-    const person: Person = {
-      id: randomUUID(),
+    const person: any = {
       name,
       email,
       phone,
@@ -35,8 +34,7 @@ const savePayment = async (payload: {
     if (!upsertedPerson) {
       throw new Error("Error upserting person.");
     }
-    const payment: Payment = {
-      id: randomUUID(),
+    const payment: any = {
       amount,
       personId: upsertedPerson?.id || "",
       mentoringId: null,
