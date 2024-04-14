@@ -2,6 +2,23 @@ import prisma from "@/database/client";
 import { Person } from "@prisma/client";
 import { logger } from "@/lib/logger";
 
+export const upsertPerson = async (person: Person) => {
+  try {
+    return await prisma.person.upsert({
+      where: { email: person.email },
+      update: { ...person, updatedAt: new Date() },
+      create: {
+        ...person,
+        createdAt: new Date(),
+        updatedAt: null,
+        removedAt: null,
+      },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+};
+
 export const createPerson = async (person: Person) => {
   try {
     const exists = await prisma.person.findFirst({

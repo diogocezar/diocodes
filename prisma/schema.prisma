@@ -1,96 +1,111 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mongodb"
-    url      = env("URI_MONGODB")
+  provider = "mongodb"
+  url      = env("URI_MONGODB")
 }
 
 enum Role {
-    ADMIN
-    USER
+  ADMIN
+  USER
 }
 
 model Person {
-    id                String      @id @default(uuid()) @map("_id")
-    name              String
-    email             String      @unique
-    user              User?
-    hostMentoring     Mentoring[] @relation("host_mentoring")
-    attendeeMentoring Mentoring[] @relation("atendee_mentoring")
-    createdAt         DateTime    @default(now())
-    updatedAt         DateTime?
-    removedAt         DateTime?
+  id                String      @id @default(uuid()) @map("_id")
+  name              String
+  email             String      @unique
+  phone             String?
+  user              User?
+  hostMentoring     Mentoring[] @relation("host_mentoring")
+  attendeeMentoring Mentoring[] @relation("atendee_mentoring")
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime?
+  removedAt         DateTime?
+  Payment           Payment[]
 }
 
 model User {
-    id        String    @id @default(uuid()) @map("_id")
-    person    Person    @relation(fields: [personId], references: [id])
-    personId  String    @unique
-    role      Role      @default(USER)
-    createdAt DateTime  @default(now())
-    updatedAt DateTime?
-    removedAt DateTime?
+  id        String    @id @default(uuid()) @map("_id")
+  person    Person    @relation(fields: [personId], references: [id])
+  personId  String    @unique
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  removedAt DateTime?
 }
 
 model Tag {
-    id             String           @id @default(uuid()) @map("_id")
-    name           String
-    createdAt      DateTime         @default(now())
-    updatedAt      DateTime?
-    removedAt      DateTime?
-    avaliationTags AvaliationTags[]
+  id             String           @id @default(uuid()) @map("_id")
+  name           String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime?
+  removedAt      DateTime?
+  avaliationTags AvaliationTags[]
 }
 
 model AvaliationTags {
-    id           String      @id @default(uuid()) @map("_id")
-    avaliation   Avaliation? @relation(fields: [avaliationId], references: [id])
-    avaliationId String?
-    tag          Tag?        @relation(fields: [tagId], references: [id])
-    tagId        String?
-    createdAt    DateTime    @default(now())
-    updatedAt    DateTime?
-    removedAt    DateTime?
+  id           String      @id @default(uuid()) @map("_id")
+  avaliation   Avaliation? @relation(fields: [avaliationId], references: [id])
+  avaliationId String?
+  tag          Tag?        @relation(fields: [tagId], references: [id])
+  tagId        String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime?
+  removedAt    DateTime?
 }
 
 model Avaliation {
-    id             String           @id @default(uuid()) @map("_id")
-    mentoring      Mentoring        @relation(fields: [mentoringId], references: [id])
-    mentoringId    String           @unique
-    rating         Int
-    avaliationTags AvaliationTags[]
-    comment        String?
-    showComment    Boolean          @default(true)
-    createdAt      DateTime         @default(now())
-    updatedAt      DateTime?
-    removedAt      DateTime?
+  id             String           @id @default(uuid()) @map("_id")
+  mentoring      Mentoring        @relation(fields: [mentoringId], references: [id])
+  mentoringId    String           @unique
+  rating         Int
+  avaliationTags AvaliationTags[]
+  comment        String?
+  showComment    Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime?
+  removedAt      DateTime?
 }
 
 model Mentoring {
-    id              String      @id @default(uuid()) @map("_id")
-    externalId      Int?        @unique
-    externalEventId Int?
-    externalStatus  String?
-    externalMessage String?
-    host            Person      @relation("host_mentoring", fields: [hostId], references: [id])
-    hostId          String
-    attendee        Person      @relation("atendee_mentoring", fields: [attendeeId], references: [id])
-    attendeeId      String
-    startTime       DateTime
-    endTime         DateTime
-    avaliation      Avaliation?
-    invite          Invite[]
-    createdAt       DateTime    @default(now())
-    updatedAt       DateTime?
-    removedAt       DateTime?
+  id              String      @id @default(uuid()) @map("_id")
+  externalId      Int?        @unique
+  externalEventId Int?
+  externalStatus  String?
+  externalMessage String?
+  host            Person      @relation("host_mentoring", fields: [hostId], references: [id])
+  hostId          String
+  attendee        Person      @relation("atendee_mentoring", fields: [attendeeId], references: [id])
+  attendeeId      String
+  startTime       DateTime
+  endTime         DateTime
+  avaliation      Avaliation?
+  invite          Invite[]
+  payment         Payment[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime?
+  removedAt       DateTime?
 }
 
 model Invite {
-    id          String    @id @default(uuid()) @map("_id")
-    mentoring   Mentoring @relation(fields: [mentoringId], references: [id])
-    mentoringId String
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime?
-    removedAt   DateTime?
+  id          String    @id @default(uuid()) @map("_id")
+  mentoring   Mentoring @relation(fields: [mentoringId], references: [id])
+  mentoringId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
+  removedAt   DateTime?
+}
+
+model Payment {
+  id          String     @id @default(uuid()) @map("_id")
+  amount      Float
+  mentoring   Mentoring? @relation(fields: [mentoringId], references: [id])
+  mentoringId String?
+  person      Person     @relation(fields: [personId], references: [id])
+  personId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime?
+  removedAt   DateTime?
 }

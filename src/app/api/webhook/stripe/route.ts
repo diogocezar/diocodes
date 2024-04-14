@@ -3,12 +3,52 @@ import { Resend } from "resend";
 import { EMAIL } from "@/contants/email";
 import { logger } from "@/lib/logger";
 import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
+import { createPayment } from "@/database/payment";
+import { Person, Payment } from "@prisma/client";
+import { upsertPerson } from "@/database/person";
+import { randomUUID } from "crypto";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 const resend = new Resend(process.env.API_RESEND);
+
+const savePayment = async (payload: {
+  name: string;
+  email: string;
+  phone: string;
+  amount: number;
+}) => {
+  const { name, email, phone, amount } = payload;
+  try {
+    const person: Person = {
+      id: randomUUID(),
+      name,
+      email,
+      phone,
+      createdAt: new Date(),
+      updatedAt: null,
+      removedAt: null,
+    };
+    const upsertedPerson = await upsertPerson(person);
+    if (!upsertedPerson) {
+      throw new Error("Error upserting person.");
+    }
+    const payment: Payment = {
+      id: randomUUID(),
+      amount,
+      personId: upsertedPerson?.id || "",
+      mentoringId: null,
+      createdAt: new Date(),
+      updatedAt: null,
+      removedAt: null,
+    };
+    await createPayment(payment);
+  } catch (error) {
+    logger.error(error);
+  }
+};
 
 const sendPaymentSucceeded = async (payload: {
   name: string;
@@ -62,7 +102,9 @@ export const POST = async (req: Request) => {
         logger.error("Missing name, phone or email.");
         return;
       }
-      await sendPaymentSucceeded({ name, email, phone, amount: amount / 100 });
+      const newAmount = amount / 100;
+      await sendPaymentSucceeded({ name, email, phone, amount: newAmount });
+      await savePayment({ name, email, phone, amount: newAmount });
     }
     return new Response(JSON.stringify({ event }), { status: 200 });
   } catch (error) {
