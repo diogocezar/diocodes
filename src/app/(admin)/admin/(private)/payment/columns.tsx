@@ -4,6 +4,7 @@ import { TypePayment } from "@/types/type-payment";
 import {
   formatCreatedAt,
   formatNameEmailWithAvatar,
+  formatNormalDate,
   formatRowValue,
   formatSelect,
 } from "@/lib/format-columns";
@@ -14,6 +15,7 @@ export const columnsNames = [
   { id: "select", name: "select" },
   { id: "name", name: "Nome" },
   { id: "amount", name: "Valor" },
+  { id: "date", name: "Data do Pagamento" },
   { id: "createdAt", name: "Criado em" },
 ];
 
@@ -43,6 +45,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypePayment>[] => {
       cell: ({ row }) => (
         <div>{formatCurrency(formatRowValue(row, "amount"))}</div>
       ),
+    },
+    {
+      accessorKey: "date",
+      accessorFn: (row) => row?.date,
+      header: ({ column }) => formatHeader("Data do Pagamento", column),
+      cell: ({ row }) => <div>{formatNormalDate(row, "date")}</div>,
     },
     {
       accessorKey: "createdAt",

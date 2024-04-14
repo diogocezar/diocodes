@@ -34,7 +34,6 @@ import { useGetMentoring } from "@/hooks/use-get-mentoring";
 export function PaymentForm() {
   const [isLoading, setIsLoading] = useState(false);
   const isOpenForm = usePaymentState((state) => state.isOpenForm);
-  console.log(isOpenForm);
   const setIsOpenForm = usePaymentState((state) => state.setIsOpenForm);
   const selectedItem: any = usePaymentState((state) => state.selectedItem);
   const queryClient = useQueryClient();
@@ -50,8 +49,8 @@ export function PaymentForm() {
 
   const bootstrap = useCallback(() => {
     setValue("amount", selectedItem?.amount || 0);
-    setValue("personId", selectedItem?.person?.id || "");
-    setValue("mentoringId", selectedItem?.mentoring?.id || "");
+    setValue("personId", selectedItem?.person?.id || null);
+    setValue("mentoringId", selectedItem?.mentoring?.id || null);
   }, [setValue, selectedItem]);
 
   useEffect(() => {
