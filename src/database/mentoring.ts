@@ -198,3 +198,17 @@ export const getMentoring = async (id: string): Promise<Mentoring | null> => {
   }
   return null;
 };
+
+export const getMentoringByExternalId = async (
+  externalId: number,
+): Promise<Mentoring | null> => {
+  try {
+    return await prisma.mentoring.findUnique({
+      where: { externalId, removedAt: null },
+      include: { attendee: true },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+  return null;
+};

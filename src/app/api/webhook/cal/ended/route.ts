@@ -47,9 +47,11 @@ export const POST = async (req: Request) => {
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
-    // const { mentoringId } = payload;
-    // const mentoring = await getMentoring(mentoringId);
-    // if (mentoring) await sendInvite(mentoring);
+    const externalId = payload.payload.bookingId;
+    logger.info("External ID", externalId);
+    const mentoring = await getMentoring(externalId);
+    logger.info("Mentoring", mentoring);
+    if (mentoring) await sendInvite(mentoring);
     return new Response(JSON.stringify({ payload }), { status: 200 });
   } catch (error) {
     logger.error(error);
