@@ -5,10 +5,12 @@ import { TypeBooking } from "@/types/type-booking";
 
 export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
   try {
-    booking.forEach(async (item: TypeBooking) => {
+    for (const item of booking) {
+      logger.info("Upserting mentoring by booking", item);
       const host = await prisma.person.findUnique({
         where: { email: item.hostEmail },
       });
+      logger.info("Host", host);
       if (!host?.id) {
         throw new Error("Host not found");
       }
@@ -23,6 +25,7 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
           removedAt: null,
         },
       });
+      logger.info("Attendee", attendee);
       await prisma.mentoring.upsert({
         where: {
           externalId: item.externalId,
@@ -49,7 +52,8 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
           removedAt: null,
         },
       });
-    });
+      logger.info("Upserted mentoring by booking", item);
+    }
   } catch (error) {
     logger.error(error);
   }

@@ -10,9 +10,8 @@ const resend = new Resend(process.env.API_RESEND);
 export const GET = async () => {
   try {
     const person = await getAllPersons();
-
     for (const item of person) {
-      const result = await resend.contacts.create({
+      await resend.contacts.create({
         email: item.email,
         firstName: item.name,
         unsubscribed: false,
