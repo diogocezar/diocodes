@@ -43,16 +43,18 @@ export const POST = async (req: Request) => {
       .createHmac("sha256", secret)
       .update(JSON.stringify(payload))
       .digest("hex");
-    logger.info({ secret, signature, hmacDigest, payload });
+    logger.info(
+      JSON.stringify({ secret, signature, hmacDigest, payload }, null, 2),
+    );
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
     const externalId = payload.payload.bookingId;
     logger.info("External ID", externalId);
     const mentoring = await getMentoring(externalId);
-    logger.info("Mentoring", mentoring);
+    logger.info("Mentoring", JSON.stringify(mentoring, null, 2));
     if (mentoring) await sendInvite(mentoring);
-    return new Response(JSON.stringify({ payload }), { status: 200 });
+    return new Response(JSON.stringify({ payload }, null, 2), { status: 200 });
   } catch (error) {
     logger.error(error);
     return new Response(JSON.stringify({ error }), { status: 500 });
