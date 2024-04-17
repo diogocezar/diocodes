@@ -9,7 +9,7 @@ export const dispatchError = (error: any, message?: string) => {
       label: "Ok",
     },
     duration: 5000,
-    position: "bottom-right",
+    position: "bottom-center",
   });
 };
 
@@ -19,7 +19,7 @@ export const dispatchSuccess = (message: string) => {
       label: "Ok",
     },
     duration: 5000,
-    position: "bottom-right",
+    position: "bottom-center",
   });
 };
 
@@ -31,6 +31,6 @@ export const dispatchPromise = (message: string, promise: Promise<any>) => {
     },
     success: "A operação foi realizada com sucesso.",
     error: "🚨 Houve um erro. Tente novamente mais tarde!",
-    position: "bottom-right",
+    position: "bottom-center",
   });
 };

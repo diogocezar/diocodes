@@ -2,6 +2,7 @@ import prisma from "@/database/client";
 import { Mentoring } from "@prisma/client";
 import { logger } from "@/lib/logger";
 import { TypeBooking } from "@/types/type-booking";
+import { CAL } from "@/contants/cal";
 
 export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
   try {
@@ -150,6 +151,35 @@ export const getAllAcceptedMentorings = async (): Promise<Mentoring[]> => {
         },
       },
       orderBy: { startTime: "asc" },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
+export const getAllProMentoring = async (): Promise<Mentoring[]> => {
+  try {
+    return await prisma.mentoring.findMany({
+      where: {
+        removedAt: null,
+        externalEventId: CAL.MENTORING_PRO,
+      },
+      include: {
+        host: true,
+        attendee: true,
+        avaliation: {
+          where: {
+            removedAt: null,
+          },
+        },
+        invite: {
+          where: {
+            removedAt: null,
+          },
+        },
+      },
+      orderBy: { startTime: "desc" },
     });
   } catch (error) {
     logger.error(error);

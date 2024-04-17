@@ -25,6 +25,28 @@ export const useGetMentoring = (url: string = "admin/mentoring/done") => {
   return { mentoring, isLoadingMentoring };
 };
 
+export const useGetMentoringPro = (url: string = "admin/mentoring/pro") => {
+  const [mentoring, setMentoring] = useState<TypeMentoring[]>([]);
+  const [isLoadingMentoring, setIsLoadingMentoring] = useState(true);
+
+  const getMentoring = useCallback(async () => {
+    try {
+      const response = await api.get(url);
+      setMentoring(response.data);
+    } catch (error) {
+      dispatchError(error);
+    } finally {
+      setIsLoadingMentoring(false);
+    }
+  }, [url]);
+
+  useEffect(() => {
+    getMentoring();
+  }, [getMentoring]);
+
+  return { mentoring, isLoadingMentoring };
+};
+
 export const useGetMentoringById = (id: string) => {
   const url = `mentoring/${id}`;
   const [mentoring, setMentoring] = useState<TypeMentoringSearchOne>();

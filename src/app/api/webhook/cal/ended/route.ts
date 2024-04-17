@@ -36,23 +36,26 @@ export const POST = async (req: Request) => {
   try {
     const secret = process.env.WEBHOOK_CAL_SECRET;
     const signature = req.headers.get("X-Cal-Signature-256");
-    const payload = await req.json();
-    if (!secret || !signature || !payload)
-      throw new Error("Missing secret, payload or signature.");
+    const data = await req.json();
+    if (!secret || !signature || !data)
+      throw new Error("Missing secret, data or signature.");
     var hmacDigest = crypto
       .createHmac("sha256", secret)
-      .update(JSON.stringify(payload))
+      .update(JSON.stringify(data))
       .digest("hex");
     logger.info(
-      JSON.stringify({ secret, signature, hmacDigest, payload }, null, 2),
+      JSON.stringify({ secret, signature, hmacDigest, data }, null, 2),
     );
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
-    const externalId = payload.payload.bookingId;
+    const { payload } = data;
+    const externalId = payload.bookingId;
     logger.info("External ID", externalId);
+    if (!externalId) throw new Error("Missing external ID");
     const mentoring = await getMentoring(externalId);
     logger.info("Mentoring", JSON.stringify(mentoring, null, 2));
+    if (!mentoring) throw new Error("Mentoring not found");
     if (mentoring) await sendInvite(mentoring);
     return new Response(JSON.stringify({ payload }, null, 2), { status: 200 });
   } catch (error) {

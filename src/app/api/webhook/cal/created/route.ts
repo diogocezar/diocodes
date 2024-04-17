@@ -10,29 +10,30 @@ export const POST = async (req: Request) => {
   try {
     const secret = process.env.WEBHOOK_CAL_SECRET;
     const signature = req.headers.get("X-Cal-Signature-256");
-    const payload = await req.json();
-    if (!secret || !signature || !payload)
+    const data = await req.json();
+    if (!secret || !signature || !data)
       throw new Error("Missing secret, payload or signature.");
     var hmacDigest = crypto
       .createHmac("sha256", secret)
-      .update(JSON.stringify(payload))
+      .update(JSON.stringify(data))
       .digest("hex");
     logger.info(
-      JSON.stringify({ secret, signature, hmacDigest, payload }, null, 2),
+      JSON.stringify({ secret, signature, hmacDigest, data }, null, 2),
     );
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
+    const { payload } = data;
     const booking: TypeBooking = {
-      externalId: payload.payload.bookingId,
-      externalEventId: payload.payload.eventTypeId,
-      hostEmail: payload.payload.organizer.email,
-      attendeeName: payload.payload.attendees[0].name,
-      attendeeEmail: payload.payload.attendees[0].email,
-      status: payload.payload.status,
-      requestMessage: payload.payload.responses["como-posso-ajudar"],
-      startTime: payload.payload.startTime,
-      endTime: payload.payload.endTime,
+      externalId: payload.bookingId,
+      externalEventId: payload.eventTypeId,
+      hostEmail: payload.organizer.email,
+      attendeeName: payload.attendees[0].name,
+      attendeeEmail: payload.attendees[0].email,
+      status: payload.status,
+      requestMessage: payload.responses["como-posso-ajudar"] || "",
+      startTime: payload.startTime,
+      endTime: payload.endTime,
     };
     logger.info("Booking", JSON.stringify(booking, null, 2));
     await upsertMentoringByBooking([booking]);

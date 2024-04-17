@@ -30,7 +30,7 @@ export default async function AvaliationAverage() {
         </div>
       </CardContent>
       <CardFooter>
-        <CardDescription>Nota {result}</CardDescription>
+        <CardDescription>Nota {result.toFixed(2)}</CardDescription>
       </CardFooter>
     </Card>
   );

@@ -26,7 +26,7 @@ export const formatExternalMessage = (row: any) => {
             {row.getValue("externalMessage")}
           </div>
         </TooltipTrigger>
-        <TooltipContent className="w-[300px] bg-background-dark text-xs">
+        <TooltipContent className="w-[300px] bg-background-dark text-foreground text-xs">
           <p>{row.getValue("externalMessage")}</p>
         </TooltipContent>
       </Tooltip>

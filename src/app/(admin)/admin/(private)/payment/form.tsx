@@ -29,7 +29,7 @@ import { QUERY_KEY } from "@/contants/query-key";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { SchemaPayment } from "@/schemas/schema-payment";
 import { useGetPerson } from "@/hooks/use-get-person";
-import { useGetMentoring } from "@/hooks/use-get-mentoring";
+import { useGetMentoringPro } from "@/hooks/use-get-mentoring";
 
 export function PaymentForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,7 @@ export function PaymentForm() {
   const selectedItem: any = usePaymentState((state) => state.selectedItem);
   const queryClient = useQueryClient();
   const { person, isLoadingPerson } = useGetPerson();
-  const { mentoring, isLoadingMentoring } = useGetMentoring();
+  const { mentoring, isLoadingMentoring } = useGetMentoringPro();
   const url = "/admin/payment";
   const form = useForm<z.infer<typeof SchemaPayment>>({
     resolver: zodResolver(SchemaPayment),
