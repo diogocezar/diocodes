@@ -159,6 +159,7 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Configurar os testes para database;
 - [x] Salvar pagamentos no webhook da stripe;
 - [x] Criar crud de pagamentos;
+- [ ] Enviar avaliação assim que a mentoria iniciar via webhook do Cal.com;
 - [ ] Nos pagamentos, trazer apenas as mentorias que são do tipo PRO;
 - [ ] Nos pagamentos, trazer apenas as pessoas que estão em mentorias do tipo PRO;
 - [ ] Arredondar a nota da avaliação no dashboard;
