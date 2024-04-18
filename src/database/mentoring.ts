@@ -163,6 +163,7 @@ export const getAllProMentoring = async (): Promise<Mentoring[]> => {
     return await prisma.mentoring.findMany({
       where: {
         removedAt: null,
+        externalStatus: "ACCEPTED",
         externalEventId: CAL.MENTORING_PRO,
       },
       include: {

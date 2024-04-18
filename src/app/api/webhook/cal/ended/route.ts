@@ -4,6 +4,7 @@ import { EmailAvaliation } from "#/emails/emails/email-avaliation";
 import { Resend } from "resend";
 import { EMAIL } from "@/contants/email";
 import { getMentoring } from "@/database/mentoring";
+import { createInvite } from "@/database/invite";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -57,7 +58,16 @@ export const POST = async (req: Request) => {
     logger.info("Mentoring", JSON.stringify(mentoring, null, 2));
     if (!mentoring) throw new Error("Mentoring not found");
     if (mentoring) await sendInvite(mentoring);
-    return new Response(JSON.stringify({ payload }, null, 2), { status: 200 });
+    logger.info("Invite Sent");
+    const invite = await createInvite({
+      createdAt: new Date(),
+      mentoringId: mentoring.id,
+    } as any);
+    logger.info("Invite Created", JSON.stringify(invite, null, 2));
+    return new Response(
+      JSON.stringify({ payload, mentoring, invite }, null, 2),
+      { status: 200 },
+    );
   } catch (error) {
     logger.error(error);
     return new Response(JSON.stringify({ error }), { status: 500 });

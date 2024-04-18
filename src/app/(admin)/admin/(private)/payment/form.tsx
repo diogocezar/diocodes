@@ -28,8 +28,9 @@ import { SheetForm } from "@/components/containers/admin/shared/sheet-form";
 import { QUERY_KEY } from "@/contants/query-key";
 import { dispatchError, dispatchSuccess } from "@/lib/toast";
 import { SchemaPayment } from "@/schemas/schema-payment";
-import { useGetPerson } from "@/hooks/use-get-person";
+import { useGetPersonPro } from "@/hooks/use-get-person";
 import { useGetMentoringPro } from "@/hooks/use-get-mentoring";
+import { PRICE } from "@/contants/price";
 
 export function PaymentForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,7 @@ export function PaymentForm() {
   const setIsOpenForm = usePaymentState((state) => state.setIsOpenForm);
   const selectedItem: any = usePaymentState((state) => state.selectedItem);
   const queryClient = useQueryClient();
-  const { person, isLoadingPerson } = useGetPerson();
+  const { person, isLoadingPerson } = useGetPersonPro();
   const { mentoring, isLoadingMentoring } = useGetMentoringPro();
   const url = "/admin/payment";
   const form = useForm<z.infer<typeof SchemaPayment>>({
@@ -48,7 +49,7 @@ export function PaymentForm() {
   const setValue = form.setValue;
 
   const bootstrap = useCallback(() => {
-    setValue("amount", selectedItem?.amount || 0);
+    setValue("amount", selectedItem?.amount || PRICE.MENTORING_PRO);
     setValue("personId", selectedItem?.person?.id || null);
     setValue("mentoringId", selectedItem?.mentoring?.id || null);
   }, [setValue, selectedItem]);
@@ -95,7 +96,7 @@ export function PaymentForm() {
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <Input placeholder="Valor" {...field} />
                   </FormControl>

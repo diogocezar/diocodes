@@ -259,6 +259,13 @@ export const formatNormalDate = (row: any, name: string) => {
   return new Date(row.getValue(name)).toLocaleDateString("pt-BR");
 };
 
+export const formatMentoringDate = (row: any) => {
+  const { mentoring } = row.original;
+  if (mentoring)
+    return new Date(mentoring.startTime).toLocaleDateString("pt-BR");
+  return "N/A";
+};
+
 export const formatTags = (row: any) => {
   const { original } = row;
   const { avaliationTags } = original;

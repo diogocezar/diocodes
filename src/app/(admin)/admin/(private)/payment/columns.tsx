@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TypePayment } from "@/types/type-payment";
 import {
   formatCreatedAt,
+  formatMentoringDate,
   formatNameEmailWithAvatar,
   formatNormalDate,
   formatRowValue,
@@ -15,6 +16,7 @@ export const columnsNames = [
   { id: "select", name: "select" },
   { id: "name", name: "Nome" },
   { id: "amount", name: "Valor" },
+  { id: "dateMentoring", name: "Data da Mentoria" },
   { id: "date", name: "Data do Pagamento" },
   { id: "createdAt", name: "Criado em" },
 ];
@@ -45,6 +47,12 @@ export const columns = (isLoading: boolean): ColumnDef<TypePayment>[] => {
       cell: ({ row }) => (
         <div>{formatCurrency(formatRowValue(row, "amount"))}</div>
       ),
+    },
+    {
+      accessorKey: "dateMentoring",
+      accessorFn: (row) => row?.date,
+      header: ({ column }) => formatHeader("Data da Mentoria", column),
+      cell: ({ row }) => <div>{formatMentoringDate(row)}</div>,
     },
     {
       accessorKey: "date",

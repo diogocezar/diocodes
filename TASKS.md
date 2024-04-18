@@ -1,4 +1,4 @@
-# ✅Tarefas do Projeto
+# ✅ Tarefas do Projeto
 
 Neste arquivo estão as tarefas que foram realizadas durante a contrução do projeto.
 
@@ -166,7 +166,9 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Hover da mensagem com cor sem contraste;
 - [x] Remover agendamentos duplicados;
 - [x] Nos pagamentos, trazer apenas as mentorias que são do tipo PRO;
-- [ ] Trazer o preço padrão como valor do pagamento;
+- [x] Trazer o preço padrão como valor do pagamento;
+- [x] Incluir campo com data da mentoria no pagamento;
+- [ ] Remover as pessoas duplicadas;
 - [ ] Nos pagamentos, trazer apenas as pessoas que estão em mentorias do tipo PRO;
 - [ ] Enviar e-mail também para quem pagou a mentoria;
 - [ ] Trazer as avaliações mais recentes primeiro;

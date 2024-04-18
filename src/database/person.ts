@@ -1,6 +1,7 @@
 import prisma from "@/database/client";
 import { Person } from "@prisma/client";
 import { logger } from "@/lib/logger";
+import { CAL } from "@/contants/cal";
 
 export const upsertPerson = async (person: Person) => {
   try {
@@ -71,6 +72,27 @@ export const getAllPersons = async (): Promise<Person[]> => {
       where: { removedAt: null },
       orderBy: { name: "asc" },
     });
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
+export const getAllPersonsPro = async (): Promise<Person[]> => {
+  try {
+    const mentoringPro = await prisma.mentoring.findMany({
+      where: {
+        removedAt: null,
+        externalStatus: "ACCEPTED",
+        externalEventId: CAL.MENTORING_PRO,
+      },
+      include: {
+        attendee: true,
+      },
+      orderBy: { startTime: "desc" },
+    });
+    // return without duplicated persons
+    return mentoringPro.map((mentoring: any) => mentoring.attendee);
   } catch (error) {
     logger.error(error);
   }
