@@ -50,8 +50,8 @@ export const POST = async (req: Request) => {
     if (signature !== hmacDigest) {
       return new Response("Unauthorized", { status: 401 });
     }
-    const { payload } = data;
-    const externalId = payload.bookingId;
+    const { id } = data;
+    const externalId = id;
     logger.info("External ID", externalId);
     if (!externalId) throw new Error("Missing external ID");
     const mentoring = await getMentoring(externalId);
@@ -64,10 +64,9 @@ export const POST = async (req: Request) => {
       mentoringId: mentoring.id,
     } as any);
     logger.info("Invite Created", JSON.stringify(invite, null, 2));
-    return new Response(
-      JSON.stringify({ payload, mentoring, invite }, null, 2),
-      { status: 200 },
-    );
+    return new Response(JSON.stringify({ data, mentoring, invite }, null, 2), {
+      status: 200,
+    });
   } catch (error) {
     logger.error(error);
     return new Response(JSON.stringify({ error }), { status: 500 });
