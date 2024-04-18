@@ -91,8 +91,19 @@ export const getAllPersonsPro = async (): Promise<Person[]> => {
       },
       orderBy: { startTime: "desc" },
     });
-    // return without duplicated persons
-    return mentoringPro.map((mentoring: any) => mentoring.attendee);
+
+    const uniqueAttendees = new Set<string>();
+    const nonDuplicatedPersons: Person[] = [];
+
+    mentoringPro.forEach((mentoring: any) => {
+      const attendee = mentoring.attendee;
+      if (!uniqueAttendees.has(attendee.id)) {
+        uniqueAttendees.add(attendee.id);
+        nonDuplicatedPersons.push(attendee);
+      }
+    });
+
+    return nonDuplicatedPersons;
   } catch (error) {
     logger.error(error);
   }
