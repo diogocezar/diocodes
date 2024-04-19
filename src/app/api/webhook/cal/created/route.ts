@@ -28,7 +28,7 @@ export const POST = async (req: Request) => {
       attendeeName: payload.attendees[0].name,
       attendeeEmail: payload.attendees[0].email,
       status: payload.status,
-      requestMessage: payload.responses["como-posso-ajudar"] || "",
+      requestMessage: payload.responses["como-posso-ajudar"].value || "",
       startTime: payload.startTime,
       endTime: payload.endTime,
     };
