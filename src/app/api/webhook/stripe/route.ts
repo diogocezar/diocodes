@@ -5,6 +5,7 @@ import { logger } from "@/lib/logger";
 import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
 import { createPayment } from "@/database/payment";
 import { upsertPerson } from "@/database/person";
+import { createWebhookLog } from "@/database/webhook-log";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -87,6 +88,11 @@ export const POST = async (req: Request) => {
       const payload = event.data.object;
       logger.info("Payment intent succeeded");
       logger.info(JSON.stringify(payload, null, 2));
+      logger.info("Creating webhook log");
+      await createWebhookLog({
+        type: "STRIPE_PAYMENT_INTENT_SUCCEEDED",
+        payload: JSON.stringify(payload),
+      } as any);
       const { amount, customer } = payload;
       if (!amount || !customer) {
         logger.error("Missing amount or customer.");

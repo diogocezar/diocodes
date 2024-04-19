@@ -1,10 +1,11 @@
 import { logger } from "@/lib/logger";
-import crypto from "crypto";
 import { EmailAvaliation } from "#/emails/emails/email-avaliation";
 import { Resend } from "resend";
 import { EMAIL } from "@/contants/email";
 import { getMentoring } from "@/database/mentoring";
 import { createInvite } from "@/database/invite";
+import { createWebhookLog } from "@/database/webhook-log";
+import { authCalWebhook } from "@/lib/auth-webhook";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -38,20 +39,15 @@ export const POST = async (req: Request) => {
     const secret = process.env.WEBHOOK_CAL_SECRET;
     const signature = req.headers.get("X-Cal-Signature-256");
     const data = await req.json();
-    if (!secret || !signature || !data)
-      throw new Error("Missing secret, data or signature.");
-    var hmacDigest = crypto
-      .createHmac("sha256", secret)
-      .update(JSON.stringify(data))
-      .digest("hex");
-    logger.info(
-      JSON.stringify({ secret, signature, hmacDigest, data }, null, 2),
-    );
-    if (signature !== hmacDigest) {
+    if (!authCalWebhook(secret, signature, data)) {
       return new Response("Unauthorized", { status: 401 });
     }
-    const { id } = data;
-    const externalId = id;
+    logger.info("Creating webhook log");
+    await createWebhookLog({
+      type: "CAL_MEETING_ENDED",
+      payload: JSON.stringify(data),
+    } as any);
+    const { id: externalId } = data;
     logger.info("External ID", externalId);
     if (!externalId) throw new Error("Missing external ID");
     const mentoring = await getMentoring(externalId);

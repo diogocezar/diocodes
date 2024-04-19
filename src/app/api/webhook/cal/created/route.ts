@@ -1,7 +1,8 @@
 import { logger } from "@/lib/logger";
-import crypto from "crypto";
 import { TypeBooking } from "@/types/type-booking";
 import { upsertMentoringByBooking } from "@/database/mentoring";
+import { createWebhookLog } from "@/database/webhook-log";
+import { authCalWebhook } from "@/lib/auth-webhook";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -11,19 +12,15 @@ export const POST = async (req: Request) => {
     const secret = process.env.WEBHOOK_CAL_SECRET;
     const signature = req.headers.get("X-Cal-Signature-256");
     const data = await req.json();
-    if (!secret || !signature || !data)
-      throw new Error("Missing secret, payload or signature.");
-    var hmacDigest = crypto
-      .createHmac("sha256", secret)
-      .update(JSON.stringify(data))
-      .digest("hex");
-    logger.info(
-      JSON.stringify({ secret, signature, hmacDigest, data }, null, 2),
-    );
-    if (signature !== hmacDigest) {
+    if (!authCalWebhook(secret, signature, data)) {
       return new Response("Unauthorized", { status: 401 });
     }
     const { payload } = data;
+    logger.info("Creating webhook log");
+    await createWebhookLog({
+      type: "CAL_BOOKING_CREATED",
+      payload: JSON.stringify(data),
+    } as any);
     const booking: TypeBooking = {
       externalId: payload.bookingId,
       externalEventId: payload.eventTypeId,

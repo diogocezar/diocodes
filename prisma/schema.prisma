@@ -110,3 +110,12 @@ model Payment {
   updatedAt   DateTime?
   removedAt   DateTime?
 }
+
+model WebhookLog {
+  id        String    @id @default(uuid()) @map("_id")
+  type      String
+  payload   Json
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  removedAt DateTime?
+}

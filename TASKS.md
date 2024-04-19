@@ -168,11 +168,12 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Nos pagamentos, trazer apenas as mentorias que são do tipo PRO;
 - [x] Trazer o preço padrão como valor do pagamento;
 - [x] Incluir campo com data da mentoria no pagamento;
-- [ ] Remover as pessoas duplicadas;
-- [ ] Nos pagamentos, trazer apenas as pessoas que estão em mentorias do tipo PRO;
+- [x] Remover as pessoas duplicadas;
+- [x] Nos pagamentos, trazer apenas as pessoas que estão em mentorias do tipo PRO;
 - [ ] Enviar e-mail também para quem pagou a mentoria;
 - [ ] Trazer as avaliações mais recentes primeiro;
 - [ ] Trazer os convites mais recentes primeiro;
 - [ ] Colocar screenshoots das telas no Readme;
 - [ ] Colocar estatísticas do dashboard na página principal;
+- [ ] Organizar implementações dos Webhooks;
 - [ ] Ajustar todas as tipagens;
