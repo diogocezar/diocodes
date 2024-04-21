@@ -1,6 +1,7 @@
 import { RESEND } from "@/contants/resend";
 import { getAllPersons } from "@/database/person";
 import { logger } from "@/lib/logger";
+import { getErrorMessage } from "@/lib/utils";
 import { createContact } from "@/services/resend";
 
 export const revalidate = 0;
@@ -15,7 +16,7 @@ export const GET = async () => {
     });
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
-    logger.error("[GET] api/admin/person/sync", error);
+    logger.error("[GET] api/admin/person/sync", getErrorMessage(error));
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

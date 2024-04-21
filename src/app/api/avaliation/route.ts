@@ -3,6 +3,7 @@ import {
   getAvaliationByMentoring,
 } from "@/database/avaliation";
 import { logger } from "@/lib/logger";
+import { getErrorMessage, transformMeta } from "@/lib/utils";
 import { sendAvaliationNotificationEmail } from "@/services/resend";
 
 export const revalidate = 0;
@@ -20,11 +21,11 @@ export const POST = async (req: Request) => {
     const result = await createAvaliation(data);
     if (result) {
       await sendAvaliationNotificationEmail(data);
-      logger.info("[POST] api/avaliation", result);
+      logger.info("[POST] api/avaliation", transformMeta(result));
       return new Response(JSON.stringify(result), { status: 201 });
     }
   } catch (error) {
-    logger.error("[POST] api/avaliation", error);
+    logger.error("[POST] api/avaliation", getErrorMessage(error));
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

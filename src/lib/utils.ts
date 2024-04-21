@@ -51,3 +51,12 @@ export function formatCurrency(value: number) {
     currency: "BRL",
   }).format(value);
 }
+
+export function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return { meta: { error: error.message } };
+  return String(error);
+}
+
+export function transformMeta(data: Object) {
+  return { meta: data };
+}

@@ -126,4 +126,5 @@ model Logger {
   source    String
   level     String
   message   String
+  meta      Json?
 }
