@@ -3,37 +3,39 @@ import { Tag as TagIcon } from "@phosphor-icons/react";
 import {
   columns,
   columnsNames,
-} from "@/app/(admin)/admin/(private)/tag/columns";
+} from "@/app/(admin)/admin/(private)/webhook-log/columns";
 import * as React from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { TagForm } from "@/app/(admin)/admin/(private)/tag/form";
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
-import { useTagState } from "@/hooks/use-tag-state";
+import { useWebhookLogState } from "@/hooks/use-webhook-log-state";
 import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
 import { useMaxTagUsed } from "@/hooks/use-get-tag";
 
-export default function AdminTagPage() {
-  const setIsOpenForm = useTagState((state) => state.setIsOpenForm);
-  const isOpenConfirmDelete = useTagState((state) => state.isOpenConfirmDelete);
-  const setIsOpenConfirmDelete = useTagState(
+export default function AdminWebhookLogPage() {
+  const setIsOpenForm = useWebhookLogState((state) => state.setIsOpenForm);
+  const isOpenConfirmDelete = useWebhookLogState(
+    (state) => state.isOpenConfirmDelete,
+  );
+  const setIsOpenConfirmDelete = useWebhookLogState(
     (state) => state.setIsOpenConfirmDelete,
   );
-  const setSelectedItem = useTagState((state) => state.setSelectedItem);
-  const selectedItem = useTagState((state) => state.selectedItem);
-  const setTable = useTagState((state) => state.setTable);
-  const table = useTagState((state) => state.table);
+  const setSelectedItem = useWebhookLogState((state) => state.setSelectedItem);
+  const selectedItem = useWebhookLogState((state) => state.selectedItem);
+  const setTable = useWebhookLogState((state) => state.setTable);
+  const table = useWebhookLogState((state) => state.table);
   const { maxTagUsed } = useMaxTagUsed();
 
-  const URL = "/admin/tag";
+  const URL = "/admin/webhook";
 
   const { handleConfirmDelete, handleDelete, handleEdit, handleCreate } =
     useControls({
       url: URL,
-      queryKey: QUERY_KEY.ADMIN_TAG,
+      queryKey: QUERY_KEY.ADMIN_WEBHOOK,
       setSelectedItem,
       setIsOpenConfirmDelete,
       selectedItem,
@@ -42,14 +44,14 @@ export default function AdminTagPage() {
     });
 
   const { data, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.ADMIN_TAG],
+    queryKey: [QUERY_KEY.ADMIN_WEBHOOK],
     queryFn: async () => {
       const { data } = await api.get(URL);
       return data;
     },
   });
 
-  const dataTableColumns = columns(isLoading, maxTagUsed);
+  const dataTableColumns = columns(isLoading);
 
   return (
     <>

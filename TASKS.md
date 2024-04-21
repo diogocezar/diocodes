@@ -175,9 +175,12 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Passar todos os envios de email para novo serviço;
 - [x] Salvar todos os Logs no MongoDB;
 - [x] Incluir logs em todos os erros do sistema;
-- [ ] Vizualização de logs;
-- [ ] Vizualização de webhooks;
-- [ ] Enviar e-mail também para quem pagou a mentoria;
+- [x] Vizualização de logs;
+- [x] Vizualização de webhooks;
+- [x] Enviar e-mail também para quem pagou a mentoria;
+- [ ] Remover opções de criar logs ou webhooks;
+- [ ] Botão de copiar o payload JSON dos Webhooks;
+- [ ] Filtrar logs e webhooks pela data de criação;
 - [ ] Trazer as avaliações mais recentes primeiro;
 - [ ] Trazer os convites mais recentes primeiro;
 - [ ] Colocar screenshoots das telas no Readme;

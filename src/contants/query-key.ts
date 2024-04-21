@@ -6,4 +6,6 @@ export const QUERY_KEY = {
   ADMIN_AVALIATION: "admin/avaliation",
   ADMIN_INVITE: "admin/invite",
   ADMIN_PAYMENT: "admin/payment",
+  ADMIN_WEBHOOK: "admin/webhook",
+  ADMIN_LOG: "admin/log",
 };

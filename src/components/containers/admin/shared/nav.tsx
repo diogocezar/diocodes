@@ -15,6 +15,8 @@ import {
   Users,
   EnvelopeSimple,
   PiggyBank,
+  Binoculars,
+  WebhooksLogo,
 } from "@phosphor-icons/react";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -281,6 +283,56 @@ export default function Nav() {
                   </TooltipTrigger>
                   {!isOpened && (
                     <TooltipContent side="right">Usuários</TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            </li>
+            <li>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <Link
+                      href="/admin/log"
+                      className={clsx(
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        pathname === "user"
+                          ? "text-background"
+                          : "text-foreground",
+                        pathname === "user" &&
+                          "bg-pink hover:bg-background hover:text-foreground",
+                      )}
+                    >
+                      <Binoculars size={18} />
+                      {isOpened && "Logs"}
+                    </Link>
+                  </TooltipTrigger>
+                  {!isOpened && (
+                    <TooltipContent side="right">Logs</TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            </li>
+            <li>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <Link
+                      href="/admin/webhook-log"
+                      className={clsx(
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        pathname === "user"
+                          ? "text-background"
+                          : "text-foreground",
+                        pathname === "user" &&
+                          "bg-pink hover:bg-background hover:text-foreground",
+                      )}
+                    >
+                      <WebhooksLogo size={18} />
+                      {isOpened && "Webhook Logs"}
+                    </Link>
+                  </TooltipTrigger>
+                  {!isOpened && (
+                    <TooltipContent side="right">Webhook Logs</TooltipContent>
                   )}
                 </Tooltip>
               </TooltipProvider>

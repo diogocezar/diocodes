@@ -8,6 +8,7 @@ import EmailAvaliation from "#/emails/emails/email-avaliation";
 import EmailAvaliationCreated from "#/emails/emails/email-avaliation-created";
 import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
 import EmailReminder from "#/emails/emails/email-reminder";
+import { getErrorMessage } from "@/lib/utils";
 
 export type TypeCreateContact = {
   person: Person[];
@@ -34,7 +35,9 @@ export const createContact = async ({
       unsubscribed: false,
       audienceId: audienceId,
     });
-    logger.info(`Result for ${item.email}: ${JSON.stringify(result, null, 2)}`);
+    logger.info(
+      `[CREATE_CONTACT] result for ${item.email} => ${JSON.stringify(result, null, 2)}`,
+    );
   }
 };
 
@@ -53,7 +56,7 @@ export const sendEmail = async ({
     };
     await resend.emails.send(config);
   } catch (error) {
-    logger.error(error);
+    logger.error("[SEND_EMAIL]", getErrorMessage(error));
   }
 };
 
@@ -118,20 +121,15 @@ export const sendReminderEmail = async (
 ) => {
   const { startTime, attendee } = mentoring;
   const { name, email } = attendee;
-  const to = [email, EMAIL.COPY_EMAIL];
-  try {
-    const config = {
-      from: EMAIL.FROM,
-      to,
-      subject: EMAIL.SUBJECT_INVITE,
-      react: EmailReminder({
-        attendee: name,
-        startTime,
-        link: meetingLink,
-      }) as React.ReactElement,
-    };
-    await resend.emails.send(config);
-  } catch (error) {
-    logger.error(error);
-  }
+  const configSendEmail: TypeSendEmail = {
+    from: EMAIL.FROM,
+    to: [email, EMAIL.COPY_EMAIL],
+    subject: EMAIL.SUBJECT_INVITE,
+    reactTemplate: EmailReminder({
+      attendee: name,
+      startTime,
+      link: meetingLink,
+    }),
+  };
+  sendEmail(configSendEmail);
 };

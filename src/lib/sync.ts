@@ -3,6 +3,7 @@ import { upsertMentoringByBooking } from "@/database/mentoring";
 import { api as cal } from "@/services/cal";
 import { logger } from "./logger";
 import { TypeBookingCal, TypeBooking } from "@/types/type-booking";
+import { transformMeta } from "./utils";
 
 const filterValidBooking = (mentoring: TypeBookingCal[]) =>
   mentoring.filter(
@@ -49,45 +50,35 @@ export const upsert = async (booking: TypeBooking[]) => {
 };
 
 export const sync = async ({ debug = false }: { debug: boolean }) => {
-  debug && logger.info("🚀 Starting Sync");
+  debug && logger.info("[SYNC] starting sync");
 
-  debug && logger.info("Getting Bookings from Cal API");
+  debug && logger.info("[SYNC] getting bookings from cal api");
   const result = await cal.get("/bookings");
   const { data } = result;
 
-  debug && logger.info(`Result data -> ${(JSON.stringify(data), null, 2)}`);
+  debug && logger.info("[SYNC] result data", transformMeta(data));
 
   const { bookings } = data;
 
-  debug && logger.info("Filtering valid bookings");
+  debug && logger.info("[SYNC] filtering valid bookings");
   const validBookings = filterValidBooking(bookings);
   debug &&
-    logger.info(
-      `Filtering Response -> ${JSON.stringify(validBookings, null, 2)}`,
-    );
+    logger.info("[SYNC] filtering response", transformMeta(validBookings));
 
-  debug && logger.info("Formating response");
+  debug && logger.info("[SYNC] formating response");
   const response = formatResponse(validBookings);
-  debug &&
-    logger.info(`Formated Response -> ${JSON.stringify(response, null, 2)}`);
-
-  debug && logger.info("Ordering response");
+  debug && logger.info("[SYNC] formated response", transformMeta(response));
+  debug && logger.info("[SYNC] ordering response");
   const ordered = sortByDate(response);
-  debug &&
-    logger.info(`Ordered Response -> ${JSON.stringify(ordered, null, 2)}`);
-
-  debug && logger.info("Removing duplicates");
+  debug && logger.info("[SYNC] ordered response", transformMeta(ordered));
+  debug && logger.info("[SYNC] removing duplicates");
   const withoutDuplicates = removeDuplicates(ordered);
   debug &&
-    logger.info(
-      `Without duplicates -> ${JSON.stringify(withoutDuplicates, null, 2)}`,
-    );
-  debug && logger.info("Saving on Database");
+    logger.info("[SYNC] without duplicates", transformMeta(withoutDuplicates));
+  debug && logger.info("[SYNC] saving on database");
   const upsertResult = await upsert(withoutDuplicates);
-  debug &&
-    logger.info(`Save result -> ${JSON.stringify(upsertResult, null, 2)}`);
-
-  debug && logger.info("🚀 Finishing Sync");
+  debug && logger.info("[SYNC] save result", transformMeta(upsertResult));
+  debug && logger.info("[SYNC] finishing sync");
 
   return upsertResult;
 };

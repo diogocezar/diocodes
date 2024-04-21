@@ -120,11 +120,14 @@ model WebhookLog {
   removedAt DateTime?
 }
 
-model Logger {
-  id        String   @id @default(uuid()) @map("_id")
-  timestamp DateTime @default(now())
+model Log {
+  id        String    @id @default(uuid()) @map("_id")
+  timestamp DateTime  @default(now())
   source    String
   level     String
   message   String
   meta      Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  removedAt DateTime?
 }

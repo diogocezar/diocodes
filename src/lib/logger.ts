@@ -1,6 +1,6 @@
 import Transport from "winston-transport";
 import winston from "winston";
-import { createLogger } from "@/database/logger";
+import { createLog } from "@/database/logger";
 const { combine, timestamp, json, printf } = winston.format;
 
 class SaveMongoTransport extends Transport {
@@ -8,7 +8,7 @@ class SaveMongoTransport extends Transport {
     super(opts);
   }
   log(info: any, callback: Function) {
-    createLogger(info);
+    createLog(info);
     callback();
   }
 }
