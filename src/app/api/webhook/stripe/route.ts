@@ -1,17 +1,16 @@
-import Stripe from "stripe";
-import { Resend } from "resend";
-import { EMAIL } from "@/contants/email";
 import { logger } from "@/lib/logger";
-import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
 import { createPayment } from "@/database/payment";
 import { upsertPerson } from "@/database/person";
 import { createWebhookLog } from "@/database/webhook-log";
+import { sendPaymentSucceededEmail } from "@/services/resend";
+import { authStripeWebhook } from "@/lib/auth-webhook";
+import { constructEvent, getCustomer } from "@/services/stripe";
+import Stripe from "stripe";
+import { WEBHOOK } from "@/contants/webhook";
+import { STRIPE } from "@/contants/stripe";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
-const resend = new Resend(process.env.API_RESEND);
 
 const savePayment = async (payload: {
   name: string;
@@ -50,47 +49,19 @@ const savePayment = async (payload: {
   }
 };
 
-const sendPaymentSucceeded = async (payload: {
-  name: string;
-  email: string;
-  phone: string;
-  amount: number;
-}) => {
-  const { name, email, phone, amount } = payload;
-  try {
-    const config = {
-      from: EMAIL.FROM,
-      to: [EMAIL.COPY_EMAIL],
-      subject: EMAIL.SUBJECT_PAYMENT_SUCCEEDED,
-      react: EmailPaymentSucceeded({
-        name,
-        email,
-        phone,
-        amount,
-      }) as React.ReactElement,
-    };
-    await resend.emails.send(config);
-    logger.info("Email sent.");
-  } catch (error) {
-    logger.error(error);
-  }
-};
-
 export const POST = async (req: Request) => {
   try {
-    const secret = process.env.WEBHOOK_STRIPE_SECRET;
-    const signature = req.headers.get("stripe-signature");
-    const payload = await req.text();
-    if (!secret || !signature || !payload)
-      throw new Error("Missing secret, payload or signature.");
-    const event = stripe.webhooks.constructEvent(payload, signature, secret);
-    if (event.type === "payment_intent.succeeded") {
-      const payload = event.data.object;
+    if (!(await authStripeWebhook(req))) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+    const event = await constructEvent(req);
+    if (event.type === STRIPE.PAYMENT_INTENT_SUCCEEDED) {
+      const payload: any = event.data.object;
       logger.info("Payment intent succeeded");
       logger.info(JSON.stringify(payload, null, 2));
       logger.info("Creating webhook log");
       await createWebhookLog({
-        type: "STRIPE_PAYMENT_INTENT_SUCCEEDED",
+        type: WEBHOOK.STRIPE_PAYMENT_INTENT_SUCCEEDED,
         payload: JSON.stringify(payload),
       } as any);
       const { amount, customer } = payload;
@@ -98,9 +69,9 @@ export const POST = async (req: Request) => {
         logger.error("Missing amount or customer.");
         return;
       }
-      const stripeCustomer: Stripe.Customer = (await stripe.customers.retrieve(
+      const stripeCustomer: Stripe.Customer = await getCustomer(
         customer.toString(),
-      )) as Stripe.Customer;
+      );
       logger.info("Stripe customer");
       logger.info(JSON.stringify(stripeCustomer, null, 2));
       const { name, phone, email } = stripeCustomer;
@@ -109,7 +80,12 @@ export const POST = async (req: Request) => {
         return;
       }
       const newAmount = amount / 100;
-      await sendPaymentSucceeded({ name, email, phone, amount: newAmount });
+      await sendPaymentSucceededEmail({
+        name,
+        email,
+        phone,
+        amount: newAmount,
+      });
       await savePayment({ name, email, phone, amount: newAmount });
     }
     return new Response(JSON.stringify({ event }), { status: 200 });

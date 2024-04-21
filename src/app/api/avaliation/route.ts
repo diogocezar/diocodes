@@ -1,37 +1,11 @@
-import EmailAvaliationCreated from "#/emails/emails/email-avaliation-created";
-import { EMAIL } from "@/contants/email";
 import {
   createAvaliation,
   getAvaliationByMentoring,
 } from "@/database/avaliation";
-import { logger } from "@/lib/logger";
-import { Resend } from "resend";
+import { sendAvaliationNotificationEmail } from "@/services/resend";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
-
-const resend = new Resend(process.env.API_RESEND);
-
-const sendAvaliationNotification = async (avaliation: any) => {
-  const { mentoring, rating, avaliationTags, comment } = avaliation;
-  try {
-    const config = {
-      from: EMAIL.FROM,
-      to: [EMAIL.COPY_EMAIL],
-      subject: EMAIL.SUBJECT_AVALIATION_SENT,
-      react: EmailAvaliationCreated({
-        attendee: mentoring.attendee.name,
-        startTime: mentoring.startTime,
-        rating,
-        tags: avaliationTags.map((tag: any) => tag.name),
-        comment,
-      }) as React.ReactElement,
-    };
-    await resend.emails.send(config);
-  } catch (error) {
-    logger.error(error);
-  }
-};
 
 export const POST = async (req: Request) => {
   const data = await req.json();
@@ -44,7 +18,7 @@ export const POST = async (req: Request) => {
       );
     const result = await createAvaliation(data);
     if (result) {
-      sendAvaliationNotification(data);
+      sendAvaliationNotificationEmail(data);
       return new Response(JSON.stringify(result), { status: 201 });
     }
   } catch (error) {

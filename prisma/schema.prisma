@@ -119,3 +119,11 @@ model WebhookLog {
   updatedAt DateTime?
   removedAt DateTime?
 }
+
+model Logger {
+  id        String   @id @default(uuid()) @map("_id")
+  timestamp DateTime @default(now())
+  level     String
+  message   String
+  meta      Json
+}

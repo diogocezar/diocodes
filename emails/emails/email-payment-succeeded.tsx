@@ -10,6 +10,7 @@ import {
   Font,
   Hr,
   Preview,
+  Button,
 } from "@react-email/components";
 import * as React from "react";
 import { Tailwind } from "@react-email/tailwind";
@@ -42,7 +43,7 @@ export const EmailPaymentSucceeded = ({
         />
       </Head>
       <Preview>
-        Tivemos um novo pagamento de {formatCurrency(amount)} feito por {name}
+        Recebemos um pagamento de {formatCurrency(amount)} feito por {name}
       </Preview>
       <Tailwind>
         <Body className="mt-12">
@@ -55,7 +56,7 @@ export const EmailPaymentSucceeded = ({
             />
 
             <Heading className="mb-0 mt-8 text-3xl font-bold text-[#282a36]">
-              Novo pagamento de mentoria
+              Pagamento de Mentoria
             </Heading>
 
             <Section className="mt-8">
@@ -83,6 +84,15 @@ export const EmailPaymentSucceeded = ({
                   {formatCurrency(amount)}
                 </span>
               </Text>
+              <Text className="text-base leading-8 text-[#020817]">
+                🚀 Tudo certinho! Agora é só agendar a sua mentoria.
+              </Text>
+              <Button
+                href="https://diocodes.dev/payment/thanks"
+                className="mb-6 mt-4 rounded-full bg-[#ff79c6] px-6 py-4 text-[#f8f8f2]"
+              >
+                Agendar Mentoria
+              </Button>
             </Section>
             <Hr />
             <Text className="text-sm text-[#020817]">

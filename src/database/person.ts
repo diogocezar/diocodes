@@ -2,10 +2,12 @@ import prisma from "@/database/client";
 import { Person } from "@prisma/client";
 import { logger } from "@/lib/logger";
 import { CAL } from "@/contants/cal";
+import { createContact } from "@/services/resend";
+import { RESEND } from "@/contants/resend";
 
 export const upsertPerson = async (person: Person) => {
   try {
-    return await prisma.person.upsert({
+    const upsertedPerson = await prisma.person.upsert({
       where: { email: person.email },
       update: { ...person, updatedAt: new Date() },
       create: {
@@ -15,6 +17,11 @@ export const upsertPerson = async (person: Person) => {
         removedAt: null,
       },
     });
+    await createContact({
+      person: [upsertedPerson],
+      audienceId: RESEND.AUDIENCE_ID_GENERAL,
+    });
+    return upsertedPerson;
   } catch (error) {
     logger.error(error);
   }
@@ -31,13 +38,17 @@ export const createPerson = async (person: Person) => {
         data: { ...person, removedAt: null, updatedAt: new Date() },
       });
     }
-    return await prisma.person.create({
+    const createdPerson = await prisma.person.create({
       data: {
         ...person,
         createdAt: new Date(),
         updatedAt: null,
         removedAt: null,
       },
+    });
+    await createContact({
+      person: [createdPerson],
+      audienceId: RESEND.AUDIENCE_ID_GENERAL,
     });
   } catch (error) {
     logger.error(error);

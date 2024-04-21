@@ -170,6 +170,11 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Incluir campo com data da mentoria no pagamento;
 - [x] Remover as pessoas duplicadas;
 - [x] Nos pagamentos, trazer apenas as pessoas que estão em mentorias do tipo PRO;
+- [x] Criar serviço para resend;
+- [x] Ao criar uma pessoa, colocá-la na audiência;
+- [x] Passar todos os envios de email para novo serviço;
+- [ ] Salvar todos os Logs no MongoDB;
+- [ ] Vizualição de webhooks;
 - [ ] Enviar e-mail também para quem pagou a mentoria;
 - [ ] Trazer as avaliações mais recentes primeiro;
 - [ ] Trazer os convites mais recentes primeiro;
