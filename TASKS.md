@@ -173,8 +173,9 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Criar serviço para resend;
 - [x] Ao criar uma pessoa, colocá-la na audiência;
 - [x] Passar todos os envios de email para novo serviço;
-- [ ] Salvar todos os Logs no MongoDB;
-- [ ] Vizualição de webhooks;
+- [x] Salvar todos os Logs no MongoDB;
+- [ ] Vizualização de logs;
+- [ ] Vizualização de webhooks;
 - [ ] Enviar e-mail também para quem pagou a mentoria;
 - [ ] Trazer as avaliações mais recentes primeiro;
 - [ ] Trazer os convites mais recentes primeiro;

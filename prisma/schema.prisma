@@ -123,7 +123,7 @@ model WebhookLog {
 model Logger {
   id        String   @id @default(uuid()) @map("_id")
   timestamp DateTime @default(now())
+  source    String
   level     String
   message   String
-  meta      Json
 }

@@ -176,6 +176,9 @@ dependencies:
   winston:
     specifier: ^3.11.0
     version: 3.11.0
+  winston-transport:
+    specifier: ^4.7.0
+    version: 4.7.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
