@@ -9,8 +9,10 @@ export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 export const POST = async (req: Request) => {
+  logger.info("POST /webhook/cal/created");
   try {
     if (!(await authCalWebhook(req))) {
+      logger.info({ message: "Unauthorized", req });
       return new Response("Unauthorized", { status: 401 });
     }
     const data = await req.json();
