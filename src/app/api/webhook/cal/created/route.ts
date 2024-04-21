@@ -42,7 +42,7 @@ export const POST = async (req: Request) => {
     logger.info("Finished upsertMentoringByBooking");
     return new Response(JSON.stringify({ payload }), { status: 200 });
   } catch (error) {
-    logger.error(error);
+    logger.error("[POST] api/webhook/cal/created", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

@@ -1,23 +1,26 @@
 import { getMentoring } from "@/database/mentoring";
-import { NextRequest, NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 export const GET = async (
-  request: NextRequest,
+  _: Request,
   { params }: { params: { id: string } },
 ) => {
+  const id = params.id;
   try {
-    const id = params.id;
     const result = await getMentoring(id);
-    if (!result)
-      return new NextResponse(JSON.stringify({ founded: false }), {
+    if (!result) {
+      logger.info(`[GET] api/mentoring/${id}`, result);
+      return new Response(JSON.stringify({ founded: false }), {
         status: 200,
       });
-    return new NextResponse(JSON.stringify(result), { status: 200 });
+    }
+    return new Response(JSON.stringify(result), { status: 200 });
   } catch (error: any) {
-    return new NextResponse(JSON.stringify({ error: error?.message }), {
+    logger.error(`[GET] api/mentoring/${id}`, error);
+    return new Response(JSON.stringify({ error: error?.message }), {
       status: 500,
     });
   }

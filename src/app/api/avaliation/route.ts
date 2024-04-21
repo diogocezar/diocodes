@@ -2,6 +2,7 @@ import {
   createAvaliation,
   getAvaliationByMentoring,
 } from "@/database/avaliation";
+import { logger } from "@/lib/logger";
 import { sendAvaliationNotificationEmail } from "@/services/resend";
 
 export const revalidate = 0;
@@ -18,10 +19,12 @@ export const POST = async (req: Request) => {
       );
     const result = await createAvaliation(data);
     if (result) {
-      sendAvaliationNotificationEmail(data);
+      await sendAvaliationNotificationEmail(data);
+      logger.info("[POST] api/avaliation", result);
       return new Response(JSON.stringify(result), { status: 201 });
     }
   } catch (error) {
+    logger.error("[POST] api/avaliation", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

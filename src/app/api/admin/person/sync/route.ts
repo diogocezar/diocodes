@@ -15,7 +15,7 @@ export const GET = async () => {
     });
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
-    logger.error(error);
+    logger.error("[GET] api/admin/person/sync", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

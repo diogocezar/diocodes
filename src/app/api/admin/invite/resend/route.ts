@@ -1,4 +1,5 @@
 import { getMentoring } from "@/database/mentoring";
+import { logger } from "@/lib/logger";
 import { sendInviteEmail } from "@/services/resend";
 
 export const revalidate = 0;
@@ -12,6 +13,7 @@ export const POST = async (req: Request) => {
     if (mentoring) await sendInviteEmail(mentoring);
     return new Response(JSON.stringify({ success: true }), { status: 201 });
   } catch (error) {
+    logger.error("[POST] api/admin/invite/resend", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

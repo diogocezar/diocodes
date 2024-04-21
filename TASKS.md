@@ -174,6 +174,7 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Ao criar uma pessoa, colocá-la na audiência;
 - [x] Passar todos os envios de email para novo serviço;
 - [x] Salvar todos os Logs no MongoDB;
+- [x] Incluir logs em todos os erros do sistema;
 - [ ] Vizualização de logs;
 - [ ] Vizualização de webhooks;
 - [ ] Enviar e-mail também para quem pagou a mentoria;

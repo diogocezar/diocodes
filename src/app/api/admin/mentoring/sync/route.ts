@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 import { sync } from "@/lib/sync";
 
 export const revalidate = 0;
@@ -8,6 +9,7 @@ export const GET = async () => {
     const result = await sync({ debug: true });
     return new Response(JSON.stringify({ result }), { status: 200 });
   } catch (error) {
+    logger.error("[GET] api/admin/mentoring/sync", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

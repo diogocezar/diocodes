@@ -62,10 +62,12 @@ export const POST = async (req: Request) => {
       logger.info("Payment intent succeeded");
       logger.info(JSON.stringify(payload, null, 2));
       logger.info("Creating webhook log");
+
       await createWebhookLog({
         type: WEBHOOK.STRIPE_PAYMENT_INTENT_SUCCEEDED,
         payload: JSON.stringify(payload),
       } as any);
+
       const { amount, customer } = payload;
       if (!amount || !customer) {
         logger.error("Missing amount or customer.");
@@ -92,7 +94,7 @@ export const POST = async (req: Request) => {
     }
     return new Response(JSON.stringify({ event }), { status: 200 });
   } catch (error) {
-    logger.error(error);
+    logger.error("[POST] api/webhook/stripe", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };

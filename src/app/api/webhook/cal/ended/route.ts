@@ -39,7 +39,7 @@ export const POST = async (req: Request) => {
       status: 200,
     });
   } catch (error) {
-    logger.error(error);
+    logger.error("[POST] api/webhook/cal/ended", error);
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 };
