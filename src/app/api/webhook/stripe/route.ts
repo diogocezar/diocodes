@@ -56,11 +56,12 @@ const savePayment = async (payload: {
 export const POST = async (req: Request) => {
   logger.info("[POST] api/webhook/stripe => started");
   try {
-    if (!(await authStripeWebhook(req))) {
+    const payload = await req.text();
+    if (!(await authStripeWebhook(req, payload))) {
       logger.info("[POST] api/webhook/stripe => unauthorized");
       return new Response("Unauthorized", { status: 401 });
     }
-    const event = await constructEvent(req);
+    const event = await constructEvent(req, payload);
     if (event.type === STRIPE.PAYMENT_INTENT_SUCCEEDED) {
       const payload: any = event.data.object;
       logger.info(

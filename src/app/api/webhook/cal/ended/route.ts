@@ -13,11 +13,11 @@ export const fetchCache = "force-no-store";
 export const POST = async (req: Request) => {
   logger.info("[POST] api/webhook/cal/ended => started");
   try {
-    if (!(await authCalWebhook(req))) {
+    const data = await req.json();
+    if (!(await authCalWebhook(req, data))) {
       logger.info("[POST] api/webhook/cal/ended => unauthorized");
       return new Response("Unauthorized", { status: 401 });
     }
-    const data = await req.json();
     logger.info("[POST] api/webhook/cal/created => creating webhook log");
     await createWebhookLog({
       type: WEBHOOK.CAL_MEETING_ENDED,
