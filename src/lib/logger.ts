@@ -8,6 +8,7 @@ class SaveMongoTransport extends Transport {
     super(opts);
   }
   log(info: any, callback: Function) {
+    console.log(info);
     createLog(info);
     callback();
   }
