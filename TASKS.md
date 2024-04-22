@@ -178,6 +178,8 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Vizualização de logs;
 - [x] Vizualização de webhooks;
 - [x] Enviar e-mail também para quem pagou a mentoria;
+- [ ] Incluir filtros de logs por erro ou info;
+- [ ] Limitar a quantidade de logs e webhooks exibidos;
 - [ ] Remover opções de criar logs ou webhooks;
 - [ ] Botão de copiar o payload JSON dos Webhooks;
 - [ ] Filtrar logs e webhooks pela data de criação;
