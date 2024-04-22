@@ -7,9 +7,8 @@ class SaveMongoTransport extends Transport {
   constructor(opts: any) {
     super(opts);
   }
-  log(info: any, callback: Function) {
-    console.log(info);
-    createLog(info);
+  async log(info: any, callback: Function) {
+    await createLog(info);
     callback();
   }
 }

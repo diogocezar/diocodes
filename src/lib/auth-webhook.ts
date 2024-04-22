@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { logger } from "@/lib/logger";
 import { constructEvent } from "@/services/stripe";
+import { transformMeta } from "./utils";
 
 export const authCalWebhook = async (req: Request, payload: any) => {
   const secret = process.env.WEBHOOK_CAL_SECRET;
@@ -12,7 +13,12 @@ export const authCalWebhook = async (req: Request, payload: any) => {
     .update(JSON.stringify(payload))
     .digest("hex");
   logger.info(
-    `[AUTH_CALL_WEBHOOK] auth log => ${JSON.stringify({ secret, signature, hmacDigest, payload }, null, 2)}`,
+    "[AUTH_CALL_WEBHOOK] auth log => ",
+    transformMeta({
+      signature,
+      hmacDigest,
+      payload,
+    }),
   );
   if (signature !== hmacDigest) {
     return false;

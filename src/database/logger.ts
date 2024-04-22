@@ -4,7 +4,7 @@ import { Log } from "@prisma/client";
 
 export const createLog = async (content: Log) => {
   try {
-    return await prisma.log.create({
+    await prisma.log.create({
       data: {
         ...content,
         source: process.env.NODE_ENV || "unknown",
