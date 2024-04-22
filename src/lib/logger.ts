@@ -15,8 +15,8 @@ class SaveMongoTransport extends Transport {
 
 const saveMongoTransport = new SaveMongoTransport({});
 
-const customFormat = printf(({ level, message, timestamp }) => {
-  return `👉 [${timestamp}] ${level}: ${message}`;
+const customFormat = printf(({ level, message, timestamp, meta }) => {
+  return `👉 [${timestamp}] ${level}: ${message} => ${JSON.stringify(meta)}`;
 });
 
 const logger = winston.createLogger({

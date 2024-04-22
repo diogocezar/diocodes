@@ -20,10 +20,12 @@ export const POST = async (req: Request) => {
     }
     const { payload } = data;
     logger.info("[POST] api/webhook/cal/started => creating webhook log");
+
     await createWebhookLog({
       type: WEBHOOK.CAL_MEETING_STARTED,
       payload: JSON.stringify(data),
     } as any);
+
     const { id: externalId, metadata } = payload;
     logger.info(
       "[POST] api/webhook/cal/started => external id",
