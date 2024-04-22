@@ -65,6 +65,7 @@ export const POST = async (req: Request) => {
       status: 200,
     });
   } catch (error) {
+    console.log(error);
     logger.error("[POST] api/webhook/cal/started", getErrorMessage(error));
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
