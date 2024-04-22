@@ -28,7 +28,6 @@ export default function AdminWebhookLogPage() {
   const selectedItem = useWebhookLogState((state) => state.selectedItem);
   const setTable = useWebhookLogState((state) => state.setTable);
   const table = useWebhookLogState((state) => state.table);
-  const { maxTagUsed } = useMaxTagUsed();
 
   const URL = "/admin/webhook";
 
@@ -66,7 +65,7 @@ export default function AdminWebhookLogPage() {
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
-          searchField="name"
+          searchField="createdAt"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}

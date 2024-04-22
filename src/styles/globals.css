@@ -64,29 +64,29 @@
         box-sizing: border-box;
     }
 
-    body::-webkit-scrollbar {
+    *::-webkit-scrollbar {
         width: 0.25rem;
     }
 
-    body::-webkit-scrollbar-track {
+    *::-webkit-scrollbar-track {
         background: var(--background-dark);
         border-radius: 0.25rem;
     }
 
-    body::-webkit-scrollbar-thumb {
+    *::-webkit-scrollbar-thumb {
         background: var(--green);
         border-radius: 0.25rem;
     }
 
-    body::-webkit-scrollbar {
+    *::-webkit-scrollbar {
         width: 0.7rem;
     }
 
-    body::-webkit-scrollbar-track {
+    *::-webkit-scrollbar-track {
         background: var(--background-dark);
     }
 
-    body::-webkit-scrollbar-thumb {
+    *::-webkit-scrollbar-thumb {
         background: var(--green);
     }
 

@@ -8,10 +8,78 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { capitalizeString, compactName, generateGravatarHash } from "./utils";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Copy, Eye } from "@phosphor-icons/react/dist/ssr";
+import JsonFormatter from "react-json-formatter";
+
+export const formatJson = (row: any, field: string) => {
+  const json = row.getValue(field);
+  const jsonStyle = {
+    propertyStyle: { color: "var(--green)" },
+    stringStyle: { color: "var(--pink)" },
+  };
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          variant="outline"
+          className="bg-pink text-background-dark hover:bg-green px-3 py-2 gap-1"
+        >
+          <Eye className="h-5 w-5" /> Payload
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="bg-background-dark border-background min-w-[800px]">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-foreground flex flex-row items-center gap-2 text-xl">
+            <Copy className="h-5 w-5" /> Copiar Payload?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            <div className="w-[750px] h-[300px] overflow-y-auto overflow-x-hidden text-foreground text-xs">
+              <pre>
+                <code>
+                  <JsonFormatter
+                    json={json}
+                    tabWith={2}
+                    jsonStyle={jsonStyle}
+                  />
+                </code>
+              </pre>
+            </div>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="mt-2 flex h-10 flex-row gap-2">
+          <AlertDialogCancel className="bg-background hover:bg-green hover:text-background h-10 cursor-crosshair rounded-lg px-4 py-2 font-semibold transition duration-300 ease-in-out">
+            Fechar
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className="m-0 flex h-10 flex-row gap-2 rounded-lg px-4 py-2"
+            onClick={() => {
+              navigator.clipboard.writeText(json);
+            }}
+          >
+            <Copy className="h-5 w-5" />
+            Copiar
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
 
 export const formatRowValue = (row: any, field: string) => {
   return row.getValue(field);

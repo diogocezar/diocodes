@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TypeWebhookLog } from "@/types/type-webhook-log";
 import {
   formatCreatedAt,
+  formatJson,
   formatRowValue,
   formatSelect,
 } from "@/lib/format-columns";
@@ -33,7 +34,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeWebhookLog>[] => {
     {
       accessorKey: "payload",
       header: ({ column }) => formatHeader("Payload", column),
-      cell: ({ row }) => <div>{formatRowValue(row, "payload")}</div>,
+      cell: ({ row }) => <div>{formatJson(row, "payload")}</div>,
     },
     {
       accessorKey: "createdAt",

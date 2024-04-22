@@ -119,6 +119,9 @@ dependencies:
   geist:
     specifier: ^1.2.2
     version: 1.2.2(next@14.1.0)
+  json-formatter-js:
+    specifier: ^2.5.11
+    version: 2.5.11
   lucide-react:
     specifier: ^0.338.0
     version: 0.338.0(react@18.2.0)
@@ -152,6 +155,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.50.1
     version: 7.50.1(react@18.2.0)
+  react-json-formatter:
+    specifier: ^0.4.0
+    version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
   recharts:
     specifier: ^2.12.1
     version: 2.12.1(react-dom@18.2.0)(react@18.2.0)
@@ -6834,6 +6840,10 @@ packages:
   /json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
 
+  /json-formatter-js@2.5.11:
+    resolution: {integrity: sha512-njrwXGOZNZTt7nrhkFDqzfEJqL442QEFLS2deEMHQhOb6m3ubYXopXFJrZCsL8/NQah3OA6O7OrlECPusoMBwQ==}
+    dev: false
+
   /json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
 
@@ -7879,6 +7889,17 @@ packages:
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
+
+  /react-json-formatter@0.4.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+BC/uzGzpwOYhtC8mOZX3qIQCW4fWnGlXIQzULouN9dnFFZPnbpBNyFwUujW/FALYzgtQ+s/lTPMe8eqBdiJdQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>16.2.0'
+      react-dom: '>16.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-remove-scroll-bar@2.3.5(@types/react@18.2.56)(react@18.2.0):
     resolution: {integrity: sha512-3cqjOqg6s0XbOjWvmasmqHch+RLxIEk2r/70rzGXuz3iIGQsQheEQyqYCBb5EECoD01Vo2SIbDqW4paLeLTASw==}
