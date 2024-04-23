@@ -10,6 +10,5 @@ export const config = {
     "/admin/tag/:path*",
     "/admin/user/:path*",
     "/api/admin/:path*",
-    "/api/cron/:path*",
   ],
 };
