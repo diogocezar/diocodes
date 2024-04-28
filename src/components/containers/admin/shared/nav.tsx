@@ -295,10 +295,10 @@ export default function Nav() {
                       href="/admin/log"
                       className={clsx(
                         "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
-                        pathname === "user"
+                        pathname === "log"
                           ? "text-background"
                           : "text-foreground",
-                        pathname === "user" &&
+                        pathname === "log" &&
                           "bg-pink hover:bg-background hover:text-foreground",
                       )}
                     >
@@ -320,10 +320,10 @@ export default function Nav() {
                       href="/admin/webhook-log"
                       className={clsx(
                         "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
-                        pathname === "user"
+                        pathname === "webhook-log"
                           ? "text-background"
                           : "text-foreground",
-                        pathname === "user" &&
+                        pathname === "webhook-log" &&
                           "bg-pink hover:bg-background hover:text-foreground",
                       )}
                     >

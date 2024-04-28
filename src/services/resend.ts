@@ -8,7 +8,7 @@ import EmailAvaliation from "#/emails/emails/email-avaliation";
 import EmailAvaliationCreated from "#/emails/emails/email-avaliation-created";
 import EmailPaymentSucceeded from "#/emails/emails/email-payment-succeeded";
 import EmailReminder from "#/emails/emails/email-reminder";
-import { getErrorMessage } from "@/lib/utils";
+import { getErrorMessage, transformMeta } from "@/lib/utils";
 
 export type TypeCreateContact = {
   person: Person[];
@@ -36,7 +36,8 @@ export const createContact = async ({
       audienceId: audienceId,
     });
     logger.info(
-      `[CREATE_CONTACT] result for ${item.email} => ${JSON.stringify(result, null, 2)}`,
+      `[CREATE_CONTACT] result for ${item.email} =>`,
+      transformMeta(result),
     );
   }
 };
@@ -54,6 +55,10 @@ export const sendEmail = async ({
       subject,
       react: reactTemplate,
     };
+    logger.info(
+      `[SEND_EMAIL] => email was successfully sent`,
+      transformMeta({ to, subject, from: config.from }),
+    );
     await resend.emails.send(config);
   } catch (error) {
     logger.error("[SEND_EMAIL]", getErrorMessage(error));

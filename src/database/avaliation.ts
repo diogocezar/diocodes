@@ -112,6 +112,7 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
         },
         mentoring: { include: { attendee: true, host: true } },
       },
+      orderBy: { createdAt: "desc" },
     });
   } catch (error) {
     logger.error(error);

@@ -49,7 +49,7 @@ export function GraphAvaliationByMonth({ data }: GraphAvaliationByMonthProps) {
   const transformedData = data?.map((item) => {
     return {
       name: getMonth(item._id),
-      total: item.avgRating,
+      total: item.avgRating.toFixed(2),
     };
   });
   return (

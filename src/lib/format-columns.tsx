@@ -29,6 +29,16 @@ import JsonFormatter from "react-json-formatter";
 
 export const formatJson = (row: any, field: string) => {
   const json = row.getValue(field);
+  if (json === null)
+    return (
+      <Button
+        variant="outline"
+        disabled={true}
+        className="bg-pink text-background-dark hover:bg-green px-3 py-2 gap-1"
+      >
+        <Eye className="h-5 w-5" /> Payload
+      </Button>
+    );
   const jsonStyle = {
     propertyStyle: { color: "var(--green)" },
     stringStyle: { color: "var(--pink)" },
@@ -320,7 +330,8 @@ export const formatShowComment = (row: any) => {
 };
 
 export const formatCreatedAt = (row: any) => {
-  return new Date(row.getValue("createdAt")).toLocaleDateString("pt-BR");
+  const date = new Date(row.getValue("createdAt"));
+  return `${date.toLocaleDateString("pt-BR")} - ${date.toLocaleTimeString("pt-BR").substring(0, 5)}`;
 };
 
 export const formatNormalDate = (row: any, name: string) => {

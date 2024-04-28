@@ -72,7 +72,7 @@ export default function AdminAvaliationPage() {
           createButtonLabel="Criar avaliação"
           iconCreateButton={<Star className="h-5 w-5" />}
           setTable={setTable}
-          pageSize={8}
+          pageSize={12}
         />
       </PageCommon>
     </>

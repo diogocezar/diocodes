@@ -120,7 +120,7 @@ export const getAllMentorings = async (): Promise<Mentoring[]> => {
           },
         },
       },
-      orderBy: { startTime: "asc" },
+      orderBy: { startTime: "desc" },
     });
   } catch (error) {
     logger.error(error);

@@ -14,7 +14,6 @@ import ConfirmDelete from "@/components/containers/admin/shared/confirm-delete";
 import { QUERY_KEY } from "@/contants/query-key";
 import { useControls } from "@/hooks/use-controls";
 import PageCommon from "@/components/containers/admin/shared/page-common";
-import { useMaxTagUsed } from "@/hooks/use-get-tag";
 
 export default function AdminWebhookLogPage() {
   const setIsOpenForm = useWebhookLogState((state) => state.setIsOpenForm);
@@ -70,8 +69,7 @@ export default function AdminWebhookLogPage() {
           handleEdit={handleEdit}
           handleCreate={handleCreate}
           isLoading={isLoading}
-          createButtonLabel="Criar tag"
-          iconCreateButton={<TagIcon className="h-5 w-5" />}
+          disableEdit={true}
           setTable={setTable}
           pageSize={15}
         />

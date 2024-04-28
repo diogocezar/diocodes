@@ -62,13 +62,12 @@ export default function AdminLogPage() {
           data={data}
           columns={dataTableColumns}
           columnsNames={columnsNames}
-          searchField="name"
+          searchField="message"
           handleDelete={handleConfirmDelete}
           handleEdit={handleEdit}
           handleCreate={handleCreate}
           isLoading={isLoading}
-          createButtonLabel="Criar tag"
-          iconCreateButton={<TagIcon className="h-5 w-5" />}
+          disableEdit={true}
           setTable={setTable}
           pageSize={15}
         />

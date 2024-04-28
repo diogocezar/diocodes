@@ -19,13 +19,12 @@ import {
   ArrowLeft,
   ArrowRight,
   Funnel,
-  DotsThreeOutlineVertical,
   MagnifyingGlass,
   PaintBrush,
   Spinner,
   Trash,
+  CursorClick,
 } from "@phosphor-icons/react";
-import { ArrowSquareRight, CursorClick } from "@phosphor-icons/react/dist/ssr";
 import {
   ColumnFiltersState,
   SortingState,
@@ -54,8 +53,9 @@ type DataTableProps = {
   handleEdit: Function;
   handleCreate: Function;
   isLoading: boolean;
-  createButtonLabel: string;
-  iconCreateButton: JSX.Element;
+  createButtonLabel?: string;
+  disableEdit?: boolean;
+  iconCreateButton?: JSX.Element;
   aditionalButtons?: ReactElement<AditionalButtonsProps>;
   aditionalSearch?: ReactElement<AditionalButtonsProps>;
   setTable: Function;
@@ -72,7 +72,8 @@ export function DataTable({
   handleEdit,
   handleCreate,
   isLoading,
-  createButtonLabel = "Criar",
+  createButtonLabel,
+  disableEdit = false,
   iconCreateButton,
   aditionalButtons,
   aditionalSearch,
@@ -152,26 +153,32 @@ export function DataTable({
               align="center"
               className="w-full border-0 bg-background-dark text-foreground"
             >
-              <DropdownMenuItem
-                disabled={disabledCreate}
-                className="flex flex-row gap-2 rounded-lg"
-                onClick={() => {
-                  handleCreate(table.getFilteredSelectedRowModel().rows);
-                }}
-              >
-                {iconCreateButton}
-                <span>{createButtonLabel}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                disabled={disabledEdit}
-                className="flex flex-row gap-2 rounded-lg"
-                onClick={() => {
-                  handleEdit(table.getFilteredSelectedRowModel().rows);
-                }}
-              >
-                <PaintBrush className="h-5 w-5" />
-                <span>Editar</span>
-              </DropdownMenuItem>
+              {createButtonLabel && (
+                <DropdownMenuItem
+                  disabled={disabledCreate}
+                  className="flex flex-row gap-2 rounded-lg"
+                  onClick={() => {
+                    handleCreate(table.getFilteredSelectedRowModel().rows);
+                  }}
+                >
+                  {iconCreateButton}
+                  <span>{createButtonLabel}</span>
+                </DropdownMenuItem>
+              )}
+
+              {!disableEdit && (
+                <DropdownMenuItem
+                  disabled={disabledEdit}
+                  className="flex flex-row gap-2 rounded-lg"
+                  onClick={() => {
+                    handleEdit(table.getFilteredSelectedRowModel().rows);
+                  }}
+                >
+                  <PaintBrush className="h-5 w-5" />
+                  <span>Editar</span>
+                </DropdownMenuItem>
+              )}
+
               <DropdownMenuItem
                 disabled={disabledDelete}
                 className="flex flex-row gap-2 rounded-lg"

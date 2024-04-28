@@ -53,6 +53,7 @@ export const getAllInvites = async (): Promise<any[]> => {
           },
         },
       },
+      orderBy: { createdAt: "desc" },
     });
   } catch (error) {
     logger.error(error);

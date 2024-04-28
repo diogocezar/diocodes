@@ -18,11 +18,25 @@ export const createLog = async (content: Log) => {
   }
 };
 
+export const removeLog = async (data: any) => {
+  try {
+    return await prisma.log.updateMany({
+      where: { id: { in: data.idsToDelete } },
+      data: { removedAt: new Date() },
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+};
+
 export const getAllLog = async (): Promise<Log[]> => {
   try {
     return await prisma.log.findMany({
       where: {
         removedAt: null,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   } catch (error) {

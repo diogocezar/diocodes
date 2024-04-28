@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TypeLog } from "@/types/type-log";
 import {
   formatCreatedAt,
+  formatJson,
   formatRowValue,
   formatSelect,
 } from "@/lib/format-columns";
@@ -45,7 +46,7 @@ export const columns = (isLoading: boolean): ColumnDef<TypeLog>[] => {
     {
       accessorKey: "meta",
       header: ({ column }) => formatHeader("Metadados", column),
-      cell: ({ row }) => <div>{formatRowValue(row, "meta")}</div>,
+      cell: ({ row }) => <div>{formatJson(row, "meta")}</div>,
     },
     {
       accessorKey: "createdAt",

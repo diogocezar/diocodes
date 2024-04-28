@@ -69,6 +69,21 @@ export const countMentoringCanceled = async (): Promise<number> => {
   return 0;
 };
 
+export const sumPayments = async (): Promise<any> => {
+  try {
+    return fakeSlowResult(
+      await prisma.payment.aggregate({
+        _sum: { amount: true },
+        where: {
+          removedAt: null,
+        },
+      }),
+    );
+  } catch (error) {
+    logger.error(error);
+  }
+};
+
 export const countMentoringPro = async (): Promise<number> => {
   try {
     return fakeSlowResult(

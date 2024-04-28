@@ -7,13 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PRICE } from "@/contants/price";
-import { countMentoringPro } from "@/database/dashboard";
+import { sumPayments } from "@/database/dashboard";
 import { formatCurrency } from "@/lib/utils";
 import { Money } from "@phosphor-icons/react/dist/ssr";
 
 export default async function MentoringReceived() {
-  const result = await countMentoringPro();
-  const total = formatCurrency(result * PRICE.MENTORING_PRO);
+  const { _sum } = await sumPayments();
   const priceByMentoring = formatCurrency(PRICE.MENTORING_PRO);
   return (
     <Card>
@@ -23,7 +22,9 @@ export default async function MentoringReceived() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="mt-2 text-4xl font-bold">{total}</div>
+        <div className="mt-2 text-4xl font-bold">
+          {formatCurrency(_sum.amount)}
+        </div>
       </CardContent>
       <CardFooter>
         <CardDescription>Preço por mentoria {priceByMentoring}</CardDescription>
