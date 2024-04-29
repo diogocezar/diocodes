@@ -40,7 +40,7 @@ export const EmailReminder = ({
         fontStyle="normal"
       />
     </Head>
-    <Preview>Olá, tudo certo? Você poderia avaliar a nossa mentoria?</Preview>
+    <Preview>Olá, tudo certo? Uma mentoria está prestes a iniciar.</Preview>
     <Tailwind>
       <Body className="mt-12">
         <Container>

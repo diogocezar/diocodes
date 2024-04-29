@@ -47,6 +47,10 @@ export const columns = (isLoading: boolean): ColumnDef<TypePayment>[] => {
       cell: ({ row }) => (
         <div>{formatCurrency(formatRowValue(row, "amount"))}</div>
       ),
+      // footer: ({ table }) =>
+      //   table
+      //     .getFilteredRowModel()
+      //     .rows.reduce((total, row) => total + Number(row.original.amount), 0),
     },
     {
       accessorKey: "dateMentoring",
