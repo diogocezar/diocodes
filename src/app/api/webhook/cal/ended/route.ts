@@ -1,5 +1,5 @@
 import { logger } from "@/lib/logger";
-import { getMentoring } from "@/database/mentoring";
+import { getMentoringByExternalId } from "@/database/mentoring";
 import { createInvite } from "@/database/invite";
 import { createWebhookLog } from "@/database/webhook-log";
 import { authCalWebhook } from "@/lib/auth-webhook";
@@ -14,24 +14,26 @@ export const POST = async (req: Request) => {
   logger.info("[POST] api/webhook/cal/ended => started");
   try {
     const data = await req.json();
+
     if (!(await authCalWebhook(req, data))) {
       logger.info("[POST] api/webhook/cal/ended => unauthorized");
       return new Response("Unauthorized", { status: 401 });
     }
-    logger.info("[POST] api/webhook/cal/created => creating webhook log");
+
+    logger.info("[POST] api/webhook/cal/ended => creating webhook log");
+
     await createWebhookLog({
       type: WEBHOOK.CAL_MEETING_ENDED,
       payload: JSON.stringify(data),
     } as any);
-    const { id: externalId } = data;
 
-    logger.info(
-      "[POST] api/webhook/cal/ended => external id",
-      transformMeta(externalId),
-    );
-    if (!externalId) throw new Error("Missing external ID");
+    const { id } = data;
 
-    const mentoring = await getMentoring(externalId);
+    logger.info("[POST] api/webhook/cal/ended => id", transformMeta(id));
+
+    if (!id) throw new Error("Missing external ID");
+
+    const mentoring = await getMentoringByExternalId(id);
 
     if (!mentoring) throw new Error("Mentoring not found");
 
@@ -40,18 +42,22 @@ export const POST = async (req: Request) => {
       transformMeta(mentoring),
     );
 
-    if (mentoring) await sendInviteEmail(mentoring);
-    logger.info("[POST] api/webhook/cal/ended => invite sent");
+    logger.info(
+      "[POST] api/webhook/cal/ended => creating invite to mentoring avaliation",
+    );
 
     const invite = await createInvite({
       createdAt: new Date(),
       mentoringId: mentoring.id,
     } as any);
+
     if (invite)
       logger.info(
-        "[POST] api/webhook/cal/ended => invite created",
+        "[POST] api/webhook/cal/started => invite created",
         transformMeta(invite),
       );
+
+    if (mentoring && invite) await sendInviteEmail(mentoring);
 
     return new Response(JSON.stringify({ data, mentoring, invite }, null, 2), {
       status: 200,

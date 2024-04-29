@@ -71,7 +71,8 @@ export const sendInviteEmail = async (mentoring: any) => {
   const { name, email } = attendee;
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
-    to: [email, EMAIL.COPY_EMAIL],
+    //to: [email, EMAIL.COPY_EMAIL],
+    to: [EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_INVITE,
     reactTemplate: EmailAvaliation({
       attendee: name,
@@ -128,7 +129,8 @@ export const sendReminderEmail = async (
   const { name, email } = attendee;
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
-    to: [email, EMAIL.COPY_EMAIL],
+    //to: [email, EMAIL.COPY_EMAIL],
+    to: [EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_INVITE,
     reactTemplate: EmailReminder({
       attendee: name,

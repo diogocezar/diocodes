@@ -1,11 +1,11 @@
 import { logger } from "@/lib/logger";
-import { getMentoring } from "@/database/mentoring";
-import { createInvite } from "@/database/invite";
+import { getMentoringByExternalId } from "@/database/mentoring";
 import { createWebhookLog } from "@/database/webhook-log";
 import { authCalWebhook } from "@/lib/auth-webhook";
 import { sendReminderEmail } from "@/services/resend";
 import { WEBHOOK } from "@/contants/webhook";
 import { getErrorMessage, transformMeta } from "@/lib/utils";
+import { api } from "@/services/cal";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -14,11 +14,12 @@ export const POST = async (req: Request) => {
   logger.info("[POST] api/webhook/cal/started => started");
   try {
     const data = await req.json();
+
     if (!(await authCalWebhook(req, data))) {
       logger.info("[POST] api/webhook/cal/started => unauthorized");
       return new Response("Unauthorized", { status: 401 });
     }
-    const { payload } = data;
+
     logger.info("[POST] api/webhook/cal/started => creating webhook log");
 
     await createWebhookLog({
@@ -26,20 +27,13 @@ export const POST = async (req: Request) => {
       payload: JSON.stringify(data),
     } as any);
 
-    const { id: externalId, metadata } = payload;
-    logger.info(
-      "[POST] api/webhook/cal/started => external id",
-      transformMeta(externalId),
-    );
-    logger.info(
-      "[POST] api/webhook/cal/started => metadata",
-      transformMeta(metadata),
-    );
+    const { id } = data;
 
-    if (!externalId || metadata || !metadata.videoCallUrl)
-      throw new Error("Missing external ID or Metadata");
+    logger.info("[POST] api/webhook/cal/started => id", transformMeta(id));
 
-    const mentoring = await getMentoring(externalId);
+    if (!id) throw new Error("Missing id");
+
+    const mentoring = await getMentoringByExternalId(id);
 
     if (!mentoring) throw new Error("Mentoring not found");
 
@@ -48,22 +42,24 @@ export const POST = async (req: Request) => {
       transformMeta(mentoring),
     );
 
+    logger.info("[POST] api/webhook/cal/started => getting metadata");
+
+    const bookingFromCal = await api.get(`bookings/${id}`);
+
+    const { metadata } = bookingFromCal.data.booking;
+
+    logger.info(
+      "[POST] api/webhook/cal/started => returned metadata",
+      transformMeta(metadata),
+    );
+
+    logger.info("[POST] api/webhook/cal/started => sending reminder email");
+
     await sendReminderEmail(mentoring, metadata.videoCallUrl);
 
     logger.info("[POST] api/webhook/cal/started => reminder sent");
 
-    const invite = await createInvite({
-      createdAt: new Date(),
-      mentoringId: mentoring.id,
-    } as any);
-
-    if (invite)
-      logger.info(
-        "[POST] api/webhook/cal/started => invite created",
-        transformMeta(invite),
-      );
-
-    return new Response(JSON.stringify({ data, mentoring, invite }, null, 2), {
+    return new Response(JSON.stringify({ data, mentoring }, null, 2), {
       status: 200,
     });
   } catch (error) {

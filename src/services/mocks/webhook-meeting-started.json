@@ -1,0 +1,81 @@
+{
+  "triggerEvent": "MEETING_STARTED",
+  "id": 1888701,
+  "uid": "7M6h1DJ3hojgWE71TR3HQT",
+  "idempotencyKey": "d4f42727-c618-575f-917a-a39c890d8907",
+  "userId": 489633,
+  "userPrimaryEmail": "diogo@diogocezar.com",
+  "eventTypeId": 665084,
+  "title": "Mentoria Diogão (Pro) between Diogo Cezar Teixeira Batista and Elton",
+  "description": "",
+  "customInputs": {},
+  "responses": {
+    "name": "Elton",
+    "email": "eltoncampos36@gmail.com",
+    "guests": [],
+    "location": {
+      "value": "integrations:google:meet",
+      "optionValue": ""
+    },
+    "como-posso-ajudar": "Mentoria focada em como melhorar como SR"
+  },
+  "startTime": "2024-04-29T11:00:00.000Z",
+  "endTime": "2024-04-29T11:45:00.000Z",
+  "location": "integrations:google:meet",
+  "createdAt": "2024-04-28T03:06:34.482Z",
+  "updatedAt": null,
+  "status": "ACCEPTED",
+  "paid": false,
+  "destinationCalendarId": 212605,
+  "cancellationReason": null,
+  "rejectionReason": null,
+  "dynamicEventSlugRef": null,
+  "dynamicGroupSlugRef": null,
+  "rescheduled": null,
+  "fromReschedule": null,
+  "recurringEventId": null,
+  "smsReminderNumber": null,
+  "scheduledJobs": [],
+  "metadata": {},
+  "isRecorded": false,
+  "iCalUID": "7M6h1DJ3hojgWE71TR3HQT@Cal.com",
+  "iCalSequence": 0,
+  "rating": null,
+  "ratingFeedback": null,
+  "noShowHost": null,
+  "user": {
+    "email": "diogo@diogocezar.com",
+    "name": "Diogo Cezar Teixeira Batista",
+    "timeZone": "America/Sao_Paulo",
+    "username": "diogocezar"
+  },
+  "attendees": [
+    {
+      "id": 2407775,
+      "email": "eltoncampos36@gmail.com",
+      "name": "Elton",
+      "timeZone": "America/Sao_Paulo",
+      "locale": "en",
+      "bookingId": 1888701
+    }
+  ],
+  "payment": [],
+  "references": [],
+  "appsStatus": [
+    {
+      "appName": "google-calendar",
+      "type": "google_calendar",
+      "success": 1,
+      "failures": 0,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "appName": "Google Meet",
+      "type": "conferencing",
+      "success": 1,
+      "failures": 0,
+      "errors": []
+    }
+  ]
+}
