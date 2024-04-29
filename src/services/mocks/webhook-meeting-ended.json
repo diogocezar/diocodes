@@ -4,14 +4,14 @@
   "uid": "7M6h1DJ3hojgWE71TR3HQT",
   "idempotencyKey": "d4f42727-c618-575f-917a-a39c890d8907",
   "userId": 489633,
-  "userPrimaryEmail": "diogo@diogocezar.com",
+  "userPrimaryEmail": "xxx",
   "eventTypeId": 665084,
-  "title": "Mentoria Diogão (Pro) between Diogo Cezar Teixeira Batista and Elton",
+  "title": "Mentoria Diogão (Pro) between Diogo Cezar Teixeira Batista and xxx",
   "description": "",
   "customInputs": {},
   "responses": {
-    "name": "Elton",
-    "email": "eltoncampos36@gmail.com",
+    "name": "xxx",
+    "email": "xxx",
     "guests": [],
     "location": {
       "value": "integrations:google:meet",
@@ -44,7 +44,7 @@
   "ratingFeedback": null,
   "noShowHost": null,
   "user": {
-    "email": "diogo@diogocezar.com",
+    "email": "xxx",
     "name": "Diogo Cezar Teixeira Batista",
     "timeZone": "America/Sao_Paulo",
     "username": "diogocezar"
@@ -52,8 +52,8 @@
   "attendees": [
     {
       "id": 2407775,
-      "email": "eltoncampos36@gmail.com",
-      "name": "Elton",
+      "email": "xxx",
+      "name": "xxx",
       "timeZone": "America/Sao_Paulo",
       "locale": "en",
       "bookingId": 1888701
