@@ -184,9 +184,10 @@ Neste arquivo estão as tarefas que foram realizadas durante a contrução do pr
 - [x] Remover opções de criar/editar logs ou webhooks;
 - [x] Remover logs e webhooks;
 - [x] Arredondar o toal nas avaliações por Mês;
+- [x] Botão de copiar o payload JSON dos Webhooks;
+- [ ] Criar webhook de cancelamento de mentoria;
 - [ ] Menu selecionado para webhooks e logs;
 - [ ] Corrigir valor na hora de criar um pagamento;
-- [x] Botão de copiar o payload JSON dos Webhooks;
 - [ ] Filtrar logs e webhooks pela data de criação;
 - [ ] Trazer as avaliações mais recentes primeiro;
 - [ ] Trazer os convites mais recentes primeiro;
