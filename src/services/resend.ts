@@ -70,9 +70,7 @@ export const sendInviteEmail = async (mentoring: any) => {
   const link = `${EMAIL.LINK}/${id}`;
   const { name, email } = attendee;
   const configSendEmail: TypeSendEmail = {
-    from: EMAIL.FROM,
-    //to: [email, EMAIL.COPY_EMAIL],
-    to: [EMAIL.COPY_EMAIL],
+    to: [email, EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_INVITE,
     reactTemplate: EmailAvaliation({
       attendee: name,
@@ -109,7 +107,7 @@ export const sendPaymentSucceededEmail = async (payload: {
   const { name, email, phone, amount } = payload;
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
-    to: [EMAIL.COPY_EMAIL, email],
+    to: [email, EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_PAYMENT_SUCCEEDED,
     reactTemplate: EmailPaymentSucceeded({
       name,
@@ -129,8 +127,7 @@ export const sendReminderEmail = async (
   const { name, email } = attendee;
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
-    //to: [email, EMAIL.COPY_EMAIL],
-    to: [EMAIL.COPY_EMAIL],
+    to: [email, EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_INVITE,
     reactTemplate: EmailReminder({
       attendee: name,
