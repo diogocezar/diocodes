@@ -141,6 +141,17 @@ export const getAvaliation = async (id: string): Promise<Avaliation | null> => {
   try {
     return await prisma.avaliation.findUnique({
       where: { id, removedAt: null },
+      include: {
+        avaliationTags: {
+          include: { tag: true },
+        },
+        mentoring: {
+          include: {
+            attendee: true,
+            host: true,
+          },
+        },
+      },
     });
   } catch (error) {
     logger.error(error);
@@ -154,7 +165,17 @@ export const getAvaliationByMentoring = async (
   try {
     return await prisma.avaliation.findUnique({
       where: { mentoringId, removedAt: null },
-      include: { mentoring: true },
+      include: {
+        avaliationTags: {
+          include: { tag: true },
+        },
+        mentoring: {
+          include: {
+            attendee: true,
+            host: true,
+          },
+        },
+      },
     });
   } catch (error) {
     logger.error(error);

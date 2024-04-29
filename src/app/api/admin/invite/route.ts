@@ -46,7 +46,6 @@ export const GET = async () => {
     const result = await getAllInvites();
     return new Response(JSON.stringify(result), { status: 200 });
   } catch (error) {
-    console.log();
     logger.error("[GET] api/admin/invite", getErrorMessage(error));
     return new Response(JSON.stringify({ error }), { status: 500 });
   }

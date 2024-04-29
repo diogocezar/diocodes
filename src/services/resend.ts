@@ -83,6 +83,7 @@ export const sendInviteEmail = async (mentoring: any) => {
 
 export const sendAvaliationNotificationEmail = async (avaliation: any) => {
   const { mentoring, rating, avaliationTags, comment } = avaliation;
+  const tags = avaliationTags.map((tag: any) => tag.tag.name);
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
     to: [EMAIL.COPY_EMAIL],
@@ -91,7 +92,7 @@ export const sendAvaliationNotificationEmail = async (avaliation: any) => {
       attendee: mentoring.attendee.name,
       startTime: mentoring.startTime,
       rating,
-      tags: avaliationTags.map((tag: any) => tag.name),
+      tags,
       comment,
     }),
   };
