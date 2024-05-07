@@ -129,6 +129,7 @@ export const sendReminderEmail = async (
   const configSendEmail: TypeSendEmail = {
     from: EMAIL.FROM,
     to: [email, EMAIL.COPY_EMAIL],
+    //to: [EMAIL.COPY_EMAIL],
     subject: EMAIL.SUBJECT_REMINDER,
     reactTemplate: EmailReminder({
       attendee: name,

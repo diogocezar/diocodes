@@ -25,17 +25,20 @@ export const POST = async (req: Request) => {
     logger.info("[POST] api/webhook/cal/canceled => creating webhook log");
 
     await createWebhookLog({
-      type: WEBHOOK.CAL_MEETING_ENDED,
+      type: WEBHOOK.CAL_BOOKING_CANCELED,
       payload: JSON.stringify(data),
     } as any);
 
-    const { id } = data;
+    const { bookingId } = data;
 
-    logger.info("[POST] api/webhook/cal/canceled => id", transformMeta(id));
+    logger.info(
+      "[POST] api/webhook/cal/canceled => id",
+      transformMeta(bookingId),
+    );
 
-    if (!id) throw new Error("Missing external ID");
+    if (!bookingId) throw new Error("Missing external ID");
 
-    const mentoring = await getMentoringByExternalId(id);
+    const mentoring = await getMentoringByExternalId(bookingId);
 
     if (!mentoring) throw new Error("Mentoring not found");
 
