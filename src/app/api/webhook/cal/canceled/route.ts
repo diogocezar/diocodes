@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
     logger.info("[POST] api/webhook/cal/canceled => creating webhook log");
 
     await createWebhookLog({
-      type: WEBHOOK.CAL_BOOKING_CANCELED,
+      type: WEBHOOK.CAL_BOOKING_CANCELLED,
       payload: JSON.stringify(data),
     } as any);
 
