@@ -10,9 +10,9 @@ const Footer = React.forwardRef<
 >(() => {
   return (
     <>
-      <footer className="bg-background-dark mt-10 w-full shadow-2xl">
+      <footer className="bg-purple mt-10 w-full shadow-2xl">
         <div className="flex flex-col items-center justify-between gap-6 p-5 pt-10 md:flex-row md:gap-0 md:p-16 md:pt-12 lg:p-12 lg:pt-14">
-          <div className="text-foreground flex flex-col items-center justify-center gap-2 text-center text-sm md:items-start">
+          <div className="text-background flex flex-col items-center justify-center gap-2 text-center text-sm md:items-start">
             Código fonte disponível em
             <Link href="https://github.com/diogocezar/diocodes" target="_blank">
               <Button
@@ -25,7 +25,7 @@ const Footer = React.forwardRef<
             </Link>
           </div>
           <div>
-            <p className="text-foreground font-poppins m-0 flex flex-row items-center justify-center gap-2 font-semibold">
+            <p className="text-background font-poppins m-0 flex flex-row items-center justify-center gap-2 font-semibold">
               Feito com{" "}
               <Heart
                 weight="fill"
@@ -37,7 +37,7 @@ const Footer = React.forwardRef<
                 href="https://diogocezar.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline"
+                className="text-green"
               >
                 Diogo Cezar
               </a>
