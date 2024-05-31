@@ -22,6 +22,7 @@ const formatResponse = (validBookings: TypeBookingCal[]) =>
       attendeeEmail: item.attendees[0].email,
       status: item.status,
       requestMessage: item.responses["como-posso-ajudar"],
+      phone: item.responses["phone"],
       startTime: item.startTime,
       endTime: item.endTime,
     };

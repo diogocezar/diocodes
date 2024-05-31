@@ -13,6 +13,7 @@ export type TypeBookingCal = {
   status: string;
   responses: {
     "como-posso-ajudar": string;
+    phone: string;
   };
   startTime: Date;
   endTime: Date;
@@ -26,6 +27,7 @@ export type TypeBooking = {
   attendeeEmail: string;
   status: string;
   requestMessage: string;
+  phone: string;
   startTime: Date;
   endTime: Date;
 };

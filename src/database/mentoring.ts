@@ -19,6 +19,7 @@ export const upsertMentoringByBooking = async (booking: TypeBooking[]) => {
         create: {
           email: item.attendeeEmail,
           name: item.attendeeName,
+          phone: item.phone,
           createdAt: new Date(),
           updatedAt: null,
           removedAt: null,
