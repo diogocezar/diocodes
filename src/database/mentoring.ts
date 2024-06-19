@@ -239,7 +239,14 @@ export const getMentoringByExternalId = async (
 ): Promise<Mentoring | null> => {
   try {
     return await prisma.mentoring.findUnique({
-      where: { externalId, removedAt: null },
+      where: {
+        externalId,
+        removedAt: null,
+        OR: [
+          { externalEventId: CAL.MENTORING_PRO },
+          { externalEventId: CAL.MENTORING_FREE },
+        ],
+      },
       include: { attendee: true },
     });
   } catch (error) {
