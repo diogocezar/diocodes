@@ -1,7 +1,6 @@
 import React from "react";
 import { HeaderImage } from "@/components/app/main/image";
 import Diocodes from "@/assets/diocodes";
-import Image from "next/image";
 import { SubTitle, Title } from "@/components/app/main/titles";
 
 type HeaderProps = {
