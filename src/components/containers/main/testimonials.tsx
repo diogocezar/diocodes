@@ -41,14 +41,14 @@ const Testimonials = React.forwardRef<
               {comment?.map((item, index) => (
                 <CarouselItem key={index} className="">
                   <Card className="rounded-none bg-transparent shadow-none">
-                    <CardContent className="flex h-[200px] items-center justify-center rounded-none p-6">
-                      <span className="line-clamp-5 overflow-ellipsis text-[14px] font-semibold md:text-lg lg:text-xl text-background-dark">
+                    <CardContent className="flex h-[200px] items-center justify-center rounded-none p-0">
+                      <span className="line-clamp-5 overflow-ellipsis text-[16px] font-normal md:text-lg lg:text-xl text-background-dark">
                         {'"'}
                         {item?.comment}
                         {'"'}
                       </span>
                     </CardContent>
-                    <CardFooter className="font-poppins text-background-dark text-[14px] font-bold capitalize md:text-lg lg:text-xl">
+                    <CardFooter className="font-poppins text-background-dark text-[16px] font-bold capitalize md:text-lg lg:text-xl p-0">
                       <ChatCircleText className="mr-1 h-6 w-6" />
                       {compactName(
                         capitalizeString(item?.mentoring?.attendee?.name),
