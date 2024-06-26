@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
           <span className="text-border-black">headerTitle</span>
         ) : (
           <>
-            <span className="text-border-black">
+            <span className="text-border-black mt-10">
               Mentoria Gratuita em Tecnologia com{" "}
             </span>
             <span className="text-border-green text-5xl text-green md:text-8xl">

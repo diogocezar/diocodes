@@ -21,7 +21,7 @@
     background-color: var(--foreground);
     border: 4px solid #000;
     position: relative;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.6rem;
     cursor: pointer;
     text-align: start;
 }

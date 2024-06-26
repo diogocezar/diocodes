@@ -7,7 +7,7 @@ const Box = React.forwardRef<
   return (
     <div
       ref={ref}
-      className="box bg-foreground border-4 border-black p-5 relative flex flex-col justify-start items-start"
+      className="box bg-foreground border-4 border-black p-5 relative flex flex-col justify-start items-start max-w-full lg:max-w-[95%]"
     >
       {props.children}
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { SubSubTitle } from "@/components/app/main/titles";
+import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
 import { Paragraph } from "@/components/app/main/paragraph";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -26,9 +26,7 @@ const Testimonials = React.forwardRef<
   return (
     <>
       <SubSubTitle>Depoimentos</SubSubTitle>
-      <Paragraph>
-        Veja os depoimentos de quem já fez a mentoria e o que eles acharam.
-      </Paragraph>
+      <SubTitle>O que o pessoal tem falado?</SubTitle>
       <Box>
         {isLoadingComment ? (
           <SkeletonTestimonials />
@@ -42,23 +40,21 @@ const Testimonials = React.forwardRef<
             <CarouselContent className="mb-10 sm:mb-2">
               {comment?.map((item, index) => (
                 <CarouselItem key={index} className="">
-                  <div className="p-1">
-                    <Card className="rounded-none">
-                      <CardContent className="flex h-[200px] items-center justify-center rounded-none p-6">
-                        <span className="line-clamp-5 overflow-ellipsis text-[14px] font-semibold md:text-lg lg:text-xl">
-                          {'"'}
-                          {item?.comment}
-                          {'"'}
-                        </span>
-                      </CardContent>
-                      <CardFooter className="font-poppins text-green text-[14px] font-bold capitalize md:text-lg lg:text-xl">
-                        <ChatCircleText className="mr-1 h-6 w-6" />
-                        {compactName(
-                          capitalizeString(item?.mentoring?.attendee?.name),
-                        )}
-                      </CardFooter>
-                    </Card>
-                  </div>
+                  <Card className="rounded-none bg-transparent shadow-none">
+                    <CardContent className="flex h-[200px] items-center justify-center rounded-none p-6">
+                      <span className="line-clamp-5 overflow-ellipsis text-[14px] font-semibold md:text-lg lg:text-xl text-background-dark">
+                        {'"'}
+                        {item?.comment}
+                        {'"'}
+                      </span>
+                    </CardContent>
+                    <CardFooter className="font-poppins text-background-dark text-[14px] font-bold capitalize md:text-lg lg:text-xl">
+                      <ChatCircleText className="mr-1 h-6 w-6" />
+                      {compactName(
+                        capitalizeString(item?.mentoring?.attendee?.name),
+                      )}
+                    </CardFooter>
+                  </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>

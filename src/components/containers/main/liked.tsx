@@ -14,27 +14,24 @@ const Liked = React.forwardRef<
       <SubSubTitle>Tá! Curti! Como eu faço?</SubSubTitle>
       <Box>
         <Paragraph>
-          Marque uma mentoria <Hightlight>free</Hightlight> comigo clicando em{" "}
+          É fácil! Marque uma mentoria gratuita comigo clicando em{" "}
           <Button
             variant={"link"}
-            className="font-fira"
+            className="font-fira shadow-none text-background-dark tracking-tighter"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <Hightlight className="underline">Mentoria Free</Hightlight>
           </Button>
         </Paragraph>
         <Paragraph>
-          Não se esqueça de preencher o campo{" "}
-          <Hightlight>como posso te ajudar?</Hightlight>
+          Não se esqueça de preencher o campo “Como posso te ajudar?”. Me conte,
+          de forma resumida, suas dificuldades, o que gostaria de aprender, ou
+          qualquer outra coisa relevante.
         </Paragraph>
-        <Paragraph>
-          Me conte de forma resumida, quais são as suas dificuldades, o que
-          gostaria de aprender, ou qualquer outra coisa que achar relevante!
-        </Paragraph>
-        <Paragraph>
-          É importante que você aguarde a <Hightlight>confirmação</Hightlight>{" "}
-          do agendamento! Caso eu não consiga confirmar, tente agendar em um
-          outro horário!
+        <Paragraph className="mb-0">
+          Aguarde a confirmação do agendamento. Se eu não conseguir confirmar,
+          tente agendar em outro horário. Vamos juntos transformar suas ideias
+          em conquistas!
         </Paragraph>
       </Box>
     </>

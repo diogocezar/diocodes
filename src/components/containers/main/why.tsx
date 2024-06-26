@@ -1,6 +1,5 @@
 import React from "react";
 import { SubSubTitle } from "@/components/app/main/titles";
-import { Hightlight } from "@/components/app/main/hightlight";
 import { Paragraph } from "@/components/app/main/paragraph";
 import { Box } from "@/components/app/main/box";
 
@@ -13,13 +12,20 @@ const Why = React.forwardRef<
       <SubSubTitle>Por que estou fazendo isso?</SubSubTitle>
       <Box>
         <Paragraph>
-          Já a algum tempo, sinto que posso{" "}
-          <Hightlight>compartilhar</Hightlight> um pouco do que aprendi.
+          Há algum tempo, percebi que meu conhecimento e experiência poderiam ir
+          além das minhas conquistas pessoais. Senti a necessidade de
+          compartilhar o que aprendi e fazer a diferença na vida de outras
+          pessoas.
         </Paragraph>
         <Paragraph>
-          Estou disponibilizando parte do meu tempo para ajudar pessoas{" "}
-          <Hightlight>(que realmente precisam)</Hightlight> a se aprimorarem na
-          área de tecnologia.
+          Disponibilizo parte do meu tempo para ajudar quem realmente precisa a
+          se aprimorar na área de tecnologia. Acredito que, juntos, podemos
+          transformar desafios em oportunidades e sonhos em realidades.
+        </Paragraph>
+        <Paragraph className="mb-0">
+          Se você está em busca de orientação, inspiração ou simplesmente um
+          empurrãozinho na direção certa, estou aqui para guiá-lo nessa jornada
+          emocionante e cheia de possibilidades.
         </Paragraph>
       </Box>
     </>

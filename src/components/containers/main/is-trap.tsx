@@ -13,35 +13,36 @@ const IsTrap = React.forwardRef<
     <>
       <SubSubTitle>Qual é a pegadinha?</SubSubTitle>
       <SubTitle>
-        É agora o momento que eu vendo um curso de como ser dev em 3 semanas?
+        Você deve estar esperando que agora eu tente te vender um curso de “Como
+        ser Dev em 3 Semanas”, certo?
       </SubTitle>
       <Box>
         <Paragraph>
-          <Hightlight>Não!</Hightlight> Não tem pegadinha! Não tem venda de
-          curso! Não preciso dos seus dados, não tem e-book!
+          <Hightlight>Errado!</Hightlight> Aqui não tem pegadinha, não tem venda
+          de curso, nem coleta de dados ou e-book “milagroso”. Meu objetivo é
+          simples e genuíno: ajudar você a crescer na área de tecnologia, de
+          forma totalmente gratuita.
         </Paragraph>
-        <Paragraph>
-          Enquanto eu conseguir, vou disponibilizar meu tempo de forma gratúita
-          para ajudar.
-        </Paragraph>
-        <Paragraph>
-          As mentorias podem ser agendadas 2 vezes por semana (com papos de 30
-          minutos).
+        <Paragraph className="mb-0">
+          Enquanto eu puder, vou disponibilizar meu tempo para oferecer
+          mentorias gratuitas, sem compromisso. Você pode agendar até 4 sessões
+          por semana, com conversas de 30 minutos, para discutir suas dúvidas,
+          projetos e desafios. Vamos juntos transformar seu potencial em
+          sucesso!
         </Paragraph>
       </Box>
       <SubSubTitle>Poxa, não tem como furar a fila?</SubSubTitle>
       <Box>
         <Paragraph>
-          Caso você não queira esperar, estou também disponibilizando uma
-          mentoria <Hightlight>Pro</Hightlight>, com o valor de{" "}
-          <Hightlight>R$ 120,00</Hightlight> por{" "}
-          <Hightlight>45 minutos</Hightlight>.
+          Quer evitar a espera? Sem problemas! Estou oferecendo também uma
+          mentoria Pro, onde você terá acesso a uma sessão exclusiva de 45
+          minutos por R$ 120,00.
         </Paragraph>
-        <Paragraph>
-          Marque uma mentoria <Hightlight>pro</Hightlight> comigo clicando em{" "}
+        <Paragraph className="mb-0">
+          Garanta seu horário e acelere seu aprendizado clicando em{" "}
           <Button
             variant={"link"}
-            className="font-fira"
+            className="font-fira shadow-none text-background-dark tracking-tighter"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <Hightlight className="underline">Mentoria Pro</Hightlight>

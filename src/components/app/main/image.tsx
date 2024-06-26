@@ -1,13 +1,16 @@
 import React from "react";
+import Image from "next/image";
 
-const HeaderImage = ({ ...props }) => {
+const MeImage = () => {
   return (
-    <div className="mb-12 h-[100px] w-[100px] items-center overflow-hidden md:h-[150px] md:w-[150px]">
-      {props.children}
-    </div>
+    <Image
+      className="h-56 w-56 rounded-full border-[6px] border-background-dark me-img"
+      src="/profile.jpg"
+      width={400}
+      height={400}
+      alt="Foto do Diogão"
+    />
   );
 };
 
-HeaderImage.displayName = "Image";
-
-export { HeaderImage };
+export { MeImage };

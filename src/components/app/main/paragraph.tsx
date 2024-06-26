@@ -6,7 +6,7 @@ const Paragraph = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
   return (
-    <h1
+    <p
       ref={ref}
       className={cn(
         "text-background-dark text-md mb-6 md:text-left tracking-tighter",
@@ -14,7 +14,7 @@ const Paragraph = React.forwardRef<
       )}
     >
       {props.children}
-    </h1>
+    </p>
   );
 });
 

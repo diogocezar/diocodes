@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Star } from "@phosphor-icons/react";
+import { Calendar } from "@phosphor-icons/react";
 import { PRICE } from "@/contants/price";
 import { formatCurrency } from "@/lib/utils";
 import Link from "next/link";
-import { SubTitle } from "@/components/app/main/titles";
 
 const Book = React.forwardRef<
   HTMLDivElement,
@@ -29,9 +28,9 @@ const Book = React.forwardRef<
         <Link
           href="https://buy.stripe.com/4gw3cy9fV7cQ6wE000"
           target="_blank"
-          className="w-full sm:w-auto"
+          className="w-full md:w-auto"
         >
-          <Button className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark sm:w-[270px] md:mb-8 md:mt-10 md:justify-center">
+          <Button className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center">
             <Calendar size={22} />
             Mentoria Pro{" "}
             <span className="text-xs">
@@ -43,7 +42,7 @@ const Book = React.forwardRef<
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao"
           data-cal-config='{"layout":"month_view"}'
-          className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark sm:w-[270px] md:mb-8 md:mt-10 md:justify-center"
+          className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center"
         >
           <Calendar size={22} />
           Mentoria Free

@@ -12,26 +12,23 @@ const Presentation = React.forwardRef<
   return (
     <Box>
       <Paragraph>
-        Estou na área de tecnologia a mais de{" "}
-        <Hightlight>{xpYears} anos</Hightlight>.
+        Sou Diogo, um entusiasta da tecnologia com{" "}
+        <Hightlight>{xpYears} anos</Hightlight> de experiência, ex-professor na
+        UTFPR e atual Head de Tecnologia e CEO de uma startup de IA. Minha
+        trajetória é marcada pela paixão em transformar ideias em realidade e
+        ajudar outros a fazerem o mesmo.
       </Paragraph>
       <Paragraph>
-        Eu já fui de tudo um pouco: <span className="underline">professor</span>
-        , <span className="underline">palestrante</span>,{" "}
-        <span className="underline">desenvolvedor</span>,{" "}
-        <span className="underline">líder de tecnologia.</span>
+        Como mentor, palestrante e líder, minha missão é impulsionar talentos e
+        moldar a próxima geração de profissionais de tecnologia. Minha abordagem
+        prática e visionária combina anos de experiência em gestão de equipes,
+        desenvolvimento de produtos e ensino acadêmico.
       </Paragraph>
-      <Paragraph>
-        Caso queira conhecer um pouco mais sobre a minha história, por favor
-        acesse o meu site:{" "}
-        <a
-          href="https://diogocezar.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple underline"
-        >
-          https://diogocezar.dev
-        </a>
+      <Paragraph className="mb-0">
+        Junte-se a mim nessa jornada! Se você busca orientação personalizada,
+        insights sobre tendências ou estratégias para superar desafios, estou
+        aqui para ajudar. Vamos transformar suas ambições em realizações
+        concretas na vibrante indústria de tecnologia.
       </Paragraph>
     </Box>
   );

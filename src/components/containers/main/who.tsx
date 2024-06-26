@@ -12,8 +12,15 @@ const Who = React.forwardRef<
       <SubSubTitle>Para quem é a mentoria?</SubSubTitle>
       <Box>
         <Paragraph>
-          Não importa qual é o seu nível de conhecimento. Se você está
-          começando, ou se já tem alguma experiência, eu posso te ajudar!
+          Se você é um iniciante curioso ou um profissional experiente buscando
+          novos desafios, essa mentoria é para você. Não importa o seu nível de
+          conhecimento, estou aqui para te ajudar a crescer e alcançar seus
+          objetivos na área de tecnologia.
+        </Paragraph>
+        <Paragraph className="mb-0">
+          Vamos juntos transformar suas dúvidas em soluções, suas ideias em
+          projetos e suas ambições em realizações. Venha fazer parte dessa
+          jornada de aprendizado e inovação!
         </Paragraph>
       </Box>
     </>
