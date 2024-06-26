@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
     <>
       <Title className="md:max-w-[80%] lg:max-w-[60%]">
         {headerTitle ? (
-          <span className="text-border-black">headerTitle</span>
+          <span className="text-border-black">{headerTitle}</span>
         ) : (
           <>
             <span className="text-border-black mt-10">

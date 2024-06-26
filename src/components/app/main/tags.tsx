@@ -31,6 +31,7 @@ export const Tags: React.FC<TagsProps> = ({
         <Toggle
           key={index}
           onClick={() => handleTagToggle(tag)}
+          variant={"avaliation"}
           disabled={
             selectedTags.length >= maxTags && !selectedTags.includes(tag)
           }

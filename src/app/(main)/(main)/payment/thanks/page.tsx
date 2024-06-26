@@ -23,7 +23,7 @@ export default function MainPage() {
   }, []);
   return (
     <>
-      <Container className="h-[calc(100vh-225px)] md:h-[calc(100vh-230px)] lg:h-[calc(100vh-220px)]">
+      <Container className="h-[calc(100vh-264px)] md:h-[calc(100vh-280px)] lg:h-[calc(100vh-204px)]">
         <Header
           headerTitle="Obrigado pelo pagamento!"
           headerSubTitle="Agora você tem acesso a todos os benefícios da mentoria Pro!"
@@ -33,7 +33,7 @@ export default function MainPage() {
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao-pro"
           data-cal-config='{"layout":"month_view"}'
-          className="mb-2 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-green hover:bg-card hover:text-green sm:w-[300px] md:mb-8 md:mt-10 md:justify-center"
+          className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center"
         >
           <Star size={20} />
           Agendar Mentoria Pro
