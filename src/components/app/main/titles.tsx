@@ -7,7 +7,7 @@ const Title = React.forwardRef<
   return (
     <h1
       ref={ref}
-      className="text-foreground text-5xl mb-4 font-black tracking-tighter font-poppins md:mb-12 md:text-6xl mt-10 lg:max-w-[70%]"
+      className="text-foreground text-5xl mb-4 font-black tracking-tighter font-poppins md:mb-12 md:text-6xl mt-5 lg:mt-10 lg:max-w-[70%]"
     >
       {props.children}
     </h1>
