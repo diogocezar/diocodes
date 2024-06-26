@@ -23,7 +23,7 @@ const SubTitle = React.forwardRef<
   return (
     <h3
       ref={ref}
-      className="font-poppins mb-3 mt-0 text-2xl font-black md:mb-6 md:text-3xl tracking-tighter"
+      className="font-poppins mb-3 mt-0 text-2xl font-black md:mb-6 md:text-3xl tracking-tighter lg:max-w-[70%]"
     >
       {props.children}
     </h3>
@@ -39,7 +39,7 @@ const SubSubTitle = React.forwardRef<
   return (
     <h2
       ref={ref}
-      className="text-border-black text-green font-black font-poppins mb-8 mt-8 text-3xl md:mt-14 md:text-5xl tracking-tighter"
+      className="text-border-black text-green font-black font-poppins mb-8 mt-8 text-3xl md:mt-14 md:text-5xl tracking-tighter lg:max-w-[70%]"
     >
       {props.children}
     </h2>
