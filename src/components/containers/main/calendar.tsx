@@ -7,6 +7,7 @@ import { SubSubTitle } from "@/components/app/main/titles";
 import SkeletonWhoBooked from "@/components/skeletons/skeleton-who-booked";
 import { compactName } from "@/lib/utils";
 import { CAL } from "@/contants/cal";
+import { Box } from "@/components/app/main/box";
 
 export default function Calendar() {
   const { mentoring, isLoadingMentoring } = useGetMentoring("mentoring");
@@ -26,18 +27,20 @@ export default function Calendar() {
       {isLoadingMentoring ? (
         <SkeletonWhoBooked />
       ) : (
-        <div className="w-full">
-          <FullCalendar
-            eventColor="#50fa7b"
-            eventTextColor="#0e0f12"
-            contentHeight={900}
-            eventDisplay="block"
-            locale={ptBrLocale}
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            events={events}
-          />
-        </div>
+        <Box>
+          <div className="w-full">
+            <FullCalendar
+              eventColor="#50fa7b"
+              eventTextColor="#0e0f12"
+              contentHeight={900}
+              eventDisplay="block"
+              locale={ptBrLocale}
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              events={events}
+            />
+          </div>
+        </Box>
       )}
     </div>
   );

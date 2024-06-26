@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "@/lib/utils";
 
 const Title = React.forwardRef<
   HTMLHeadingElement,
@@ -8,10 +7,7 @@ const Title = React.forwardRef<
   return (
     <h1
       ref={ref}
-      className={cn(
-        "text-pink font-poppins mb-6 text-2xl font-bold md:mb-12 md:text-6xl",
-        className,
-      )}
+      className="text-foreground text-5xl mb-4 font-black tracking-tighter font-poppins md:mb-12 md:text-6xl"
     >
       {props.children}
     </h1>
@@ -27,10 +23,7 @@ const SubTitle = React.forwardRef<
   return (
     <h3
       ref={ref}
-      className={cn(
-        "text-foreground font-poppins font-poppins mb-4 mt-2 text-lg font-medium md:mb-12 md:text-xl",
-        className,
-      )}
+      className="font-poppins mb-4 mt-2 text-2xl font-black md:mb-12 md:text-4xl tracking-tighter"
     >
       {props.children}
     </h3>
@@ -46,10 +39,7 @@ const SubSubTitle = React.forwardRef<
   return (
     <h2
       ref={ref}
-      className={cn(
-        "text-green font-poppins mb-8 mt-1 text-xl font-bold md:mt-14 md:text-4xl",
-        className,
-      )}
+      className="text-border-black text-green font-black font-poppins mb-8 mt-8 text-3xl md:mt-14 md:text-5xl tracking-tighter"
     >
       {props.children}
     </h2>

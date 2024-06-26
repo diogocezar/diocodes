@@ -2,6 +2,7 @@ import React from "react";
 import { Paragraph } from "@/components/app/main/paragraph";
 import { Hightlight } from "@/components/app/main/hightlight";
 import { getXpYear } from "@/lib/utils";
+import { Box } from "@/components/app/main/box";
 
 const Presentation = React.forwardRef<
   HTMLDivElement,
@@ -9,7 +10,7 @@ const Presentation = React.forwardRef<
 >(() => {
   const xpYears = getXpYear();
   return (
-    <>
+    <Box>
       <Paragraph>
         Estou na área de tecnologia a mais de{" "}
         <Hightlight>{xpYears} anos</Hightlight>.
@@ -32,7 +33,7 @@ const Presentation = React.forwardRef<
           https://diogocezar.dev
         </a>
       </Paragraph>
-    </>
+    </Box>
   );
 });
 

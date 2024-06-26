@@ -96,20 +96,68 @@
     }
 
     .bg-dots {
-        background-color: #0e0f12;
+        background-color: var(--pink);
         opacity: 1;
         background-image: radial-gradient(
-                rgba(255, 121, 198, 0.2) 1.4000000000000001px,
+                rgba(255, 255, 255, 0.1) 5px,
                 transparent 1.2px
             ),
-            radial-gradient(
-                rgba(255, 121, 198, 0.5) 1.4000000000000001px,
-                #0e0f12 1.2px
-            );
-        background-size: 112px 112px;
+            radial-gradient(rgba(255, 255, 255, 0.1) 10px, var(--pink) 1.2px);
+        background-size: 100px 100px;
         background-position:
             0 0,
-            56px 56px;
+            50px 50px;
+    }
+
+    .box {
+        width: 100%;
+        background-color: var(--foreground);
+        border: 4px solid #000;
+        position: relative;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .box::before {
+        content: "";
+        position: absolute;
+        right: -12px;
+        top: 15px;
+        width: 100%;
+        height: 98%;
+        background-color: #000;
+        background-size: 12px, 100%;
+        border: 0.4rem solid #000;
+        z-index: -2;
+    }
+
+    .text-border-black {
+        -webkit-text-fill-color: var(--foreground);
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: var(--background-dark);
+        text-shadow: 0px 3px 0 var(--background-dark);
+    }
+
+    .text-border-green {
+        -webkit-text-fill-color: var(--green);
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: var(--background-dark);
+        text-shadow: 0px 3px 0 var(--background-dark);
+    }
+
+    @media (max-width: 768px) {
+        .text-border-black {
+            -webkit-text-fill-color: var(--foreground);
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: var(--background-dark);
+            text-shadow: 0px 2px 0 var(--background-dark);
+        }
+
+        .text-border-green {
+            -webkit-text-fill-color: var(--green);
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: var(--background-dark);
+            text-shadow: 0px 2px 0 var(--background-dark);
+        }
     }
 }
 
