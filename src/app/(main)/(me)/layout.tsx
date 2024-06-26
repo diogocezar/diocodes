@@ -26,23 +26,21 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title:
-    "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+  title: "Os Links Pessoais do Diogão | Conecte-se nas Redes | diocodes.dev/me",
   description:
-    "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
+    "Explore os links pessoais do Diogão! Encontre-me no TikTok, Instagram, LinkedIn, GitHub, Portfólio Pessoal e Site de Mentorias.",
   keywords: [
-    "mentorias gratuitas em tecnologia",
-    "mentoria para profissionais de TI",
-    "orientação tecnológica gratuita",
-    "mentoria em programação gratuita",
-    "mentor de desenvolvimento de software",
-    "guia para programadores iniciantes",
-    "mentor de design de interface",
-    "mentor de carreira em tecnologia",
-    "desenvolvimento profissional em TI",
-    "estratégias de crescimento na carreira de TI",
-    "comunidade de mentoria em tecnologia",
-    "networking para profissionais de TI",
+    "links pessoais",
+    "conecte-se com Diogão",
+    "Diogão no TikTok",
+    "Diogão no Instagram",
+    "Diogão no LinkedIn",
+    "Diogão no GitHub",
+    "portfólio pessoal de Diogão",
+    "site de mentorias de Diogão",
+    "rede social de Diogão",
+    "mentoria em tecnologia",
+    "recursos de tecnologia",
   ],
   authors: [
     {
@@ -52,23 +50,23 @@ export const metadata: Metadata = {
   ],
   creator: "Diogo Cezar",
   manifest: "/manifest.json",
-  metadataBase: new URL("https://diocodes.dev"),
+  metadataBase: new URL("https://diocodes.dev/me"),
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://diocodes.dev",
+    url: "https://diocodes.dev/me",
     siteName:
-      "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+      "Os Links Pessoais do Diogão | Conecte-se nas Redes | diocodes.dev/me",
     title:
-      "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
+      "Os Links Pessoais do Diogão | Conecte-se nas Redes | diocodes.dev/me",
     description:
-      "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
+      "Explore os links pessoais do Diogão! Encontre-me no TikTok, Instagram, LinkedIn, GitHub, Portfólio Pessoal e Site de Mentorias.",
     images: [
       {
         url: "https://diocodes.dev/og.png",
         width: 280,
         height: 280,
-        alt: "Mentorias com o Diogão",
+        alt: "Links Pessoais do Diogão",
       },
     ],
   },

@@ -1,18 +1,22 @@
+.text-border-black {
+    -webkit-text-fill-color: var(--foreground);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--background-dark);
+    text-shadow: 0px 4px 0 var(--background-dark);
+}
+
 .bg-dots-me {
-    background-color: #212226;
+    background-color: var(--pink);
     opacity: 1;
     background-image: radial-gradient(
-            rgba(255, 121, 198, 0.2) 1.4000000000000001px,
+            rgba(255, 255, 255, 0.1) 5px,
             transparent 1.2px
         ),
-        radial-gradient(
-            rgba(255, 121, 198, 0.5) 1.4000000000000001px,
-            #212226 1.2px
-        );
-    background-size: 112px 112px;
+        radial-gradient(rgba(255, 255, 255, 0.1) 10px, var(--pink) 1.2px);
+    background-size: 100px 100px;
     background-position:
         0 0,
-        56px 56px;
+        50px 50px;
 }
 
 .me-button {

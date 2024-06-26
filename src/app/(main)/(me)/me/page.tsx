@@ -17,13 +17,15 @@ type ButtonProps = {
 
 const MeImage = () => {
   return (
-    <Image
-      className="h-60 w-60 rounded-full border-4 mt-5 border-foreground mb-6 me-img"
-      src="/profile.jpg"
-      width={400}
-      height={400}
-      alt="Foto do Diogão"
-    />
+    <div className="relative">
+      <Image
+        className="h-60 w-60 rounded-full border-[6px] border-background-dark me-img"
+        src="/profile.jpg"
+        width={400}
+        height={400}
+        alt="Foto do Diogão"
+      />
+    </div>
   );
 };
 
@@ -40,8 +42,11 @@ const Button = (props: ButtonProps) => {
 
 export default function MePage() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col gap-3">
+    <div className="w-screen h-screen flex justify-center items-center flex-col gap-4 relative">
       <MeImage />
+      <h1 className="text-border-black text-green text-5xl font-poppins mb-4 font-black tracking-tighter">
+        Diogão
+      </h1>
       <Button href="https://diocodes.dev" icon={<Calendar size={22} />}>
         Agende sua mentoria
       </Button>
