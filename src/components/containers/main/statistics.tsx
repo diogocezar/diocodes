@@ -53,7 +53,7 @@ export default function Statistics() {
               <div>
                 Total de
                 <br />
-                Agendamentos
+                Mentorias
               </div>
             }
             value={statistics.totalMentoring}
