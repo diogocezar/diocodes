@@ -10,6 +10,7 @@ import { IsTrap } from "@/components/containers/main/is-trap";
 import { Liked } from "@/components/containers/main/liked";
 import { Testimonials } from "@/components/containers/main/testimonials";
 import { MeImage } from "@/components/app/main/image";
+import Statistics from "@/components/containers/main/statistics";
 // import Calendar from "@/components/containers/main/calendar";
 
 export default function MainPage() {
@@ -20,6 +21,7 @@ export default function MainPage() {
         <Header />
         <Presentation />
         <Book />
+        <Statistics />
         {/* <Calendar /> */}
         {/* <WhoBooked /> */}
         <Testimonials />

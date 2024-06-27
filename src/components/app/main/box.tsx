@@ -7,7 +7,7 @@ const Box = React.forwardRef<
 >(({ className, ...props }, ref) => {
   let joinClassName = "box ";
   joinClassName += cn(
-    "bg-foreground border-4 border-black p-5 relative flex flex-col justify-start items-start max-w-full lg:max-w-[95%]",
+    "bg-foreground border-4 border-black p-5 relative flex flex-col justify-start items-start max-w-full",
     className,
   );
   return (

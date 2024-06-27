@@ -3,33 +3,15 @@ import prisma from "@/database/client";
 import { logger } from "@/lib/logger";
 import { MongoClient, Document } from "mongodb";
 
-const MIN_FAKE_SLOW_TIME = 100;
-const MAX_FAKE_SLOW_TIME = 450;
-
-const fakeSlowResult = <T>(result: T): Promise<T> => {
-  return new Promise((resolve) => {
-    setTimeout(
-      () => {
-        resolve(result);
-      },
-      Math.floor(
-        Math.random() * (MAX_FAKE_SLOW_TIME - MIN_FAKE_SLOW_TIME + 1),
-      ) + MIN_FAKE_SLOW_TIME,
-    );
-  });
-};
-
 export const countMentoringDone = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          removedAt: null,
-          externalStatus: CAL.STATUS_ACCEPTED,
-          startTime: { lte: new Date() },
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        removedAt: null,
+        externalStatus: CAL.STATUS_ACCEPTED,
+        startTime: { lte: new Date() },
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -38,15 +20,13 @@ export const countMentoringDone = async (): Promise<number> => {
 
 export const countMentoringToBe = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          removedAt: null,
-          externalStatus: CAL.STATUS_ACCEPTED,
-          startTime: { gte: new Date() },
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        removedAt: null,
+        externalStatus: CAL.STATUS_ACCEPTED,
+        startTime: { gte: new Date() },
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -55,14 +35,12 @@ export const countMentoringToBe = async (): Promise<number> => {
 
 export const countMentoringCanceled = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          externalStatus: CAL.STATUS_CANCELLED,
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        externalStatus: CAL.STATUS_CANCELLED,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -71,14 +49,12 @@ export const countMentoringCanceled = async (): Promise<number> => {
 
 export const sumPayments = async (): Promise<any> => {
   try {
-    return fakeSlowResult(
-      await prisma.payment.aggregate({
-        _sum: { amount: true },
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.payment.aggregate({
+      _sum: { amount: true },
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -86,15 +62,13 @@ export const sumPayments = async (): Promise<any> => {
 
 export const countMentoringPro = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          externalStatus: CAL.STATUS_ACCEPTED,
-          externalEventId: CAL.MENTORING_PRO,
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        externalStatus: CAL.STATUS_ACCEPTED,
+        externalEventId: CAL.MENTORING_PRO,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -103,15 +77,13 @@ export const countMentoringPro = async (): Promise<number> => {
 
 export const countMentoringFree = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          externalStatus: CAL.STATUS_ACCEPTED,
-          externalEventId: CAL.MENTORING_FREE,
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        externalStatus: CAL.STATUS_ACCEPTED,
+        externalEventId: CAL.MENTORING_FREE,
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -120,13 +92,11 @@ export const countMentoringFree = async (): Promise<number> => {
 
 export const countMentoringTotal = async (): Promise<number> => {
   try {
-    return fakeSlowResult(
-      await prisma.mentoring.count({
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.mentoring.count({
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -135,13 +105,11 @@ export const countMentoringTotal = async (): Promise<number> => {
 
 export const countAvaliationTotal = async (): Promise<number> => {
   try {
-    return await fakeSlowResult(
-      prisma.avaliation.count({
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.avaliation.count({
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -150,14 +118,12 @@ export const countAvaliationTotal = async (): Promise<number> => {
 
 export const averageAvaliationTotal = async (): Promise<number> => {
   try {
-    const result = await fakeSlowResult(
-      prisma.avaliation.aggregate({
-        _avg: { rating: true },
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    const result = await prisma.avaliation.aggregate({
+      _avg: { rating: true },
+      where: {
+        removedAt: null,
+      },
+    });
     if (!result) return 0;
     return result._avg.rating!;
   } catch (error) {
@@ -168,13 +134,11 @@ export const averageAvaliationTotal = async (): Promise<number> => {
 
 export const countInviteTotal = async (): Promise<number> => {
   try {
-    return await fakeSlowResult(
-      prisma.invite.count({
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.invite.count({
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -183,13 +147,11 @@ export const countInviteTotal = async (): Promise<number> => {
 
 export const countTagTotal = async (): Promise<number> => {
   try {
-    return await fakeSlowResult(
-      prisma.tag.count({
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.tag.count({
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -198,13 +160,11 @@ export const countTagTotal = async (): Promise<number> => {
 
 export const countPersonTotal = async (): Promise<number> => {
   try {
-    return await fakeSlowResult(
-      prisma.person.count({
-        where: {
-          removedAt: null,
-        },
-      }),
-    );
+    return prisma.person.count({
+      where: {
+        removedAt: null,
+      },
+    });
   } catch (error) {
     logger.error(error);
   }
@@ -215,20 +175,18 @@ export const getNextMentoring = async (): Promise<
   { attendee: { name: string; email: string }; id: string; startTime: Date }[]
 > => {
   try {
-    const result = await fakeSlowResult(
-      prisma.mentoring.findMany({
-        where: {
-          removedAt: null,
-          startTime: { gte: new Date() },
-          externalStatus: CAL.STATUS_ACCEPTED,
-        },
-        include: {
-          attendee: true,
-        },
-        take: 6,
-        orderBy: { startTime: "asc" },
-      }),
-    );
+    const result = await prisma.mentoring.findMany({
+      where: {
+        removedAt: null,
+        startTime: { gte: new Date() },
+        externalStatus: CAL.STATUS_ACCEPTED,
+      },
+      include: {
+        attendee: true,
+      },
+      take: 6,
+      orderBy: { startTime: "asc" },
+    });
     return result.map((item) => ({
       id: item.id,
       attendee: item.attendee,
@@ -278,7 +236,7 @@ export const getAvaliationsByMonth = async (): Promise<Document[]> => {
     const cursor = coll.aggregate(agg);
     const result = await cursor.toArray();
     await client.close();
-    return fakeSlowResult(result);
+    return result;
   } catch (error) {
     logger.error(error);
   }

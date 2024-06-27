@@ -1,6 +1,7 @@
 import prisma from "@/database/client";
 import { Avaliation } from "@prisma/client";
 import { logger } from "@/lib/logger";
+import { shuffleArray } from "@/lib/utils";
 
 export const createAvaliation = async (
   avaliation: Avaliation & { avaliationTags: [] },
@@ -114,6 +115,24 @@ export const getAllAvaliations = async (): Promise<Avaliation[]> => {
       },
       orderBy: { createdAt: "desc" },
     });
+  } catch (error) {
+    logger.error(error);
+  }
+  return [];
+};
+
+export const getAllShuffleComments = async (): Promise<Avaliation[]> => {
+  try {
+    const result = await prisma.avaliation.findMany({
+      where: {
+        removedAt: null,
+        showComment: true,
+      },
+      include: {
+        mentoring: { include: { attendee: true } },
+      },
+    });
+    return shuffleArray(result);
   } catch (error) {
     logger.error(error);
   }

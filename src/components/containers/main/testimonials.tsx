@@ -1,6 +1,5 @@
 import React from "react";
 import { SubSubTitle, SubTitle } from "@/components/app/main/titles";
-import { Paragraph } from "@/components/app/main/paragraph";
 import Autoplay from "embla-carousel-autoplay";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
