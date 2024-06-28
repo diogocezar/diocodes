@@ -30,7 +30,7 @@ const Book = React.forwardRef<
           target="_blank"
           className="w-full md:w-auto"
         >
-          <Button className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center">
+          <Button className="me-button bg-green hover:bg-background hover:text-foreground rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 md:w-[270px] md:mb-8 md:mt-10 md:justify-center">
             <Calendar size={22} />
             Mentoria Pro{" "}
             <span className="text-xs">
@@ -42,7 +42,7 @@ const Book = React.forwardRef<
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao"
           data-cal-config='{"layout":"month_view"}'
-          className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center"
+          className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground md:w-[270px] md:mb-8 md:mt-10 md:justify-center"
         >
           <Calendar size={22} />
           Mentoria Free
