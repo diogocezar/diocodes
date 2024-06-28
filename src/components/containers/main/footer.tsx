@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Heart, GithubLogo, LinkSimple } from "@phosphor-icons/react";
+import { Heart, GithubLogo, AddressBook } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 const Footer = React.forwardRef<
@@ -21,8 +21,8 @@ const Footer = React.forwardRef<
             </Link>
             <Link href="https://diocodes.dev/me" target="_blank">
               <Button className="me-button rounded-none mb-0 mt-0 flex w-[220px] flex-row items-center justify-start gap-2 bg-foreground hover:bg-green hover:text-background-dark md:mb-0 md:mt-2 md:justify-start">
-                <LinkSimple size={20} />
-                Entre em contato
+                <AddressBook size={20} />
+                Entre em Contato
               </Button>
             </Link>
           </div>

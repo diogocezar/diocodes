@@ -18,7 +18,7 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
   return (
     <a href={props.href} target="_blank">
-      <button className="me-button hover:bg-green transition-all gap-2 font-medium">
+      <button className="me-button bg-foreground hover:bg-green transition-all gap-2 font-medium">
         {props.icon}
         {props.children}
       </button>
