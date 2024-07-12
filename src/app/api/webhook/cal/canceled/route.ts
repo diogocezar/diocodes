@@ -1,13 +1,11 @@
 import { logger } from "@/lib/logger";
-import {
-  getMentoringByExternalId,
-  updateMentoring,
-} from "@/database/mentoring";
+import { getMentoringByExternalId } from "@/database/mentoring";
 import { createWebhookLog } from "@/database/webhook-log";
 import { authCalWebhook } from "@/lib/auth-webhook";
 import { WEBHOOK } from "@/contants/webhook";
 import { getErrorMessage, transformMeta } from "@/lib/utils";
 import { CAL } from "@/contants/cal";
+import prisma from "@/database/client";
 
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -29,7 +27,7 @@ export const POST = async (req: Request) => {
       payload: JSON.stringify(data),
     } as any);
 
-    const { bookingId } = data;
+    const { bookingId } = data.payload;
 
     logger.info(
       "[POST] api/webhook/cal/canceled => id",
@@ -51,9 +49,12 @@ export const POST = async (req: Request) => {
       "[POST] api/webhook/cal/canceled => changing status to canceled",
     );
 
-    const updatedMentoring = await updateMentoring(mentoring.id, {
-      ...mentoring,
-      externalStatus: CAL.STATUS_CANCELLED,
+    const updatedMentoring = await prisma.mentoring.update({
+      where: { id: mentoring.id },
+      data: {
+        externalStatus: CAL.STATUS_CANCELLED,
+        updatedAt: new Date(),
+      },
     });
 
     if (updatedMentoring)
