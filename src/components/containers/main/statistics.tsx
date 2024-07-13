@@ -13,10 +13,10 @@ type StatisticsBoxProps = {
 const StatisticsBox = ({ title, value }: StatisticsBoxProps) => {
   return (
     <Box className="w-[45%] lg:w-[23%]">
-      <h3 className="font-poppins mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
+      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
         {title}
       </h3>
-      <span className="text-5xl font-black">{value}</span>
+      <span className="text-5xl font-black text-center w-full">{value}</span>
     </Box>
   );
 };
@@ -24,13 +24,17 @@ const StatisticsBox = ({ title, value }: StatisticsBoxProps) => {
 const StatisticsBoxAvaliation = ({ title, value }: StatisticsBoxProps) => {
   return (
     <Box className="w-[45%] lg:w-[23%]">
-      <h3 className="font-poppins mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
+      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
         {title}
       </h3>
-      <div className="mt-2 flex flex-row gap-1 text-3xl">
+      <div className="mt-2 flex flex-row text-3xl flex-wrap w-full justify-center">
         {[1, 2, 3, 4, 5].map((index) =>
           index <= Math.round(value) ? (
-            <Star key={index} weight="fill" />
+            <Star
+              key={index}
+              weight="fill"
+              className="size-5 sm:size-8 xl:size-10 text-pink"
+            />
           ) : (
             <Star key={index} className="opacity-20" />
           ),
@@ -50,37 +54,16 @@ export default function Statistics() {
       ) : (
         <div className="flex w-full flex-row flex-wrap justify-between gap-y-8">
           <StatisticsBox
-            title={
-              <div>
-                Mentorias <br /> Realizadas
-              </div>
-            }
+            title={<div>Realizadas</div>}
             value={statistics.totalMentoring}
           />
           <StatisticsBox
-            title={
-              <div>
-                Mentorias <br /> Agendadas
-              </div>
-            }
+            title={<div>Agendadas</div>}
             value={statistics.mentoringToBe}
           />
-          <StatisticsBox
-            title={
-              <div>
-                Mentorias <br /> PRO
-              </div>
-            }
-            value={statistics.totalPro}
-          />
+          <StatisticsBox title={<div>Pro</div>} value={statistics.totalPro} />
           <StatisticsBoxAvaliation
-            title={
-              <div>
-                Média de
-                <br />
-                Avaliações
-              </div>
-            }
+            title={<div>Avaliação</div>}
             value={statistics.avgAvaliation}
           />
         </div>
