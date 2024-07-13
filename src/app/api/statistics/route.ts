@@ -1,6 +1,6 @@
 import {
   countMentoringDone,
-  countMentoringTotal,
+  countMentoringPro,
   averageAvaliationTotal,
   countMentoringToBe,
 } from "@/database/dashboard";
@@ -12,8 +12,8 @@ export const fetchCache = "force-no-store";
 export const GET = async () => {
   try {
     const statistics = {
-      totalDoneMentoring: await countMentoringDone(),
-      totalMentoring: await countMentoringTotal(),
+      totalMentoring: await countMentoringDone(),
+      totalPro: await countMentoringPro(),
       avgAvaliation: await averageAvaliationTotal(),
       mentoringToBe: await countMentoringToBe(),
     };

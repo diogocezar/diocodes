@@ -1,9 +1,9 @@
 import { Box } from "@/components/app/main/box";
 import { SubSubTitle } from "@/components/app/main/titles";
-import React, { Suspense } from "react";
-import SkeletonDahboardTile from "@/components/skeletons/skeleton-dashboard-tile";
+import React from "react";
 import { useGetStatistics } from "@/hooks/use-get-statistics";
 import SkeletonStatistics from "@/components/skeletons/skeleton-statistics";
+import { Star } from "@phosphor-icons/react/dist/ssr";
 
 type StatisticsBoxProps = {
   title: React.ReactElement;
@@ -21,6 +21,25 @@ const StatisticsBox = ({ title, value }: StatisticsBoxProps) => {
   );
 };
 
+const StatisticsBoxAvaliation = ({ title, value }: StatisticsBoxProps) => {
+  return (
+    <Box className="w-[45%] lg:w-[23%]">
+      <h3 className="font-poppins mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
+        {title}
+      </h3>
+      <div className="mt-2 flex flex-row gap-1 text-3xl">
+        {[1, 2, 3, 4, 5].map((index) =>
+          index <= Math.round(value) ? (
+            <Star key={index} weight="fill" />
+          ) : (
+            <Star key={index} className="opacity-20" />
+          ),
+        )}
+      </div>
+    </Box>
+  );
+};
+
 export default function Statistics() {
   const { statistics, isLoadingStatistics } = useGetStatistics();
   return (
@@ -33,27 +52,7 @@ export default function Statistics() {
           <StatisticsBox
             title={
               <div>
-                Mentorias <br /> Relizadas
-              </div>
-            }
-            value={statistics.totalDoneMentoring}
-          />
-          <StatisticsBox
-            title={
-              <div>
-                Média de
-                <br />
-                Avaliações
-              </div>
-            }
-            value={statistics.avgAvaliation}
-          />
-          <StatisticsBox
-            title={
-              <div>
-                Total de
-                <br />
-                Mentorias
+                Mentorias <br /> Realizadas
               </div>
             }
             value={statistics.totalMentoring}
@@ -65,6 +64,24 @@ export default function Statistics() {
               </div>
             }
             value={statistics.mentoringToBe}
+          />
+          <StatisticsBox
+            title={
+              <div>
+                Mentorias <br /> PRO
+              </div>
+            }
+            value={statistics.totalPro}
+          />
+          <StatisticsBoxAvaliation
+            title={
+              <div>
+                Média de
+                <br />
+                Avaliações
+              </div>
+            }
+            value={statistics.avgAvaliation}
           />
         </div>
       )}
