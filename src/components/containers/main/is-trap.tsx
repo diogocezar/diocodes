@@ -4,6 +4,8 @@ import { Paragraph } from "@/components/app/main/paragraph";
 import { Hightlight } from "@/components/app/main/hightlight";
 import { Button } from "@/components/ui/button";
 import { Box } from "@/components/app/main/box";
+import { formatCurrency } from "@/lib/utils";
+import { PRICE } from "@/contants/price";
 
 const IsTrap = React.forwardRef<
   HTMLDivElement,
@@ -36,7 +38,7 @@ const IsTrap = React.forwardRef<
         <Paragraph>
           Quer evitar a espera? Sem problemas! Estou oferecendo também uma
           mentoria Pro, onde você terá acesso a uma sessão exclusiva de 45
-          minutos por R$ 120,00.
+          minutos por {formatCurrency(PRICE.MENTORING_PRO)}.
         </Paragraph>
         <Paragraph className="mb-0">
           Garanta seu horário e acelere seu aprendizado clicando em{" "}
