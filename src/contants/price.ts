@@ -1,3 +1,3 @@
 export const PRICE = {
-  MENTORING_PRO: 120,
+  MENTORING_PRO: 150,
 };

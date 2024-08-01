@@ -26,7 +26,7 @@ const Book = React.forwardRef<
     <>
       <div className="mb-4 flex flex-col items-center justify-center gap-0 sm:mb-0 md:flex-row md:justify-start md:gap-4">
         <Link
-          href="https://buy.stripe.com/4gw3cy9fV7cQ6wE000"
+          href="https://buy.stripe.com/28oeVg9fVbt61ck9AB"
           target="_blank"
           className="w-full md:w-auto"
         >
