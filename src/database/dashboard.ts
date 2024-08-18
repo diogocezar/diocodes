@@ -10,6 +10,10 @@ export const countMentoringDone = async (): Promise<number> => {
         removedAt: null,
         externalStatus: CAL.STATUS_ACCEPTED,
         startTime: { lte: new Date() },
+        OR: [
+          { externalEventId: CAL.MENTORING_PRO },
+          { externalEventId: CAL.MENTORING_FREE },
+        ],
       },
     });
   } catch (error) {
@@ -24,6 +28,10 @@ export const countMentoringToBe = async (): Promise<number> => {
       where: {
         removedAt: null,
         externalStatus: CAL.STATUS_ACCEPTED,
+        OR: [
+          { externalEventId: CAL.MENTORING_PRO },
+          { externalEventId: CAL.MENTORING_FREE },
+        ],
         startTime: { gte: new Date() },
       },
     });
@@ -38,6 +46,10 @@ export const countMentoringCanceled = async (): Promise<number> => {
     return prisma.mentoring.count({
       where: {
         externalStatus: CAL.STATUS_CANCELLED,
+        OR: [
+          { externalEventId: CAL.MENTORING_PRO },
+          { externalEventId: CAL.MENTORING_FREE },
+        ],
         removedAt: null,
       },
     });
@@ -95,6 +107,10 @@ export const countMentoringTotal = async (): Promise<number> => {
     return prisma.mentoring.count({
       where: {
         removedAt: null,
+        OR: [
+          { externalEventId: CAL.MENTORING_PRO },
+          { externalEventId: CAL.MENTORING_FREE },
+        ],
       },
     });
   } catch (error) {
