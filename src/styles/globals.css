@@ -120,7 +120,7 @@
         background-color: var(--purple-dark);
         background-image: url("../../public/assets/images/bg/bg.svg");
         background-repeat: no-repeat;
-        background-position: top right;
+        background-position: top left;
     }
 
     .box {
@@ -133,6 +133,22 @@
 
     .font-obviously {
         font-family: "obviously", sans-serif;
+    }
+
+    @keyframes float-custom {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .floating-image-custom {
+        animation: float-custom 3s ease-in-out infinite;
     }
 
     @media (max-width: 768px) {

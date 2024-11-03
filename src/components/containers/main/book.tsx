@@ -24,13 +24,13 @@ const Book = React.forwardRef<
   }, []);
   return (
     <>
-      <div className="mb-4 flex flex-col items-center justify-center gap-0 sm:mb-0 md:flex-row md:justify-start md:gap-4">
+      <div className="mb-4 flex flex-col w-full items-center justify-center gap-0 sm:mb-0 md:flex-row md:justify-start md:gap-4">
         <Link
           href="https://buy.stripe.com/28oeVg9fVbt61ck9AB"
           target="_blank"
-          className="w-full md:w-auto"
+          className="w-full lg:w-auto"
         >
-          <Button className="bg-pink-primary text-foreground hover:bg-background hover:text-foreground rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center h-[60px] gap-2 md:w-[350px] md:mb-8 md:mt-10 md:justify-center">
+          <Button className="bg-pink-primary text-foreground hover:bg-background hover:text-foreground rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center h-[60px] gap-2 lg:w-[350px] lg:mb-8 lg:mt-10 lg:justify-center">
             MENTORIA PRO{" "}
             <span className="text-xs">
               ({formatCurrency(PRICE.MENTORING_PRO)})
@@ -41,7 +41,7 @@ const Book = React.forwardRef<
           data-cal-namespace=""
           data-cal-link="diogocezar/mentoria-diogao"
           data-cal-config='{"layout":"month_view"}'
-          className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] md:w-[350px] md:mb-8 md:mt-10 md:justify-center"
+          className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] lg:w-[350px] lg:mb-8 lg:mt-10 lg:justify-center"
         >
           MENTORIA FREE
         </Button>

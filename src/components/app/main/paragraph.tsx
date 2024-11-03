@@ -9,7 +9,7 @@ const Paragraph = React.forwardRef<
     <p
       ref={ref}
       className={cn(
-        "text-background-dark text-md mb-6 md:text-left tracking-tighter",
+        "text-background-dark text-md mb-6 md:text-left tracking-tighter leading-8",
         className,
       )}
     >
