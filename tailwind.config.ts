@@ -19,6 +19,9 @@ const config = {
     },
     extend: {
       colors: {
+        "purple-dark": "var(--purple-dark)",
+        "purple-contrast": "var(--purple-contrast)",
+        "pink-primary": "var(--pink-primary)",
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",

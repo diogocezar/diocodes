@@ -6,27 +6,5 @@
   "start_url": "/",
   "name": "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
   "short_name": "Mentorias Diogão",
-  "description": "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação.",
-  "icons": [
-    {
-      "src": "/icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "description": "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação."
 }

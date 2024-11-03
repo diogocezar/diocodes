@@ -6,7 +6,7 @@ const Title = React.forwardRef<
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => {
   const joinClassName = cn(
-    "text-foreground text-5xl mb-4 font-black tracking-tighter font-poppins md:mb-12 md:text-6xl mt-5 lg:mt-10 lg:max-w-[70%]",
+    "text-foreground text-5xl mb-4 font-black tracking-tighter md:mb-12 md:text-6xl mt-5 lg:mt-10 lg:max-w-[70%]",
     className,
   );
   return (
@@ -23,7 +23,7 @@ const SubTitle = React.forwardRef<
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => {
   const joinClassName = cn(
-    "font-poppins mb-3 mt-0 text-2xl font-black md:mb-6 md:text-3xl tracking-tighter lg:max-w-[70%]",
+    "mb-5 mt-0 text-2xl font-bold text-pink-primary md:mb-10 md:text-3xl tracking-tighter lg:max-w-[70%]",
     className,
   );
   return (
@@ -39,9 +39,9 @@ const SubSubTitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => {
-  let joinClassName = "text-border-black ";
+  let joinClassName = "";
   joinClassName += cn(
-    "text-green font-black font-poppins mb-8 mt-8 text-3xl md:mt-14 md:text-5xl tracking-tighter lg:max-w-[70%]",
+    "text-foreground mb-8 mt-8 font-bold text-3xl md:mt-14 md:text-5xl tracking-tighter lg:max-w-[70%]",
     className,
   );
   return (

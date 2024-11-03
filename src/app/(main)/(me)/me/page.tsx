@@ -30,7 +30,7 @@ export default function MePage() {
   return (
     <div className="w-screen h-screen flex justify-center items-center flex-col gap-3 relative">
       <MeImage />
-      <h1 className="text-border-black text-green text-5xl font-poppins mb-4 font-black tracking-tighter">
+      <h1 className="text-green text-5xl font-poppins mb-4 font-black tracking-tighter">
         Diogão
       </h1>
       <Button href="https://diocodes.dev" icon={<Calendar size={22} />}>

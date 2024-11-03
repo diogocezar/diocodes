@@ -94,14 +94,8 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <body
-        className={cn(
-          "bg-dots antialiased",
-          fira.className,
-          fira.variable,
-          poppins.variable,
-        )}
-      >
+      <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+      <body className={cn("bg-dots antialiased font-obviously")}>
         <CustomSessionProvider session={session}>
           {children}
           <Footer />

@@ -33,7 +33,7 @@ const StatisticsBoxAvaliation = ({ title, value }: StatisticsBoxProps) => {
             <Star
               key={index}
               weight="fill"
-              className="size-5 sm:size-8 xl:size-10 text-pink"
+              className="size-5 sm:size-8 xl:size-10 text-pink-primary"
             />
           ) : (
             <Star key={index} className="opacity-20" />

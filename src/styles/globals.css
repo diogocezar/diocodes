@@ -43,6 +43,10 @@
 
         --destructive: #ff79c6;
         --destructive-foreground: #ff79c6;
+
+        --purple-dark: #160830;
+        --purple-contrast: #220d49;
+        --pink-primary: #ea00a4;
     }
 
     .font-poppins {
@@ -74,7 +78,7 @@
     }
 
     *::-webkit-scrollbar-thumb {
-        background: var(--green);
+        background: var(--pink-primary);
         border-radius: 0.25rem;
     }
 
@@ -87,7 +91,7 @@
     }
 
     *::-webkit-scrollbar-thumb {
-        background: var(--green);
+        background: var(--pink-primary);
     }
 
     ::selection {
@@ -113,52 +117,22 @@
     }
 
     .bg-dots {
-        background-color: var(--pink);
-        opacity: 1;
-        background-image: radial-gradient(
-                rgba(255, 255, 255, 0.1) 5px,
-                transparent 1.2px
-            ),
-            radial-gradient(rgba(255, 255, 255, 0.1) 10px, var(--pink) 1.2px);
-        background-size: 100px 100px;
-        background-position:
-            0 0,
-            50px 50px;
+        background-color: var(--purple-dark);
+        background-image: url("../../public/assets/images/bg/bg.svg");
+        background-repeat: no-repeat;
+        background-position: top right;
     }
 
     .box {
         width: 100%;
         background-color: var(--foreground);
-        border: 4px solid #000;
         position: relative;
         padding: 0.5rem 0.8rem;
+        border-radius: 8px;
     }
 
-    .box::before {
-        content: "";
-        position: absolute;
-        right: -15px;
-        top: 15px;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        background-size: 12px, 100%;
-        border: 0.4rem solid #000;
-        z-index: -2;
-    }
-
-    .text-border-black {
-        -webkit-text-fill-color: var(--foreground);
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: var(--background-dark);
-        text-shadow: 0px 3px 0 var(--background-dark);
-    }
-
-    .text-border-green {
-        -webkit-text-fill-color: var(--green);
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: var(--background-dark);
-        text-shadow: 0px 3px 0 var(--background-dark);
+    .font-obviously {
+        font-family: "obviously", sans-serif;
     }
 
     @media (max-width: 768px) {
@@ -174,21 +148,6 @@
             -webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: var(--background-dark);
             text-shadow: 0px 2px 0 var(--background-dark);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .box::before {
-            content: "";
-            position: absolute;
-            right: -10px;
-            top: 10px;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            background-size: 12px, 100%;
-            border: 0.4rem solid #000;
-            z-index: -2;
         }
     }
 }
