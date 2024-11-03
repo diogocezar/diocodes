@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Fira_Code, Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";
@@ -11,14 +10,6 @@ import { Toaster } from "@/components/ui/sonner";
 import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import { getServerSession } from "next-auth";
 import CustomSessionProvider from "@/context/session-provider";
-
-const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -94,7 +85,9 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+      </head>
       <body className={cn("bg-dots antialiased font-obviously")}>
         <CustomSessionProvider session={session}>
           {children}
