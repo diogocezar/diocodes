@@ -1,15 +1,8 @@
 .bg-dots-me {
-    background-color: var(--pink);
-    opacity: 1;
-    background-image: radial-gradient(
-            rgba(255, 255, 255, 0.1) 5px,
-            transparent 1.2px
-        ),
-        radial-gradient(rgba(255, 255, 255, 0.1) 10px, var(--pink) 1.2px);
-    background-size: 100px 100px;
-    background-position:
-        0 0,
-        50px 50px;
+    background-color: var(--purple-dark);
+    background-image: url("../../public/assets/images/bg/bg.svg");
+    background-repeat: no-repeat;
+    background-position: top center;
 }
 
 .me-button {
@@ -18,22 +11,13 @@
     align-items: center;
     width: 100%;
     width: 300px;
-    border: 4px solid #000;
     position: relative;
-    padding: 0.4rem 0.6rem;
+    padding: 0.8rem 0.8rem;
     cursor: pointer;
     text-align: start;
+    border-radius: 25px;
 }
 
-.me-button::before {
-    content: "";
-    position: absolute;
-    right: -8px;
-    top: 8px;
-    width: 98%;
-    height: 98%;
-    background-color: #000;
-    background-size: 12px, 100%;
-    border: 0.4rem solid #000;
-    z-index: -2;
+.font-obviously {
+    font-family: "obviously", sans-serif;
 }

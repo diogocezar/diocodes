@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
                 src="assets/images/logo/logo-simple.svg"
                 width={200}
                 height={120}
-                alt="Avatar do Diogão"
+                alt="Logo do DioGO"
               />
             </span>
           </>

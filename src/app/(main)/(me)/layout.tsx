@@ -10,14 +10,6 @@ import authOptions from "@/app/api/auth/[...nextauth]/auth-options";
 import { getServerSession } from "next-auth";
 import CustomSessionProvider from "@/context/session-provider";
 
-const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
-});
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -90,14 +82,8 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <body
-        className={cn(
-          "bg-dots-me antialiased",
-          fira.className,
-          fira.variable,
-          poppins.variable,
-        )}
-      >
+      <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+      <body className={cn("bg-dots-me antialiased font-obviously")}>
         <CustomSessionProvider session={session}>
           {children}
           <SpeedInsights />
