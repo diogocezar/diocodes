@@ -40,7 +40,7 @@ const Footer = React.forwardRef<
               width={320}
               height={132}
               alt="Logotipo DioGO!"
-              src="assets/images/logo/logo.svg"
+              src="/assets/images/logo/logo.svg"
             />
           </div>
         </div>

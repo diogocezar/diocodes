@@ -30,6 +30,7 @@ export const Tags: React.FC<TagsProps> = ({
       {availableTags.map((tag: TypeTagValueLabel, index) => (
         <Toggle
           key={index}
+          className="rounded-lg border-2 hover:bg-purple-contrast hover:text-foreground data-[state=on]:bg-purple-dark data-[state=on]:text-foreground"
           onClick={() => handleTagToggle(tag)}
           variant={"avaliation"}
           disabled={

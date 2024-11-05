@@ -29,6 +29,7 @@ import { useGetTag } from "@/hooks/use-get-tag";
 import { useGetMentoringById } from "@/hooks/use-get-mentoring";
 import { TypeTagValueLabel } from "@/types/type-tag";
 import { Box } from "@/components/app/main/box";
+import { MeImage } from "@/components/app/main/image";
 
 export default function AvaliationPage({ params }: { params: { id: string } }) {
   const [rating, setRating] = useState<number>(0);
@@ -101,7 +102,8 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <Container className="min-h-[calc(100vh-200px)]">
+      <Container>
+        <MeImage />
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -109,32 +111,41 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
           >
             <Header
               headerTitle="Avalie a sua mentoria"
-              headerSubTitle="Obrigado por realizar a avaliação da nossa mentoria!"
+              headerSubTitle="Vai ser rapidinho! E você me ajuda a melhorar como mentor."
             />
             {isLoading ? (
-              <Paragraph className="mb-8 flex flex-row gap-2">
-                <Spinner size={20} className="animate-spin" />
-                Carregando...
-              </Paragraph>
+              <div className="mb-8 flex flex-row gap-2 items-center">
+                <Spinner size={20} className="animate-spin text-pink-primary" />
+                <Paragraph className="mb-0 text-pink-primary">
+                  Carregando...
+                </Paragraph>
+              </div>
             ) : (
               <div>
-                <Box className="bg-pink">
+                <Box>
                   <SubTitle className="mt-3">
                     Olá,{" "}
-                    <span className="text-foreground">{getAttendee()}</span>,
-                    espero que esteja bem!
+                    <span className="text-background-dark">
+                      {getAttendee()}
+                    </span>
+                    , espero que esteja bem!
                   </SubTitle>
                   <SubTitle>
                     Essa avaliação é referente ao encontro de{" "}
-                    <span className="text-foreground">{getDate()}</span> das{" "}
-                    <span className="text-foreground">{getStartTime()}</span>{" "}
-                    até <span className="text-foreground">{getEndTime()}</span>.
+                    <span className="text-background-dark">{getDate()}</span>{" "}
+                    das{" "}
+                    <span className="text-background-dark">
+                      {getStartTime()}
+                    </span>{" "}
+                    até{" "}
+                    <span className="text-background-dark">{getEndTime()}</span>
+                    .
                   </SubTitle>
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.rating?.message
-                        ? "text-foreground"
-                        : "text-green",
+                        ? "text-background-dark"
+                        : "text-pink-primary",
                       "mb-12 mt-14",
                     )}
                   >
@@ -165,13 +176,16 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                   </div>
                   <Paragraph className="font-bold text-md">
                     Você escolheu a nota{" "}
-                    <span className="text-foreground text-xl">{rating}</span>.
+                    <span className="text-background-dark text-xl">
+                      {rating}
+                    </span>
+                    .
                   </Paragraph>
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.avaliationTags?.message
-                        ? "text-foreground"
-                        : "text-green",
+                        ? "text-background-dark"
+                        : "text-pink-primary",
                       "mt-14",
                     )}
                   >
@@ -186,7 +200,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                     )}
                   </FormMessage>
                   {isLoadingTag ? (
-                    <div className="text-foreground flex w-full flex-row items-center gap-2 font-bold text-md">
+                    <div className="text-background-dark flex w-full flex-row items-center gap-2 font-bold text-md">
                       <Spinner size={20} className="animate-spin" />
                       Carregando...
                     </div>
@@ -209,11 +223,11 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                       />
                       <Paragraph className="mt-10 font-bold text-md">
                         Você escolheu{" "}
-                        <span className="text-foreground font-bold text-xl">
+                        <span className="text-background-dark font-bold text-xl">
                           {form.getValues("avaliationTags")?.length || 0}
                         </span>{" "}
                         de{" "}
-                        <span className="text-foreground font-bold text-xl">
+                        <span className="text-background-dark font-bold text-xl">
                           {AVALIATION.MAX_TAGS}
                         </span>
                         .
@@ -223,8 +237,8 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.comment?.message
-                        ? "text-foreground"
-                        : "text-green",
+                        ? "text-background-dark"
+                        : "text-pink-primary",
                       "mt-8",
                     )}
                   >
@@ -246,7 +260,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                         <FormControl>
                           <Textarea
                             placeholder="Como você classifica a mentoria? O que você achou? Conte-nos mais sobre a sua experiência."
-                            className="h-[100px] w-full rounded-none border-4 bg-foreground font-bold text-background-dark"
+                            className="h-[100px] w-full rounded-lg border-2 bg-foreground font-bold text-background-dark"
                             maxLength={250}
                             {...field}
                           />

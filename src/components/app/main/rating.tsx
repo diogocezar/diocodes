@@ -11,7 +11,7 @@ const StarIcon: React.FC<StarIconProps> = ({ filled, onHover, onClick }) => {
   return (
     <div className="cursor-pointer" onMouseEnter={onHover} onClick={onClick}>
       {filled ? (
-        <Star weight="fill" className="text-foreground" size={36} />
+        <Star weight="fill" className="text-purple-contrast" size={36} />
       ) : (
         <Star className="text-background-dark" size={36} />
       )}
