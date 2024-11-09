@@ -26,11 +26,8 @@ const IsTrap = React.forwardRef<
           forma totalmente gratuita.
         </Paragraph>
         <Paragraph className="mb-0">
-          Enquanto eu puder, vou disponibilizar meu tempo para oferecer
-          mentorias gratuitas, sem compromisso. Você pode agendar até 4 sessões
-          por semana, com conversas de 30 minutos, para discutir suas dúvidas,
-          projetos e desafios. Vamos juntos transformar seu potencial em
-          sucesso!
+          Enquanto eu puder, vou disponibilizar parte do meu tempo para oferecer
+          mentorias gratuitas, sem compromisso.
         </Paragraph>
       </Box>
       <SubSubTitle>Poxa, não tem como furar a fila?</SubSubTitle>

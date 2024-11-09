@@ -144,14 +144,14 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.rating?.message
-                        ? "text-background-dark"
+                        ? "text-rose-500"
                         : "text-pink-primary",
                       "mb-12 mt-14",
                     )}
                   >
                     Que nota você dá a essa mentoria?
                   </SubSubTitle>
-                  <FormMessage className="mb-8 font-bold text-background-dark text-md">
+                  <FormMessage className="mb-8 font-bold text-rose-500 text-md">
                     {form.formState.errors.rating?.message && (
                       <div className="flex flex-row gap-2">
                         <Siren size={23} />{" "}
@@ -184,18 +184,20 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.avaliationTags?.message
-                        ? "text-background-dark"
+                        ? "text-rose-500"
                         : "text-pink-primary",
                       "mt-14",
                     )}
                   >
                     Selecione {AVALIATION.MAX_TAGS} tags
                   </SubSubTitle>
-                  <FormMessage className="mb-8 font-bold text-background-dark text-md">
+                  <FormMessage className="mb-8 font-bold text-rose-500 text-md">
                     {form.formState.errors.avaliationTags?.message && (
                       <div className="flex flex-row gap-2">
                         <Siren size={23} />{" "}
-                        {form.formState.errors.avaliationTags?.message}
+                        {form.formState.errors.avaliationTags?.message
+                          ? "Selecione pelo menos 6 tags!"
+                          : ""}
                       </div>
                     )}
                   </FormMessage>
@@ -237,14 +239,14 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                   <SubSubTitle
                     className={cn(
                       form.formState.errors.comment?.message
-                        ? "text-background-dark"
+                        ? "text-rose-500"
                         : "text-pink-primary",
                       "mt-8",
                     )}
                   >
                     Deixe um comentário
                   </SubSubTitle>
-                  <FormMessage className="mb-8 font-bold text-background-dark text-md">
+                  <FormMessage className="mb-8 font-bold text-rose-500 text-md">
                     {form.formState.errors.comment?.message && (
                       <div className="flex flex-row gap-2">
                         <Siren size={23} />{" "}
@@ -271,7 +273,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                 </Box>
                 <Button
                   type="submit"
-                  className="me-button rounded-none mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-green hover:text-background-dark md:w-[270px] md:mb-8 md:mt-10 md:justify-center"
+                  className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] lg:w-[250px] md:w-full md:mb-2 md:mt-2 lg:mb-8 lg:mt-10 md:justify-center"
                   disabled={isLoadingSubmit}
                 >
                   {isLoadingSubmit ? (
@@ -280,7 +282,7 @@ export default function AvaliationPage({ params }: { params: { id: string } }) {
                       Enviando
                     </div>
                   ) : (
-                    "Enviar"
+                    "ENVIAR"
                   )}
                 </Button>
               </div>

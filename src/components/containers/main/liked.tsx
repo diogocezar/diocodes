@@ -29,9 +29,8 @@ const Liked = React.forwardRef<
           qualquer outra coisa relevante.
         </Paragraph>
         <Paragraph className="mb-0">
-          Aguarde a confirmação do agendamento. Se eu não conseguir confirmar,
-          tente agendar em outro horário. Vamos juntos transformar suas ideias
-          em conquistas!
+          É importante que você escolha um horário que poderá participar! Caso
+          contrário, estará tirando a chance de outra pessoa!
         </Paragraph>
       </Box>
     </>
