@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Fira_Code, Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport } from "next";

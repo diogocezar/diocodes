@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-purple-contrast text-foreground font-obviously hover:bg-pink-primary mb-8 mt-8 cursor-crosshair rounded-full px-6 py-3 font-semibold transition duration-300 ease-in-out",
+          "bg-pink-primary text-background-dark font-obviously hover:bg-pink-primary mb-8 mt-8 cursor-crosshair rounded-full px-6 py-3 font-semibold transition duration-300 ease-in-out",
         destructive:
           "bg-background text-foreground font-obviously  hover:bg-pink-primary cursor-crosshair rounded-full px-8 py-4 font-semibold transition duration-300 ease-in-out",
         outline:
