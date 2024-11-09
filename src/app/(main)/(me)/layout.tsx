@@ -55,9 +55,9 @@ export const metadata: Metadata = {
       "Explore os links pessoais do Diogão! Encontre-me no TikTok, Instagram, LinkedIn, GitHub, Portfólio Pessoal e Site de Mentorias.",
     images: [
       {
-        url: "https://diocodes.dev/og.png",
-        width: 280,
-        height: 280,
+        url: "https://diocodes.dev/assets/images/og/og.png",
+        width: 1200,
+        height: 630,
         alt: "Links Pessoais do Diogão",
       },
     ],
@@ -82,7 +82,26 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="assets/images/favicon/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="assets/images/favicon/favicon.svg"
+        />
+        <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="assets/images/favicon/apple-touch-icon.png"
+        />
+      </head>
       <body className={cn("bg-dots-me antialiased font-obviously")}>
         <CustomSessionProvider session={session}>
           {children}
