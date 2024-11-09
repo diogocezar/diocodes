@@ -8,7 +8,10 @@ const DashboardTitle = React.forwardRef<
   return (
     <h2
       ref={ref}
-      className={cn("text-pink font-poppin text-4xl font-bold", className)}
+      className={cn(
+        "text-pink-primary font-obviously text-4xl font-bold",
+        className,
+      )}
     >
       {props.children}
     </h2>

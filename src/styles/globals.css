@@ -95,25 +95,15 @@
     }
 
     ::selection {
-        background-color: var(--green) !important;
-        color: var(--background) !important;
+        background-color: var(--pink-primary) !important;
+        color: var(--foreground) !important;
     }
 
     .bg-dots-admin {
-        background-color: #0e0f12;
-        opacity: 1;
-        background-image: radial-gradient(
-                rgba(255, 121, 198, 0.2) 1.4000000000000001px,
-                transparent 1.2px
-            ),
-            radial-gradient(
-                rgba(255, 121, 198, 0.5) 1.4000000000000001px,
-                #0e0f12 1.2px
-            );
-        background-size: 112px 112px;
-        background-position:
-            0 0,
-            56px 56px;
+        background-color: var(--purple-dark);
+        background-image: url("../../public/assets/images/bg/bg.svg");
+        background-repeat: no-repeat;
+        background-position: top left;
     }
 
     .bg-dots {

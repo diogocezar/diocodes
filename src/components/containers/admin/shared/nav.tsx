@@ -39,7 +39,7 @@ export default function Nav() {
   return (
     <div
       style={{ width: isOpened ? 240 : 72 }}
-      className="fixed flex h-screen flex-col gap-4 bg-background-dark px-4 py-6 z-50"
+      className="fixed flex h-screen flex-col gap-4 bg-purple-contrast px-4 py-6 z-50"
     >
       <div className="flex h-full flex-col justify-between">
         <div className="flex flex-col gap-4">
@@ -63,7 +63,7 @@ export default function Nav() {
             {isOpened && (
               <div className="flex items-center justify-center w-[35px] h-[35px] absolute right-[-15px]">
                 <Button
-                  className="flex w-full h-9 bg-green cursor-crosshair flex-row items-center justify-center gap-2 rounded-lg px-1 py-1 font-bold hover:bg-pink m-0"
+                  className="flex text-foreground w-full h-9 bg-pink-primary cursor-crosshair flex-row items-center justify-center gap-2 rounded-lg px-1 py-1 font-bold hover:bg-purple-dark hover:text-foreground m-0"
                   onClick={() => setIsOpened(!isOpened)}
                 >
                   <ChevronsLeft size={16} />
@@ -77,7 +77,7 @@ export default function Nav() {
               <li>
                 <Button
                   onClick={() => setIsOpened(!isOpened)}
-                  className="flex h-9 bg-green cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-pink m-0"
+                  className="flex text-foreground h-9 bg-pink-primary cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark hover:text-foreground m-0"
                 >
                   <ChevronsRight size={16} />
                 </Button>
@@ -90,12 +90,12 @@ export default function Nav() {
                     <Link
                       href="/admin/dashboard"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "dashboard"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "dashboard" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <ChartBar size={18} />
@@ -117,12 +117,12 @@ export default function Nav() {
                     <Link
                       href="/admin/payment"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "payment"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "payment" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <PiggyBank size={18} />
@@ -144,12 +144,12 @@ export default function Nav() {
                     <Link
                       href="/admin/mentoring"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "mentoring"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "mentoring" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <Plant size={18} />
@@ -169,12 +169,12 @@ export default function Nav() {
                     <Link
                       href="/admin/avaliation"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "avaliation"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "avaliation" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <Star size={18} />
@@ -194,12 +194,12 @@ export default function Nav() {
                     <Link
                       href="/admin/invite"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "invite"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "invite" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <EnvelopeSimple size={18} />
@@ -219,12 +219,12 @@ export default function Nav() {
                     <Link
                       href="/admin/tag"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "tag"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "tag" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <Tag size={18} />
@@ -244,12 +244,12 @@ export default function Nav() {
                     <Link
                       href="/admin/person"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "person"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "person" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <Users size={18} />
@@ -269,12 +269,12 @@ export default function Nav() {
                     <Link
                       href="/admin/user"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "user"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "user" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <User size={18} />
@@ -294,12 +294,12 @@ export default function Nav() {
                     <Link
                       href="/admin/log"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "log"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "log" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <Binoculars size={18} />
@@ -319,12 +319,12 @@ export default function Nav() {
                     <Link
                       href="/admin/webhook-log"
                       className={clsx(
-                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-background",
+                        "flex h-9 cursor-crosshair flex-row items-center gap-2 rounded-lg px-3 py-2 font-bold hover:bg-purple-dark",
                         pathname === "webhook-log"
-                          ? "text-background"
+                          ? "text-foreground"
                           : "text-foreground",
                         pathname === "webhook-log" &&
-                          "bg-pink hover:bg-background hover:text-foreground",
+                          "bg-pink-primary hover:bg-purple-dark hover:text-foreground",
                       )}
                     >
                       <WebhooksLogo size={18} />
