@@ -1,10 +1,26 @@
 {
-  "theme_color": "#ea00a4",
-  "background_color": "#160830",
+  "theme_color": "#8936FF",
+  "background_color": "#2EC6FE",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "./assets/images/icons/icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "./assets/images/icons/icon512_rounded.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
-  "name": "Desenvolva suas habilidades com Diogão | Mentorias Tech Gratuitas | diocodes.dev",
-  "short_name": "Mentorias Diogão",
-  "description": "Descubra o mundo da tecnologia com Diogão! Mentorias gratuitas e planos pagos, recursos de aprendizado, carreira e orientação em programação."
+  "dir": "auto",
+  "lang": "en-US",
+  "name": "Mentorias Diogão",
+  "short_name": "Diogão",
+  "start_url": "https://diocodes.dev",
+  "scope": "https://diocodes.dev"
 }
