@@ -72,6 +72,7 @@
     "react-json-formatter": "^0.4.0",
     "recharts": "^2.12.1",
     "resend": "^3.2.0",
+    "solar-icon-set": "^1.0.0",
     "sonner": "^1.4.1",
     "stripe": "^14.23.0",
     "tailwind-merge": "^2.2.1",

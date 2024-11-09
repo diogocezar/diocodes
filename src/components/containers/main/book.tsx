@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@phosphor-icons/react";
 import { PRICE } from "@/contants/price";
 import { formatCurrency } from "@/lib/utils";
 import Link from "next/link";
+import { Stars, ChatDots } from "solar-icon-set";
 
 const Book = React.forwardRef<
   HTMLDivElement,
@@ -31,7 +31,8 @@ const Book = React.forwardRef<
           className="w-full lg:w-auto"
         >
           <Button className="bg-pink-primary text-foreground hover:bg-background hover:text-foreground rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center h-[60px] gap-2 lg:w-[350px] lg:mb-8 lg:mt-10 lg:justify-center">
-            MENTORIA PRO{" "}
+            <Stars className="mt-1" size={24} />
+            MENTORIA PRO
             <span className="text-xs">
               ({formatCurrency(PRICE.MENTORING_PRO)})
             </span>
@@ -43,6 +44,7 @@ const Book = React.forwardRef<
           data-cal-config='{"layout":"month_view"}'
           className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] lg:w-[350px] lg:mb-8 lg:mt-10 lg:justify-center"
         >
+          <ChatDots className="mt-1" size={24} />
           MENTORIA FREE
         </Button>
       </div>

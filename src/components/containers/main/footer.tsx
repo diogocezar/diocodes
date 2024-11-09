@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { GithubLogo, AddressBook } from "@phosphor-icons/react";
+import { GithubLogo } from "@phosphor-icons/react";
+import { ChatRound } from "solar-icon-set";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -20,7 +21,7 @@ const Footer = React.forwardRef<
               className="w-full"
             >
               <Button className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] lg:w-[250px] md:w-full md:mb-2 md:mt-2 lg:mb-8 lg:mt-10 md:justify-center">
-                <GithubLogo size={20} />
+                <GithubLogo size={24} />
                 VEJA O CÓDIGO
               </Button>
             </Link>
@@ -30,7 +31,7 @@ const Footer = React.forwardRef<
               className="w-full"
             >
               <Button className="rounded-lg mb-0 mt-6 flex w-full flex-row items-center justify-center gap-2 bg-foreground hover:bg-background hover:text-foreground h-[60px] lg:w-[250px] md:w-full md:mb-2 md:mt-2 lg:mb-8 lg:mt-10 md:justify-center">
-                <AddressBook size={20} />
+                <ChatRound size={24} />
                 ENTRE EM CONTATO
               </Button>
             </Link>

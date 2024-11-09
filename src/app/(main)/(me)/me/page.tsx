@@ -1,13 +1,13 @@
 import { MeImage } from "@/components/app/main/image";
 import {
-  Calendar,
-  AddressBook,
   TwitterLogo,
   InstagramLogo,
   TiktokLogo,
   GithubLogo,
   LinkedinLogo,
 } from "@phosphor-icons/react/dist/ssr";
+
+import { Calendar, User } from "solar-icon-set";
 
 import Image from "next/image";
 
@@ -42,36 +42,36 @@ export default function MePage() {
       <Button href="https://diocodes.dev" icon={<Calendar size={24} />}>
         Agende sua mentoria
       </Button>
-      <Button href="https://diogocezar.dev" icon={<AddressBook size={24} />}>
+      <Button href="https://diogocezar.dev" icon={<User size={24} />}>
         Portifólio
       </Button>
       <Button
         href="https://twitter.com/diogocezar"
-        icon={<TwitterLogo size={24} weight="fill" />}
+        icon={<TwitterLogo size={24} weight="regular" />}
       >
         Twitter
       </Button>
       <Button
         href="https://www.instagram.com/diocodes"
-        icon={<InstagramLogo size={24} weight="fill" />}
+        icon={<InstagramLogo size={24} weight="regular" />}
       >
         Instagram
       </Button>
       <Button
         href="https://www.tiktok.com/@diogocodes"
-        icon={<TiktokLogo size={24} weight="fill" />}
+        icon={<TiktokLogo size={24} weight="regular" />}
       >
         TikTok
       </Button>
       <Button
         href="https://www.linkedin.com/in/diogocezar/"
-        icon={<LinkedinLogo size={24} weight="fill" />}
+        icon={<LinkedinLogo size={24} weight="regular" />}
       >
         Linkedin
       </Button>
       <Button
         href="https://github.com/diogocezar"
-        icon={<GithubLogo size={24} weight="fill" />}
+        icon={<GithubLogo size={24} weight="regular" />}
       >
         Github
       </Button>

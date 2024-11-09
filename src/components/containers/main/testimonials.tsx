@@ -11,7 +11,7 @@ import {
 import { useGetComment } from "@/hooks/use-get-comment";
 import { capitalizeString, compactName } from "@/lib/utils";
 import SkeletonTestimonials from "@/components/skeletons/skeleton-testimonials";
-import { ChatCircleText } from "@phosphor-icons/react/dist/ssr";
+import { ChatSquare } from "solar-icon-set";
 import { Box } from "@/components/app/main/box";
 
 const Testimonials = React.forwardRef<
@@ -48,7 +48,7 @@ const Testimonials = React.forwardRef<
                       </span>
                     </CardContent>
                     <CardFooter className="font-poppins text-background-dark text-[16px] font-bold capitalize md:text-lg lg:text-xl p-0">
-                      <ChatCircleText className="mr-1 h-6 w-6" />
+                      <ChatSquare className="mt-2 mr-2" size={24} />
                       {compactName(
                         capitalizeString(item?.mentoring?.attendee?.name),
                       )}
