@@ -86,7 +86,7 @@ export default async function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="stylesheet" href="https://use.typekit.net/zbi8mzg.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/slx4mdu.css" />
         <link
           rel="icon"
           type="image/png"
