@@ -6,7 +6,7 @@ const Hightlight = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   return (
-    <span ref={ref} className={cn("font-black", className)}>
+    <span ref={ref} className={cn("font-semibold", className)}>
       {props.children}
     </span>
   );

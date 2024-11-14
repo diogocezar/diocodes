@@ -13,10 +13,10 @@ type StatisticsBoxProps = {
 const StatisticsBox = ({ title, value }: StatisticsBoxProps) => {
   return (
     <Box className="w-[45%] lg:w-[23%]">
-      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
+      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-semibold md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
         {title}
       </h3>
-      <span className="text-5xl font-black text-center w-full">{value}</span>
+      <span className="text-5xl font-semibold text-center w-full">{value}</span>
     </Box>
   );
 };
@@ -24,7 +24,7 @@ const StatisticsBox = ({ title, value }: StatisticsBoxProps) => {
 const StatisticsBoxAvaliation = ({ title, value }: StatisticsBoxProps) => {
   return (
     <Box className="w-[45%] lg:w-[23%]">
-      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-black md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
+      <h3 className="font-poppins text-center w-full mb-3 mt-0 text-lg font-semibold md:mb-6 md:text-xl lg:text-1xl xl:text-2xl 2xl:text-3xl tracking-tighter">
         {title}
       </h3>
       <div className="mt-2 flex flex-row text-3xl flex-wrap w-full justify-center">
