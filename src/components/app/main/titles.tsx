@@ -41,7 +41,7 @@ const SubSubTitle = React.forwardRef<
 >(({ className, ...props }, ref) => {
   let joinClassName = "";
   joinClassName += cn(
-    "text-foreground mb-8 mt-8 font-bold text-3xl md:mt-14 md:text-5xl tracking-tighter lg:max-w-[70%]",
+    "text-foreground mb-8 mt-8 font-semibold text-3xl md:mt-14 md:text-5xl tracking-tighter lg:max-w-[70%]",
     className,
   );
   return (

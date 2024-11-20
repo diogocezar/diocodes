@@ -1,4 +1,4 @@
-import { MeImage } from "@/components/app/main/image";
+import { MeLogo } from "@/components/app/main/image";
 import {
   TwitterLogo,
   InstagramLogo,
@@ -20,7 +20,7 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
   return (
     <a href={props.href} target="_blank">
-      <button className="me-button bg-pink-primary text-foreground uppercase font-bold hover:bg-foreground hover:text-background-dark transition-all gap-2 justify-center">
+      <button className="me-button bg-pink-primary items-center text-foreground uppercase font-bold hover:bg-foreground hover:text-background-dark transition-all gap-2 justify-center text-sm">
         {props.icon}
         {props.children}
       </button>
@@ -30,15 +30,8 @@ const Button = (props: ButtonProps) => {
 
 export default function MePage() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col gap-3 relative">
-      <MeImage />
-      <Image
-        className="h-[120px] inline mt-3 mb-3"
-        src="assets/images/logo/logo-simple.svg"
-        width={200}
-        height={120}
-        alt="Logo do DioGO"
-      />
+    <div className="w-screen h-screen flex justify-center items-center flex-col gap-4 relative">
+      <MeLogo />
       <Button href="https://diocodes.dev" icon={<Calendar size={24} />}>
         Agende sua mentoria
       </Button>

@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
     <>
       <Title className="md:max-w-[85%] lg:max-w-[70%]">
         {headerTitle ? (
-          <span>{headerTitle}</span>
+          <span className="leading-[4rem] font-semibold">{headerTitle}</span>
         ) : (
           <>
             <span className="mt-10">
@@ -31,9 +31,11 @@ const Header: React.FC<HeaderProps> = ({ headerTitle, headerSubTitle }) => {
         )}
       </Title>
       <SubTitle>
-        {headerSubTitle
-          ? headerSubTitle
-          : "Explorando as Oportunidades na Área de Tecnologia"}
+        <span className="font-semibold">
+          {headerSubTitle
+            ? headerSubTitle
+            : "Explorando as Oportunidades na Área de Tecnologia"}
+        </span>
       </SubTitle>
     </>
   );

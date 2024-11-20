@@ -9,10 +9,24 @@ const MeImage = () => {
         src="/assets/images/perfil/avatar.svg"
         width={400}
         height={400}
-        alt="Avatar do Diogão"
+        alt="Avatar do DioGO!"
       />
     </div>
   );
 };
 
-export { MeImage };
+const MeLogo = () => {
+  return (
+    <div className="floating-image-custom">
+      <Image
+        className="w-56 md:w-80"
+        src="/assets/images/logo/logo-complete.svg"
+        width={400}
+        height={400}
+        alt="Logo do DioGO!"
+      />
+    </div>
+  );
+};
+
+export { MeImage, MeLogo };
